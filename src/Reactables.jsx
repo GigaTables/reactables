@@ -2,11 +2,12 @@ import React from 'react'
 
 class Reactables extends React.Component {
 
-  constructor()
+  constructor(props)
   {
-    super();
-    this.state = {
-      editor: ''
+    super(props);
+    var tableElements = this.props.children;
+    props = {
+      tableElements: tableElements
     };
   }
 
@@ -16,18 +17,17 @@ class Reactables extends React.Component {
 
   render() {
     // console.log('hi');
-    // console.log(this.props.settings);
-    console.log(this.props.children);
+    // console.log(this.props.tableElements);
+    this.props.children.map((val, index) => {
+      console.log(val);
+    });
+    // console.log(this.props.children);
       return (
         <div>vsdf</div>
       )
 
   }
 
-}
-
-Reactables.defaultProps = {
-  editor:null
 }
 
 export default Reactables

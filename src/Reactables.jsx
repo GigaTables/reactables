@@ -1,4 +1,5 @@
 import React from 'react'
+var EditorConstants = require('EditorConstants');
 
 class Reactables extends React.Component {
 

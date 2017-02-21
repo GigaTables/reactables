@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Editor from './components/Editor.js'
 import styles from './css/styles.css'
+import addons from "react/addons";
+let {addons: {cloneWithProps}} = addons;
 
 class Reactables extends React.Component {
 
@@ -43,6 +45,13 @@ class Reactables extends React.Component {
     // newPre.innerHTML = "boom";
     // this.props.children[0].parentNode.insertBefore(newPre, this.props.children[1]);
     // console.log(ReactDOM.findDOMNode(this.props.children[0]));
+      // let thead = this.props.children.querySelector('thead').setAttribute('className', 'styles.gt_head');
+
+      var inputReactObject = React.Children.only(this.props.children[0]);
+      var clonnedChild = React.addons.cloneWithProps(inputReactObject, {
+        className: "input-element test"
+      });
+
       return (
         <div>
           <table>

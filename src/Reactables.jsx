@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Editor from './components/Editor.js'
+import styles from './css/styles.css'
 
 class Reactables extends React.Component {
 

@@ -11,24 +11,19 @@ const config = {
    module: {
       loaders: [
          {
-            test: /\.(jsx?|css)$/,
+            test: /\.jsx?$/,
             exclude: /node_modules/,
             loader: 'babel-loader',
-            // ExtractTextPlugin.extract({
-            //   notExtractLoader: 'style-loader',
-            //   loader: 'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]!resolve-url!postcss',
-            // }),
             query: {
                presets: ['es2015', 'react']
             }
-         }
+         },
+         {
+          test: /\.css$/,
+          loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+         },
+         {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
       ]
    }
-  //  plugins: [
-    //  new ExtractTextPlugin({
-    //    filename: 'app.css'
-    //  })
-  //  ]
 }
-
 module.exports = config;

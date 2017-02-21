@@ -1,5 +1,4 @@
 module.exports = {
-  UNDEFINED: 'undefined',
   // HTML5 form types
   TYPE_CHECKBOX: 'checkbox',
   TYPE_SELECT: 'select',

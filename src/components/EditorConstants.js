@@ -21,9 +21,6 @@ module.exports = {
   TYPE_URL: 'url',
   TYPE_MONTH: 'month',
   TYPE_WEEK: 'week',
-  // keys
-  ESCAPE_KEY: 27,
-  ENTER_KEY: 13,
   // actions
   ACTION_CREATE: 'create',
   ACTION_EDIT: 'edit',

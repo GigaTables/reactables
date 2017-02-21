@@ -1,3 +1,6 @@
 module.exports = {
-  UNDEFINED: 'undefined'
+  UNDEFINED: 'undefined',
+  // keys
+  ESCAPE_KEY: 27,
+  ENTER_KEY: 13  
 }

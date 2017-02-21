@@ -61,7 +61,7 @@ var settings = {
  lang: 'en', // english default
  perPageRows: [25, 50, 100, 200, 500],
  defaultPerPage: 50,
- ajax: 'gigatables.php',
+ ajax: 'http://gigatables.loc/gigatables.php',
  requestType: 'POST',
  columns: [
    {// include all defaults
@@ -122,18 +122,22 @@ var settings = {
 ReactDOM.render(
   <Reactables editor={editor} settings={settings}>
     <thead>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Date</th>
-      <th>Info</th>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Info</th>
+      </tr>
     </thead>
     <tfoot>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Date</th>
-      <th>Info</th>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Info</th>
+      </tr>
     </tfoot>
   </Reactables>,
   document.getElementById('app'))

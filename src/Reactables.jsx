@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import Editor from './components/Editor.js'
 import classNames from 'classnames/bind';
 import styles from './css/styles.css'
-// import addons from "react/addons";
-// let {addons: {cloneWithProps}} = addons;
 
 class Reactables extends React.Component {
 
@@ -37,21 +35,14 @@ class Reactables extends React.Component {
   }
 
   render() {
-    // console.log(this.props.tableElements);
-    // this.props.children.map((val, index) => {
-    //   console.log(val);
-    // });
-    // var newPre = document.createElement('pre');
-    // newPre.setAttribute("contentEditable", "true");
-    // newPre.innerHTML = "boom";
-    // this.props.children[0].parentNode.insertBefore(newPre, this.props.children[1]);
-    // console.log(ReactDOM.findDOMNode(this.props.children[0]));
-      // let thead = this.props.children.querySelector('thead').setAttribute('className', 'styles.gt_head');
-
-      var inputReactObject = React.Children.only(this.props.children[0]);
-      var clonnedChild = React.cloneElement(inputReactObject, {
+      var tHead = React.Children.only(this.props.children[0]);
+      var clonnedTHead = React.cloneElement(tHead, {
         className: "input-element test"
       });
+      var tFoot = React.Children.only(this.props.children[1]);
+      var clonedTFoot = React.cloneElement(tFoot, {
+        className: "some_class"
+      });    
       let tableClass = classNames({
         'gt_container': true,
         'gt_body': true,
@@ -60,7 +51,7 @@ class Reactables extends React.Component {
       return (
         <div>
           <table>
-            {clonnedChild}
+            {clonnedTHead}
             <tbody className={tableClass}>
               <tr>
                 <td>vsdfvd</td>
@@ -70,7 +61,7 @@ class Reactables extends React.Component {
                 <td>vsdfvd</td>
               </tr>
             </tbody>
-            {this.props.children[1]}
+            {clonedTFoot}
           </table>
         </div>
       )

@@ -121,23 +121,10 @@ var settings = {
 
 ReactDOM.render(
   <Reactables editor={editor} settings={settings}>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Date</th>
-        <th>Info</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Date</th>
-        <th>Info</th>
-      </tr>
-    </tfoot>
+    <Column>ID</Column>
+    <Column>Name</Column>
+    <Column>Description</Column>
+    <Column>Date</Column>
+    <Column>Info</Column>
   </Reactables>,
   document.getElementById('app'))

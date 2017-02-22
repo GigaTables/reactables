@@ -48,10 +48,10 @@ class Reactables extends React.Component {
     // console.log(ReactDOM.findDOMNode(this.props.children[0]));
       // let thead = this.props.children.querySelector('thead').setAttribute('className', 'styles.gt_head');
 
-      // var inputReactObject = React.Children.only(this.props.children[0]);
-      // var clonnedChild = React.addons.cloneWithProps(inputReactObject, {
-      //   className: "input-element test"
-      // });
+      var inputReactObject = React.Children.only(this.props.children[0]);
+      var clonnedChild = React.cloneElement(inputReactObject, {
+        className: "input-element test"
+      });
       let tableClass = classNames({
         'gt_container': true,
         'gt_body': true,
@@ -60,7 +60,7 @@ class Reactables extends React.Component {
       return (
         <div>
           <table>
-            {this.props.children[0]}
+            {clonnedChild}
             <tbody className={tableClass}>
               <tr>
                 <td>vsdfvd</td>

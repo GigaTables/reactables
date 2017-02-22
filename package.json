@@ -4,6 +4,7 @@
   "description": "GigaTables is a plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems.",
   "main": "index.js",
   "dependencies": {
+    "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "expect": "^1.20.2",
     "file-loader": "^0.10.0",

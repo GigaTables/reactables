@@ -1,19 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Editor from './components/Editor.js'
+import classNames from 'classnames/bind';
 import styles from './css/styles.css'
-import addons from "react/addons";
-let {addons: {cloneWithProps}} = addons;
+// import addons from "react/addons";
+// let {addons: {cloneWithProps}} = addons;
 
 class Reactables extends React.Component {
 
   constructor(props)
   {
     super(props);
-    var tableElements = this.props.children;
     props = {
-      tableElements: tableElements
+      tableElements: this.props.children
     };
+
     this.build();
   }
 
@@ -47,16 +48,20 @@ class Reactables extends React.Component {
     // console.log(ReactDOM.findDOMNode(this.props.children[0]));
       // let thead = this.props.children.querySelector('thead').setAttribute('className', 'styles.gt_head');
 
-      var inputReactObject = React.Children.only(this.props.children[0]);
-      var clonnedChild = React.addons.cloneWithProps(inputReactObject, {
-        className: "input-element test"
+      // var inputReactObject = React.Children.only(this.props.children[0]);
+      // var clonnedChild = React.addons.cloneWithProps(inputReactObject, {
+      //   className: "input-element test"
+      // });
+      let tableClass = classNames({
+        'gt_container': true,
+        'gt_body': true,
+        'gt_page': false
       });
-
       return (
         <div>
           <table>
             {this.props.children[0]}
-            <tbody>
+            <tbody className={tableClass}>
               <tr>
                 <td>vsdfvd</td>
                 <td>vsdfvd</td>

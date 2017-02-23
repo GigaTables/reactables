@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '../css/styles.css'
 import classNames from 'classnames/bind'
 
 export default class Column extends React.Component {
@@ -10,7 +11,7 @@ export default class Column extends React.Component {
       'gt_page': false
     });
     return (
-      <td className={rowClasses}>{this.props.data}</td>
+      <td data-id={this.props.dataId} className={rowClasses}>{this.props.children}</td>
     )
   }
 }

@@ -5,6 +5,7 @@ import Row from './components/Row.js'
 import Column from './components/Column.js'
 import classNames from 'classnames/bind';
 import styles from './css/styles.css'
+var CommonConstants = require('./components/CommonConstants');
 
 export const Header = (props) => <th>{props.children}</th>;
 
@@ -13,9 +14,11 @@ class Reactables extends React.Component {
   constructor(props)
   {
     super(props);
-    props = {
-    };
-
+    // props = {
+    // };
+    this.state = {
+      dataRows:null
+    }
     this.build();
   }
 
@@ -24,12 +27,24 @@ class Reactables extends React.Component {
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
       // console.log(data['rows']);
-      data['rows'].map((object, objectIndex) => {
-        this.props.settings.columns.map((column, index) => {
-          console.log(column);
+      if(data['rows'] !== CommonConstants.UNDEFINED) {
+        let rows = [];
+        data['rows'].map((object, objectIndex) => {
+            let cols = [];
+            this.props.settings.columns.map((column, index) => {
+              console.log(column);
+              if(object[column['data']] !== CommonConstants.UNDEFINED)
+              {
+                cols.push(<Column>{object[column['data']]}</Column>);
+              }
+            });
+            console.log(object);
+            rows.push(<Row key={objectIndex} count={objectIndex}>{cols}</Row>);
         });
-        console.log(object);
-      });
+        this.setState({
+          dataRows:rows
+        });
+      }
     });
   }
 
@@ -58,17 +73,18 @@ class Reactables extends React.Component {
         'gt_page': false
       });
       return (
-        <div>
+        <div className="gt_container">
+          <div className="gt_head_tools">
+
+          </div>
           <table>
             <thead>
               <tr>
                 {this.props.children}
               </tr>
             </thead>
-            <tbody className={tableClass}>
-              <Row>
-                {}<Column />
-              </Row>
+            <tbody className="gt_body">
+                {this.state.dataRows}
             </tbody>
             <tfoot>
               <tr>
@@ -76,6 +92,11 @@ class Reactables extends React.Component {
               </tr>
             </tfoot>
           </table>
+          <div className="gt_pagination">
+          </div>
+          <div className="gt_foot_tools">
+
+          </div>
         </div>
       )
   }

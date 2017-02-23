@@ -35,6 +35,12 @@ tbody tr.even {
 tbody tr.odd {
   background-color:#f9f9f9;
 }
+.even {
+  background-color:#fff;
+}
+.odd {
+  background-color:#f9f9f9;
+}
 td {
   word-wrap: break-word;
   min-width: 50px;

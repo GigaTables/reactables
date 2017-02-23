@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames/bind'
 
 export default class Column extends React.Component {
   render()

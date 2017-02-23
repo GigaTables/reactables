@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Reactables from './src/Reactables.jsx'
+import Reactables, {Header} from './src/Reactables.jsx'
 
 var editor = {
   ajax: 'editor.php',
@@ -62,7 +62,7 @@ var settings = {
  perPageRows: [25, 50, 100, 200, 500],
  defaultPerPage: 50,
  ajax: 'http://gigatables.loc/gigatables.php',
- requestType: 'POST',
+ requestType: 'GET',
  columns: [
    {// include all defaults
      data: "id",
@@ -121,10 +121,10 @@ var settings = {
 
 ReactDOM.render(
   <Reactables editor={editor} settings={settings}>
-    <Column>ID</Column>
-    <Column>Name</Column>
-    <Column>Description</Column>
-    <Column>Date</Column>
-    <Column>Info</Column>
+    <Header>ID</Header>
+    <Header>Name</Header>
+    <Header>Description</Header>
+    <Header>Date</Header>
+    <Header>Info</Header>
   </Reactables>,
   document.getElementById('app'))

@@ -4,7 +4,7 @@ export default class Row extends React.Component {
   render()
   {
     return (
-      <tr></tr>
+      <tr>{this.props.children}</tr>
     )
   }
 }

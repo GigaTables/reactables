@@ -11,12 +11,13 @@ var CommonConstants = require('./components/CommonConstants');
 
 export class Header extends React.Component {
   render() {
-    console.log(this.props.gteSort);
+    let sorting = this.props.gteSort === CommonConstants.SORTABLE;
     let thClasses = classNames({
-      sorting:(this.props.gteSort === CommonConstants.SORTABLE) ? true : false
+      gt_head_tr_th: true,
+      sorting:sorting ? true : false
     });
     return (
-      <th className={thClasses}>
+      <th className={thClasses} style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
         <div className={styles.gt_th_box}>{this.props.children}</div>
       </th>
     )
@@ -96,13 +97,13 @@ class Reactables extends React.Component {
       return (
         <div className={styles.gt_container}>
           <div className={styles.gt_head_tools}>
-            <Editor>
+            <Tools>
               // elements
-            </Editor>
+            </Tools>
           </div>
           <table id="gigatable" className={styles.gigatable}>
-            <thead className={styles.gt_thead}>
-              <tr>
+            <thead className={styles.gt_head}>
+              <tr className={styles.gt_head_tr}>
                 {
                   this.props.children.map((th, index) => {
                     // console.log(this.props.settings.columns[index][CommonConstants.SORTABLE]);
@@ -132,9 +133,9 @@ class Reactables extends React.Component {
           <div className={styles.gt_pagination}>
           </div>
           <div className={styles.gt_foot_tools}>
-            <Editor>
+            <Tools>
               // elements
-            </Editor>
+            </Tools>
           </div>
         </div>
       )

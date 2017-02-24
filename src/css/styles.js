@@ -63,14 +63,19 @@ export default StyleSheet.create({
         "fontSize": 14,
         "fontWeight": "bold"
     },
-    "gt_head tr": {
+    ":global gt_head_tr": {
         "borderBottom": "1px solid #333"
     },
-    "gt_head tr th": {
+    ":global gt_head_tr_th": {
         "paddingTop": 0,
         "paddingRight": 0,
         "paddingBottom": 10,
-        "paddingLeft": 0,
+        "paddingLeft": 0
+    },
+    "c_pointer": {
+        "cursor": "pointer"
+    },
+    "c_default": {
         "cursor": "pointer"
     },
     "gt_th_box": {

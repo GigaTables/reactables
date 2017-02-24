@@ -54,12 +54,17 @@ td {
   font-weight: bold;
   /*border-bottom: 1px solid #333;*/
 }
-.gt_head tr {
+:global .gt_head_tr {
   border-bottom: 1px solid #333;
 }
-.gt_head tr th {
+:global .gt_head_tr_th {
   padding:0 0 10px 0;
+}
+.c_pointer {
   cursor:pointer;
+}
+.c_default {
+  cursor:pointer
 }
 .gt_th_box {
   padding:0 20px 0 0;

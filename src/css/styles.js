@@ -45,10 +45,10 @@ export default StyleSheet.create({
     "tbody trodd": {
         "backgroundColor": "#f9f9f9"
     },
-    "even": {
+    ":global even": {
         "backgroundColor": "#fff"
     },
-    "odd": {
+    ":global odd": {
         "backgroundColor": "#f9f9f9"
     },
     "td": {
@@ -238,7 +238,7 @@ export default StyleSheet.create({
         "backgroundColor": "#337ab7",
         "color": "#fff"
     },
-    "sorting": {
+    ":global sorting": {
         "background": "url('../images/sort_both.png') right center no-repeat"
     },
     "sorting_asc": {

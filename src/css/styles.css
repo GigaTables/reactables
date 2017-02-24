@@ -35,10 +35,10 @@ tbody tr.even {
 tbody tr.odd {
   background-color:#f9f9f9;
 }
-.even {
+:global .even {
   background-color:#fff;
 }
-.odd {
+:global .odd {
   background-color:#f9f9f9;
 }
 td {
@@ -191,7 +191,7 @@ td {
   background-color:#337ab7;
   color:#fff;
 }
-.sorting {
+:global .sorting {
   background:url('../images/sort_both.png') right center no-repeat;
   /*  width:19px;
     height:19px;*/

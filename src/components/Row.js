@@ -6,12 +6,12 @@ export default class Row extends React.Component {
   render()
   {
     let rowClasses = classNames({
-      'even':(this.props.count % 2 === 0)?true:false,
-      'odd':(this.props.count % 2 === 0)?false:true,
+      "even":(this.props.count % 2 === 0)?true:false,
+      "odd":(this.props.count % 2 === 0)?false:true,
     });
-    console.log(this.props.count);
+    // console.log(this.props.count);
     return (
-      <tr className={rowClasses}>{this.props.children}</tr>
+      <tr className={rowClasses} data-row-id={this.props.gteRowId}>{this.props.children}</tr>
     )
   }
 }

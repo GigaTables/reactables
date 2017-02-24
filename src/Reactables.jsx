@@ -5,9 +5,23 @@ import Row from './components/Row.js'
 import Column from './components/Column.js'
 import classNames from 'classnames/bind';
 import styles from './css/styles.css'
+import {DataException} from './components/Exceptions';
+
 var CommonConstants = require('./components/CommonConstants');
 
-export const Header = (props) => <th>{props.children}</th>;
+export class Header extends React.Component {
+  render() {
+    console.log(this.props.gteSort);
+    let thClasses = classNames({
+      sorting:(this.props.gteSort === CommonConstants.SORTABLE) ? true : false
+    });
+    return (
+      <th className={thClasses}>
+        <div className={styles.gt_th_box}>{this.props.children}</div>
+      </th>
+    )
+  }
+}
 
 class Reactables extends React.Component {
 
@@ -27,35 +41,42 @@ class Reactables extends React.Component {
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
       // console.log(data['rows']);
-      if(data['rows'] !== CommonConstants.UNDEFINED) {
-        let rows = [];
-        data['rows'].map((object, objectIndex) => {
-            let cols = [];
-            this.props.settings.columns.map((column, index) => {
-              console.log(column);
-              if(object[column['data']] !== CommonConstants.UNDEFINED)
-              {
-                cols.push(<Column>{object[column['data']]}</Column>);
-              }
-            });
-            console.log(object);
-            rows.push(<Row key={objectIndex} count={objectIndex}>{cols}</Row>);
-        });
-        this.setState({
-          dataRows:rows
-        });
-      }
+      this.createTable(data);
     });
   }
 
-  componentDidUpdate(prevProps, prevState)
+  createTable(data)
   {
-    console.log(prevProps);
-  }
-
-  componentWillReceiveProps(nextProps)
-  {
-    console.log(nextProps);
+    if(typeof data['rows'] === CommonConstants.UNDEFINED) {
+      throw new DataException('JSON must contain "rows" field');
+    }
+    let rows = [];
+    // process rows
+    data['rows'].map((object, objectIndex) => {
+        let cols = [];
+        let rowId = 0;
+        // perform id check
+        if(typeof object[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
+            rowId = object[CommonConstants.GT_ROW_ID];
+        } else if (typeof object['id'] !== CommonConstants.UNDEFINED) {
+            rowId = object['id'];
+        } else {
+            throw new DataException('You have neither "GT_RowId" nor "id" in json structure.');
+        }
+        // process cols
+        this.props.settings.columns.map((column, index) => {
+          // console.log(column);
+          if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
+          {
+            cols.push(<Column dataIndex={column['data']} key={index}>{object[column['data']]}</Column>);
+          }
+        });
+        // console.log(object);
+        rows.push(<Row key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
+    });
+    this.setState({
+      dataRows:rows
+    });
   }
 
   render() {
@@ -73,17 +94,33 @@ class Reactables extends React.Component {
         'gt_page': false
       });
       return (
-        <div className="gt_container">
-          <div className="gt_head_tools">
-
+        <div className={styles.gt_container}>
+          <div className={styles.gt_head_tools}>
+            <Editor>
+              // elements
+            </Editor>
           </div>
-          <table>
-            <thead>
+          <table id="gigatable" className={styles.gigatable}>
+            <thead className={styles.gt_thead}>
               <tr>
-                {this.props.children}
+                {
+                  this.props.children.map((th, index) => {
+                    // console.log(this.props.settings.columns[index][CommonConstants.SORTABLE]);
+                    var thh = React.Children.only(th);
+                    var clonedOpts = {
+                      key: index
+                    };
+                    if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+                    || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
+                      // set gteSort for <Header> which should be sorted
+                      clonedOpts['gteSort'] = CommonConstants.SORTABLE;
+                    }
+                    return React.cloneElement(thh, clonedOpts);
+                  })
+                }
               </tr>
             </thead>
-            <tbody className="gt_body">
+            <tbody className={styles.gt_body}>
                 {this.state.dataRows}
             </tbody>
             <tfoot>
@@ -92,10 +129,12 @@ class Reactables extends React.Component {
               </tr>
             </tfoot>
           </table>
-          <div className="gt_pagination">
+          <div className={styles.gt_pagination}>
           </div>
-          <div className="gt_foot_tools">
-
+          <div className={styles.gt_foot_tools}>
+            <Editor>
+              // elements
+            </Editor>
           </div>
         </div>
       )

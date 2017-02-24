@@ -4,7 +4,7 @@ label {
   margin-bottom: 5px;
   max-width: 100%;
 }
-.gte_button {
+:global .gte_button {
   border: 1px solid #999;
   border-radius: 2px;
   box-shadow: 1px 1px 3px #ccc;
@@ -36,7 +36,7 @@ label {
   background:         linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
 }
-.gte_buttons_container {
+:global .gte_buttons_container {
   float:left;
   margin:0 5px 0 0;
 }

@@ -84,7 +84,7 @@ export default StyleSheet.create({
         "paddingBottom": 0,
         "paddingLeft": 0
     },
-    "gt_head_tools": {
+    ":global gt_head_tools": {
         "marginTop": 15,
         "marginRight": 0,
         "marginBottom": 15,
@@ -143,7 +143,7 @@ export default StyleSheet.create({
     "gt_rows_selector": {
         "float": "left"
     },
-    "clear": {
+    ":global clear": {
         "clear": "both"
     },
     "gt_pagination": {

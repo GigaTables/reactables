@@ -1,4 +1,6 @@
 import React from 'react'
+import styles from '../css/styles.css'
+import editor from '../css/editor.css'
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
@@ -6,7 +8,14 @@ var EditorConstants = require('./EditorConstants');
 class Button extends React.Component {
   render()
   {
-    return null
+    return (
+      <div className="gte_buttons_container">
+        <div className="gte_button">
+          <span>{this.props.children}</span>
+        </div>
+        <div className={styles.clear}></div>
+      </div>
+    )
   }
 }
 

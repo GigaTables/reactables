@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Tools from './components/Tools.js'
 import Editor from './components/Editor.js'
 import Row from './components/Row.js'
 import Column from './components/Column.js'

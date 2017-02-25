@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './Button.js'
+import PagesSelector from './PagesSelector.js'
 import styles from '../css/styles.css'
 
 var CommonConstants = require('./CommonConstants');
@@ -13,6 +14,9 @@ class Tools extends React.Component {
         <Button>New</Button>
         <Button>Edit</Button>
         <Button>Delete</Button>
+        <PagesSelector defaultPerPage={this.props.defaultPerPage}
+        perPageRows={this.props.perPageRows}/>
+        <div className={styles.clear}></div>
       </div>
     )
   }

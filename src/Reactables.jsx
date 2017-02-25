@@ -15,7 +15,7 @@ export class Header extends React.Component {
     let sorting = this.props.gteSort === CommonConstants.SORTABLE;
     let thClasses = classNames({
       gt_head_tr_th: true,
-      sorting:sorting ? true : false
+      sorting: sorting ? true : false
     });
     return (
       <th className={thClasses} style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
@@ -96,18 +96,16 @@ class Reactables extends React.Component {
         'gt_page': false
       });
       return (
-        <div className={styles.gt_container}>
+        <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
-            <Tools>
-              // elements
-            </Tools>
+            <Tools perPageRows={this.props.settings.perPageRows}
+            defaultPerPage={this.props.settings.defaultPerPage} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
               <tr className={styles.gt_head_tr}>
                 {
                   this.props.children.map((th, index) => {
-                    // console.log(this.props.settings.columns[index][CommonConstants.SORTABLE]);
                     var thh = React.Children.only(th);
                     var clonedOpts = {
                       key: index
@@ -127,16 +125,28 @@ class Reactables extends React.Component {
             </tbody>
             <tfoot>
               <tr>
-                {this.props.children}
+                {
+                  this.props.children.map((th, index) => {
+                    var thh = React.Children.only(th);
+                    var clonedOpts = {
+                      key: index
+                    };
+                    if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+                    || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
+                      // set gteSort for <Header> which should be sorted
+                      clonedOpts['gteSort'] = CommonConstants.SORTABLE;
+                    }
+                    return React.cloneElement(thh, clonedOpts);
+                  })
+                }
               </tr>
             </tfoot>
           </table>
           <div className={styles.gt_pagination}>
           </div>
           <div className={styles.gt_foot_tools}>
-            <Tools>
-              // elements
-            </Tools>
+            <Tools perPageRows={this.props.settings.perPageRows}
+            defaultPerPage={this.props.settings.defaultPerPage}/>
           </div>
         </div>
       )

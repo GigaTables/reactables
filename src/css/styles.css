@@ -113,7 +113,7 @@ td {
 .gt_rows_selector {
   float:left;
 }
-:global .clear {
+.clear {
   clear:both;
 }
 /* pagination */

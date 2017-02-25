@@ -143,7 +143,7 @@ export default StyleSheet.create({
     "gt_rows_selector": {
         "float": "left"
     },
-    ":global clear": {
+    "clear": {
         "clear": "both"
     },
     "gt_pagination": {

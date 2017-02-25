@@ -127,6 +127,6 @@ ReactDOM.render(
     <Header>Date</Header>
     <Header>Info</Header>
     <Header>Field2</Header>
-    <Header>Field3</Header>    
+    <Header>Field3</Header>
   </Reactables>,
   document.getElementById('app'))

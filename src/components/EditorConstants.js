@@ -23,5 +23,11 @@ module.exports = {
   // actions
   ACTION_CREATE: 'create',
   ACTION_EDIT: 'edit',
-  ACTION_DELETE: 'delete'
+  ACTION_DELETE: 'delete',
+  // buttons
+  EDITOR_CREATE: 'editor_create',
+  EDITOR_EDIT: 'editor_edit',
+  EDITOR_REMOVE: 'editor_remove',
+  // different opts
+  EXTENDED: 'extended'
 }

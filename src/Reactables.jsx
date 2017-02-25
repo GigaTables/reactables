@@ -67,7 +67,7 @@ class Reactables extends React.Component {
         }
         // process cols
         this.props.settings.columns.map((column, index) => {
-          // console.log(column);
+          // check if a JSON object has this data field
           if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
           {
             cols.push(<Column dataIndex={column['data']} key={index}>{object[column['data']]}</Column>);
@@ -98,7 +98,7 @@ class Reactables extends React.Component {
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
-            <Tools perPageRows={this.props.settings.perPageRows}
+            <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
             defaultPerPage={this.props.settings.defaultPerPage} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
@@ -145,7 +145,7 @@ class Reactables extends React.Component {
           <div className={styles.gt_pagination}>
           </div>
           <div className={styles.gt_foot_tools}>
-            <Tools perPageRows={this.props.settings.perPageRows}
+            <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
             defaultPerPage={this.props.settings.defaultPerPage}/>
           </div>
         </div>

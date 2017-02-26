@@ -162,7 +162,7 @@ export default StyleSheet.create({
     "gt_pgn_pages": {
         "float": "right"
     },
-    "gt_page": {
+    ":global gt_page": {
         "cursor": "pointer",
         "backgroundColor": "#fff",
         "border": "1px solid #ddd",
@@ -197,10 +197,10 @@ export default StyleSheet.create({
         "borderColor": "#ddd",
         "color": "#23527c"
     },
-    "gt_pageprev": {
+    ":global gt_pageprev": {
         "borderRadius": "3px 0 0 3px"
     },
-    "gt_pagenext": {
+    ":global gt_pagenext": {
         "borderRadius": "0 3px 3px 0"
     },
     "gt_select": {
@@ -235,11 +235,11 @@ export default StyleSheet.create({
         "boxShadow": "0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6)",
         "outline": "0 none"
     },
-    "selected": {
+    ":global selected": {
         "backgroundColor": "#337ab7",
         "color": "#fff"
     },
-    "selected:hover": {
+    ":global selected:hover": {
         "backgroundColor": "#337ab7",
         "color": "#fff"
     },

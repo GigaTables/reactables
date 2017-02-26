@@ -4,6 +4,7 @@ import Tools from './components/Tools.js'
 import Editor from './components/Editor.js'
 import Row from './components/Row.js'
 import Column from './components/Column.js'
+import Pagination from './components/Pagination.js'
 import classNames from 'classnames/bind';
 import styles from './css/styles.css'
 import {DataException} from './components/Exceptions';
@@ -33,7 +34,10 @@ class Reactables extends React.Component {
     // props = {
     // };
     this.state = {
-      dataRows:null
+      dataRows:null,
+      countRows:0,
+      perPage:50,
+      page:1
     }
     this.build();
   }
@@ -42,7 +46,6 @@ class Reactables extends React.Component {
   {
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
-      // console.log(data['rows']);
       this.createTable(data);
     });
   }
@@ -53,6 +56,7 @@ class Reactables extends React.Component {
       throw new DataException('JSON must contain "rows" field');
     }
     let rows = [];
+    let dataJson = data['rows'];
     // process rows
     data['rows'].map((object, objectIndex) => {
         let cols = [];
@@ -77,7 +81,16 @@ class Reactables extends React.Component {
         rows.push(<Row key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
     });
     this.setState({
-      dataRows:rows
+      dataRows:rows,
+      countRows:data['rows'].length
+    });
+  }
+
+  handlePagination(e)
+  {
+    console.log(e.target.dataset.from);
+    this.setState({
+      page: e.target.dataset.from / this.state.perPage
     });
   }
 
@@ -90,11 +103,7 @@ class Reactables extends React.Component {
       // var clonedTFoot = React.cloneElement(tFoot, {
       //   className: "some_class"
       // });
-      let tableClass = classNames({
-        'gt_container': true,
-        'gt_body': true,
-        'gt_page': false
-      });
+      let dataJsonman = this.state.dataJsonman;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
@@ -143,6 +152,7 @@ class Reactables extends React.Component {
             </tfoot>
           </table>
           <div className={styles.gt_pagination}>
+            <Pagination updatePagination={this.handlePagination.bind(this)} countRows={this.state.countRows} page={this.state.page} perPage={this.state.perPage} />
           </div>
           <div className={styles.gt_foot_tools}>
             <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}

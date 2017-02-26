@@ -127,7 +127,7 @@ td {
 .gt_pgn_pages {
   float:right;
 }
-.gt_page {
+:global .gt_page {
   cursor:pointer;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -156,10 +156,10 @@ td {
   border-color:#ddd;
   color:#23527c;
 }
-.gt_page.prev {
+:global .gt_page.prev {
   border-radius: 3px 0 0 3px;
 }
-.gt_page.next {
+:global .gt_page.next {
   border-radius: 0 3px 3px 0;
 }
 .gt_select {
@@ -188,11 +188,11 @@ td {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
   outline:0 none;
 }
-.selected {
+:global .selected {
   background-color:#337ab7;
   color:#fff;
 }
-.selected:hover {
+:global .selected:hover {
   background-color:#337ab7;
   color:#fff;
 }

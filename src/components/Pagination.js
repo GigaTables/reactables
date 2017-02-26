@@ -4,6 +4,7 @@ import styles from '../css/styles.css'
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
+var Lang = require('./Lang');
 
 class Pagination extends React.Component {
   constructor(props)
@@ -49,7 +50,8 @@ class Pagination extends React.Component {
       gt_page: true,
       next: true
     });
-    // console.log(this.props.countRows);
+    console.log(this.props.page + ' ' + this.props.fromRow);
+
 
     let countRows = this.props.countRows,
     page = this.props.page,
@@ -65,7 +67,11 @@ class Pagination extends React.Component {
       });
       pagesContent[i] = <div key={i} data-from={i*perPage} className={pageClasses}>{currentPage}</div>;
     }
-    let lastPageFrom = perPage*pages;
+
+    let prev = (page === 1) ? perPage * (pages - 1) : perPage * (page - 2),
+    next = (page === pages) ? 0 : perPage * (page);
+
+    let from = parseInt(this.props.fromRow);
     // <div data-from="0" className="gt_page selected">1</div>
     // <div data-from="25" class="gt_page ">2</div>
     // <div data-from="50" class="gt_page ">3</div>
@@ -73,12 +79,13 @@ class Pagination extends React.Component {
     // <div data-from="100" class="gt_page ">5</div>
     return (
       <div className={styles.gt_pagination}>
-        <div className={styles.gt_pgn_ttl}>Showing 1 to 25 of 110 entries. </div>
+        <div className={styles.gt_pgn_ttl}>{Lang.en.showing + ' ' + (from + 1) + ' '
+        + Lang.en.to + ' ' + (page * perPage) + ' ' + Lang.en.of  + ' ' + countRows + ' ' + Lang.en.entries + '.'}</div>
         <div className={styles.gt_pgn_pages}>
           <div className={styles.gt_pagn}>
-            <div data-from={lastPageFrom} onClick={this.props.updatePagination} className={prevClasses}>Previous</div>
+            <div data-from={prev} onClick={this.props.updatePagination} className={prevClasses}>{Lang.en.prev}</div>
             {pagesContent}
-            <div data-from={perPage} className={nextClasses}>Next</div>
+            <div data-from={next} onClick={this.props.updatePagination} className={nextClasses}>{Lang.en.next}</div>
           </div>
         </div>
         <div className={styles.clear}></div>

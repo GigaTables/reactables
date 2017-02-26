@@ -37,7 +37,8 @@ class Reactables extends React.Component {
       dataRows:null,
       countRows:0,
       perPage:50,
-      page:1
+      page:1,
+      fromRow:0
     }
     this.build();
   }
@@ -88,9 +89,9 @@ class Reactables extends React.Component {
 
   handlePagination(e)
   {
-    console.log(e.target.dataset.from);
     this.setState({
-      page: e.target.dataset.from / this.state.perPage
+      fromRow: e.target.dataset.from,
+      page: e.target.dataset.from / this.state.perPage + 1
     });
   }
 
@@ -152,7 +153,9 @@ class Reactables extends React.Component {
             </tfoot>
           </table>
           <div className={styles.gt_pagination}>
-            <Pagination updatePagination={this.handlePagination.bind(this)} countRows={this.state.countRows} page={this.state.page} perPage={this.state.perPage} />
+            <Pagination updatePagination={this.handlePagination.bind(this)}
+            countRows={this.state.countRows} page={this.state.page}
+            perPage={this.state.perPage} fromRow={this.state.fromRow} />
           </div>
           <div className={styles.gt_foot_tools}>
             <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}

@@ -79,8 +79,6 @@ class Reactables extends React.Component {
     } else { // clicked
       this.props.children.map((th, idx) => {
       var that = this;
-      console.log(that.state.sortButtons[index]);
-      // this.sortTimeout = setTimeout(function () {
       let cols = that.props.settings.columns,
       sJson = that.jsonData,
       sButtons = that.state.sortButtons,
@@ -160,8 +158,6 @@ class Reactables extends React.Component {
         });
       }
       that.createTable(sJson, sortedButtons);
-      // }
-    // }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
       });
     }
   }
@@ -229,6 +225,11 @@ class Reactables extends React.Component {
     });
   }
 
+  updatePerPage(e)
+  {
+    console.log(e.target);
+  }
+
   setHeads()
   {
     let sortedCols = [];
@@ -259,7 +260,7 @@ class Reactables extends React.Component {
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
-            <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
+            <Tools updatePerPage={this.updatePerPage.bind(this)} tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
             defaultPerPage={this.props.settings.defaultPerPage} />
           </div>
           <table id="gigatable" className={styles.gigatable}>

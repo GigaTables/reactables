@@ -3,7 +3,7 @@ module.exports = {
   // keys
   ESCAPE_KEY: 27,
   ENTER_KEY: 13,
-  // silly pressing buttons protection
-  PROTECT_SILLY_PRESS_TIME: 50,
-  SORTABLE: 'sortable'
+  // table
+  GT_ROW_ID:'GT_RowId',
+  SORTABLE:'sortable'
 }

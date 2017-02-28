@@ -85,12 +85,10 @@ class Reactables extends React.Component {
       let cols = that.props.settings.columns,
       sJson = that.jsonData,
       sButtons = that.state.sortButtons,
-      check = 0, isNan = 0;
+      check = 0, isNan = 0, sortedButtons = [];
 
       if (that.state.sortButtons[index] === 1) {
-        that.setState({
-          sortButtons: that.getButtonsState(index, -1)
-        });
+        sortedButtons = that.getButtonsState(index, -1);
         sJson.sort(function (a, b) {
             var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
             a = (an === null) ? '' : an + '';
@@ -107,9 +105,7 @@ class Reactables extends React.Component {
             return b - a;
         });
       } else { // if 0 || -1 = 1
-        that.setState({
-          sortButtons: that.getButtonsState(index, 1)
-        });
+        sortedButtons = that.getButtonsState(index, 1);
           sJson.sort(function (a, b) {
             var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
             a = (an === null) ? '' : an + '';
@@ -126,7 +122,7 @@ class Reactables extends React.Component {
             return a - b;
           });
       }
-      that.createTable(sJson);
+      that.createTable(sJson, sortedButtons);
     }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
   });
     }
@@ -146,7 +142,7 @@ class Reactables extends React.Component {
     });
   }
 
-  createTable(jsonData)
+  createTable(jsonData, sortedButtons)
   {
     let rows = [];
     if (this.state.dataSearch !== null) {
@@ -175,10 +171,14 @@ class Reactables extends React.Component {
         // console.log(object);
         rows.push(<Row key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
     });
-    this.setState({
+    let state = {
       dataRows:rows,
       countRows:jsonData.length
-    });
+    };
+    if(typeof sortedButtons !== CommonConstants.UNDEFINED) {
+      state['sortButtons'] = sortedButtons;
+    }
+    this.setState(state);
   }
 
   handlePagination(e)

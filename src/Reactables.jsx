@@ -17,7 +17,7 @@ export class Header extends React.Component {
     // 0 - default data-direction, 1 - asc, -1 - desc
     desc = (this.props.sortDirection === -1) ? true : false,
     asc = (this.props.sortDirection === 1) ? true : false;
-
+    // console.log(sorting);
     let thClasses = classNames({
       gt_head_tr_th: true,
       sorting: sorting ? true : false,
@@ -71,7 +71,6 @@ class Reactables extends React.Component {
       this.props.children.map((th, index) => {
         if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
         || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
-        // console.log(index);
           sortedButtons[index] = 0;
         }
       });
@@ -81,15 +80,15 @@ class Reactables extends React.Component {
     } else { // clicked
       this.props.children.map((th, idx) => {
       var that = this;
-      var sortTimeout = setTimeout(function () {
+      // this.sortTimeout = setTimeout(function () {
       let cols = that.props.settings.columns,
       sJson = that.jsonData,
       sButtons = that.state.sortButtons,
       check = 0, isNan = 0, sortedButtons = [];
 
-      if (that.state.sortButtons[index] === 1) {
-        sortedButtons = that.getButtonsState(index, -1);
-        sJson.sort(function (a, b) {
+        if (that.state.sortButtons[index] === 1) {
+          sortedButtons = that.getButtonsState(index, -1);
+          sJson.sort(function (a, b) {
             var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
             a = (an === null) ? '' : an + '';
             b = (bn === null) ? '' : bn + '';
@@ -103,28 +102,28 @@ class Reactables extends React.Component {
                 return b.localeCompare(a);
             }
             return b - a;
-        });
-      } else { // if 0 || -1 = 1
-        sortedButtons = that.getButtonsState(index, 1);
+          });
+        } else { // if 0 || -1 = 1
+          sortedButtons = that.getButtonsState(index, 1);
           sJson.sort(function (a, b) {
             var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
             a = (an === null) ? '' : an + '';
             b = (bn === null) ? '' : bn + '';
             if (check === 0) { // check just the 1st time
-                if (isNaN(a - b)) {
+              if (isNaN(a - b)) {
                     isNan = 1;
-                }
-                check = 1;
+              }
+              check = 1;
             }
             if (isNan) {
-                return a.localeCompare(b);
+              return a.localeCompare(b);
             }
             return a - b;
           });
-      }
-      that.createTable(sJson, sortedButtons);
-    }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
-  });
+        }
+        that.createTable(sJson, sortedButtons);
+    // }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
+      });
     }
   }
 
@@ -177,6 +176,7 @@ class Reactables extends React.Component {
     };
     if(typeof sortedButtons !== CommonConstants.UNDEFINED) {
       state['sortButtons'] = sortedButtons;
+      // clearTimeout(this.sortTimeout);
     }
     this.setState(state);
   }
@@ -210,6 +210,7 @@ class Reactables extends React.Component {
       }
       sortedCols[index] = React.cloneElement(thh, clonedOpts);
     })
+    console.log(this.state.sortButtons);
     return sortedCols;
   }
 

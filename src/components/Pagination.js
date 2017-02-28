@@ -10,23 +10,7 @@ class Pagination extends React.Component {
   constructor(props)
   {
     super(props);
-    // this.state = {
-    //   countRows: this.props.countRows,
-    //   page: this.props.page,
-    //   perPage: this.props.perPage,
-    //   pages: Math.ceil(countRows / perPage)
-    // }
   }
-
-  // componentDidMount()
-  // {
-  //   this.state = {
-  //     countRows: this.props.countRows,
-  //     page: this.props.page,
-  //     perPage: this.props.perPage,
-  //     pages: Math.ceil(countRows / perPage)
-  //   }
-  // }
 
   // handlePagination(from, e)
   // {
@@ -38,10 +22,7 @@ class Pagination extends React.Component {
 
   render()
   {
-    // let pageClasses = classNames({
-    //   gt_page: true,
-    //   selected: this.props.
-    // });
+    var lang = Lang[this.props.lang];
     let prevClasses = classNames({
       gt_page: true,
       prev: true
@@ -50,13 +31,12 @@ class Pagination extends React.Component {
       gt_page: true,
       next: true
     });
-    console.log(this.props.page + ' ' + this.props.fromRow);
-
 
     let countRows = this.props.countRows,
     page = this.props.page,
     perPage = this.props.perPage,
-    pages = Math.ceil(countRows / perPage);
+    pages = Math.ceil(countRows / perPage),
+    more = 5;
 
     let pagesContent = [];
     for (var i=0;i<pages;++i) {
@@ -65,27 +45,24 @@ class Pagination extends React.Component {
         gt_page: true,
         selected: (currentPage === page)?true:false
       });
-      pagesContent[i] = <div key={i} data-from={i*perPage} className={pageClasses}>{currentPage}</div>;
+      pagesContent[i] = <div key={i} onClick={this.props.updatePagination}
+      data-from={i*perPage} className={pageClasses}>{currentPage}</div>;
     }
 
     let prev = (page === 1) ? perPage * (pages - 1) : perPage * (page - 2),
     next = (page === pages) ? 0 : perPage * (page);
 
     let from = parseInt(this.props.fromRow);
-    // <div data-from="0" className="gt_page selected">1</div>
-    // <div data-from="25" class="gt_page ">2</div>
-    // <div data-from="50" class="gt_page ">3</div>
-    // <div data-from="75" class="gt_page ">4</div>
-    // <div data-from="100" class="gt_page ">5</div>
+    let description = lang.showing + ' ' + (from + 1) + ' '
+    + lang.to + ' ' + (page * perPage) + ' ' + lang.of  + ' ' + countRows + ' ' + lang.entries + '.';
     return (
       <div className={styles.gt_pagination}>
-        <div className={styles.gt_pgn_ttl}>{Lang.en.showing + ' ' + (from + 1) + ' '
-        + Lang.en.to + ' ' + (page * perPage) + ' ' + Lang.en.of  + ' ' + countRows + ' ' + Lang.en.entries + '.'}</div>
+        <div className={styles.gt_pgn_ttl}>{description}</div>
         <div className={styles.gt_pgn_pages}>
           <div className={styles.gt_pagn}>
-            <div data-from={prev} onClick={this.props.updatePagination} className={prevClasses}>{Lang.en.prev}</div>
+            <div data-from={prev} onClick={this.props.updatePagination} className={prevClasses}>{lang.prev}</div>
             {pagesContent}
-            <div data-from={next} onClick={this.props.updatePagination} className={nextClasses}>{Lang.en.next}</div>
+            <div data-from={next} onClick={this.props.updatePagination} className={nextClasses}>{lang.next}</div>
           </div>
         </div>
         <div className={styles.clear}></div>

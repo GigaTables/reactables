@@ -13,13 +13,21 @@ var CommonConstants = require('./components/CommonConstants');
 
 export class Header extends React.Component {
   render() {
-    let sorting = this.props.gteSort === CommonConstants.SORTABLE;
+    let sorting = this.props.gteSort === CommonConstants.SORTABLE,
+    // 0 - default data-direction, 1 - asc, -1 - desc
+    desc = (this.props.sortDirection === -1) ? true : false,
+    asc = (this.props.sortDirection === 1) ? true : false;
+
     let thClasses = classNames({
       gt_head_tr_th: true,
-      sorting: sorting ? true : false
+      sorting: sorting ? true : false,
+      sorting_desc: desc,
+      sorting_asc: asc
     });
     return (
-      <th className={thClasses} style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
+      <th onClick={this.props.updateSort} className={thClasses} data-sortindex={this.props.sortId}
+      data-direction={this.props.sortDirection}
+      style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
         <div className={styles.gt_th_box}>{this.props.children}</div>
       </th>
     )
@@ -31,16 +39,58 @@ class Reactables extends React.Component {
   constructor(props)
   {
     super(props);
-    // props = {
-    // };
     this.state = {
       dataRows:null,
       countRows:0,
       perPage:50,
       page:1,
-      fromRow:0
+      fromRow:0,
+      dataSearch:null,
+      sortButtons:[]
     }
     this.build();
+    // console.log(this.state.sortButtons);
+  }
+
+  getButtonsState(index, value)
+  {
+    let buttons = [];
+    for (let key in this.state.sortButtons) {
+      buttons[key] = this.state.sortButtons[key];
+      console.log(index + ' ' + key);
+      if (parseInt(key) === parseInt(index)) {
+        buttons[key] = value;
+      }
+    }
+    return buttons;
+  }
+
+  setTableSort(index, e)
+  {
+    if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
+      let sortedButtons = [];
+      this.props.children.map((th, index) => {
+        if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+        || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
+        // console.log(index);
+          sortedButtons[index] = 0;
+        }
+      });
+      this.setState({
+        sortButtons : sortedButtons
+      });
+    } else { // clicked
+      if (this.state.sortButtons[index] === 1) {
+        this.setState({
+          sortButtons: this.getButtonsState(index, -1)
+        });
+      } else { // if 0 || -1 = 1
+        this.setState({
+          sortButtons: this.getButtonsState(index, 1)
+        });
+      }
+      // console.log(this.state.sortButtons[index]);
+    }
   }
 
   build()
@@ -48,18 +98,22 @@ class Reactables extends React.Component {
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
       this.createTable(data);
+      this.setTableSort();
     });
   }
 
   createTable(data)
   {
     if(typeof data['rows'] === CommonConstants.UNDEFINED) {
-      throw new DataException('JSON must contain "rows" field');
+      throw new DataException('JSON must contain "rows" field.');
     }
     let rows = [];
     let dataJson = data['rows'];
+    if (this.state.dataSearch !== null) {
+      dataJson = this.state.dataSearch;
+    }
     // process rows
-    data['rows'].map((object, objectIndex) => {
+    dataJson.map((object, objectIndex) => {
         let cols = [];
         let rowId = 0;
         // perform id check
@@ -83,7 +137,7 @@ class Reactables extends React.Component {
     });
     this.setState({
       dataRows:rows,
-      countRows:data['rows'].length
+      countRows:dataJson.length
     });
   }
 
@@ -95,16 +149,31 @@ class Reactables extends React.Component {
     });
   }
 
+  setHeads()
+  {
+    let sortedCols = [];
+    this.props.children.map((th, index) => {
+      var thh = React.Children.only(th);
+      var clonedOpts = {
+        key: index,
+        sortId: index+'',
+        sortDirection: (typeof this.state.sortButtons[index] !== CommonConstants.UNDEFINED) ? this.state.sortButtons[index] : 0
+      };
+      if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+      || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
+        // set gteSort for <Header> which should be sorted
+        clonedOpts['gteSort'] = CommonConstants.SORTABLE;
+        if(typeof this.state.sortButtons[index] !== CommonConstants.UNDEFINED) {
+          clonedOpts['updateSort'] = this.setTableSort.bind(this, index);
+        }
+      }
+      sortedCols[index] = React.cloneElement(thh, clonedOpts);
+    })
+    return sortedCols;
+  }
+
   render() {
-      // var tHead = React.Children.only(this.props.children[0]);
-      // var clonnedTHead = React.cloneElement(tHead, {
-      //   className: "input-element test"
-      // });
-      // var tFoot = React.Children.only(this.props.children[1]);
-      // var clonedTFoot = React.cloneElement(tFoot, {
-      //   className: "some_class"
-      // });
-      let dataJsonman = this.state.dataJsonman;
+      let sortedCols = this.setHeads();
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
@@ -114,48 +183,22 @@ class Reactables extends React.Component {
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
               <tr className={styles.gt_head_tr}>
-                {
-                  this.props.children.map((th, index) => {
-                    var thh = React.Children.only(th);
-                    var clonedOpts = {
-                      key: index
-                    };
-                    if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
-                    || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
-                      // set gteSort for <Header> which should be sorted
-                      clonedOpts['gteSort'] = CommonConstants.SORTABLE;
-                    }
-                    return React.cloneElement(thh, clonedOpts);
-                  })
-                }
+                {sortedCols}
               </tr>
             </thead>
             <tbody className={styles.gt_body}>
                 {this.state.dataRows}
             </tbody>
-            <tfoot>
+            <tfoot className={styles.gt_foot}>
               <tr>
-                {
-                  this.props.children.map((th, index) => {
-                    var thh = React.Children.only(th);
-                    var clonedOpts = {
-                      key: index
-                    };
-                    if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
-                    || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
-                      // set gteSort for <Header> which should be sorted
-                      clonedOpts['gteSort'] = CommonConstants.SORTABLE;
-                    }
-                    return React.cloneElement(thh, clonedOpts);
-                  })
-                }
+                {sortedCols}
               </tr>
             </tfoot>
           </table>
           <div className={styles.gt_pagination}>
             <Pagination updatePagination={this.handlePagination.bind(this)}
             countRows={this.state.countRows} page={this.state.page}
-            perPage={this.state.perPage} fromRow={this.state.fromRow} />
+            perPage={this.state.perPage} fromRow={this.state.fromRow} lang={this.props.settings.lang} />
           </div>
           <div className={styles.gt_foot_tools}>
             <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}

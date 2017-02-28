@@ -89,6 +89,7 @@ class Reactables extends React.Component {
           sortButtons: this.getButtonsState(index, 1)
         });
       }
+      console.log(this.data);
       // console.log(this.state.sortButtons[index]);
     }
   }
@@ -98,6 +99,7 @@ class Reactables extends React.Component {
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
       this.createTable(data);
+      this.data = data;
       this.setTableSort();
     });
   }

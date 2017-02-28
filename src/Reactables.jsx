@@ -57,7 +57,6 @@ class Reactables extends React.Component {
     let buttons = [];
     for (let key in this.state.sortButtons) {
       buttons[key] = this.state.sortButtons[key];
-      console.log(index + ' ' + key);
       if (parseInt(key) === parseInt(index)) {
         buttons[key] = value;
       }
@@ -80,17 +79,40 @@ class Reactables extends React.Component {
         sortButtons : sortedButtons
       });
     } else { // clicked
+      // var sortTimeout = setTimeout(function () {
+      let cols = this.props.settings.columns,
+      sJson = this.jsonData,
+      sButtons = this.state.sortButtons,
+      check = 0, isNan = 0;
+
       if (this.state.sortButtons[index] === 1) {
         this.setState({
           sortButtons: this.getButtonsState(index, -1)
+        });
+        sButtons.map((sort, idx) => {
+          sJson.sort(function (a, b) {
+            var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
+            a = (an === null) ? '' : an + '';
+            b = (bn === null) ? '' : bn + '';
+            if (check === 0) { // check just the 1st time
+                if (isNaN(a - b)) {
+                    isNan = 1;
+                }
+                check = 1;
+            }
+            if (isNan) {
+                return a.localeCompare(b);
+            }
+            return a - b;
+          });
         });
       } else { // if 0 || -1 = 1
         this.setState({
           sortButtons: this.getButtonsState(index, 1)
         });
       }
-      console.log(this.data);
-      // console.log(this.state.sortButtons[index]);
+      this.createTable(sJson);
+    // }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
     }
   }
 
@@ -98,24 +120,24 @@ class Reactables extends React.Component {
   {
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
-      this.createTable(data);
-      this.data = data;
+      let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
+      if (typeof jsonData === CommonConstants.UNDEFINED) {
+        throw new DataException('JSON must contain "rows" field.');
+      }
+      this.jsonData = jsonData;
+      this.createTable(jsonData);
       this.setTableSort();
     });
   }
 
-  createTable(data)
+  createTable(jsonData)
   {
-    if(typeof data['rows'] === CommonConstants.UNDEFINED) {
-      throw new DataException('JSON must contain "rows" field.');
-    }
     let rows = [];
-    let dataJson = data['rows'];
     if (this.state.dataSearch !== null) {
-      dataJson = this.state.dataSearch;
+      jsonData = this.state.dataSearch;
     }
     // process rows
-    dataJson.map((object, objectIndex) => {
+    jsonData.map((object, objectIndex) => {
         let cols = [];
         let rowId = 0;
         // perform id check
@@ -139,7 +161,7 @@ class Reactables extends React.Component {
     });
     this.setState({
       dataRows:rows,
-      countRows:dataJson.length
+      countRows:jsonData.length
     });
   }
 
@@ -167,6 +189,7 @@ class Reactables extends React.Component {
         clonedOpts['gteSort'] = CommonConstants.SORTABLE;
         if(typeof this.state.sortButtons[index] !== CommonConstants.UNDEFINED) {
           clonedOpts['updateSort'] = this.setTableSort.bind(this, index);
+          clonedOpts['sortDirection'] = this.state.sortButtons[index];
         }
       }
       sortedCols[index] = React.cloneElement(thh, clonedOpts);

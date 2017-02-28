@@ -79,17 +79,37 @@ class Reactables extends React.Component {
         sortButtons : sortedButtons
       });
     } else { // clicked
-      // var sortTimeout = setTimeout(function () {
-      let cols = this.props.settings.columns,
-      sJson = this.jsonData,
-      sButtons = this.state.sortButtons,
+      this.props.children.map((th, idx) => {
+      var that = this;
+      var sortTimeout = setTimeout(function () {
+      let cols = that.props.settings.columns,
+      sJson = that.jsonData,
+      sButtons = that.state.sortButtons,
       check = 0, isNan = 0;
 
-      if (this.state.sortButtons[index] === 1) {
-        this.setState({
-          sortButtons: this.getButtonsState(index, -1)
+      if (that.state.sortButtons[index] === 1) {
+        that.setState({
+          sortButtons: that.getButtonsState(index, -1)
         });
-        sButtons.map((sort, idx) => {
+        sJson.sort(function (a, b) {
+            var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
+            a = (an === null) ? '' : an + '';
+            b = (bn === null) ? '' : bn + '';
+            if (check === 0) { // check just the 1st time
+                if (isNaN(a - b)) {
+                    isNan = 1;
+                }
+                check = 1;
+            }
+            if (isNan) {
+                return b.localeCompare(a);
+            }
+            return b - a;
+        });
+      } else { // if 0 || -1 = 1
+        that.setState({
+          sortButtons: that.getButtonsState(index, 1)
+        });
           sJson.sort(function (a, b) {
             var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
             a = (an === null) ? '' : an + '';
@@ -105,14 +125,10 @@ class Reactables extends React.Component {
             }
             return a - b;
           });
-        });
-      } else { // if 0 || -1 = 1
-        this.setState({
-          sortButtons: this.getButtonsState(index, 1)
-        });
       }
-      this.createTable(sJson);
-    // }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
+      that.createTable(sJson);
+    }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
+  });
     }
   }
 

@@ -201,10 +201,10 @@ td {
   /*  width:19px;
     height:19px;*/
 }
-.sorting_asc {
+:global .sorting_asc {
   background:url('../images/sort_asc.png') right top no-repeat;
 }
-.sorting_desc {
+:global .sorting_desc {
   background:url('../images/sort_desc.png') right top no-repeat;
 }
 .unselectable {

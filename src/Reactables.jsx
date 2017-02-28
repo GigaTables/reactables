@@ -35,7 +35,6 @@ export class Header extends React.Component {
 }
 
 class Reactables extends React.Component {
-
   constructor(props)
   {
     super(props);
@@ -80,48 +79,88 @@ class Reactables extends React.Component {
     } else { // clicked
       this.props.children.map((th, idx) => {
       var that = this;
+      console.log(that.state.sortButtons[index]);
       // this.sortTimeout = setTimeout(function () {
       let cols = that.props.settings.columns,
       sJson = that.jsonData,
       sButtons = that.state.sortButtons,
       check = 0, isNan = 0, sortedButtons = [];
-
-        if (that.state.sortButtons[index] === 1) {
-          sortedButtons = that.getButtonsState(index, -1);
-          sJson.sort(function (a, b) {
-            var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
-            a = (an === null) ? '' : an + '';
-            b = (bn === null) ? '' : bn + '';
-            if (check === 0) { // check just the 1st time
-                if (isNaN(a - b)) {
-                    isNan = 1;
+      // check and sort for other columns
+      if (typeof that.state.sortButtons[idx] !== CommonConstants.UNDEFINED
+          && that.state.sortButtons[idx] !== 0
+          && idx !== index) {
+            if (that.state.sortButtons[idx] === 1) {
+              sJson.sort(function (a, b) {
+                var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
+                a = (an === null) ? '' : an + '';
+                b = (bn === null) ? '' : bn + '';
+                if (check === 0) { // check just the 1st time
+                  if (isNaN(a - b)) {
+                        isNan = 1;
+                  }
+                  check = 1;
                 }
-                check = 1;
+                if (isNan) {
+                  return a.localeCompare(b);
+                }
+                return a - b;
+              });
+            } else {
+              sJson.sort(function (a, b) {
+                var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
+                a = (an === null) ? '' : an + '';
+                b = (bn === null) ? '' : bn + '';
+                if (check === 0) { // check just the 1st time
+                    if (isNaN(a - b)) {
+                        isNan = 1;
+                    }
+                    check = 1;
+                }
+                if (isNan) {
+                    return b.localeCompare(a);
+                }
+                return b - a;
+              });
             }
-            if (isNan) {
-                return b.localeCompare(a);
-            }
-            return b - a;
-          });
-        } else { // if 0 || -1 = 1
-          sortedButtons = that.getButtonsState(index, 1);
-          sJson.sort(function (a, b) {
-            var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
-            a = (an === null) ? '' : an + '';
-            b = (bn === null) ? '' : bn + '';
-            if (check === 0) { // check just the 1st time
+      }
+
+      if (that.state.sortButtons[index] === 1) {
+        sortedButtons = that.getButtonsState(index, -1);
+        sJson.sort(function (a, b) {
+          var an = eval('a.' + cols[index].data), bn = eval('b.' + cols[index].data);
+          a = (an === null) ? '' : an + '';
+          b = (bn === null) ? '' : bn + '';
+          if (check === 0) { // check just the 1st time
               if (isNaN(a - b)) {
-                    isNan = 1;
+                  isNan = 1;
               }
               check = 1;
+          }
+          if (isNan) {
+              return b.localeCompare(a);
+          }
+          return b - a;
+        });
+      } else { // if 0 || -1 = 1
+        sortedButtons = that.getButtonsState(index, 1);
+        sJson.sort(function (a, b) {
+          var an = eval('a.' + cols[index].data), bn = eval('b.' + cols[index].data);
+          a = (an === null) ? '' : an + '';
+          b = (bn === null) ? '' : bn + '';
+          if (check === 0) { // check just the 1st time
+            if (isNaN(a - b)) {
+                  isNan = 1;
             }
-            if (isNan) {
-              return a.localeCompare(b);
-            }
-            return a - b;
-          });
-        }
-        that.createTable(sJson, sortedButtons);
+            check = 1;
+          }
+          if (isNan) {
+            return a.localeCompare(b);
+          }
+          return a - b;
+        });
+      }
+      that.createTable(sJson, sortedButtons);
+      // }
     // }, CommonConstants.PROTECT_SILLY_PRESS_TIME);
       });
     }
@@ -147,6 +186,7 @@ class Reactables extends React.Component {
     if (this.state.dataSearch !== null) {
       jsonData = this.state.dataSearch;
     }
+    // console.log(sortedButtons);
     // process rows
     jsonData.map((object, objectIndex) => {
         let cols = [];
@@ -210,7 +250,7 @@ class Reactables extends React.Component {
       }
       sortedCols[index] = React.cloneElement(thh, clonedOpts);
     })
-    console.log(this.state.sortButtons);
+    // console.log(this.state.sortButtons);
     return sortedCols;
   }
 

@@ -182,9 +182,12 @@ class Reactables extends React.Component {
     if (this.state.dataSearch !== null) {
       jsonData = this.state.dataSearch;
     }
-    // console.log(sortedButtons);
+    let jsonDataPerPage = jsonData;
+    if (jsonData.length > this.state.perPage) {
+      jsonDataPerPage = jsonData.slice(this.state.fromRow, this.state.perPage);
+    }
     // process rows
-    jsonData.map((object, objectIndex) => {
+    jsonDataPerPage.map((object, objectIndex) => {
         let cols = [];
         let rowId = 0;
         // perform id check
@@ -203,7 +206,6 @@ class Reactables extends React.Component {
             cols.push(<Column dataIndex={column['data']} key={index}>{object[column['data']]}</Column>);
           }
         });
-        // console.log(object);
         rows.push(<Row key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
     });
     let state = {

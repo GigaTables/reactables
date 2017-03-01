@@ -6,22 +6,24 @@ import styles from '../css/styles.css'
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
+var Lang = require('./Lang');
 
 class Tools extends React.Component {
   render()
   {
+    var lang = Lang[this.props.lang];
     return (
       <div className="gt_head_tools">
         {// proccess buttons
           this.props.tableOpts.buttons.map((btn, i) => {
             if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
-              return <Button key={i}>New</Button>;
+              return <Button key={i}>{lang.editor_create}</Button>;
             }
             if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
-              return <Button key={i}>Edit</Button>;
+              return <Button key={i}>{lang.editor_edit}</Button>;
             }
             if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
-              return <Button key={i}>Delete</Button>;
+              return <Button key={i}>{lang.editor_remove}</Button>;
             }
           })
         }

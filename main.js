@@ -17,7 +17,7 @@ var editor = {
     {// an example of using select - automatically selected if matches with data in table column
       label: "Types:",
       name: "types[]",
-      values: [// if select,checkbox,radio etc types - need this kinda structure of value
+      values: [// if select,checkbox,radio etc types - need this pre-set structure of values
         {'key1': 'val1'},
         {'key2': 'val2'}
       ],

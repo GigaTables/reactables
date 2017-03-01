@@ -184,7 +184,9 @@ class Reactables extends React.Component {
     }
     let jsonDataPerPage = jsonData;
     if (jsonData.length > this.state.perPage) {
-      jsonDataPerPage = jsonData.slice(this.state.fromRow, this.state.perPage);
+      let from = parseInt(this.state.fromRow),
+      to = from + parseInt(this.state.perPage);
+      jsonDataPerPage = jsonData.slice(from, to);
     }
     // process rows
     jsonDataPerPage.map((object, objectIndex) => {
@@ -224,16 +226,14 @@ class Reactables extends React.Component {
     this.setState({
       fromRow: e.target.dataset.from,
       page: e.target.dataset.from / this.state.perPage + 1
-    });
+    }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
   }
 
   updatePerPage(e)
   {
-    this.setState(
-      {
+    this.setState({
         perPage: e.target.value
-      }, () => {this.createTable(this.jsonData, this.state.sortedButtons)}
-    )
+      }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
   }
 
   setHeads()
@@ -257,7 +257,6 @@ class Reactables extends React.Component {
       }
       sortedCols[index] = React.cloneElement(thh, clonedOpts);
     })
-    // console.log(this.state.sortButtons);
     return sortedCols;
   }
 
@@ -291,7 +290,8 @@ class Reactables extends React.Component {
           <div className={styles.gt_pagination}>
             <Pagination updatePagination={this.handlePagination.bind(this)}
             countRows={this.state.countRows} page={this.state.page}
-            perPage={this.state.perPage} fromRow={this.state.fromRow} lang={this.props.settings.lang} />
+            perPage={this.state.perPage} fromRow={this.state.fromRow}
+            lang={this.props.settings.lang} />
           </div>
           <div className={styles.gt_foot_tools}>
             <Tools updatePerPage={this.updatePerPage.bind(this)}

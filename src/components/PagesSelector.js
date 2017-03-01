@@ -3,30 +3,18 @@ import styles from '../css/styles.css'
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
+var Lang = require('./Lang');
 
 class PagesSelector extends React.Component {
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      optionValue: props.defaultPerPage
-    }
-  }
-
-  updatePerPage()
-  {
-    console.log(1);
-  }
-
   render()
   {
-    console.log(this.state);
+    var lang = Lang[this.props.lang];
     return (
       <div className={styles.gt_rows_selector}>
-        <span>Show&nbsp;</span>
+        <span>{lang.show}&nbsp;</span>
         <span>
-          <select onChange={(event) => {this.updatePerPage();this.props.updatePerPage(event)}}
-          defaultValue={this.props.defaultPerPage} className={styles.gt_select}>
+          <select onChange={(event) => {this.props.updatePerPage(event)}}
+          value={this.props.perPage} className={styles.gt_select}>
           {
             this.props.perPageRows.map((rows, index) => {
                 return <option key={index}>{rows}</option>;
@@ -34,7 +22,7 @@ class PagesSelector extends React.Component {
           }
           </select>
         </span>
-        <span>&nbsp;entries</span>
+        <span>&nbsp;{lang.entries}</span>
       </div>
     )
   }

@@ -227,7 +227,11 @@ class Reactables extends React.Component {
 
   updatePerPage(e)
   {
-    console.log(e.target);
+    this.setState(
+      {
+        perPage: e.target.value
+      }
+    )
   }
 
   setHeads()
@@ -260,8 +264,10 @@ class Reactables extends React.Component {
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
-            <Tools updatePerPage={this.updatePerPage.bind(this)} tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
-            defaultPerPage={this.props.settings.defaultPerPage} />
+            <Tools updatePerPage={this.updatePerPage.bind(this)} tableOpts={this.props.settings.tableOpts}
+            perPageRows={this.props.settings.perPageRows} perPage={this.state.perPage}
+            defaultPerPage={this.props.settings.defaultPerPage}
+            lang={this.props.settings.lang} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -284,8 +290,10 @@ class Reactables extends React.Component {
             perPage={this.state.perPage} fromRow={this.state.fromRow} lang={this.props.settings.lang} />
           </div>
           <div className={styles.gt_foot_tools}>
-            <Tools tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
-            defaultPerPage={this.props.settings.defaultPerPage}/>
+            <Tools updatePerPage={this.updatePerPage.bind(this)}
+              tableOpts={this.props.settings.tableOpts} perPageRows={this.props.settings.perPageRows}
+              defaultPerPage={this.props.settings.defaultPerPage} perPage={this.state.perPage}
+              lang={this.props.settings.lang} />
           </div>
         </div>
       )

@@ -240,7 +240,10 @@ class Reactables extends React.Component {
 
   showPopup(event)
   {
-    console.log(event.target.dataset.action);
+    this.setState({
+      action: event.target.dataset.action
+    });
+    // console.log(event.target.dataset.faction);
   }
 
   setHeads()

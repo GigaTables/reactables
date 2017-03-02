@@ -238,9 +238,9 @@ class Reactables extends React.Component {
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
   }
 
-  showPopup(e)
+  showPopup(event)
   {
-    console.log(e.target.dataset.action);
+    console.log(event.target.dataset.action);
   }
 
   setHeads()

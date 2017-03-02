@@ -23,7 +23,7 @@ class Editor extends React.Component {
     } else if (props.action === EditorConstants.ACTION_EDIT) {
       fields = this.setEditFields(props.editor.fields);
     } else if (props.action === EditorConstants.ACTION_DELETE) {
-      fields = this.setEditFields(props.delItems);
+      fields = this.setDeleteFields(props.delItems);
     }
     this.state = {
       fields: fields,
@@ -36,7 +36,7 @@ class Editor extends React.Component {
   {
     let fields = [];
     editorFields.map((object, index) => {
-      fields = this.getFieldByType(index, object);
+      fields[index] = this.getFieldByType(index, object);
     });
     return fields;
   }
@@ -45,7 +45,7 @@ class Editor extends React.Component {
   {
     let fields = [];
     editorFields.map((object, index) => {
-      fields = this.getFieldByType(index, object);
+      fields[index] = this.getFieldByType(index, object);
     });
     return fields;
   }

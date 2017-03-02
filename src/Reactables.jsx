@@ -238,6 +238,11 @@ class Reactables extends React.Component {
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
   }
 
+  showPopup(e)
+  {
+    console.log(e.target.action);
+  }
+
   setHeads()
   {
     let sortedCols = [];
@@ -268,6 +273,7 @@ class Reactables extends React.Component {
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
             <Tools updatePerPage={this.updatePerPage.bind(this)}
+              showPopup={this.showPopup.bind(this)}
               tableOpts={this.props.settings.tableOpts}
               perPageRows={this.props.settings.perPageRows}
               perPage={this.state.perPage}
@@ -297,6 +303,7 @@ class Reactables extends React.Component {
           </div>
           <div className={styles.gt_foot_tools}>
             <Tools updatePerPage={this.updatePerPage.bind(this)}
+              showPopup={this.showPopup.bind(this)}
               tableOpts={this.props.settings.tableOpts}
               perPageRows={this.props.settings.perPageRows}
               defaultPerPage={this.props.settings.defaultPerPage}

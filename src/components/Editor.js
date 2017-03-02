@@ -40,13 +40,14 @@ class Editor extends React.Component {
 
   getFieldByType(index, object)
   {
-    var fieldType = fields[k].type,
-            fieldName = fields[k].name,
-            fieldLabel = fields[k].label;
+    var fieldType = object.type,
+            fieldName = object.name,
+            fieldLabel = object.label,
+            action = this.props.action;
 
     var attributes = '';
-    if (typeof fields[k].attrs !== UNDEFINED) {
-      var fieldOpts = fields[k].attrs;
+    if (typeof object.attrs !== CommonConstants.UNDEFINED) {
+      var fieldOpts = object.attrs;
       for (var opt in fieldOpts) {
         for (var attr in fieldOpts[opt]) {
           attributes += attr + '="' + fieldOpts[opt][attr] + '"';
@@ -54,6 +55,7 @@ class Editor extends React.Component {
       }
     }
 
+    let i = 0;
     switch (fieldType) {
       case TYPE_TEXT:
       case TYPE_HIDDEN:
@@ -71,21 +73,17 @@ class Editor extends React.Component {
       case TYPE_MONTH:
       case TYPE_WEEK:
       case TYPE_FILE:
-        htmlFieldsCreate += '<div class="gte_editor_fields">';
-        htmlFieldsEdit += '<div class="gte_editor_fields">';
+        htmlFields[i] += '<div class="gte_editor_fields">';
         if (fieldType !== 'hidden') {
-          htmlFieldsCreate += '<label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label>';
-          htmlFieldsEdit += '<label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label>';
+          htmlFields[i] += '<label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label>';
         }
-        htmlFieldsCreate += '<div class="gte_field"><input ' + attributes + ' id="' + fieldName + '" type="' + fieldType + '" name="' + fieldName + '" data-value=""/></div><div class="clear"></div></div>';
-        htmlFieldsEdit += '<div class="gte_field"><input ' + attributes + ' id="' + fieldName + '" type="' + fieldType + '" name="' + fieldName + '" data-value=""/></div><div class="clear"></div></div>';
+        htmlFields[i] += '<div class="gte_field"><input ' + attributes + ' id="' + fieldName + '" type="' + fieldType + '" name="' + fieldName + '" data-value=""/></div><div class="clear"></div></div>';
         break;
       case TYPE_TEXTAREA:
-        htmlFieldsCreate += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div class="clear"></div></div>';
-        htmlFieldsEdit += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div class="clear"></div></div>';
+        htmlFields[i] += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div class="clear"></div></div>';
         break;
       case TYPE_SELECT:
-        var values = fields[k].values;
+        var values = object.values;
         var options = '', val = '';
         for (var k in values) {
           for (var key in values[k]) {
@@ -93,16 +91,13 @@ class Editor extends React.Component {
             options += '<option value="' + key + '" data-value="' + val.toLowerCase() + '">' + val + '</option>';
           }
         }
-        htmlFieldsCreate += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
-                options
-                + '</select></div><div class="clear"></div></div>';
-        htmlFieldsEdit += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
+        htmlFields[i] += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
                 options
                 + '</select></div><div class="clear"></div></div>';
         break;
       case TYPE_CHECKBOX:
       case TYPE_RADIO:
-        var values = fields[k].values;
+        var values = object.values;
         var options = '', val = '',
                 //@fixme regexp to remove ex: [3] etc
                 id = fieldName.replace('[]', '');
@@ -112,14 +107,12 @@ class Editor extends React.Component {
             options += '<label class="gte_label_text"><input ' + attributes + ' id="' + id + '" type="' + fieldType + '" name="' + fieldName + '" data-value="' + val.toLowerCase() + '" value="' + key + '">' + val + '</label>';
           }
         }
-        htmlFieldsCreate += '<div class="gte_editor_fields"><label class="gte_label">' + fieldLabel + '</label><div class="gte_field">' +
-                options
-                + '</div><div class="clear"></div></div>';
-        htmlFieldsEdit += '<div class="gte_editor_fields"><label class="gte_label">' + fieldLabel + '</label><div class="gte_field">' +
+        htmlFields[i] += '<div class="gte_editor_fields"><label class="gte_label">' + fieldLabel + '</label><div class="gte_field">' +
                 options
                 + '</div><div class="clear"></div></div>';
         break;
     }
+    return htmlFields;
   }
 
   setEditFields(fields)

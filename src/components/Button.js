@@ -10,7 +10,8 @@ class Button extends React.Component {
   {
     return (
       <div className="gte_buttons_container">
-        <div className="gte_button" onClick={(event) => {this.props.showPopup(event)}}>
+        <div className="gte_button" data-action={this.props.action}
+          onClick={(event) => {this.props.showPopup(event)}}>
           <span>{this.props.children}</span>
         </div>
         <div className={styles.clear}></div>

@@ -17,13 +17,13 @@ class Tools extends React.Component {
         {// proccess buttons
           this.props.tableOpts.buttons.map((btn, i) => {
             if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
-              return <Button data-action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
+              return <Button action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
             }
             if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
-              return <Button data-action={EditorConstants.ACTION_EDIT} showPopup={this.props.showPopup} key={i}>{lang.editor_edit}</Button>;
+              return <Button action={EditorConstants.ACTION_EDIT} showPopup={this.props.showPopup} key={i}>{lang.editor_edit}</Button>;
             }
             if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
-              return <Button data-action={EditorConstants.ACTION_DELETE} showPopup={this.props.showPopup} key={i}>{lang.editor_remove}</Button>;
+              return <Button action={EditorConstants.ACTION_DELETE} showPopup={this.props.showPopup} key={i}>{lang.editor_remove}</Button>;
             }
           })
         }

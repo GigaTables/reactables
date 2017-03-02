@@ -71,7 +71,8 @@ class Editor extends React.Component {
       }
     }
 
-    let i = 0;
+    let i = 0,
+    htmlFields = [];
     switch (fieldType) {
       case CommonConstants.TYPE_TEXT:
       case CommonConstants.TYPE_HIDDEN:

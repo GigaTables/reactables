@@ -10,6 +10,7 @@ import styles from './css/styles.css'
 import {DataException} from './components/Exceptions';
 
 var CommonConstants = require('./components/CommonConstants');
+var EditorConstants = require('./components/EditorConstants');
 
 export class Header extends React.Component {
   render() {
@@ -45,7 +46,8 @@ class Reactables extends React.Component {
       page:1,
       fromRow:0,
       dataSearch:null,
-      sortButtons:[]
+      sortButtons:[],
+      action:EditorConstants.ACTION_CREATE
     }
     this.build();
     // console.log(this.state.sortButtons);
@@ -301,7 +303,7 @@ class Reactables extends React.Component {
               perPage={this.state.perPage}
               lang={this.props.settings.lang} />
           </div>
-          <Editor editor={this.props.editor} lang={this.props.settings.lang} />
+          <Editor action={this.state.action} editor={this.props.editor} lang={this.props.settings.lang} />
         </div>
       )
   }

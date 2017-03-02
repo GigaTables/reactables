@@ -1,5 +1,6 @@
 import React from 'react'
-import {DataException} from './components/Exceptions';
+import {EditorException} from './Exceptions';
+import editorStyles from '../css/editor.css'
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
@@ -12,7 +13,6 @@ class Editor extends React.Component {
     if (typeof props.editor.fields === CommonConstants.UNDEFINED) {
       throw new EditorException('You should define "fields" option.');
     }
-
     if (props.editor.fields.length === 0) {
       throw new EditorException('You should define at least one field in "fields" option.');
     }
@@ -31,19 +31,19 @@ class Editor extends React.Component {
     }
   }
 
-  setCreateFields(fields)
+  setCreateFields(editorFields)
   {
     let fields = [];
-    fields.map((object, index) => {
+    editorFields.map((object, index) => {
       fields = this.getFieldByType(index, object);
     });
     return fields;
   }
 
-  setEditFields(fields)
+  setEditFields(editorFields)
   {
     let fields = [];
-    fields.map((object, index) => {
+    editorFields.map((object, index) => {
       fields = this.getFieldByType(index, object);
     });
     return fields;
@@ -89,14 +89,14 @@ class Editor extends React.Component {
       case CommonConstants.TYPE_MONTH:
       case CommonConstants.TYPE_WEEK:
       case CommonConstants.TYPE_FILE:
-        htmlFields[i] += '<div class="gte_editor_fields">';
+        htmlFields[i] += '<div className="gte_editor_fields">';
         if (fieldType !== 'hidden') {
-          htmlFields[i] += '<label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label>';
+          htmlFields[i] += '<label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label>';
         }
-        htmlFields[i] += '<div class="gte_field"><input ' + attributes + ' id="' + fieldName + '" type="' + fieldType + '" name="' + fieldName + '" data-value=""/></div><div class="clear"></div></div>';
+        htmlFields[i] += '<div className={editorStyles.gte_field}><input ' + attributes + ' id="' + fieldName + '" type="' + fieldType + '" name="' + fieldName + '" data-value=""/></div><div className="clear"></div></div>';
         break;
       case CommonConstants.TYPE_TEXTAREA:
-        htmlFields[i] += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div class="clear"></div></div>';
+        htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div className="clear"></div></div>';
         break;
       case CommonConstants.TYPE_SELECT:
         var values = object.values;
@@ -107,9 +107,9 @@ class Editor extends React.Component {
             options += '<option value="' + key + '" data-value="' + val.toLowerCase() + '">' + val + '</option>';
           }
         }
-        htmlFields[i] += '<div class="gte_editor_fields"><label class="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div class="gte_field"><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
+        htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
                 options
-                + '</select></div><div class="clear"></div></div>';
+                + '</select></div><div className="clear"></div></div>';
         break;
       case CommonConstants.TYPE_CHECKBOX:
       case CommonConstants.TYPE_RADIO:
@@ -120,12 +120,12 @@ class Editor extends React.Component {
         for (var k in values) {
           for (var key in values[k]) {
             val = values[k][key].trim();
-            options += '<label class="gte_label_text"><input ' + attributes + ' id="' + id + '" type="' + fieldType + '" name="' + fieldName + '" data-value="' + val.toLowerCase() + '" value="' + key + '"/>' + val + '</label>';
+            options += '<label className="gte_label_text"><input ' + attributes + ' id="' + id + '" type="' + fieldType + '" name="' + fieldName + '" data-value="' + val.toLowerCase() + '" value="' + key + '"/>' + val + '</label>';
           }
         }
-        htmlFields[i] += '<div class="gte_editor_fields"><label class="gte_label">' + fieldLabel + '</label><div class="gte_field">' +
+        htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label">' + fieldLabel + '</label><div className={editorStyles.gte_field}>' +
                 options
-                + '</div><div class="clear"></div></div>';
+                + '</div><div className="clear"></div></div>';
         break;
     }
     return htmlFields;
@@ -136,12 +136,12 @@ class Editor extends React.Component {
   //   let field = [];
   //
   //   return (
-  //     <div class="gte_editor_fields">
-  //       <label class="gte_label">Types:</label>
-  //       <div class="gte_field">
+  //     <div className="gte_editor_fields">
+  //       <label className="gte_label">Types:</label>
+  //       <div className="gte_field">
   //         <input id="id" type="hidden" name="id" data-value=""/>
   //       </div>
-  //       <div class="clear"></div>
+  //       <div className="clear"></div>
   //     </div>
   //   );
   // }
@@ -149,18 +149,18 @@ class Editor extends React.Component {
   render()
   {
     return (
-      <div class="gte_editor_popup" style="display: block; opacity: 1; top: -20px;">
-        <div class="gte_popup_container">
-          <div class="gte_popup_container_wrapper">
-            <div class="gte_form_border_box">
-              <div class="gte_form_fields">
-                <div class="gte_header">
-                  <div class="gte_editor_title">{this.state.popup_title}</div>
+      <div className="gte_editor_popup">
+        <div className="gte_popup_container">
+          <div className="gte_popup_container_wrapper">
+            <div className="gte_form_border_box">
+              <div className="gte_form_fields">
+                <div className="gte_header">
+                  <div className="gte_editor_title">{this.state.popup_title}</div>
                 </div>
-                <div class="gte_form_body">
-                  <div class="gte_form_body_content">
+                <div className="gte_form_body">
+                  <div className="gte_form_body_content">
                     <form id="gte_form" action="" method="post">
-                      <div class="gte_form_content">
+                      <div className="gte_form_content">
                         <div>
                           <input type="hidden" name="action" value={this.props.action}/>
                         </div>

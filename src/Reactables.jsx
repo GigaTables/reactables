@@ -301,7 +301,7 @@ class Reactables extends React.Component {
               perPage={this.state.perPage}
               lang={this.props.settings.lang} />
           </div>
-          <Editor />
+          <Editor editor={this.props.editor} lang={this.props.settings.lang} />
         </div>
       )
   }

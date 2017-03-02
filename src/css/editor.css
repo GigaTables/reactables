@@ -53,7 +53,7 @@ label {
   left: 50%;
   margin-left: -390px;
   position: fixed;
-  top: 0;
+  top: -20px;
   width: 780px;
   z-index: 111;
 }
@@ -236,7 +236,7 @@ div.gte_field input, div.gte_field textarea {
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-.gte_field {
+:global .gte_field {
   float: right;
   width: 60%;
 }

@@ -47,7 +47,7 @@ label {
   cursor:default;
   color: #999 !important;
 }
-.gte_editor_popup {
+:global .gte_editor_popup {
   display:none;
   height: 100%;
   left: 50%;
@@ -67,7 +67,7 @@ label {
   width: 100%;
   z-index: 110;
 }
-.gte_popup_container {
+:global .gte_popup_container {
   display: table;
   height: 100%;
   width: 100%;
@@ -80,37 +80,37 @@ label {
   overflow: auto;
   position: relative;
 }
-.gte_popup_container_wrapper {
+:global .gte_popup_container_wrapper {
   display: table;
   height: 100%;
   vertical-align: middle;
   width: 100%;
 }
-.gte_form_border_box {
+:global .gte_form_border_box {
   border: 7px solid rgba(220, 220, 220, 0.5);
   border-radius: 10px;
   box-shadow: 2px 2px 10px #555;
   box-sizing: border-box;
   position: relative;
 }
-.gte_form_fields {
+:global .gte_form_fields {
   background: white none repeat scroll 0 0;
   border: 2px solid #444;
   border-radius: 6px;
   box-shadow: 0 0 5px #555;
   box-sizing: border-box;
 }
-.gte_editor_fields {
+:global .gte_editor_fields {
   border: 1px solid transparent;
   clear: both;
   padding: 5px 20%;
   position: relative;
 }
-.gte_form_content {
+:global .gte_form_content {
   padding: 10px;
   position: relative;
 }
-.gte_header {
+:global .gte_header {
   background-color: #f3f3f3;
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
@@ -128,7 +128,7 @@ label {
   top: 2px;
   width: auto;
 }
-.gte_footer {
+:global .gte_footer {
   background-color: #f3f3f3;
   border-top: 1px solid #ddd;
   /*bottom: 0;*/
@@ -145,13 +145,13 @@ label {
   right: 2px;
   width: auto;
 }
-.gte_form_err {
+:global .gte_form_err {
   color: #b11f1f;
   display: none;
   float: left;
   padding: 5px;
 }
-.gte_form_buttons .btn {
+:global .gte_form_buttons .btn {
   position: relative;
   text-align: center;
   display: block;

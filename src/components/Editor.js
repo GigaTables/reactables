@@ -27,7 +27,8 @@ class Editor extends React.Component {
     }
     this.state = {
       fields: fields,
-      popup_title: this.lang.gte_editor_popupheader_create
+      popup_title: this.lang.gte_editor_popupheader_create,
+      popup_button: this.lang.gte_editor_sendbtn_create
     }
   }
 
@@ -170,6 +171,12 @@ class Editor extends React.Component {
                         {this.state.fields}
                       </div>
                     </form>
+                  </div>
+                </div>
+                <div className="gte_footer">
+                  <div className="gte_form_err"></div>
+                  <div className="gte_form_buttons">
+                    <button id="gte_sent_btn" className="btn">{this.state.popup_button}</button>
                   </div>
                 </div>
               </div>

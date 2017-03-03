@@ -47,7 +47,8 @@ class Reactables extends React.Component {
       fromRow:0,
       dataSearch:null,
       sortButtons:[],
-      action:EditorConstants.ACTION_CREATE
+      action: EditorConstants.ACTION_CREATE,
+      active: false
     }
     this.build();
     // console.log(this.state.sortButtons);
@@ -238,10 +239,11 @@ class Reactables extends React.Component {
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
   }
 
-  showPopup(event)
+  showPopup(e)
   {
     this.setState({
-      action: event.target.dataset.action
+      action: e.target.dataset.action,
+      active: true
     });
     // console.log(event.target.dataset.faction);
   }
@@ -313,7 +315,9 @@ class Reactables extends React.Component {
               perPage={this.state.perPage}
               lang={this.props.settings.lang} />
           </div>
-          <Editor action={this.state.action} editor={this.props.editor} lang={this.props.settings.lang} />
+          <Editor active={this.state.active} action={this.state.action}
+          editor={this.props.editor}
+          lang={this.props.settings.lang} />
         </div>
       )
   }

@@ -184,6 +184,7 @@ class Editor extends React.Component {
           </div>
         </div>
       </div>
+      <div class="gte_popup_background"></div>
     )
   }
 }

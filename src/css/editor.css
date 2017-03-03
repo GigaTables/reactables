@@ -24,7 +24,7 @@ label {
   background:         linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa',GradientType=0 ); /* IE6-9 */
 }
-.gte_button:hover:not(.gte_btn_disabled) {
+:global .gte_button:hover:not(.gte_btn_disabled) {
   border: 1px solid #666;
   box-shadow: 1px 1px 1px #999;
 
@@ -40,7 +40,7 @@ label {
   float:left;
   margin:0 5px 0 0;
 }
-.gte_btn_disabled {
+:global .gte_btn_disabled {
   background: #fff;
   box-shadow: 1px 1px 1px #999;
   border:1px solid #eee;
@@ -57,7 +57,7 @@ label {
   width: 780px;
   z-index: 111;
 }
-.gte_popup_background {
+:global .gte_popup_background {
   display:none;
   background: rgba(0, 0, 0, 0) radial-gradient(ellipse farthest-corner at center center , rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%) repeat scroll 0 0;
   height: 100%;
@@ -183,7 +183,7 @@ label {
   background-image: linear-gradient(top, white 0%, #eeeeee 65%, #f9f9f9 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='white', EndColorStr='#f9f9f9');
 }
-.gte_form_buttons .btn:hover {
+:global .gte_form_buttons .btn:hover {
   background-color: #f3f3f3 100%;
   /* Fallback */
   background-image: -webkit-linear-gradient(top, white 0%, #dedede 65%, #f3f3f3 100%);
@@ -199,12 +199,12 @@ label {
   border: 1px solid #666;
   box-shadow: 1px 1px 3px #888;
 }
-.gte_label {
+:global .gte_label {
   float: left;
   padding-top: 6px;
   width: 40%;
 }
-.gte_label_text{
+:global .gte_label_text {
   font-weight: normal;
 }
 div.gte_field input[type="color"],
@@ -250,4 +250,7 @@ div.gte_field input, div.gte_field textarea {
 #gte_msg {
   padding:4px 6px;
   text-align: center;
+}
+:global .display {
+  display: block;
 }

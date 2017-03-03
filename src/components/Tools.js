@@ -12,21 +12,21 @@ class Tools extends React.Component {
   render()
   {
     var lang = Lang[this.props.lang];
+    let buttons = [];
+    this.props.tableOpts.buttons.map((btn, i) => {
+      if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
+        buttons[i] = <Button action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
+      }
+      if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
+        buttons[i] = <Button action={EditorConstants.ACTION_EDIT} showPopup={this.props.showPopup} key={i}>{lang.editor_edit}</Button>;
+      }
+      if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
+        buttons[i] = <Button action={EditorConstants.ACTION_DELETE} showPopup={this.props.showPopup} key={i}>{lang.editor_remove}</Button>;
+      }
+    });
     return (
       <div className="gt_head_tools">
-        {// proccess buttons
-          this.props.tableOpts.buttons.map((btn, i) => {
-            if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
-              return <Button action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
-            }
-            if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
-              return <Button action={EditorConstants.ACTION_EDIT} showPopup={this.props.showPopup} key={i}>{lang.editor_edit}</Button>;
-            }
-            if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
-              return <Button action={EditorConstants.ACTION_DELETE} showPopup={this.props.showPopup} key={i}>{lang.editor_remove}</Button>;
-            }
-          })
-        }
+        {buttons}
         <PagesSelector perPage={this.props.perPage} updatePerPage={this.props.updatePerPage}
           defaultPerPage={this.props.defaultPerPage}
           perPageRows={this.props.perPageRows} lang={this.props.lang} />

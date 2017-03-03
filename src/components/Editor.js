@@ -1,6 +1,7 @@
 import React from 'react'
 import {EditorException} from './Exceptions';
 import editorStyles from '../css/editor.css'
+import classNames from 'classnames/bind';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
@@ -150,8 +151,14 @@ class Editor extends React.Component {
 
   render()
   {
+    console.log(this.props.active);
+    let editorClasses = classNames({
+      gte_editor_popup: true,
+      display: this.props.active
+    });
     return (
-      <div className="gte_editor_popup">
+      <div>
+      <div className={editorClasses}>
         <div className="gte_popup_container">
           <div className="gte_popup_container_wrapper">
             <div className="gte_form_border_box">
@@ -184,7 +191,8 @@ class Editor extends React.Component {
           </div>
         </div>
       </div>
-      <div class="gte_popup_background"></div>
+      <div className="gte_popup_background"></div>
+      </div>
     )
   }
 }

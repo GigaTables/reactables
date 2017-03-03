@@ -30,7 +30,7 @@ export default StyleSheet.create({
         "background": "linear-gradient(top, #ffffff 0%,#f9f9f9 89%,#fafafa 100%)",
         "filter": "progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa',GradientType=0 )"
     },
-    "gte_button:hover:not(gte_btn_disabled)": {
+    ":global gte_button:hover:not(gte_btn_disabled)": {
         "border": "1px solid #666",
         "boxShadow": "1px 1px 1px #999",
         "background": "linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%)",
@@ -43,24 +43,24 @@ export default StyleSheet.create({
         "marginBottom": 0,
         "marginLeft": 0
     },
-    "gte_btn_disabled": {
+    ":global gte_btn_disabled": {
         "background": "#fff",
         "boxShadow": "1px 1px 1px #999",
         "border": "1px solid #eee",
         "cursor": "default",
         "color": "#999 !important"
     },
-    "gte_editor_popup": {
+    ":global gte_editor_popup": {
         "display": "none",
         "height": "100%",
         "left": "50%",
         "marginLeft": -390,
         "position": "fixed",
-        "top": 0,
+        "top": -20,
         "width": 780,
         "zIndex": 111
     },
-    "gte_popup_background": {
+    ":global gte_popup_background": {
         "display": "none",
         "background": "rgba(0, 0, 0, 0) radial-gradient(ellipse farthest-corner at center center , rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%) repeat scroll 0 0",
         "height": "100%",
@@ -70,43 +70,43 @@ export default StyleSheet.create({
         "width": "100%",
         "zIndex": 110
     },
-    "gte_popup_container": {
+    ":global gte_popup_container": {
         "display": "table",
         "height": "100%",
         "width": "100%",
         "marginTop": "15%"
     },
-    "gte_form_body": {
+    ":global gte_form_body": {
         "paddingTop": 50,
         "paddingRight": 0,
         "paddingBottom": 50,
         "paddingLeft": 0
     },
-    "gte_form_body_content": {
+    ":global gte_form_body_content": {
         "overflow": "auto",
         "position": "relative"
     },
-    "gte_popup_container_wrapper": {
+    ":global gte_popup_container_wrapper": {
         "display": "table",
         "height": "100%",
         "verticalAlign": "middle",
         "width": "100%"
     },
-    "gte_form_border_box": {
+    ":global gte_form_border_box": {
         "border": "7px solid rgba(220, 220, 220, 0.5)",
         "borderRadius": 10,
         "boxShadow": "2px 2px 10px #555",
         "boxSizing": "border-box",
         "position": "relative"
     },
-    "gte_form_fields": {
+    ":global gte_form_fields": {
         "background": "white none repeat scroll 0 0",
         "border": "2px solid #444",
         "borderRadius": 6,
         "boxShadow": "0 0 5px #555",
         "boxSizing": "border-box"
     },
-    "gte_editor_fields": {
+    ":global gte_editor_fields": {
         "border": "1px solid transparent",
         "clear": "both",
         "paddingTop": 5,
@@ -115,14 +115,14 @@ export default StyleSheet.create({
         "paddingLeft": "20%",
         "position": "relative"
     },
-    "gte_form_content": {
+    ":global gte_form_content": {
         "paddingTop": 10,
         "paddingRight": 10,
         "paddingBottom": 10,
         "paddingLeft": 10,
         "position": "relative"
     },
-    "gte_header": {
+    ":global gte_header": {
         "backgroundColor": "#f3f3f3",
         "borderBottom": "1px solid #ddd",
         "boxSizing": "border-box",
@@ -140,7 +140,7 @@ export default StyleSheet.create({
         "top": 2,
         "width": "auto"
     },
-    "gte_footer": {
+    ":global gte_footer": {
         "backgroundColor": "#f3f3f3",
         "borderTop": "1px solid #ddd",
         "boxSizing": "border-box",
@@ -157,7 +157,7 @@ export default StyleSheet.create({
         "right": 2,
         "width": "auto"
     },
-    "gte_form_err": {
+    ":global gte_form_err": {
         "color": "#b11f1f",
         "display": "none",
         "float": "left",
@@ -166,7 +166,7 @@ export default StyleSheet.create({
         "paddingBottom": 5,
         "paddingLeft": 5
     },
-    "gte_form_buttons btn": {
+    ":global gte_form_buttons btn": {
         "position": "relative",
         "textAlign": "center",
         "display": "block",
@@ -192,19 +192,19 @@ export default StyleSheet.create({
         "backgroundImage": "linear-gradient(top, white 0%, #eeeeee 65%, #f9f9f9 100%)",
         "filter": "progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='white', EndColorStr='#f9f9f9')"
     },
-    "gte_form_buttons btn:hover": {
+    ":global gte_form_buttons btn:hover": {
         "backgroundColor": "#f3f3f3 100%",
         "backgroundImage": "linear-gradient(top, white 0%, #dedede 65%, #f3f3f3 100%)",
         "filter": "progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='white', EndColorStr='#f3f3f3')",
         "border": "1px solid #666",
         "boxShadow": "1px 1px 3px #888"
     },
-    "gte_label": {
+    ":global gte_label": {
         "float": "left",
         "paddingTop": 6,
         "width": "40%"
     },
-    "gte_label_text": {
+    ":global gte_label_text": {
         "fontWeight": "normal"
     },
     "divgte_field input[type=\"color\"]": {
@@ -343,7 +343,7 @@ export default StyleSheet.create({
         "KhtmlBorderRadius": 3,
         "borderRadius": 3
     },
-    "gte_field": {
+    ":global gte_field": {
         "float": "right",
         "width": "60%"
     },
@@ -367,5 +367,8 @@ export default StyleSheet.create({
         "paddingBottom": 4,
         "paddingLeft": 6,
         "textAlign": "center"
+    },
+    ":global display": {
+        "display": "block"
     }
 });

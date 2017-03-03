@@ -73,10 +73,10 @@ label {
   width: 100%;
   margin-top:15%;
 }
-.gte_form_body {
+:global .gte_form_body {
   padding: 50px 0;
 }
-.gte_form_body_content {
+:global .gte_form_body_content {
   overflow: auto;
   position: relative;
 }

@@ -155,6 +155,10 @@ class Editor extends React.Component {
     let editorClasses = classNames({
       gte_editor_popup: true,
       display: this.props.active
+    }),
+    backgroundClasses = classNames({
+      gte_popup_background:true,
+      display: this.props.active
     });
     return (
       <div>
@@ -191,7 +195,7 @@ class Editor extends React.Component {
           </div>
         </div>
       </div>
-      <div className="gte_popup_background"></div>
+      <div className={backgroundClasses}></div>
       </div>
     )
   }

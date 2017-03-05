@@ -10,9 +10,12 @@ export default class Row extends React.Component {
       odd:(this.props.count % 2 === 0)?false:true,
       active: this.props.selectedRows[this.props.gteRowId]
     });
+    // console.log(this.props.selectedRows[this.props.gteRowId]);
     return (
-      <tr className={rowClasses} onClick={this.props.clickedRow}
-       data-rowid={this.props.gteRowId}>{this.props.children}</tr>
+      <tr key={this.props.gteRowId} className={rowClasses}
+        data-selectedrows={this.props.selectedRows} onClick={this.props.clickedRow}
+        data-minrow={this.props.minRow} data-maxrow={this.props.maxRow}
+        data-rowid={this.props.count}>{this.props.children}</tr>
     )
   }
 }

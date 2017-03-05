@@ -18,7 +18,6 @@ export class Header extends React.Component {
     // 0 - default data-direction, 1 - asc, -1 - desc
     desc = (this.props.sortDirection === -1) ? true : false,
     asc = (this.props.sortDirection === 1) ? true : false;
-    // console.log(sorting);
     let thClasses = classNames({
       gt_head_tr_th: true,
       sorting: sorting ? true : false,
@@ -213,13 +212,17 @@ class Reactables extends React.Component {
           // check if a JSON object has this data field
           if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
           {
-            cols.push(<Column dataIndex={column['data']} rowId={rowId} key={index}>{object[column['data']]}</Column>);
+            cols.push(<Column dataIndex={column['data']} selectedRows={this.state.selectedRows}
+            minRow={this.state.minRow} maxRow={this.state.maxRow}
+            count={objectIndex} key={index}>{object[column['data']]}</Column>);
           }
         });
+        // count is used to shft key + click selection of rows, ex.: sorted
         rows.push(<Row clickedRow={this.clickedRow.bind(this)}
         selectedRows={this.state.selectedRows}
         minRow={this.state.minRow} maxRow={this.state.maxRow}
-        key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
+        key={objectIndex} count={objectIndex}
+        gteRowId={rowId}>{cols}</Row>);
     });
     let state = {
       dataRows:rows,
@@ -227,7 +230,6 @@ class Reactables extends React.Component {
     };
     if(typeof sortedButtons !== CommonConstants.UNDEFINED) {
       state['sortButtons'] = sortedButtons;
-      // clearTimeout(this.sortTimeout);
     }
     this.setState(state);
   }
@@ -236,31 +238,31 @@ class Reactables extends React.Component {
   {
     let rows = this.state.selectedRows;
     let min = 0, max = 0;
-    console.log(this.state.ctrlDown);
     if (this.state.ctrlDown === true) {
       rows.push(e.target.dataset.rowid);
     } else if (this.state.shiftDown === true) {
-      // rows.push(e.target.dataset.rowid);
-      // min = rows[0], max = rows[0];
-      // for (var row in rows) {
-      //   if (rows[row] < min) {
-      //     min = rows[row];
-      //   }
-      //   if (rows[row] > max) {
-      //     max = rows[row];
-      //   }
-      // }
+      rows.push(e.target.dataset.rowid);
+      min = rows[0], max = rows[0];
+      for (var row in rows) {
+        if (rows[row] < min) {
+          min = rows[row];
+        }
+        if (rows[row] > max) {
+          max = rows[row];
+        }
+      }
       // fill in the items
-
+      this.setState({
+        minRow: parseInt(min),
+        maxRow: parseInt(max)
+      });
     } else { // if just a click override prev
       rows = [e.target.dataset.rowid];
     }
-    console.log(rows);
     this.setState({
-      selectedRows: rows,
-      minRow: min,
-      maxRow: max
+      selectedRows: rows
     });
+    this.createTable(this.jsonData, this.state.sortedButtons);
   }
 
   handlePagination(e)
@@ -284,7 +286,6 @@ class Reactables extends React.Component {
       action: e.target.dataset.action,
       active: true
     });
-    // console.log(event.target.dataset.faction);
   }
 
   hidePopup()

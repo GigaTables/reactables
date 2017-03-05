@@ -48,7 +48,12 @@ class Reactables extends React.Component {
       dataSearch:null,
       sortButtons:[],
       action: EditorConstants.ACTION_CREATE,
-      active: false
+      active: false,
+      selectedRows: [],
+      ctrlDown: false,
+      shiftDown: false,
+      minRow: 0,
+      maxRow: 0
     }
     this.build();
     // console.log(this.state.sortButtons);
@@ -208,10 +213,13 @@ class Reactables extends React.Component {
           // check if a JSON object has this data field
           if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
           {
-            cols.push(<Column dataIndex={column['data']} key={index}>{object[column['data']]}</Column>);
+            cols.push(<Column dataIndex={column['data']} rowId={rowId} key={index}>{object[column['data']]}</Column>);
           }
         });
-        rows.push(<Row key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
+        rows.push(<Row clickedRow={this.clickedRow.bind(this)}
+        selectedRows={this.state.selectedRows}
+        minRow={this.state.minRow} maxRow={this.state.maxRow}
+        key={objectIndex} count={objectIndex} gteRowId={rowId}>{cols}</Row>);
     });
     let state = {
       dataRows:rows,
@@ -222,6 +230,37 @@ class Reactables extends React.Component {
       // clearTimeout(this.sortTimeout);
     }
     this.setState(state);
+  }
+
+  clickedRow(e)
+  {
+    let rows = this.state.selectedRows;
+    let min = 0, max = 0;
+    console.log(this.state.ctrlDown);
+    if (this.state.ctrlDown === true) {
+      rows.push(e.target.dataset.rowid);
+    } else if (this.state.shiftDown === true) {
+      // rows.push(e.target.dataset.rowid);
+      // min = rows[0], max = rows[0];
+      // for (var row in rows) {
+      //   if (rows[row] < min) {
+      //     min = rows[row];
+      //   }
+      //   if (rows[row] > max) {
+      //     max = rows[row];
+      //   }
+      // }
+      // fill in the items
+
+    } else { // if just a click override prev
+      rows = [e.target.dataset.rowid];
+    }
+    console.log(rows);
+    this.setState({
+      selectedRows: rows,
+      minRow: min,
+      maxRow: max
+    });
   }
 
   handlePagination(e)
@@ -248,6 +287,13 @@ class Reactables extends React.Component {
     // console.log(event.target.dataset.faction);
   }
 
+  hidePopup()
+  {
+    this.setState({
+      active: false
+    });
+  }
+
   setHeads()
   {
     let sortedCols = [];
@@ -270,6 +316,42 @@ class Reactables extends React.Component {
       sortedCols[index] = React.cloneElement(thh, clonedOpts);
     })
     return sortedCols;
+  }
+
+  componentDidMount()
+  {
+    var that = this;
+    document.addEventListener('keydown', (e) => {
+      switch (e.which) {
+        case CommonConstants.CNTRL_KEY:
+          that.setState({
+            ctrlDown: true
+          });
+          break;
+        case CommonConstants.SHIFT_KEY:
+          that.setState({
+            shiftDown: true
+          });
+          break;
+        case CommonConstants.ESCAPE_KEY:
+          that.hidePopup();
+          break;
+      }
+    });
+    document.addEventListener('keyup', (e) => {
+      switch (e.which) {
+        case CommonConstants.CNTRL_KEY:
+          that.setState({
+            ctrlDown: false
+          });
+          break;
+        case CommonConstants.SHIFT_KEY:
+          that.setState({
+            shiftDown: false
+          });
+          break;
+      }
+    });
   }
 
   render() {
@@ -316,7 +398,7 @@ class Reactables extends React.Component {
               lang={this.props.settings.lang} />
           </div>
           <Editor active={this.state.active} action={this.state.action}
-          editor={this.props.editor}
+          editor={this.props.editor} hidePopup={this.hidePopup.bind(this)}
           lang={this.props.settings.lang} />
         </div>
       )

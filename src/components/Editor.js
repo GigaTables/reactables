@@ -151,7 +151,6 @@ class Editor extends React.Component {
 
   render()
   {
-    console.log(this.props.active);
     let editorClasses = classNames({
       gte_editor_popup: true,
       display: this.props.active
@@ -195,7 +194,7 @@ class Editor extends React.Component {
           </div>
         </div>
       </div>
-      <div className={backgroundClasses}></div>
+      <div onClick={this.props.hidePopup} className={backgroundClasses}></div>
       </div>
     )
   }

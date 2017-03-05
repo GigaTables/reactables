@@ -6,7 +6,7 @@ const {width, height, scale} = Dimensions.get("window"),
     vmax = Math.max(vw, vh);
 
 export default StyleSheet.create({
-    "label": {
+    ":global label": {
         "display": "inline-block",
         "fontWeight": "bold",
         "marginBottom": 5,

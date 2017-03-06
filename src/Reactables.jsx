@@ -11,6 +11,7 @@ import {DataException} from './components/Exceptions';
 
 var CommonConstants = require('./components/CommonConstants');
 var EditorConstants = require('./components/EditorConstants');
+var Lang = require('./components/Lang');
 
 export class Header extends React.Component {
   render() {
@@ -293,9 +294,23 @@ class Reactables extends React.Component {
 
   showPopup(e)
   {
+    this.lang = Lang[this.props.settings.lang];
+    let action = e.target.dataset.action,
+    popup_title = this.lang.gte_editor_popupheader_create,
+    popup_button = this.lang.gte_editor_sendbtn_create;
+
+    if (action === EditorConstants.ACTION_EDIT) {
+      popup_title = this.lang.gte_editor_popupheader_edit;
+      popup_button = this.lang.gte_editor_sendbtn_update;
+    } else if (action === EditorConstants.ACTION_DELETE) {
+      popup_title = this.lang.gte_editor_popupheader_delete;
+      popup_button = this.lang.gte_editor_sendbtn_delete;
+    }
     this.setState({
-      action: e.target.dataset.action,
-      active: true
+      action: action,
+      active: true,
+      popup_title: popup_title,
+      popup_button: popup_button
     });
   }
 
@@ -391,7 +406,8 @@ class Reactables extends React.Component {
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
-            <Tools updatePerPage={this.updatePerPage.bind(this)}
+            <Tools
+              updatePerPage={this.updatePerPage.bind(this)}
               showPopup={this.showPopup.bind(this)}
               tableOpts={this.props.settings.tableOpts}
               perPageRows={this.props.settings.perPageRows}
@@ -415,13 +431,17 @@ class Reactables extends React.Component {
             </tfoot>
           </table>
           <div className={styles.gt_pagination}>
-            <Pagination updatePagination={this.handlePagination.bind(this)}
-            countRows={this.state.countRows} page={this.state.page}
-            perPage={this.state.perPage} fromRow={this.state.fromRow}
-            lang={this.props.settings.lang} />
+            <Pagination
+              updatePagination={this.handlePagination.bind(this)}
+              countRows={this.state.countRows}
+              page={this.state.page}
+              perPage={this.state.perPage}
+              fromRow={this.state.fromRow}
+              lang={this.props.settings.lang} />
           </div>
           <div className={styles.gt_foot_tools}>
-            <Tools updatePerPage={this.updatePerPage.bind(this)}
+            <Tools
+              updatePerPage={this.updatePerPage.bind(this)}
               showPopup={this.showPopup.bind(this)}
               tableOpts={this.props.settings.tableOpts}
               perPageRows={this.props.settings.perPageRows}
@@ -429,9 +449,14 @@ class Reactables extends React.Component {
               perPage={this.state.perPage}
               lang={this.props.settings.lang} />
           </div>
-          <Editor active={this.state.active} action={this.state.action}
-          editor={this.props.editor} hidePopup={this.hidePopup.bind(this)}
-          lang={this.props.settings.lang} />
+          <Editor
+            active={this.state.active}
+            action={this.state.action}
+            editor={this.props.editor}
+            popupButton={this.state.popup_button}
+            popupTitle={this.state.popup_title}
+            hidePopup={this.hidePopup.bind(this)}
+            lang={this.props.settings.lang} />
         </div>
       )
   }

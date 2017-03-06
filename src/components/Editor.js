@@ -167,7 +167,7 @@ class Editor extends React.Component {
             <div className="gte_form_border_box">
               <div className="gte_form_fields">
                 <div className="gte_header">
-                  <div className="gte_editor_title">{this.state.popup_title}</div>
+                  <div className="gte_editor_title">{this.props.popupTitle}</div>
                 </div>
                 <div className="gte_form_body">
                   <div className="gte_form_body_content">
@@ -186,7 +186,7 @@ class Editor extends React.Component {
                 <div className="gte_footer">
                   <div className="gte_form_err"></div>
                   <div className="gte_form_buttons">
-                    <button id="gte_sent_btn" className="btn">{this.state.popup_button}</button>
+                    <button id="gte_sent_btn" className="btn">{this.props.popupButton}</button>
                   </div>
                 </div>
               </div>

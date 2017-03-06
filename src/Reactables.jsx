@@ -238,28 +238,36 @@ class Reactables extends React.Component {
   clickedRow(e)
   {
     let rows = this.state.selectedRows;
-    let min = 0, max = 0;
-    console.log(this.state.ctrlDown);
-    if (this.state.ctrlDown === true) {
-      rows.push(parseInt(e.target.dataset.rowid));
-    } else if (this.state.shiftDown === true) {
-      rows.push(parseInt(e.target.dataset.rowid));
-      min = rows[0], max = rows[0];
-      for (var row in rows) {
-        if (rows[row] < min) {
-          min = rows[row];
+    let min = 0, max = 0,
+    rowId = parseInt(e.target.dataset.rowid);
+
+    if (rows.length > 0 && rows.indexOf(rowId) !== -1
+      && this.state.ctrlDown === false) { // if row is active - remove it
+      rows = rows.splice(rowId, 1);
+      this.state.selectedRows = rows;
+    } else {
+      if (this.state.ctrlDown === true) {
+        rows.push(parseInt(e.target.dataset.rowid));
+      } else if (this.state.shiftDown === true) {
+        rows.push(parseInt(e.target.dataset.rowid));
+        min = rows[0], max = rows[0];
+        for (var row in rows) {
+          if (rows[row] < min) {
+            min = rows[row];
+          }
+          if (rows[row] > max) {
+            max = rows[row];
+          }
         }
-        if (rows[row] > max) {
-          max = rows[row];
+        rows = [], this.state.selectedRows = [];
+        // fill in the items
+        for (var i = min; i <= max;++i) {
+          rows.push(i);
         }
+        this.state.selectedRows = rows;
+      } else { // if just a click override prev
+        rows = [parseInt(e.target.dataset.rowid)];
       }
-      rows = [];
-      // fill in the items
-      for (var i = min; i < max;++i) {
-        rows.push(i);
-      }
-    } else { // if just a click override prev
-      rows = [parseInt(e.target.dataset.rowid)];
     }
     // we can't use the state for selectedRows here because of state latency
     this.createTable(this.jsonData, this.state.sortedButtons, rows);
@@ -332,6 +340,11 @@ class Reactables extends React.Component {
             ctrlDown: true
           });
           break;
+        case CommonConstants.CNTRL_KEY_MAC:
+          that.setState({
+            ctrlDown: true
+          });
+          break;
         case CommonConstants.SHIFT_KEY:
           that.setState({
             shiftDown: true
@@ -345,6 +358,11 @@ class Reactables extends React.Component {
     document.addEventListener('keyup', (e) => {
       switch (e.which) {
         case CommonConstants.CNTRL_KEY:
+          that.setState({
+            ctrlDown: false
+          });
+          break;
+        case CommonConstants.CNTRL_KEY_MAC:
           that.setState({
             ctrlDown: false
           });

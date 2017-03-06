@@ -21,12 +21,15 @@ tbody tr {
   border-collapse: collapse;
   border-top:1px solid #ddd;
 }
-tbody tr.active {
+:global tbody tr.active {
   /*background-color:#08c;*/
   /*background-color:#08c !important;*/
   background-color:#25adf1 !important;
 }
-tbody tr.active:hover {
+:global .active {
+  background-color:#25adf1 !important;
+}
+:global tbody tr.active:hover {
   background-color:#1098dc !important;
 }
 tbody tr.even {

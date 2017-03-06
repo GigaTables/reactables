@@ -8,9 +8,10 @@ export default class Row extends React.Component {
     let rowClasses = classNames({
       even:(this.props.count % 2 === 0)?true:false,
       odd:(this.props.count % 2 === 0)?false:true,
-      active: this.props.selectedRows[this.props.gteRowId]
+      active: (this.props.selectedRows.indexOf(this.props.count) !== -1) ? true : false
     });
-    // console.log(this.props.selectedRows[this.props.gteRowId]);
+    // console.log(this.props.selectedRows + ' - ' + this.props.count);
+    // console.log(this.props.selectedRows.indexOf(this.props.count));
     return (
       <tr key={this.props.gteRowId} className={rowClasses}
         data-selectedrows={this.props.selectedRows} onClick={this.props.clickedRow}

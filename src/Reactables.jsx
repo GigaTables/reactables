@@ -183,7 +183,7 @@ class Reactables extends React.Component {
     });
   }
 
-  createTable(jsonData, sortedButtons)
+  createTable(jsonData, sortedButtons, selectedRows)
   {
     let rows = [];
     if (this.state.dataSearch !== null) {
@@ -212,14 +212,15 @@ class Reactables extends React.Component {
           // check if a JSON object has this data field
           if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
           {
-            cols.push(<Column dataIndex={column['data']} selectedRows={this.state.selectedRows}
+            cols.push(<Column dataIndex={column['data']}
+            selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
             minRow={this.state.minRow} maxRow={this.state.maxRow}
             count={objectIndex} key={index}>{object[column['data']]}</Column>);
           }
         });
         // count is used to shft key + click selection of rows, ex.: sorted
         rows.push(<Row clickedRow={this.clickedRow.bind(this)}
-        selectedRows={this.state.selectedRows}
+        selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
         minRow={this.state.minRow} maxRow={this.state.maxRow}
         key={objectIndex} count={objectIndex}
         gteRowId={rowId}>{cols}</Row>);
@@ -238,10 +239,11 @@ class Reactables extends React.Component {
   {
     let rows = this.state.selectedRows;
     let min = 0, max = 0;
+    console.log(this.state.ctrlDown);
     if (this.state.ctrlDown === true) {
-      rows.push(e.target.dataset.rowid);
+      rows.push(parseInt(e.target.dataset.rowid));
     } else if (this.state.shiftDown === true) {
-      rows.push(e.target.dataset.rowid);
+      rows.push(parseInt(e.target.dataset.rowid));
       min = rows[0], max = rows[0];
       for (var row in rows) {
         if (rows[row] < min) {
@@ -251,18 +253,19 @@ class Reactables extends React.Component {
           max = rows[row];
         }
       }
+      rows = [];
       // fill in the items
-      this.setState({
-        minRow: parseInt(min),
-        maxRow: parseInt(max)
-      });
+      for (var i = min; i < max;++i) {
+        rows.push(i);
+      }
     } else { // if just a click override prev
-      rows = [e.target.dataset.rowid];
+      rows = [parseInt(e.target.dataset.rowid)];
     }
+    // we can't use the state for selectedRows here because of state latency
+    this.createTable(this.jsonData, this.state.sortedButtons, rows);
     this.setState({
       selectedRows: rows
     });
-    this.createTable(this.jsonData, this.state.sortedButtons);
   }
 
   handlePagination(e)

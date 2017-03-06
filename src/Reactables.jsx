@@ -335,12 +335,17 @@ class Reactables extends React.Component {
     var that = this;
     document.addEventListener('keydown', (e) => {
       switch (e.which) {
-        case CommonConstants.CNTRL_KEY:
+        case CommonConstants.CTRL_KEY:
           that.setState({
             ctrlDown: true
           });
           break;
-        case CommonConstants.CNTRL_KEY_MAC:
+        case CommonConstants.CTRL_KEY_MAC_CHROME:
+          that.setState({
+            ctrlDown: true
+          });
+          break;
+        case CommonConstants.CTRL_KEY_MAC_FF:
           that.setState({
             ctrlDown: true
           });
@@ -362,7 +367,12 @@ class Reactables extends React.Component {
             ctrlDown: false
           });
           break;
-        case CommonConstants.CNTRL_KEY_MAC:
+        case CommonConstants.CTRL_KEY_MAC_CHROME:
+          that.setState({
+            ctrlDown: false
+          });
+          break;
+        case CommonConstants.CTRL_KEY_MAC_FF:
           that.setState({
             ctrlDown: false
           });

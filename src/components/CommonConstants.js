@@ -2,8 +2,9 @@ module.exports = {
   UNDEFINED: 'undefined',
   // keys
   ESCAPE_KEY: 27,
-  CNTRL_KEY: 17,
-  CNTRL_KEY_MAC: 91,
+  CTRL_KEY: 17,
+  CTRL_KEY_MAC_CHROME: 91,
+  CTRL_KEY_MAC_FF: 224,
   SHIFT_KEY: 16,
   ENTER_KEY: 13,
   // table

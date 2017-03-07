@@ -11,7 +11,7 @@ class Editor extends React.Component {
   constructor(props)
   {
     super(props);
-    if (typeof props.editor.fields === CommonConstants.UNDEFINED) {
+    if (typeof props.editor.fields === EditorConstants.UNDEFINED) {
       throw new EditorException('You should define "fields" option.');
     }
     if (props.editor.fields.length === 0) {
@@ -26,6 +26,7 @@ class Editor extends React.Component {
     } else if (props.action === EditorConstants.ACTION_DELETE) {
       fields = this.setDeleteFields(props.delItems);
     }
+    console.log(props.editor.fields);
     this.state = {
       fields: fields,
       popup_title: this.lang.gte_editor_popupheader_create,
@@ -39,6 +40,7 @@ class Editor extends React.Component {
     editorFields.map((object, index) => {
       fields[index] = this.getFieldByType(index, object);
     });
+    console.log(fields);
     return fields;
   }
 
@@ -62,74 +64,71 @@ class Editor extends React.Component {
             fieldName = object.name,
             fieldLabel = object.label,
             action = this.props.action;
-
-    var attributes = '';
+    // settting attrs        
+    var attributes = [];
     if (typeof object.attrs !== CommonConstants.UNDEFINED) {
       var fieldOpts = object.attrs;
       for (var opt in fieldOpts) {
         for (var attr in fieldOpts[opt]) {
-          attributes += attr + '="' + fieldOpts[opt][attr] + '"';
+          attributes[attr] = fieldOpts[opt][attr];
         }
       }
     }
 
+    console.log(attributes + fieldType);
     let i = 0,
     htmlFields = [];
     switch (fieldType) {
-      case CommonConstants.TYPE_TEXT:
-      case CommonConstants.TYPE_HIDDEN:
-      case CommonConstants.TYPE_EMAIL:
-      case CommonConstants.TYPE_PASSWORD:
-      case CommonConstants.TYPE_COLOR:
-      case CommonConstants.TYPE_DATE:
-      case CommonConstants.TYPE_DATETIME:
-      case CommonConstants.TYPE_NUMBER:
-      case CommonConstants.TYPE_RANGE:
-      case CommonConstants.TYPE_SEARCH:
-      case CommonConstants.TYPE_TIME:
-      case CommonConstants.TYPE_TEL:
-      case CommonConstants.TYPE_URL:
-      case CommonConstants.TYPE_MONTH:
-      case CommonConstants.TYPE_WEEK:
-      case CommonConstants.TYPE_FILE:
-        htmlFields[i] += '<div className="gte_editor_fields">';
-        if (fieldType !== 'hidden') {
-          htmlFields[i] += '<label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label>';
-        }
-        htmlFields[i] += '<div className={editorStyles.gte_field}><input ' + attributes + ' id="' + fieldName + '" type="' + fieldType + '" name="' + fieldName + '" data-value=""/></div><div className="clear"></div></div>';
+      case EditorConstants.TYPE_TEXT:
+      case EditorConstants.TYPE_HIDDEN:
+      case EditorConstants.TYPE_EMAIL:
+      case EditorConstants.TYPE_PASSWORD:
+      case EditorConstants.TYPE_COLOR:
+      case EditorConstants.TYPE_DATE:
+      case EditorConstants.TYPE_DATETIME:
+      case EditorConstants.TYPE_NUMBER:
+      case EditorConstants.TYPE_RANGE:
+      case EditorConstants.TYPE_SEARCH:
+      case EditorConstants.TYPE_TIME:
+      case EditorConstants.TYPE_TEL:
+      case EditorConstants.TYPE_URL:
+      case EditorConstants.TYPE_MONTH:
+      case EditorConstants.TYPE_WEEK:
+      case EditorConstants.TYPE_FILE:
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType === EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input {...attributes} id={fieldName} type={fieldType} name={fieldName} data-value=""/></div><div className="clear"></div></div>;
         break;
-      case CommonConstants.TYPE_TEXTAREA:
-        htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div className="clear"></div></div>';
-        break;
-      case CommonConstants.TYPE_SELECT:
-        var values = object.values;
-        var options = '', val = '';
-        for (var k in values) {
-          for (var key in values[k]) {
-            val = values[k][key].trim();
-            options += '<option value="' + key + '" data-value="' + val.toLowerCase() + '">' + val + '</option>';
-          }
-        }
-        htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
-                options
-                + '</select></div><div className="clear"></div></div>';
-        break;
-      case CommonConstants.TYPE_CHECKBOX:
-      case CommonConstants.TYPE_RADIO:
-        var values = object.values;
-        var options = '', val = '',
-                //@fixme regexp to remove ex: [3] etc
-                id = fieldName.replace('[]', '');
-        for (var k in values) {
-          for (var key in values[k]) {
-            val = values[k][key].trim();
-            options += '<label className="gte_label_text"><input ' + attributes + ' id="' + id + '" type="' + fieldType + '" name="' + fieldName + '" data-value="' + val.toLowerCase() + '" value="' + key + '"/>' + val + '</label>';
-          }
-        }
-        htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label">' + fieldLabel + '</label><div className={editorStyles.gte_field}>' +
-                options
-                + '</div><div className="clear"></div></div>';
-        break;
+      // case EditorConstants.TYPE_TEXTAREA:
+      //   htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div className="clear"></div></div>';
+      //   break;
+      // case EditorConstants.TYPE_SELECT:
+      //   var values = object.values;
+      //   var options = '', val = '';
+      //   for (var k in values) {
+      //     for (var key in values[k]) {
+      //       val = values[k][key].trim();
+      //       options += '<option value="' + key + '" data-value="' + val.toLowerCase() + '">' + val + '</option>';
+      //     }
+      //   }
+      //   htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
+      //           options
+      //           + '</select></div><div className="clear"></div></div>';
+      //   break;
+      // case EditorConstants.TYPE_CHECKBOX:
+      // case EditorConstants.TYPE_RADIO:
+      //   var values = object.values;
+      //   var options = '', val = '',
+      //           //@fixme regexp to remove ex: [3] etc
+      //           id = fieldName.replace('[]', '');
+      //   for (var k in values) {
+      //     for (var key in values[k]) {
+      //       val = values[k][key].trim();
+      //       options += '<label className="gte_label_text"><input ' + attributes + ' id="' + id + '" type="' + fieldType + '" name="' + fieldName + '" data-value="' + val.toLowerCase() + '" value="' + key + '"/>' + val + '</label>';
+      //     }
+      //   }
+      //   htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label">' + fieldLabel + '</label><div className={editorStyles.gte_field}>' +
+      //           options
+      //           + '</div><div className="clear"></div></div>';
+      //   break;
     }
     return htmlFields;
   }

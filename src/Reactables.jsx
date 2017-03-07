@@ -455,6 +455,7 @@ class Reactables extends React.Component {
             active={this.state.active}
             action={this.state.action}
             editor={this.props.editor}
+            selectedRows={this.state.selectedRows}
             popupButton={this.state.popup_button}
             popupTitle={this.state.popup_title}
             hidePopup={this.hidePopup.bind(this)}

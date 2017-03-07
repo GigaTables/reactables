@@ -18,20 +18,24 @@ class Editor extends React.Component {
       throw new EditorException('You should define at least one field in "fields" option.');
     }
     this.lang = Lang[props.lang];
+    this.setFields(props);
+    this.state = {
+      popup_title: this.lang.gte_editor_popupheader_create,
+      popup_button: this.lang.gte_editor_sendbtn_create
+    }
+  }
+
+  setFields(props)
+  {
     let fields = [];
     if (props.action === EditorConstants.ACTION_CREATE) {
       fields = this.setCreateFields(props.editor.fields);
     } else if (props.action === EditorConstants.ACTION_EDIT) {
       fields = this.setEditFields(props.editor.fields);
     } else if (props.action === EditorConstants.ACTION_DELETE) {
-      fields = this.setDeleteFields(props.delItems);
+      fields = this.setDeleteFields(props.selectedRows.length);
     }
-    console.log(props.editor.fields);
-    this.state = {
-      fields: fields,
-      popup_title: this.lang.gte_editor_popupheader_create,
-      popup_button: this.lang.gte_editor_sendbtn_create
-    }
+    this.fields = fields;
   }
 
   setCreateFields(editorFields)
@@ -64,7 +68,7 @@ class Editor extends React.Component {
             fieldName = object.name,
             fieldLabel = object.label,
             action = this.props.action;
-    // settting attrs        
+    // settting attrs
     var attributes = [];
     if (typeof object.attrs !== CommonConstants.UNDEFINED) {
       var fieldOpts = object.attrs;
@@ -75,7 +79,6 @@ class Editor extends React.Component {
       }
     }
 
-    console.log(attributes + fieldType);
     let i = 0,
     htmlFields = [];
     switch (fieldType) {
@@ -97,59 +100,44 @@ class Editor extends React.Component {
       case EditorConstants.TYPE_FILE:
         htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType === EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input {...attributes} id={fieldName} type={fieldType} name={fieldName} data-value=""/></div><div className="clear"></div></div>;
         break;
-      // case EditorConstants.TYPE_TEXTAREA:
-      //   htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><textarea ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '"></textarea></div><div className="clear"></div></div>';
-      //   break;
-      // case EditorConstants.TYPE_SELECT:
-      //   var values = object.values;
-      //   var options = '', val = '';
-      //   for (var k in values) {
-      //     for (var key in values[k]) {
-      //       val = values[k][key].trim();
-      //       options += '<option value="' + key + '" data-value="' + val.toLowerCase() + '">' + val + '</option>';
-      //     }
-      //   }
-      //   htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label" for="' + fieldName + '">' + fieldLabel + '</label><div className={editorStyles.gte_field}><select ' + attributes + ' id="' + fieldName + '" name="' + fieldName + '">' +
-      //           options
-      //           + '</select></div><div className="clear"></div></div>';
-      //   break;
-      // case EditorConstants.TYPE_CHECKBOX:
-      // case EditorConstants.TYPE_RADIO:
-      //   var values = object.values;
-      //   var options = '', val = '',
-      //           //@fixme regexp to remove ex: [3] etc
-      //           id = fieldName.replace('[]', '');
-      //   for (var k in values) {
-      //     for (var key in values[k]) {
-      //       val = values[k][key].trim();
-      //       options += '<label className="gte_label_text"><input ' + attributes + ' id="' + id + '" type="' + fieldType + '" name="' + fieldName + '" data-value="' + val.toLowerCase() + '" value="' + key + '"/>' + val + '</label>';
-      //     }
-      //   }
-      //   htmlFields[i] += '<div className="gte_editor_fields"><label className="gte_label">' + fieldLabel + '</label><div className={editorStyles.gte_field}>' +
-      //           options
-      //           + '</div><div className="clear"></div></div>';
-      //   break;
+      case EditorConstants.TYPE_TEXTAREA:
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><textarea {...attributes} id={fieldName} name={fieldName}></textarea></div><div className="clear"></div></div>;
+        break;
+      case EditorConstants.TYPE_TEXTAREA:
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><textarea {...attributes} id={fieldName} name={fieldName}></textarea></div><div className="clear"></div></div>;
+        break;
+      case EditorConstants.TYPE_SELECT:
+        var values = object.values;
+        var options = [], val = '';
+        for (var k in values) {
+          for (var key in values[k]) {
+            val = values[k][key].trim();
+            options[k] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>;
+          }
+        }
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><select {...attributes} id={fieldName} name={fieldName}>{options}</select></div><div className="clear"></div></div>;
+        break;
+      case EditorConstants.TYPE_CHECKBOX:
+      case EditorConstants.TYPE_RADIO:
+        var values = object.values;
+        var options = [], val = '',
+                //@fixme regexp to remove ex: [3] etc
+                id = fieldName.replace('[]', '');
+        for (var k in values) {
+          for (var key in values[k]) {
+            val = values[k][key].trim();
+            options[k] = <label key={key} className="gte_label_text"><input key={key} {...attributes} id={id} type={fieldType} name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
+          }
+        }
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label">{fieldLabel}</label><div className={editorStyles.gte_field}>{options}</div><div className="clear"></div></div>;
+        break;
     }
     return htmlFields;
   }
 
-  // getEditorField(params = [])
-  // {
-  //   let field = [];
-  //
-  //   return (
-  //     <div className="gte_editor_fields">
-  //       <label className="gte_label">Types:</label>
-  //       <div className="gte_field">
-  //         <input id="id" type="hidden" name="id" data-value=""/>
-  //       </div>
-  //       <div className="clear"></div>
-  //     </div>
-  //   );
-  // }
-
   render()
   {
+    this.setFields(this.props);
     let editorClasses = classNames({
       gte_editor_popup: true,
       display: this.props.active
@@ -177,7 +165,7 @@ class Editor extends React.Component {
                         </div>
                       </div>
                       <div>
-                        {this.state.fields}
+                        {this.fields}
                       </div>
                     </form>
                   </div>

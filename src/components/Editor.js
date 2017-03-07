@@ -44,7 +44,6 @@ class Editor extends React.Component {
     editorFields.map((object, index) => {
       fields[index] = this.getFieldByType(index, object);
     });
-    console.log(fields);
     return fields;
   }
 

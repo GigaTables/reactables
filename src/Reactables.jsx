@@ -413,7 +413,8 @@ class Reactables extends React.Component {
               perPageRows={this.props.settings.perPageRows}
               perPage={this.state.perPage}
               defaultPerPage={this.props.settings.defaultPerPage}
-              lang={this.props.settings.lang} />
+              lang={this.props.settings.lang}
+              selectedRows={this.state.selectedRows} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -447,7 +448,8 @@ class Reactables extends React.Component {
               perPageRows={this.props.settings.perPageRows}
               defaultPerPage={this.props.settings.defaultPerPage}
               perPage={this.state.perPage}
-              lang={this.props.settings.lang} />
+              lang={this.props.settings.lang}
+              selectedRows={this.state.selectedRows} />
           </div>
           <Editor
             active={this.state.active}

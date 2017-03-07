@@ -15,13 +15,23 @@ class Tools extends React.Component {
     let buttons = [];
     this.props.tableOpts.buttons.map((btn, i) => {
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
-        buttons[i] = <Button action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
+        buttons[i] = <Button active={false} action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
       }
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
-        buttons[i] = <Button action={EditorConstants.ACTION_EDIT} showPopup={this.props.showPopup} key={i}>{lang.editor_edit}</Button>;
+        buttons[i] = <Button
+          active={(this.props.selectedRows.length === 1) ? false : true}
+          selectedRows={this.props.selectedRows}
+          action={EditorConstants.ACTION_EDIT}
+          showPopup={this.props.showPopup}
+          key={i}>{lang.editor_edit}</Button>;
       }
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
-        buttons[i] = <Button action={EditorConstants.ACTION_DELETE} showPopup={this.props.showPopup} key={i}>{lang.editor_remove}</Button>;
+        buttons[i] = <Button
+          active={(this.props.selectedRows.length === 0) ? true : false}
+          selectedRows={this.props.selectedRows}
+          action={EditorConstants.ACTION_DELETE}
+          showPopup={this.props.showPopup}
+          key={i}>{lang.editor_remove}</Button>;
       }
     });
     return (

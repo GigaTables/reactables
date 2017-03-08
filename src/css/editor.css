@@ -247,7 +247,11 @@ div.gte_field input, div.gte_field textarea {
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-#gte_msg {
+:global #gte_msg {
+  padding:4px 6px;
+  text-align: center;
+}
+:global .gte_msg {
   padding:4px 6px;
   text-align: center;
 }

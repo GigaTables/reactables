@@ -361,7 +361,7 @@ export default StyleSheet.create({
         "KhtmlBorderRadius": 3,
         "borderRadius": 3
     },
-    "gte_msg": {
+    ":global gte_msg": {
         "paddingTop": 4,
         "paddingRight": 6,
         "paddingBottom": 4,

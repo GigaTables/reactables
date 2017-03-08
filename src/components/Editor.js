@@ -58,7 +58,7 @@ class Editor extends React.Component {
 
   setDeleteFields(items)
   {
-    return (<div>Are You sure You wish to delete {items} row(s)?</div>);
+    return (<div className="gte_msg">Are You sure You wish to delete {items} row(s)?</div>);
   }
 
   getFieldByType(index, object)
@@ -97,7 +97,7 @@ class Editor extends React.Component {
       case EditorConstants.TYPE_MONTH:
       case EditorConstants.TYPE_WEEK:
       case EditorConstants.TYPE_FILE:
-        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType === EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input {...attributes} id={fieldName} type={fieldType} name={fieldName} data-value=""/></div><div className="clear"></div></div>;
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input {...attributes} id={fieldName} type={fieldType} name={fieldName} data-value=""/></div><div className="clear"></div></div>;
         break;
       case EditorConstants.TYPE_TEXTAREA:
         htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><textarea {...attributes} id={fieldName} name={fieldName}></textarea></div><div className="clear"></div></div>;
@@ -162,9 +162,9 @@ class Editor extends React.Component {
                         <div>
                           <input type="hidden" name="action" value={this.props.action}/>
                         </div>
-                      </div>
-                      <div>
-                        {this.fields}
+                        <div>
+                          {this.fields}
+                        </div>
                       </div>
                     </form>
                   </div>

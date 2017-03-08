@@ -56,6 +56,7 @@
   top: -20px;
   width: 780px;
   z-index: 111;
+  opacity: 0;
 }
 :global .gte_popup_background {
   display:none;

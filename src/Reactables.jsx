@@ -53,7 +53,8 @@ class Reactables extends React.Component {
       ctrlDown: false,
       shiftDown: false,
       minRow: 0,
-      maxRow: 0
+      maxRow: 0,
+      opacity: 0
     }
     this.build();
     // console.log(this.state.sortButtons);
@@ -306,11 +307,17 @@ class Reactables extends React.Component {
       popup_title = this.lang.gte_editor_popupheader_delete;
       popup_button = this.lang.gte_editor_sendbtn_delete;
     }
+    e.preventDefault();
     this.setState({
       action: action,
       active: true,
       popup_title: popup_title,
-      popup_button: popup_button
+      popup_button: popup_button,
+      opacity: 1
+    }, () => {
+        if(!this.timeout)
+            clearTimeout(this.timeout);
+    		this.timeout = setTimeout(() => this.setState({opacity:0}),4000);
     });
   }
 
@@ -456,6 +463,7 @@ class Reactables extends React.Component {
             action={this.state.action}
             editor={this.props.editor}
             selectedRows={this.state.selectedRows}
+            opacity={this.state.opacity}
             popupButton={this.state.popup_button}
             popupTitle={this.state.popup_title}
             hidePopup={this.hidePopup.bind(this)}

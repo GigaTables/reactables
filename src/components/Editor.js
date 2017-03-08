@@ -147,7 +147,7 @@ class Editor extends React.Component {
     });
     return (
       <div>
-      <div className={editorClasses}>
+      <div className={editorClasses} style={{opacity:this.props.opacity, transition: "opacity 1s"}}>
         <div className="gte_popup_container">
           <div className="gte_popup_container_wrapper">
             <div className="gte_form_border_box">

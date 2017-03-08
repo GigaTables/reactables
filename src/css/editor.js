@@ -58,7 +58,8 @@ export default StyleSheet.create({
         "position": "fixed",
         "top": -20,
         "width": 780,
-        "zIndex": 111
+        "zIndex": 111,
+        "opacity": 0
     },
     ":global gte_popup_background": {
         "display": "none",

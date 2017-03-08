@@ -371,26 +371,5 @@ export default StyleSheet.create({
     },
     ":global display": {
         "display": "block"
-    },
-    ":global example-enter": {
-        "opacity": 0.01
-    },
-    ":global example-enterexample-enter-active": {
-        "opacity": 1,
-        "transition": "opacity 5s ease-in"
-    },
-    ":global example-leave": {
-        "opacity": 1
-    },
-    ":global example-leaveexample-leave-active": {
-        "opacity": 0.01,
-        "transition": "opacity 3s ease-in"
-    },
-    ":global example-appear": {
-        "opacity": 0.01
-    },
-    ":global example-appearexample-appear-active": {
-        "opacity": 1,
-        "transition": "opacity 1s ease-in"
     }
 });

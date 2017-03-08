@@ -314,10 +314,6 @@ class Reactables extends React.Component {
       popup_title: popup_title,
       popup_button: popup_button,
       opacity: 1
-    }, () => {
-        if(!this.timeout)
-            clearTimeout(this.timeout);
-    		this.timeout = setTimeout(() => this.setState({opacity:0}),4000);
     });
   }
 
@@ -462,6 +458,7 @@ class Reactables extends React.Component {
             active={this.state.active}
             action={this.state.action}
             editor={this.props.editor}
+            columns={this.props.editor.fields}
             selectedRows={this.state.selectedRows}
             opacity={this.state.opacity}
             popupButton={this.state.popup_button}

@@ -29,5 +29,9 @@ module.exports = {
   EDITOR_EDIT: 'editor_edit',
   EDITOR_REMOVE: 'editor_remove',
   // different opts
-  EXTENDED: 'extended'
+  EXTENDED: 'extended',
+  // http methods
+  HTTP_METHOD_POST: 'POST',
+  HTTP_METHOD_PATCH: 'PUT',
+  HTTP_METHOD_DELETE: 'DELETE',
 }

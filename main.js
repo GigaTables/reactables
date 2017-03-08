@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Reactables, {Header} from './src/Reactables.jsx'
 
 var editor = {
-  ajax: 'editor.php',
+  ajax: 'http://gigatables.loc/editor.php',
   ajaxFiles: 'uploadFiles.php',
   struct: {
     buttons: ['top', 'bottom'] // buttons

@@ -16,7 +16,7 @@ export default class Row extends React.Component {
       <tr key={this.props.gteRowId} className={rowClasses}
         data-selectedrows={this.props.selectedRows} onClick={this.props.clickedRow}
         data-minrow={this.props.minRow} data-maxrow={this.props.maxRow}
-        data-rowid={this.props.count}>{this.props.children}</tr>
+        data-rowid={this.props.count} data-realid={this.props.gteRowId}>{this.props.children}</tr>
     )
   }
 }

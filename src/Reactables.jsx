@@ -50,6 +50,7 @@ class Reactables extends React.Component {
       action: EditorConstants.ACTION_CREATE,
       active: false,
       selectedRows: [],
+      selectedIds: [],
       ctrlDown: false,
       shiftDown: false,
       minRow: 0,
@@ -214,18 +215,25 @@ class Reactables extends React.Component {
           // check if a JSON object has this data field
           if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
           {
-            cols.push(<Column dataIndex={column['data']}
-            selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
-            minRow={this.state.minRow} maxRow={this.state.maxRow}
-            count={objectIndex} key={index}>{object[column['data']]}</Column>);
+            cols.push(<Column
+              dataIndex={column['data']}
+              selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
+              minRow={this.state.minRow}
+              maxRow={this.state.maxRow}
+              count={objectIndex}
+              gteRowId={rowId}
+              key={index}>{object[column['data']]}</Column>);
           }
         });
         // count is used to shft key + click selection of rows, ex.: sorted
-        rows.push(<Row clickedRow={this.clickedRow.bind(this)}
-        selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
-        minRow={this.state.minRow} maxRow={this.state.maxRow}
-        key={objectIndex} count={objectIndex}
-        gteRowId={rowId}>{cols}</Row>);
+        rows.push(<Row
+          clickedRow={this.clickedRow.bind(this)}
+          selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
+          minRow={this.state.minRow}
+          maxRow={this.state.maxRow}
+          key={objectIndex}
+          count={objectIndex}
+          gteRowId={rowId}>{cols}</Row>);
     });
     let state = {
       dataRows:rows,
@@ -239,19 +247,26 @@ class Reactables extends React.Component {
 
   clickedRow(e)
   {
-    let rows = this.state.selectedRows;
+    console.log(e.target.dataset.realid);
+    let rows = this.state.selectedRows,
+    ids = this.state.selectedIds;
     let min = 0, max = 0,
-    rowId = parseInt(e.target.dataset.rowid);
+    rowId = parseInt(e.target.dataset.rowid),
+    realId = parseInt(e.target.dataset.realid);
 
     if (rows.length > 0 && rows.indexOf(rowId) !== -1
       && this.state.ctrlDown === false) { // if row is active - remove it
       rows = rows.splice(rowId, 1);
+      ids = ids.splice(realId, 1);
       this.state.selectedRows = rows;
+      this.state.selectedIds = ids;
     } else {
       if (this.state.ctrlDown === true) {
         rows.push(parseInt(e.target.dataset.rowid));
+        ids.push(parseInt(e.target.dataset.realid));
       } else if (this.state.shiftDown === true) {
         rows.push(parseInt(e.target.dataset.rowid));
+        ids.push(parseInt(e.target.dataset.realid));
         min = rows[0], max = rows[0];
         for (var row in rows) {
           if (rows[row] < min) {
@@ -269,12 +284,14 @@ class Reactables extends React.Component {
         this.state.selectedRows = rows;
       } else { // if just a click override prev
         rows = [parseInt(e.target.dataset.rowid)];
+        ids = [parseInt(e.target.dataset.realid)];
       }
     }
     // we can't use the state for selectedRows here because of state latency
     this.createTable(this.jsonData, this.state.sortedButtons, rows);
     this.setState({
-      selectedRows: rows
+      selectedRows: rows,
+      selectedIds: ids
     });
   }
 
@@ -467,6 +484,7 @@ class Reactables extends React.Component {
             columns={this.props.editor.fields}
             editorUpdate={this.editorUpdate.bind(this)}
             selectedRows={this.state.selectedRows}
+            selectedIds={this.state.selectedIds}
             opacity={this.state.opacity}
             popupButton={this.state.popup_button}
             popupTitle={this.state.popup_title}

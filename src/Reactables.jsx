@@ -245,6 +245,29 @@ class Reactables extends React.Component {
     this.setState(state);
   }
 
+  editorUpdate(e, dataIndices)
+  {
+    let action = e.target.dataset.action,
+    rowId = 0;
+    if (action === EditorConstants.ACTION_DELETE) {
+      for (var dataKey in dataIndices) {
+        this.jsonData.filter((object) => {
+          if(typeof object[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
+              rowId = object[CommonConstants.GT_ROW_ID];
+          } else if (typeof object['id'] !== CommonConstants.UNDEFINED) {
+              rowId = object['id'];
+          }
+          if (dataIndices[dataKey] === rowId) {
+            return false;
+          }
+          return true;
+        });
+      }
+    }
+    this.createTable(this.jsonData, this.state.sortedButtons);
+    this.hidePopup();
+  }
+
   clickedRow(e)
   {
     console.log(e.target.dataset.realid);
@@ -419,12 +442,6 @@ class Reactables extends React.Component {
           break;
       }
     });
-  }
-
-  editorUpdate(e, dataIndices)
-  {
-    console.log(e.target.dataset.action);
-    console.log(dataIndices);
   }
 
   render() {

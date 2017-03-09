@@ -15,7 +15,11 @@ class Tools extends React.Component {
     let buttons = [];
     this.props.tableOpts.buttons.map((btn, i) => {
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
-        buttons[i] = <Button active={false} action={EditorConstants.ACTION_CREATE} showPopup={this.props.showPopup} key={i}>{lang.editor_create}</Button>;
+        buttons[i] = <Button
+          active={false}
+          action={EditorConstants.ACTION_CREATE}
+          showPopup={this.props.showPopup}
+          key={i}>{lang.editor_create}</Button>;
       }
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
         buttons[i] = <Button

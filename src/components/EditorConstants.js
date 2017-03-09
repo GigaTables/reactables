@@ -32,6 +32,6 @@ module.exports = {
   EXTENDED: 'extended',
   // http methods
   HTTP_METHOD_POST: 'POST',
-  HTTP_METHOD_PATCH: 'PUT',
+  HTTP_METHOD_PUT: 'PUT',
   HTTP_METHOD_DELETE: 'DELETE',
 }

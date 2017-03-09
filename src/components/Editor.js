@@ -160,28 +160,15 @@ class Editor extends React.Component {
     if (this.props.action === EditorConstants.ACTION_CREATE) {
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_POST,
-      body: JSON.stringify({
-        config_name: 'default',
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        password: this.state.password,
-        password_confirmation: this.state.password_confirmation,
-        }).replace(/{|}/gi, "")
+      body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
         console.log(data);
       });
+      // .replace(/{|}/gi, "")
     } else if (this.props.action === EditorConstants.ACTION_EDIT) {
       fetch(ajaxUrl, {
-      method: EditorConstants.HTTP_METHOD_PATCH,
-      body: JSON.stringify({
-        config_name: 'default',
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        password: this.state.password,
-        password_confirmation: this.state.password_confirmation,
-        }).replace(/{|}/gi, "")
+      method: EditorConstants.HTTP_METHOD_PUT,
+      body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
         console.log(data);
       });
@@ -234,9 +221,10 @@ class Editor extends React.Component {
                 <div className="gte_footer">
                   <div className="gte_form_err"></div>
                   <div className="gte_form_buttons">
-                    <button id="gte_sent_btn" className="btn"
+                    <button
+                      id="gte_sent_btn"
+                      className="btn"
                       data-action={this.props.action}
-                      data-states={this.state}
                       onClick={this.btnClicked.bind(this)}>{this.props.popupButton}</button>
                   </div>
                 </div>

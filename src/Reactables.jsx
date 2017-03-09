@@ -248,29 +248,38 @@ class Reactables extends React.Component {
   editorUpdate(e, dataIndices)
   {
     let action = e.target.dataset.action,
-    rowId = 0;
+    rowId = 0, rowIndex = null;
+
     if (action === EditorConstants.ACTION_DELETE) {
       for (var dataKey in dataIndices) {
-        this.jsonData.filter((object) => {
-          if(typeof object[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
-              rowId = object[CommonConstants.GT_ROW_ID];
-          } else if (typeof object['id'] !== CommonConstants.UNDEFINED) {
-              rowId = object['id'];
+        for (var key in this.jsonData) {
+          if(typeof this.jsonData[key][CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
+              rowId = this.jsonData[key][CommonConstants.GT_ROW_ID];
+          } else if (typeof this.jsonData[key]['id'] !== CommonConstants.UNDEFINED) {
+              rowId = this.jsonData[key]['id'];
           }
           if (dataIndices[dataKey] === rowId) {
-            return false;
+            rowIndex = key;
+            this.jsonData.splice(key, 1);
           }
-          return true;
-        });
+        }
       }
     }
     this.createTable(this.jsonData, this.state.sortedButtons);
+    let selectedRows = this.state.selectedRows;
+    console.log(rowIndex);
+    console.log(selectedRows);
+    selectedRows.splice(selectedRows.indexOf(rowIndex), 1);
+    console.log(selectedRows);
+    this.setState({
+      selectedRows: selectedRows
+    });
     this.hidePopup();
   }
 
   clickedRow(e)
   {
-    console.log(e.target.dataset.realid);
+    // console.log(e.target.dataset.realid);
     let rows = this.state.selectedRows,
     ids = this.state.selectedIds;
     let min = 0, max = 0,

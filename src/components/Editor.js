@@ -21,7 +21,7 @@ class Editor extends React.Component {
     this.lang = Lang[props.lang];
     this.setFields(props);
     this.state = {
-      dataIndices: [],
+      dataIndices: {},
       popup_title: this.lang.gte_editor_popupheader_create,
       popup_button: this.lang.gte_editor_sendbtn_create
     }
@@ -45,7 +45,7 @@ class Editor extends React.Component {
     } else if (props.action === EditorConstants.ACTION_EDIT) {
       fields = this.setEditFields(props.editor.fields);
     } else if (props.action === EditorConstants.ACTION_DELETE) {
-      fields = this.setDeleteFields(props.selectedRows.length);
+      fields = this.setDeleteFields(props.selectedRows);
     }
     this.fields = fields;
   }
@@ -70,11 +70,16 @@ class Editor extends React.Component {
 
   setDeleteFields(items)
   {
-    return (<div className="gte_msg">Are You sure You wish to delete {items} row(s)?</div>);
+    return (<div className="gte_msg">Are You sure You wish to delete {items.length} row(s)?</div>);
   }
 
-  onChange(e) {
-    this.setState({[e.target.name]: e.target.value});
+  onChange(e)
+  {
+    this.setState({
+      dataIndices: Object.assign({}, this.state.dataIndices, {
+        [e.target.name]: e.target.value
+      })
+    })
   }
 
   getFieldByType(index, object)
@@ -150,8 +155,8 @@ class Editor extends React.Component {
   btnClicked(e)
   {
     let ajaxUrl = this.props.editor.ajax;
-    // gather data from fields
-
+    // call editorUpdate method with passing all user-input values
+    this.props.editorUpdate(e, this.state.dataIndices);
     if (this.props.action === EditorConstants.ACTION_CREATE) {
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_POST,
@@ -181,7 +186,7 @@ class Editor extends React.Component {
         console.log(data);
       });
     } else if (this.props.action === EditorConstants.ACTION_DELETE) {
-      console.log(this.props.selectedRows);
+      // console.log(this.props.selectedRows);
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
         body: JSON.stringify(this.props.selectedRows)
@@ -189,7 +194,6 @@ class Editor extends React.Component {
         console.log(data);
       });
     }
-    // console.log(e.target.dataset.action);
   }
 
   render()
@@ -230,7 +234,10 @@ class Editor extends React.Component {
                 <div className="gte_footer">
                   <div className="gte_form_err"></div>
                   <div className="gte_form_buttons">
-                    <button id="gte_sent_btn" className="btn" data-action={this.props.action} onClick={this.btnClicked.bind(this)}>{this.props.popupButton}</button>
+                    <button id="gte_sent_btn" className="btn"
+                      data-action={this.props.action}
+                      data-states={this.state}
+                      onClick={this.btnClicked.bind(this)}>{this.props.popupButton}</button>
                   </div>
                 </div>
               </div>

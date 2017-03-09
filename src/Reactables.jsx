@@ -404,6 +404,12 @@ class Reactables extends React.Component {
     });
   }
 
+  editorUpdate(e, dataIndices)
+  {
+    console.log(e.target.dataset.action);
+    console.log(dataIndices);
+  }
+
   render() {
       let sortedCols = this.setHeads();
       return (
@@ -459,6 +465,7 @@ class Reactables extends React.Component {
             action={this.state.action}
             editor={this.props.editor}
             columns={this.props.editor.fields}
+            editorUpdate={this.editorUpdate.bind(this)}
             selectedRows={this.state.selectedRows}
             opacity={this.state.opacity}
             popupButton={this.state.popup_button}

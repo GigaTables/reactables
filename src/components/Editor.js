@@ -70,12 +70,13 @@ class Editor extends React.Component {
 
   setDeleteFields(items)
   {
-    let fields = [];
+    let fields = [], lastId = 0;
+    this.state.dataIndices = this.props.selectedIds;
     this.props.selectedIds.map((object, index) => {
-      this.state.dataIndices.push(object);
-      fields[index] = <input type="hidden" data-value={object} name="ids[]" value={object} />;
+      fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object} />;
+      lastId = index;
     });
-    fields.push(<div className="gte_msg">Are You sure You wish to delete {items.length} row(s)?</div>);
+    fields.push(<div key={++lastId} className="gte_msg">Are You sure You wish to delete {items.length} row(s)?</div>);
     return fields;
   }
 
@@ -182,7 +183,7 @@ class Editor extends React.Component {
       // console.log(this.props.selectedRows);
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
-        body: JSON.stringify(this.props.selectedRows)
+        body: JSON.stringify(this.props.dataIndices)
       }).then(response => response.json()).then((data) => {
         console.log(data);
       });

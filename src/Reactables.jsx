@@ -63,9 +63,10 @@ class Reactables extends React.Component {
 
   getButtonsState(index, value)
   {
+    const { sortButtons } = this.state;
     let buttons = [];
-    for (let key in this.state.sortButtons) {
-      buttons[key] = this.state.sortButtons[key];
+    for (let key in sortButtons) {
+      buttons[key] = sortButtons[key];
       if (parseInt(key) === parseInt(index)) {
         buttons[key] = value;
       }
@@ -75,11 +76,12 @@ class Reactables extends React.Component {
 
   setTableSort(index, e)
   {
+    const { columns } = this.props.settings;
     if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
       let sortedButtons = [];
       this.props.children.map((th, index) => {
-        if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
-        || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
+        if(typeof columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+        || columns[index][CommonConstants.SORTABLE] === true) {
           sortedButtons[index] = 0;
         }
       });
@@ -89,15 +91,17 @@ class Reactables extends React.Component {
     } else { // clicked
       this.props.children.map((th, idx) => {
       var that = this;
-      let cols = that.props.settings.columns,
+      const { sortButtons } = that.state;
+
+      let cols = columns,
       sJson = that.jsonData,
       sButtons = that.state.sortButtons,
       check = 0, isNan = 0, sortedButtons = [];
       // check and sort for other columns
-      if (typeof that.state.sortButtons[idx] !== CommonConstants.UNDEFINED
-          && that.state.sortButtons[idx] !== 0
+      if (typeof sortButtons[idx] !== CommonConstants.UNDEFINED
+          && sortButtons[idx] !== 0
           && idx !== index) {
-            if (that.state.sortButtons[idx] === 1) {
+            if (sortButtons[idx] === 1) {
               sJson.sort(function (a, b) {
                 var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
                 a = (an === null) ? '' : an + '';
@@ -132,7 +136,7 @@ class Reactables extends React.Component {
             }
       }
 
-      if (that.state.sortButtons[index] === 1) {
+      if (sortButtons[index] === 1) {
         sortedButtons = that.getButtonsState(index, -1);
         sJson.sort(function (a, b) {
           var an = eval('a.' + cols[index].data), bn = eval('b.' + cols[index].data);
@@ -394,21 +398,22 @@ class Reactables extends React.Component {
 
   setHeads()
   {
+    const { sortButtons } = this.state;
     let sortedCols = [];
     this.props.children.map((th, index) => {
       var thh = React.Children.only(th);
       var clonedOpts = {
         key: index,
         sortId: index+'',
-        sortDirection: (typeof this.state.sortButtons[index] !== CommonConstants.UNDEFINED) ? this.state.sortButtons[index] : 0
+        sortDirection: (typeof sortButtons[index] !== CommonConstants.UNDEFINED) ? sortButtons[index] : 0
       };
       if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
       || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
         // set gteSort for <Header> which should be sorted
         clonedOpts['gteSort'] = CommonConstants.SORTABLE;
-        if(typeof this.state.sortButtons[index] !== CommonConstants.UNDEFINED) {
+        if(typeof sortButtons[index] !== CommonConstants.UNDEFINED) {
           clonedOpts['updateSort'] = this.setTableSort.bind(this, index);
-          clonedOpts['sortDirection'] = this.state.sortButtons[index];
+          clonedOpts['sortDirection'] = sortButtons[index];
         }
       }
       sortedCols[index] = React.cloneElement(thh, clonedOpts);

@@ -161,31 +161,37 @@ class Editor extends React.Component {
 
   btnClicked(e)
   {
-    let ajaxUrl = this.props.editor.ajax;
-    // call editorUpdate method with passing all user-input values
-    this.props.editorUpdate(e, this.state.dataIndices);
-    if (this.props.action === EditorConstants.ACTION_CREATE) {
+    e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
+    const { action } = this.props;
+    let ajaxUrl = this.props.editor.ajax, that = this;
+    var dataResp = that.state.dataIndices;
+    if (action === EditorConstants.ACTION_CREATE) {
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_POST,
       body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
-        console.log(data);
+        dataResp = this.state.dataIndices;
+        dataResp['id'] = data['row']['id'];
+        dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
+        this.props.editorUpdate(e, dataResp);
       });
-      // .replace(/{|}/gi, "")
-    } else if (this.props.action === EditorConstants.ACTION_EDIT) {
+    } else if (action === EditorConstants.ACTION_EDIT) {
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_PUT,
       body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
-        console.log(data);
+        dataResp = this.state.dataIndices;
+        // call editorUpdate method with passing all user-input values
+        this.props.editorUpdate(e, dataResp);
       });
-    } else if (this.props.action === EditorConstants.ACTION_DELETE) {
-      // console.log(this.props.selectedRows);
+    } else if (action === EditorConstants.ACTION_DELETE) {
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
         body: JSON.stringify(this.props.dataIndices)
       }).then(response => response.json()).then((data) => {
-        console.log(data);
+        dataResp = this.state.dataIndices;
+        // call editorUpdate method with passing all user-input values
+        this.props.editorUpdate(e, dataResp);
       });
     }
   }

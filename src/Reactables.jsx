@@ -248,7 +248,8 @@ class Reactables extends React.Component {
   editorUpdate(e, dataIndices)
   {
     let action = e.target.dataset.action,
-    rowId = 0, rowIndex = null;
+    rowId = 0,
+    selectedRows = this.state.selectedRows;
 
     if (action === EditorConstants.ACTION_DELETE) {
       for (var dataKey in dataIndices) {
@@ -259,18 +260,21 @@ class Reactables extends React.Component {
               rowId = this.jsonData[key]['id'];
           }
           if (dataIndices[dataKey] === rowId) {
-            rowIndex = key;
+            selectedRows.splice(selectedRows.indexOf(key), 1);
             this.jsonData.splice(key, 1);
           }
         }
       }
+    } else if (action === EditorConstants.ACTION_CREATE) {
+      // dataIndices['id'] = 123;
+      console.log(dataIndices);
+      this.jsonData.unshift(dataIndices);
+    } else if (action === EditorConstants.ACTION_EDIT) {
+      for (var key in dataIndices) {
+        this.jsonData[this.state.selectedRows[0]][key] = dataIndices[key];
+      }
     }
     this.createTable(this.jsonData, this.state.sortedButtons);
-    let selectedRows = this.state.selectedRows;
-    console.log(rowIndex);
-    console.log(selectedRows);
-    selectedRows.splice(selectedRows.indexOf(rowIndex), 1);
-    console.log(selectedRows);
     this.setState({
       selectedRows: selectedRows
     });

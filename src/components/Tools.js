@@ -44,7 +44,7 @@ class Tools extends React.Component {
         <PagesSelector perPage={this.props.perPage} updatePerPage={this.props.updatePerPage}
           defaultPerPage={this.props.defaultPerPage}
           perPageRows={this.props.perPageRows} lang={this.props.lang} />
-        <Search lang={this.props.lang}/>
+        <Search doSearch={this.props.doSearch} lang={this.props.lang}/>
         <div className={styles.clear}></div>
       </div>
     )

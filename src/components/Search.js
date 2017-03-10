@@ -12,7 +12,7 @@ class Search extends React.Component {
     var lang = Lang[this.props.lang];
     return (
       <div className={styles.gt_main_search}>
-        <input type="text" className={styles.gt_search} placeholder={lang.search} />
+        <input onKeyUp={this.props.doSearch} type="text" className={styles.gt_search} placeholder={lang.search} />
         <div className={styles.clear}></div>
       </div>
     )

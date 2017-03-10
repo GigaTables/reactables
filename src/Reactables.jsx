@@ -454,7 +454,7 @@ class Reactables extends React.Component {
     });
     document.addEventListener('keyup', (e) => {
       switch (e.which) {
-        case CommonConstants.CNTRL_KEY:
+        case CommonConstants.CTRL_KEY:
           that.setState({
             ctrlDown: false
           });

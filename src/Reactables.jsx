@@ -188,14 +188,21 @@ class Reactables extends React.Component {
 
   createTable(jsonData, sortedButtons, selectedRows)
   {
+    const {
+      dataSearch,
+      perPage,
+      fromRow,
+      minRow,
+      maxRow
+    } = this.state;
     let rows = [];
-    if (this.state.dataSearch !== null) {
-      jsonData = this.state.dataSearch;
+    if (dataSearch !== null) {
+      jsonData = dataSearch;
     }
     let jsonDataPerPage = jsonData;
-    if (jsonData.length > this.state.perPage) {
-      let from = parseInt(this.state.fromRow),
-      to = from + parseInt(this.state.perPage);
+    if (jsonData.length > perPage) {
+      let from = parseInt(fromRow),
+      to = from + parseInt(perPage);
       jsonDataPerPage = jsonData.slice(from, to);
     }
     // process rows
@@ -218,8 +225,8 @@ class Reactables extends React.Component {
             cols.push(<Column
               dataIndex={column['data']}
               selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
-              minRow={this.state.minRow}
-              maxRow={this.state.maxRow}
+              minRow={minRow}
+              maxRow={maxRow}
               count={objectIndex}
               gteRowId={rowId}
               key={index}>{object[column['data']]}</Column>);
@@ -229,8 +236,8 @@ class Reactables extends React.Component {
         rows.push(<Row
           clickedRow={this.clickedRow.bind(this)}
           selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
-          minRow={this.state.minRow}
-          maxRow={this.state.maxRow}
+          minRow={minRow}
+          maxRow={maxRow}
           key={objectIndex}
           count={objectIndex}
           gteRowId={rowId}>{cols}</Row>);
@@ -283,26 +290,34 @@ class Reactables extends React.Component {
 
   clickedRow(e)
   {
+    const {
+      selectedRows,
+      selectedIds,
+      sortedButtons,
+      ctrlDown,
+      shiftDown
+    } = this.state;
+    const { rowid, realid } = e.target.dataset;
     // console.log(e.target.dataset.realid);
-    let rows = this.state.selectedRows,
-    ids = this.state.selectedIds;
+    let rows = selectedRows,
+    ids = selectedIds;
     let min = 0, max = 0,
-    rowId = parseInt(e.target.dataset.rowid),
-    realId = parseInt(e.target.dataset.realid);
+    rowId = parseInt(rowid),
+    realId = parseInt(realid);
 
     if (rows.length > 0 && rows.indexOf(rowId) !== -1
-      && this.state.ctrlDown === false) { // if row is active - remove it
+      && ctrlDown === false) { // if row is active - remove it
       rows = rows.splice(rowId, 1);
       ids = ids.splice(realId, 1);
       this.state.selectedRows = rows;
       this.state.selectedIds = ids;
     } else {
-      if (this.state.ctrlDown === true) {
-        rows.push(parseInt(e.target.dataset.rowid));
-        ids.push(parseInt(e.target.dataset.realid));
-      } else if (this.state.shiftDown === true) {
-        rows.push(parseInt(e.target.dataset.rowid));
-        ids.push(parseInt(e.target.dataset.realid));
+      if (ctrlDown === true) {
+        rows.push(parseInt(rowid));
+        ids.push(parseInt(realid));
+      } else if (shiftDown === true) {
+        rows.push(parseInt(rowid));
+        ids.push(parseInt(realid));
         min = rows[0], max = rows[0];
         for (var row in rows) {
           if (rows[row] < min) {
@@ -319,12 +334,12 @@ class Reactables extends React.Component {
         }
         this.state.selectedRows = rows;
       } else { // if just a click override prev
-        rows = [parseInt(e.target.dataset.rowid)];
-        ids = [parseInt(e.target.dataset.realid)];
+        rows = [parseInt(rowid)];
+        ids = [parseInt(realid)];
       }
     }
     // we can't use the state for selectedRows here because of state latency
-    this.createTable(this.jsonData, this.state.sortedButtons, rows);
+    this.createTable(this.jsonData, sortedButtons, rows);
     this.setState({
       selectedRows: rows,
       selectedIds: ids
@@ -463,7 +478,6 @@ class Reactables extends React.Component {
       const { editor } = this.props;
       const {
         dataRows,
-        perPage,
         active,
         action,
         selectedRows,

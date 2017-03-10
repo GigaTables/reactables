@@ -170,7 +170,6 @@ class Editor extends React.Component {
       method: EditorConstants.HTTP_METHOD_POST,
       body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
-        dataResp = this.state.dataIndices;
         dataResp['id'] = data['row']['id'];
         dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
         this.props.editorUpdate(e, dataResp);
@@ -180,8 +179,6 @@ class Editor extends React.Component {
       method: EditorConstants.HTTP_METHOD_PUT,
       body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
-        dataResp = this.state.dataIndices;
-        // call editorUpdate method with passing all user-input values
         this.props.editorUpdate(e, dataResp);
       });
     } else if (action === EditorConstants.ACTION_DELETE) {
@@ -189,7 +186,6 @@ class Editor extends React.Component {
         method: EditorConstants.HTTP_METHOD_DELETE,
         body: JSON.stringify(this.props.dataIndices)
       }).then(response => response.json()).then((data) => {
-        dataResp = this.state.dataIndices;
         // call editorUpdate method with passing all user-input values
         this.props.editorUpdate(e, dataResp);
       });
@@ -198,6 +194,13 @@ class Editor extends React.Component {
 
   render()
   {
+    const {
+      hidePopup,
+      opacity,
+      popupTitle,
+      action,
+      popupButton
+    } = this.props;
     this.setFields(this.props);
     let editorClasses = classNames({
       gte_editor_popup: true,
@@ -209,20 +212,20 @@ class Editor extends React.Component {
     });
     return (
       <div>
-      <div className={editorClasses} style={{opacity:this.props.opacity, transition: "opacity 1s"}}>
+      <div className={editorClasses} style={{opacity:opacity, transition: "opacity 1s"}}>
         <div className="gte_popup_container">
           <div className="gte_popup_container_wrapper">
             <div className="gte_form_border_box">
               <div className="gte_form_fields">
                 <div className="gte_header">
-                  <div className="gte_editor_title">{this.props.popupTitle}</div>
+                  <div className="gte_editor_title">{popupTitle}</div>
                 </div>
                 <div className="gte_form_body">
                   <div className="gte_form_body_content">
                     <form id="gte_form" action="" method="post">
                       <div className="gte_form_content">
                         <div>
-                          <input type="hidden" name="action" value={this.props.action}/>
+                          <input type="hidden" name="action" value={action}/>
                         </div>
                         <div>
                           {this.fields}
@@ -237,8 +240,8 @@ class Editor extends React.Component {
                     <button
                       id="gte_sent_btn"
                       className="btn"
-                      data-action={this.props.action}
-                      onClick={this.btnClicked.bind(this)}>{this.props.popupButton}</button>
+                      data-action={action}
+                      onClick={this.btnClicked.bind(this)}>{popupButton}</button>
                   </div>
                 </div>
               </div>
@@ -246,7 +249,7 @@ class Editor extends React.Component {
           </div>
         </div>
       </div>
-      <div onClick={this.props.hidePopup} className={backgroundClasses}></div>
+      <div onClick={hidePopup} className={backgroundClasses}></div>
       </div>
     )
   }

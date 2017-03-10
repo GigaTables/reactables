@@ -7,19 +7,6 @@ var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
 class Pagination extends React.Component {
-  constructor(props)
-  {
-    super(props);
-  }
-
-  // handlePagination(from, e)
-  // {
-  //   console.log(from);
-  //   this.setState({
-  //     page: from / this.props.perPage
-  //   });
-  // }
-
   render()
   {
     var lang = Lang[this.props.lang];

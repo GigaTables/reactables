@@ -58,7 +58,6 @@ class Reactables extends React.Component {
       opacity: 0
     }
     this.build();
-    // console.log(this.state.sortButtons);
   }
 
   getButtonsState(index, value)
@@ -277,8 +276,6 @@ class Reactables extends React.Component {
         }
       }
     } else if (action === EditorConstants.ACTION_CREATE) {
-      // dataIndices['id'] = 123;
-      console.log(dataIndices);
       this.jsonData.unshift(dataIndices);
     } else if (action === EditorConstants.ACTION_EDIT) {
       for (var key in dataIndices) {
@@ -302,7 +299,7 @@ class Reactables extends React.Component {
       shiftDown
     } = this.state;
     const { rowid, realid } = e.target.dataset;
-    // console.log(e.target.dataset.realid);
+
     let rows = selectedRows,
     ids = selectedIds;
     let min = 0, max = 0,
@@ -352,10 +349,14 @@ class Reactables extends React.Component {
 
   handlePagination(e)
   {
+    const { from } = e.target.dataset;
+    const { perPage, sortedButtons } = this.state;
     this.setState({
-      fromRow: e.target.dataset.from,
-      page: e.target.dataset.from / this.state.perPage + 1
-    }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      fromRow: from,
+      page: from / perPage + 1,
+      selectedRows: [],
+      selectedIds: []
+    }, () => {this.createTable(this.jsonData, sortedButtons)});
   }
 
   updatePerPage(e)

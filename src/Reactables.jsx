@@ -459,18 +459,35 @@ class Reactables extends React.Component {
 
   render() {
       let sortedCols = this.setHeads();
+      const { tableOpts, perPageRows, defaultPerPage, lang } = this.props.settings;
+      const { editor } = this.props;
+      const {
+        dataRows,
+        perPage,
+        active,
+        action,
+        selectedRows,
+        selectedIds,
+        countRows,
+        page,
+        opacity,
+        perPage,
+        fromRow,
+        popup_button,
+        popup_title
+      } = this.state;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
             <Tools
               updatePerPage={this.updatePerPage.bind(this)}
               showPopup={this.showPopup.bind(this)}
-              tableOpts={this.props.settings.tableOpts}
-              perPageRows={this.props.settings.perPageRows}
-              perPage={this.state.perPage}
-              defaultPerPage={this.props.settings.defaultPerPage}
-              lang={this.props.settings.lang}
-              selectedRows={this.state.selectedRows} />
+              tableOpts={tableOpts}
+              perPageRows={perPageRows}
+              perPage={perPage}
+              defaultPerPage={defaultPerPage}
+              lang={lang}
+              selectedRows={selectedRows} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -479,7 +496,7 @@ class Reactables extends React.Component {
               </tr>
             </thead>
             <tbody className={styles.gt_body}>
-                {this.state.dataRows}
+                {dataRows}
             </tbody>
             <tfoot className={styles.gt_foot}>
               <tr>
@@ -490,36 +507,36 @@ class Reactables extends React.Component {
           <div className={styles.gt_pagination}>
             <Pagination
               updatePagination={this.handlePagination.bind(this)}
-              countRows={this.state.countRows}
-              page={this.state.page}
-              perPage={this.state.perPage}
-              fromRow={this.state.fromRow}
-              lang={this.props.settings.lang} />
+              countRows={countRows}
+              page={page}
+              perPage={perPage}
+              fromRow={fromRow}
+              lang={lang} />
           </div>
           <div className={styles.gt_foot_tools}>
             <Tools
               updatePerPage={this.updatePerPage.bind(this)}
               showPopup={this.showPopup.bind(this)}
-              tableOpts={this.props.settings.tableOpts}
-              perPageRows={this.props.settings.perPageRows}
-              defaultPerPage={this.props.settings.defaultPerPage}
-              perPage={this.state.perPage}
-              lang={this.props.settings.lang}
-              selectedRows={this.state.selectedRows} />
+              tableOpts={tableOpts}
+              perPageRows={perPageRows}
+              defaultPerPage={defaultPerPage}
+              perPage={perPage}
+              lang={lang}
+              selectedRows={selectedRows} />
           </div>
           <Editor
-            active={this.state.active}
-            action={this.state.action}
-            editor={this.props.editor}
-            columns={this.props.editor.fields}
+            active={active}
+            action={action}
+            editor={editor}
+            columns={editor.fields}
             editorUpdate={this.editorUpdate.bind(this)}
-            selectedRows={this.state.selectedRows}
-            selectedIds={this.state.selectedIds}
-            opacity={this.state.opacity}
-            popupButton={this.state.popup_button}
-            popupTitle={this.state.popup_title}
+            selectedRows={selectedRows}
+            selectedIds={selectedIds}
+            opacity={opacity}
+            popupButton={popup_button}
+            popupTitle={popup_title}
             hidePopup={this.hidePopup.bind(this)}
-            lang={this.props.settings.lang} />
+            lang={lang} />
         </div>
       )
   }

@@ -12,7 +12,7 @@ class Tools extends React.Component {
   render()
   {
     const {
-      searchValue,
+      search,
       selectedRows,
       showPopup,
       defaultPerPage,
@@ -60,7 +60,7 @@ class Tools extends React.Component {
           perPageRows={perPageRows}
           lang={lang} />
         <Search
-          searchValue={searchValue}
+          search={search}
           doSearch={doSearch}
           lang={lang}/>
         <div className={styles.clear}></div>

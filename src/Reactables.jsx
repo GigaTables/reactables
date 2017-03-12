@@ -56,7 +56,7 @@ class Reactables extends React.Component {
       minRow: 0,
       maxRow: 0,
       opacity: 0,
-      searchValue: ''
+      search: ''
     }
     // cols opts
     this.searchableCols = [];
@@ -179,7 +179,8 @@ class Reactables extends React.Component {
   {
     var that = this;
 
-    let val = e.target.value,
+    let name = e.target.name,
+    val = e.target.value,
     len = val.length,
     nothing = false,
     tOut = [], c = 0;
@@ -224,7 +225,8 @@ class Reactables extends React.Component {
       }
       nothing = false;
       this.setState({
-        searchValue: val
+        [name]: val,
+        dataSearch: nJson
       });
     }
     this.lastTimeKeyup = this.nowMillis;
@@ -597,7 +599,7 @@ class Reactables extends React.Component {
         fromRow,
         popup_button,
         popup_title,
-        searchValue
+        search
       } = this.state;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
@@ -612,7 +614,7 @@ class Reactables extends React.Component {
               defaultPerPage={defaultPerPage}
               lang={lang}
               selectedRows={selectedRows}
-              searchValue={searchValue} />
+              search={search} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -649,7 +651,7 @@ class Reactables extends React.Component {
               perPage={perPage}
               lang={lang}
               selectedRows={selectedRows}
-              searchValue={searchValue} />
+              search={search} />
           </div>
           <Editor
             active={active}

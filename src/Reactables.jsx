@@ -206,7 +206,7 @@ class Reactables extends React.Component {
               }
           }
       }
-
+      this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
     }
   }
 

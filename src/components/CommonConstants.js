@@ -9,5 +9,8 @@ module.exports = {
   ENTER_KEY: 13,
   // table
   GT_ROW_ID:'GT_RowId',
-  SORTABLE:'sortable'
+  SORTABLE:'sortable',
+  SEARCHABLE: 'searchable',
+  VISIBLE: 'visible',
+  DATA: 'data'
 }

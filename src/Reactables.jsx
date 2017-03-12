@@ -57,126 +57,197 @@ class Reactables extends React.Component {
       maxRow: 0,
       opacity: 0
     }
+    // cols opts
+    this.searchableCols = [];
+    this.visibleCols = [];
+    this.sortableCols = [];
     this.build();
   }
 
-  getButtonsState(index, value)
+  getButtonsState(indexData, value)
   {
     const { sortButtons } = this.state;
     let buttons = [];
     for (let key in sortButtons) {
       buttons[key] = sortButtons[key];
-      if (parseInt(key) === parseInt(index)) {
+      if (key === indexData) {
         buttons[key] = value;
       }
     }
+    console.log(buttons, 666);
     return buttons;
   }
 
-  setTableSort(index, e)
+  setTableSort(indexData, e)
   {
     const { columns } = this.props.settings;
     if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
       let sortedButtons = [];
       this.props.children.map((th, index) => {
-        if(typeof columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
-        || columns[index][CommonConstants.SORTABLE] === true) {
-          sortedButtons[index] = 0;
+        const { data } = th.props;
+        if(typeof data !== CommonConstants.UNDEFINED) {
+          columns.map((column, colIdx) => {
+            // console.log(column[CommonConstants.DATA], data);
+            if(column[CommonConstants.DATA] === data
+              && (typeof column[CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+                || column[CommonConstants.SORTABLE] === true)) {
+              sortedButtons[data] = 0; // 0 - none, 1 - asc, -1 - desc
+            }
+          });
         }
       });
+      // console.log(sortedButtons);
       this.setState({
         sortButtons : sortedButtons
       });
     } else { // clicked
       this.props.children.map((th, idx) => {
-      var that = this;
-      const { sortButtons } = that.state;
+        var that = this;
+        const { sortButtons } = that.state;
+        const { data } = th.props;
 
-      let cols = columns,
-      sJson = that.jsonData,
-      sButtons = that.state.sortButtons,
-      check = 0, isNan = 0, sortedButtons = [];
-      // check and sort for other columns
-      if (typeof sortButtons[idx] !== CommonConstants.UNDEFINED
-          && sortButtons[idx] !== 0
-          && idx !== index) {
-            if (sortButtons[idx] === 1) {
-              sJson.sort(function (a, b) {
-                var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
-                a = (an === null) ? '' : an + '';
-                b = (bn === null) ? '' : bn + '';
-                if (check === 0) { // check just the 1st time
-                  if (isNaN(a - b)) {
-                        isNan = 1;
-                  }
-                  check = 1;
-                }
-                if (isNan) {
-                  return a.localeCompare(b);
-                }
-                return a - b;
-              });
+        let cols = columns,
+        sJson = that.jsonData,
+        sortedButtons = [];
+        // check and sort for other columns
+        if (typeof sortButtons[data] !== CommonConstants.UNDEFINED
+          && sortButtons[data] !== 0
+          && data !== indexData) {
+            if (sortButtons[data] === 1) {
+              sJson = this.sortAsc(data, sJson);
             } else {
-              sJson.sort(function (a, b) {
-                var an = eval('a.' + cols[idx].data), bn = eval('b.' + cols[idx].data);
-                a = (an === null) ? '' : an + '';
-                b = (bn === null) ? '' : bn + '';
-                if (check === 0) { // check just the 1st time
-                    if (isNaN(a - b)) {
-                        isNan = 1;
-                    }
-                    check = 1;
-                }
-                if (isNan) {
-                    return b.localeCompare(a);
-                }
-                return b - a;
-              });
+              sJson = this.sortDesc(data, sJson);
             }
+        }
+
+        if (indexData === data) { // iff the cols match
+          console.log(indexData, data);
+          if (sortButtons[data] === 1) {
+            sortedButtons = that.getButtonsState(indexData, -1);
+            sJson = this.sortDesc(data, sJson);
+          } else { // if 0 || -1 = 1
+            sortedButtons = that.getButtonsState(indexData, 1);
+            sJson = this.sortAsc(data, sJson);
+          }
+          that.createTable(sJson, sortedButtons);
+        }
+      });
+    }
+  }
+
+  sortAsc(data, sJson)
+  {
+    let check = 0, isNan = 0;
+    sJson.sort(function (a, b) {
+      var an = eval('a.' + data), bn = eval('b.' + data);
+      a = (an === null) ? '' : an + '';
+      b = (bn === null) ? '' : bn + '';
+      // console.log(a, b);
+      if (check === 0) { // check just the 1st time
+        if (isNaN(a - b)) {
+          isNan = 1;
+        }
+        check = 1;
+      }
+      if (isNan) {
+        return a.localeCompare(b);
+      }
+      return a - b;
+    });
+    return sJson;
+  }
+
+  sortDesc(data, sJson)
+  {
+    let check = 0, isNan = 0;
+    sJson.sort(function (a, b) {
+      var an = eval('a.' + data), bn = eval('b.' + data);
+      a = (an === null) ? '' : an + '';
+      b = (bn === null) ? '' : bn + '';
+      if (check === 0) { // check just the 1st time
+          if (isNaN(a - b)) {
+              isNan = 1;
+          }
+          check = 1;
+      }
+      if (isNan) {
+          return b.localeCompare(a);
+      }
+      return b - a;
+    });
+    return sJson;
+  }
+
+  doSearch(e)
+  {
+    let val = e.target.value,
+    len = val.length,
+    nothing = false;
+
+    if (len > 0 || (len === 0 && val === '')) { // do search
+      if (nothing === true && val === '') {
+          return; // exit - user pressed not a symbol keys or teared down
+      }
+      if (nothing === false && val === '') { // rebuild full table if teared down
+          this.createTable(this.jsonData, this.state.sortedButtons);
+          nothing = true;
+          return;
+      }
+      var nJson = [], str = '', i = 0, json = this.jsonData;
+      for (let key in json) {
+          for (let k in json[key]) {
+              if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
+                  str = json[key][k] + '';
+                  if (str.indexOf(val) !== -1) {
+                      nJson[i] = json[key];
+                      ++i;
+                      break;
+                  }
+              }
+          }
       }
 
-      if (sortButtons[index] === 1) {
-        sortedButtons = that.getButtonsState(index, -1);
-        sJson.sort(function (a, b) {
-          var an = eval('a.' + cols[index].data), bn = eval('b.' + cols[index].data);
-          a = (an === null) ? '' : an + '';
-          b = (bn === null) ? '' : bn + '';
-          if (check === 0) { // check just the 1st time
-              if (isNaN(a - b)) {
-                  isNan = 1;
-              }
-              check = 1;
-          }
-          if (isNan) {
-              return b.localeCompare(a);
-          }
-          return b - a;
-        });
-      } else { // if 0 || -1 = 1
-        sortedButtons = that.getButtonsState(index, 1);
-        sJson.sort(function (a, b) {
-          var an = eval('a.' + cols[index].data), bn = eval('b.' + cols[index].data);
-          a = (an === null) ? '' : an + '';
-          b = (bn === null) ? '' : bn + '';
-          if (check === 0) { // check just the 1st time
-            if (isNaN(a - b)) {
-                  isNan = 1;
-            }
-            check = 1;
-          }
-          if (isNan) {
-            return a.localeCompare(b);
-          }
-          return a - b;
-        });
-      }
-      that.createTable(sJson, sortedButtons);
-      });
+    }
+  }
+
+  setSearchableCols(object)
+  {
+    this.searchableCols[object[CommonConstants.DATA]] = false;
+    if(typeof object[CommonConstants.SEARCHABLE] === CommonConstants.UNDEFINED
+    || object[CommonConstants.SEARCHABLE] === true) {
+      this.searchableCols[object[CommonConstants.DATA]] = true;
+    }
+  }
+
+  setVisibleCols(object)
+  {
+    this.visibleCols[object[CommonConstants.DATA]] = true;
+    if(typeof object[CommonConstants.VISIBLE] !== CommonConstants.UNDEFINED
+    && object[CommonConstants.VISIBLE] === false) {
+      this.visibleCols[object[CommonConstants.DATA]] = false;
+      this.sortableCols[object[CommonConstants.DATA]] = false;
+      this.searchableCols[object[CommonConstants.DATA]] = false;
+    }
+  }
+
+  setSortableCols(object)
+  {
+    this.sortableCols[object[CommonConstants.DATA]] = false;
+    if(typeof object[CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
+    || object[CommonConstants.SORTABLE] === true) {
+      this.sortableCols[object[CommonConstants.DATA]] = true;
     }
   }
 
   build()
   {
+    const { columns } = this.props.settings;
+    columns.map((object, index) => {
+      this.setSearchableCols(object, index);
+      this.setSortableCols(object, index);
+      // visibility must be the last - it unsets search & sort if false
+      this.setVisibleCols(object, index);
+    });
     fetch(this.props.settings.ajax).then(response => response.json())
     .then((data) => {
       let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
@@ -210,29 +281,22 @@ class Reactables extends React.Component {
     }
     // process rows
     jsonDataPerPage.map((object, objectIndex) => {
-        let cols = [];
-        let rowId = 0;
-        // perform id check
-        if(typeof object[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
-            rowId = object[CommonConstants.GT_ROW_ID];
-        } else if (typeof object['id'] !== CommonConstants.UNDEFINED) {
-            rowId = object['id'];
-        } else {
-            throw new DataException('You have neither "GT_RowId" nor "id" in json structure.');
-        }
+        let cols = [], rowId = 0;
+        rowId = this.getRowId(object);
         // process cols
-        this.props.settings.columns.map((column, index) => {
-          // check if a JSON object has this data field
-          if(typeof object[column['data']] !== CommonConstants.UNDEFINED)
-          {
+        this.props.children.map((th, idx) => {
+          const { data } = th.props;
+        // this.props.settings.columns.map((column, index) => {
+          // check if a JSON object has this data field + visible
+          if(typeof data !== CommonConstants.UNDEFINED && this.visibleCols[data] === true) {
             cols.push(<Column
-              dataIndex={column['data']}
+              dataIndex={data}
               selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
               minRow={minRow}
               maxRow={maxRow}
               count={objectIndex}
               gteRowId={rowId}
-              key={index}>{object[column['data']]}</Column>);
+              key={idx}>{object[data]}</Column>);
           }
         });
         // count is used to shft key + click selection of rows, ex.: sorted
@@ -253,6 +317,20 @@ class Reactables extends React.Component {
       state['sortButtons'] = sortedButtons;
     }
     this.setState(state);
+  }
+
+  getRowId(object)
+  {
+    let rowId = 0;
+    // perform id check
+    if(typeof object[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
+        rowId = object[CommonConstants.GT_ROW_ID];
+    } else if (typeof object['id'] !== CommonConstants.UNDEFINED) {
+        rowId = object['id'];
+    } else {
+        throw new DataException('You have neither "GT_RowId" nor "id" in json structure.');
+    }
+    return rowId;
   }
 
   editorUpdate(e, dataIndices)
@@ -400,24 +478,28 @@ class Reactables extends React.Component {
   setHeads()
   {
     const { sortButtons } = this.state;
+    const { columns } = this.props.settings;
     let sortedCols = [];
+
     this.props.children.map((th, index) => {
+    const { data } = th.props;
+    if (typeof data !== CommonConstants.UNDEFINED
+        && this.visibleCols[data] === true) {
       var thh = React.Children.only(th);
       var clonedOpts = {
         key: index,
         sortId: index+'',
-        sortDirection: (typeof sortButtons[index] !== CommonConstants.UNDEFINED) ? sortButtons[index] : 0
+        sortDirection: (typeof sortButtons[data] === CommonConstants.UNDEFINED) ? sortButtons[data] : 0
       };
-      if(typeof this.props.settings.columns[index][CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
-      || this.props.settings.columns[index][CommonConstants.SORTABLE] === true) {
-        // set gteSort for <Header> which should be sorted
-        clonedOpts['gteSort'] = CommonConstants.SORTABLE;
-        if(typeof sortButtons[index] !== CommonConstants.UNDEFINED) {
-          clonedOpts['updateSort'] = this.setTableSort.bind(this, index);
-          clonedOpts['sortDirection'] = sortButtons[index];
+        if (this.sortableCols[data] === true) {
+          clonedOpts['gteSort'] = CommonConstants.SORTABLE;
+          if(typeof sortButtons[data] !== CommonConstants.UNDEFINED) {
+            clonedOpts['updateSort'] = this.setTableSort.bind(this, data);
+            clonedOpts['sortDirection'] = sortButtons[data];
+          }
         }
+        sortedCols[index] = React.cloneElement(thh, clonedOpts);
       }
-      sortedCols[index] = React.cloneElement(thh, clonedOpts);
     })
     return sortedCols;
   }
@@ -502,6 +584,7 @@ class Reactables extends React.Component {
             <Tools
               updatePerPage={this.updatePerPage.bind(this)}
               showPopup={this.showPopup.bind(this)}
+              doSearch={this.doSearch.bind(this)}
               tableOpts={tableOpts}
               perPageRows={perPageRows}
               perPage={perPage}
@@ -537,6 +620,7 @@ class Reactables extends React.Component {
             <Tools
               updatePerPage={this.updatePerPage.bind(this)}
               showPopup={this.showPopup.bind(this)}
+              doSearch={this.doSearch.bind(this)}
               tableOpts={tableOpts}
               perPageRows={perPageRows}
               defaultPerPage={defaultPerPage}

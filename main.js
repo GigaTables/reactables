@@ -53,7 +53,7 @@ var editor = {
 };
 
 var settings = {
- struct: {// all in
+ struct: {
    search: ['top', 'bottom'],
    rowsSelector: ['asc', 'top', 'bottom'],
    pagination: ['bottom']
@@ -66,27 +66,29 @@ var settings = {
  columns: [
    {// include all defaults
      data: "id",
-     sortable: true,
-     visible: true,
-     searchable: true,
+     sortable: true, // true by defualt
+     visible: true, // true by defualt
+     searchable: true, // true by defualt
      discreteSearch: true, // false by default
      discreteSearchValue: function (title) {
        return 'Поиск по полю ' + title;
      }
    },
-//            {data: "title"},
-   {data: "desc", sortable: false},
+   {data: "title"},
+   {
+     data: "desc",
+     sortable: false
+   },
    {
      data: "date",
      searchable: false
    },
    {
-     data: "info",
-     //              visible: false
+     data: "info"
    },
    {data:"field1"},
    {data:"field2"},
-   {data:"field3"}
+   {data:"field3", visible: false}
  ],
  columnOpts: [
    {
@@ -121,12 +123,14 @@ var settings = {
 
 ReactDOM.render(
   <Reactables editor={editor} settings={settings}>
-    <Header>ID</Header>
-    <Header>Name</Header>
-    <Header>Description</Header>
-    <Header>Date</Header>
-    <Header>Info</Header>
-    <Header>Field2</Header>
-    <Header>Field3</Header>
+    <Header data="id">ID</Header>
+    <Header data="title">Name</Header>
+    <Header data="desc">Description</Header>
+    <Header data="date">Date</Header>
+    <Header data="info">Info</Header>
+    <Header data="field2">Field123 but data from field2</Header>
+    <Header data="field1">Field1</Header>
+    <Header data="field3">Field3 invisible</Header>
+    <Header>Field3 invisible</Header>
   </Reactables>,
   document.getElementById('app'))

@@ -12,5 +12,7 @@ module.exports = {
   SORTABLE:'sortable',
   SEARCHABLE: 'searchable',
   VISIBLE: 'visible',
-  DATA: 'data'
+  DATA: 'data',
+  PERIOD_SEARCH: 200,
+  TIMEOUT_SEARCH: 300
 }

@@ -61,6 +61,7 @@ class Reactables extends React.Component {
     this.searchableCols = [];
     this.visibleCols = [];
     this.sortableCols = [];
+    this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0;
     this.build();
   }
 
@@ -180,9 +181,15 @@ class Reactables extends React.Component {
 
   doSearch(e)
   {
+    var that = this;
+
     let val = e.target.value,
     len = val.length,
-    nothing = false;
+    nothing = false,
+    tOut = [], c = 0;
+
+    this.nowMillis = (new Date()).getTime();
+    var period = this.nowMillis - this.lastTimeKeyup;
 
     if (len > 0 || (len === 0 && val === '')) { // do search
       if (nothing === true && val === '') {
@@ -206,8 +213,23 @@ class Reactables extends React.Component {
               }
           }
       }
-      this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+      if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
+          for (var j in tOut) {
+              clearTimeout(tOut[j]);
+          }
+          tOut = [];
+          c = 0;
+          this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+      } else {
+          tOut[c] = setTimeout(function () {
+              that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
+          }, CommonConstants.TIMEOUT_SEARCH);
+          c++;
+      }
+      nothing = false;
+      // this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
     }
+    this.lastTimeKeyup = this.nowMillis;
   }
 
   setSearchableCols(object)

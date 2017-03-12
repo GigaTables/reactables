@@ -17,6 +17,11 @@ class Button extends React.Component {
     return showPopup(event);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.active !== nextProps.active
+      || this.props.action !== nextProps.action;
+  }
+
   render()
   {
     const { action, children } = this.props;

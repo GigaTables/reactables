@@ -6,23 +6,38 @@ var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
 class PagesSelector extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      perPageRows,
+      perPage
+    } = this.props;
+    return perPageRows !== nextProps.perPageRows
+      || perPage !== nextProps.perPage;
+  }
+
   render()
   {
-    var lang = Lang[this.props.lang];
+    const {
+      lang,
+      perPageRows,
+      perPage,
+      updatePerPage
+    } = this.props;
+    var language = Lang[lang];
     return (
       <div className={styles.gt_rows_selector}>
-        <span>{lang.show}&nbsp;</span>
+        <span>{language.show}&nbsp;</span>
         <span>
-          <select onChange={(event) => {this.props.updatePerPage(event)}}
-          value={this.props.perPage} className={styles.gt_select}>
+          <select onChange={(event) => {updatePerPage(event)}}
+          value={perPage} className={styles.gt_select}>
           {
-            this.props.perPageRows.map((rows, index) => {
+            perPageRows.map((rows, index) => {
                 return <option key={index}>{rows}</option>;
             })
           }
           </select>
         </span>
-        <span>&nbsp;{lang.entries}</span>
+        <span>&nbsp;{language.entries}</span>
       </div>
     )
   }

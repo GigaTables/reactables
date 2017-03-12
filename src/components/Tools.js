@@ -11,40 +11,58 @@ var Lang = require('./Lang');
 class Tools extends React.Component {
   render()
   {
-    var lang = Lang[this.props.lang];
+    const {
+      searchValue,
+      selectedRows,
+      showPopup,
+      defaultPerPage,
+      perPage,
+      updatePerPage,
+      perPageRows,
+      doSearch,
+      lang
+    } = this.props;
+
+    var language = Lang[lang];
     let buttons = [];
     this.props.tableOpts.buttons.map((btn, i) => {
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
         buttons[i] = <Button
           active={false}
           action={EditorConstants.ACTION_CREATE}
-          showPopup={this.props.showPopup}
-          key={i}>{lang.editor_create}</Button>;
+          showPopup={showPopup}
+          key={i}>{language.editor_create}</Button>;
       }
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
         buttons[i] = <Button
-          active={(this.props.selectedRows.length === 1) ? false : true}
-          selectedRows={this.props.selectedRows}
+          active={(selectedRows.length === 1) ? false : true}
+          selectedRows={selectedRows}
           action={EditorConstants.ACTION_EDIT}
-          showPopup={this.props.showPopup}
-          key={i}>{lang.editor_edit}</Button>;
+          showPopup={showPopup}
+          key={i}>{language.editor_edit}</Button>;
       }
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
         buttons[i] = <Button
-          active={(this.props.selectedRows.length === 0) ? true : false}
-          selectedRows={this.props.selectedRows}
+          active={(selectedRows.length === 0) ? true : false}
+          selectedRows={selectedRows}
           action={EditorConstants.ACTION_DELETE}
-          showPopup={this.props.showPopup}
-          key={i}>{lang.editor_remove}</Button>;
+          showPopup={showPopup}
+          key={i}>{language.editor_remove}</Button>;
       }
     });
     return (
       <div className="gt_head_tools">
         {buttons}
-        <PagesSelector perPage={this.props.perPage} updatePerPage={this.props.updatePerPage}
-          defaultPerPage={this.props.defaultPerPage}
-          perPageRows={this.props.perPageRows} lang={this.props.lang} />
-        <Search doSearch={this.props.doSearch} lang={this.props.lang}/>
+        <PagesSelector
+          perPage={perPage}
+          updatePerPage={updatePerPage}
+          defaultPerPage={defaultPerPage}
+          perPageRows={perPageRows}
+          lang={lang} />
+        <Search
+          searchValue={searchValue}
+          doSearch={doSearch}
+          lang={lang}/>
         <div className={styles.clear}></div>
       </div>
     )

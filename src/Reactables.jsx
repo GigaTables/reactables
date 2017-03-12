@@ -55,7 +55,8 @@ class Reactables extends React.Component {
       shiftDown: false,
       minRow: 0,
       maxRow: 0,
-      opacity: 0
+      opacity: 0,
+      searchValue: ''
     }
     // cols opts
     this.searchableCols = [];
@@ -75,7 +76,6 @@ class Reactables extends React.Component {
         buttons[key] = value;
       }
     }
-    console.log(buttons, 666);
     return buttons;
   }
 
@@ -88,7 +88,6 @@ class Reactables extends React.Component {
         const { data } = th.props;
         if(typeof data !== CommonConstants.UNDEFINED) {
           columns.map((column, colIdx) => {
-            // console.log(column[CommonConstants.DATA], data);
             if(column[CommonConstants.DATA] === data
               && (typeof column[CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
                 || column[CommonConstants.SORTABLE] === true)) {
@@ -97,7 +96,6 @@ class Reactables extends React.Component {
           });
         }
       });
-      // console.log(sortedButtons);
       this.setState({
         sortButtons : sortedButtons
       });
@@ -122,7 +120,6 @@ class Reactables extends React.Component {
         }
 
         if (indexData === data) { // iff the cols match
-          console.log(indexData, data);
           if (sortButtons[data] === 1) {
             sortedButtons = that.getButtonsState(indexData, -1);
             sJson = this.sortDesc(data, sJson);
@@ -143,7 +140,6 @@ class Reactables extends React.Component {
       var an = eval('a.' + data), bn = eval('b.' + data);
       a = (an === null) ? '' : an + '';
       b = (bn === null) ? '' : bn + '';
-      // console.log(a, b);
       if (check === 0) { // check just the 1st time
         if (isNaN(a - b)) {
           isNan = 1;
@@ -227,7 +223,9 @@ class Reactables extends React.Component {
           c++;
       }
       nothing = false;
-      // this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+      this.setState({
+        searchValue: val
+      });
     }
     this.lastTimeKeyup = this.nowMillis;
   }
@@ -598,7 +596,8 @@ class Reactables extends React.Component {
         perPage,
         fromRow,
         popup_button,
-        popup_title
+        popup_title,
+        searchValue
       } = this.state;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
@@ -612,7 +611,8 @@ class Reactables extends React.Component {
               perPage={perPage}
               defaultPerPage={defaultPerPage}
               lang={lang}
-              selectedRows={selectedRows} />
+              selectedRows={selectedRows}
+              searchValue={searchValue} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -648,7 +648,8 @@ class Reactables extends React.Component {
               defaultPerPage={defaultPerPage}
               perPage={perPage}
               lang={lang}
-              selectedRows={selectedRows} />
+              selectedRows={selectedRows}
+              searchValue={searchValue} />
           </div>
           <Editor
             active={active}

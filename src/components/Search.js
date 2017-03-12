@@ -7,12 +7,23 @@ var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
 class Search extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.searchValue !== nextProps.searchValue;
+  }
+
   render()
   {
-    var lang = Lang[this.props.lang];
+    const { lang, doSearch, searchValue } = this.props;
+    var language = Lang[lang];
     return (
       <div className={styles.gt_main_search}>
-        <input onKeyUp={this.props.doSearch} type="text" className={styles.gt_search} placeholder={lang.search} />
+        <input
+          tabIndex="1"
+          defaultValue={searchValue}
+          onKeyUp={doSearch}
+          type="text"
+          className={styles.gt_search}
+          placeholder={language.search} />
         <div className={styles.clear}></div>
       </div>
     )

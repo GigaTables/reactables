@@ -5,18 +5,31 @@ import classNames from 'classnames/bind'
 export default class Row extends React.Component {
   render()
   {
+    const {
+      count,
+      selectedRows,
+      children,
+      gteRowId,
+      minRow,
+      maxRow,
+      clickedRow
+    } = this.props;
+
     let rowClasses = classNames({
-      even:(this.props.count % 2 === 0)?true:false,
-      odd:(this.props.count % 2 === 0)?false:true,
-      active: (this.props.selectedRows.indexOf(this.props.count) !== -1) ? true : false
+      even:(count % 2 === 0)?true:false,
+      odd:(count % 2 === 0)?false:true,
+      active: (selectedRows.indexOf(count) !== -1) ? true : false
     });
-    // console.log(this.props.selectedRows + ' - ' + this.props.count);
-    // console.log(this.props.selectedRows.indexOf(this.props.count));
     return (
-      <tr key={this.props.gteRowId} className={rowClasses}
-        data-selectedrows={this.props.selectedRows} onClick={this.props.clickedRow}
-        data-minrow={this.props.minRow} data-maxrow={this.props.maxRow}
-        data-rowid={this.props.count} data-realid={this.props.gteRowId}>{this.props.children}</tr>
+      <tr
+        key={gteRowId}
+        className={rowClasses}
+        data-selectedrows={selectedRows}
+        onClick={clickedRow}
+        data-minrow={minRow}
+        data-maxrow={maxRow}
+        data-rowid={count}
+        data-realid={gteRowId}>{children}</tr>
     )
   }
 }

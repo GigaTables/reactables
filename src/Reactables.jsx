@@ -102,12 +102,15 @@ class Reactables extends React.Component {
     } else { // clicked
       this.props.children.map((th, idx) => {
         var that = this;
-        const { sortButtons } = that.state;
+        const { sortButtons, dataSearch } = that.state;
         const { data } = th.props;
 
         let cols = columns,
         sJson = that.jsonData,
         sortedButtons = [];
+        if (dataSearch !== null) {
+          sJson = dataSearch;
+        }
         // check and sort for other columns
         if (typeof sortButtons[data] !== CommonConstants.UNDEFINED
           && sortButtons[data] !== 0

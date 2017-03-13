@@ -33,10 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/GigaTables/react.git"
+    "url": "git+ssh://git@github.com/GigaTables/reactables.git"
   },
   "keywords": [
+    "reactjs",
     "tables",
+    "greed",
     "react",
     "javascript",
     "row-edit"
@@ -44,7 +46,7 @@
   "author": "Arthur Kushman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GigaTables/react/issues"
+    "url": "https://github.com/GigaTables/reactables/issues"
   },
-  "homepage": "https://github.com/GigaTables/react#readme"
+  "homepage": "https://github.com/GigaTables/reactables#readme"
 }

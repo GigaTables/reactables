@@ -1,5 +1,5 @@
 {
-  "name": "gigatables_react",
+  "name": "gigatables-react",
   "version": "0.0.1",
   "description": "GigaTables is a ReactJS plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems.",
   "main": "./build/index.js",

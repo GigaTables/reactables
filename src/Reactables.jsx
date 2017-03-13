@@ -7,11 +7,12 @@ import Column from './components/Column.js'
 import Pagination from './components/Pagination.js'
 import classNames from 'classnames/bind';
 import styles from './css/styles.css'
-import {DataException} from './components/Exceptions';
+import { DataException } from './components/Exceptions';
 
 var CommonConstants = require('./components/CommonConstants');
 var EditorConstants = require('./components/EditorConstants');
 var Lang = require('./components/Lang');
+var loAssign = require('lodash/assign');
 
 export class Header extends React.Component {
   render() {
@@ -63,6 +64,23 @@ class Reactables extends React.Component {
     this.visibleCols = [];
     this.sortableCols = [];
     this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0;
+    // these default sets will merge with users sets
+    this.defaultSettings = {
+      struct: {
+        search: ['top', 'bottom'],
+        rowsSelector: ['asc', 'top', 'bottom'],
+        pagination: ['bottom']
+      },
+      lang: 'en',
+      perPageRows: [25, 50, 100, 200, 500],
+      defaultPerPage: 25,
+      columns: [],
+      columnOpts: [],
+      tableOpts: {
+          buttons: [],
+          theme: 'std'
+      }
+    };
     this.build();
   }
 
@@ -266,6 +284,7 @@ class Reactables extends React.Component {
 
   build()
   {
+    this.settings = loAssign({}, this.defaultSettings, this.props.settings);
     const { columns } = this.props.settings;
     columns.map((object, index) => {
       this.setSearchableCols(object, index);
@@ -587,12 +606,15 @@ class Reactables extends React.Component {
 
   render() {
       let sortedCols = this.setHeads();
-      const { 
+      // ==== settings
+      const {
         tableOpts,
         perPageRows,
         defaultPerPage,
-        lang
-      } = this.props.settings;
+        lang,
+        struct
+      } = this.settings;
+      // ==== settings ===
       const { editor } = this.props;
       const {
         dataRows,
@@ -622,7 +644,8 @@ class Reactables extends React.Component {
               defaultPerPage={defaultPerPage}
               lang={lang}
               selectedRows={selectedRows}
-              search={search} />
+              search={search}
+              struct={struct}/>
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -655,8 +678,8 @@ class Reactables extends React.Component {
               doSearch={this.doSearch.bind(this)}
               tableOpts={tableOpts}
               perPageRows={perPageRows}
-              defaultPerPage={defaultPerPage}
               perPage={perPage}
+              defaultPerPage={defaultPerPage}
               lang={lang}
               selectedRows={selectedRows}
               search={search} />
@@ -673,7 +696,8 @@ class Reactables extends React.Component {
             popupButton={popup_button}
             popupTitle={popup_title}
             hidePopup={this.hidePopup.bind(this)}
-            lang={lang} />
+            lang={lang}
+            struct={struct}/>
         </div>
       )
   }

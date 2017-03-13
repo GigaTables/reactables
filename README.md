@@ -3,9 +3,9 @@ GigaTables is a ReactJS plug-in to help web-developers process table-data in app
 
 ### Supported package managers
 
-- npm i gigatables_react
-- bower install gigatables (--allow-root, for sudo)
-- composer require gt/gigatables
+- npm i gigatables-react
+- bower install gigatables-react (--allow-root, for sudo)
+- composer require gt/gigatables-react
 
 ## Fiew screen-shots
 

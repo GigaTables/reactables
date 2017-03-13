@@ -55,11 +55,11 @@ var editor = {
 var settings = {
  struct: {
    search: ['top', 'bottom'],
-   rowsSelector: ['asc', 'top', 'bottom'],
+   rowsSelector: ['desc', 'top', 'bottom'],
    pagination: ['bottom']
  },
  lang: 'en', // english default
- perPageRows: [25, 50, 100, 200, 500],
+ perPageRows: [25, 50, 100],
  defaultPerPage: 50,
  ajax: 'http://gigatables.loc/gigatables.php',
  requestType: 'GET',

@@ -4,9 +4,8 @@ const path = require('path');
 
 const config = {
    entry: './main.js',
+  // entry: './src/Reactables.jsx',
    output: {
-      // path:'/',
-      // filename: 'index.js',
       path: path.normalize(__dirname + '/build'),
       publicPath: '',
       filename: 'index.js',

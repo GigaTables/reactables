@@ -587,7 +587,12 @@ class Reactables extends React.Component {
 
   render() {
       let sortedCols = this.setHeads();
-      const { tableOpts, perPageRows, defaultPerPage, lang } = this.props.settings;
+      const { 
+        tableOpts,
+        perPageRows,
+        defaultPerPage,
+        lang
+      } = this.props.settings;
       const { editor } = this.props;
       const {
         dataRows,

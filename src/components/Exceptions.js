@@ -1,10 +1,15 @@
-export function DataException(message)
+const DataException = (message) =>
 {
   this.message = message;
   this.name = 'DataException';
 }
-export function EditorException(message)
+const EditorException = (message) =>
 {
   this.message = message;
-  this.name = 'EditorException';  
+  this.name = 'EditorException';
+}
+
+export {
+  DataException,
+  EditorException
 }

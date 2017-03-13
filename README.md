@@ -24,7 +24,8 @@ GigaTables is a ReactJS plug-in to help web-developers process table-data in app
 
 ## Getting Started
 
-To initialize plug-in and to bind GigaTables with table structure You don't need to do a lot - just settings prop with options and set table structure in JSX. The <Reactables> tag, it's Headers and all the stuff like pagination, per page selector will be constructed automatically.
+To initialize plug-in and to bind GigaTables with table structure You don't need to do a lot - just set the settings prop with options and set table structure in JSX format.
+The `<Reactables>` tag, it's `Headers` and all the stuff like pagination, per page selector will be constructed on the fly.
 
 ### Minimal configuration
 

@@ -1,7 +1,7 @@
 {
   "name": "gigatables_react",
   "version": "0.0.1",
-  "description": "GigaTables is a plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems.",
+  "description": "GigaTables is a ReactJS plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems.",
   "main": "index.js",
   "dependencies": {
     "classnames": "^2.2.5",
@@ -15,8 +15,7 @@
     "resolve-url": "^0.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack": "^2.2.1"
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",
@@ -27,12 +26,35 @@
     "jest": "^18.1.0",
     "react-test-renderer": "^15.4.2",
     "rimraf": "^2.6.1",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "webpack-dev-server": "^2.3.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot",
+    "start": "better-npm-run build:dev",
     "test": "jest",
     "build": "better-npm-run build:prod"
+  },
+  "betterScripts": {
+    "build:dev": {
+      "command": "webpack-dev-server --hot",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build:prod": {
+      "command": "rimraf build && webpack",
+      "env": {
+        "NODE_ENV": "production",
+        "PLATFORM": 1
+      }
+    },
+    "build:platform": {
+      "command": "rimraf build && webpack",
+      "env": {
+        "NODE_ENV": "production",
+        "PLATFORM": 1
+      }
+    }
   },
   "repository": {
     "type": "git",

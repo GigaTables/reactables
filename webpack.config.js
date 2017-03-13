@@ -1,8 +1,17 @@
+const package = require('./package.json');
+const webpack = require('webpack');
+const path = require('path');
+
 const config = {
    entry: './main.js',
    output: {
-      path:'./build',
+      // path:'/',
+      // filename: 'index.js',
+      path: path.normalize(__dirname + '/build'),
+      publicPath: '',
       filename: 'index.js',
+      library: '[name]',
+      chunkFilename: '[name].[chunkhash].js'
    },
    devServer: {
       inline: true,

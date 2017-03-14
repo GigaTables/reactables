@@ -55,7 +55,8 @@ class Reactables extends Main {
       minRow: 0,
       maxRow: 0,
       opacity: 0,
-      search: ''
+      search: '',
+      fieldsEdit: {}
     }
     // cols opts
     this.searchableCols = [];

@@ -301,6 +301,8 @@ class Main extends React.Component {
     if (action === EditorConstants.ACTION_EDIT) {
       popup_title = this.lang.gte_editor_popupheader_edit;
       popup_button = this.lang.gte_editor_sendbtn_update;
+      // collect data for fields filling in Editor
+      console.log(this.jsonData[this.jsonData.indexOf(this.state.selectedRows[0])]);
     } else if (action === EditorConstants.ACTION_DELETE) {
       popup_title = this.lang.gte_editor_popupheader_delete;
       popup_button = this.lang.gte_editor_sendbtn_delete;

@@ -1,5 +1,7 @@
 # GigaTables ReactJS plug-in
 GigaTables is a ReactJS plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems.
+It supports ajax data processing/editing (CRUD), pagination, cross-sorting, global search,
+shft/ctrl rows selection, 7 popular languages and more.
 
 ### Supported package managers
 

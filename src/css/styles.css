@@ -142,7 +142,7 @@ td {
   position: relative;
   text-decoration: none;
 }
-.gt_page_dots {
+:global .gt_page_dots {
   cursor:not-allowed;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -154,7 +154,7 @@ td {
   position: relative;
   text-decoration: none;
 }
-.gt_page:hover {
+:global .gt_page:hover {
   background-color:#eee;
   border-color:#ddd;
   color:#23527c;

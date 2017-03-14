@@ -99,7 +99,7 @@ class Reactables extends React.Component {
 
   setTableSort(indexData, e)
   {
-    const { columns } = this.props.settings;
+    const { columns } = this.settings;
     if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
       let sortedButtons = [];
       this.props.children.map((th, index) => {
@@ -285,14 +285,14 @@ class Reactables extends React.Component {
   build()
   {
     this.settings = loAssign({}, this.defaultSettings, this.props.settings);
-    const { columns } = this.props.settings;
+    const { columns } = this.settings;
     columns.map((object, index) => {
       this.setSearchableCols(object, index);
       this.setSortableCols(object, index);
       // visibility must be the last - it unsets search & sort if false
       this.setVisibleCols(object, index);
     });
-    fetch(this.props.settings.ajax).then(response => response.json())
+    fetch(this.settings.ajax).then(response => response.json())
     .then((data) => {
       let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
       if (typeof jsonData === CommonConstants.UNDEFINED) {
@@ -330,7 +330,6 @@ class Reactables extends React.Component {
         // process cols
         this.props.children.map((th, idx) => {
           const { data } = th.props;
-        // this.props.settings.columns.map((column, index) => {
           // check if a JSON object has this data field + visible
           if(typeof data !== CommonConstants.UNDEFINED && this.visibleCols[data] === true) {
             cols.push(<Column
@@ -490,7 +489,7 @@ class Reactables extends React.Component {
 
   showPopup(e)
   {
-    this.lang = Lang[this.props.settings.lang];
+    this.lang = Lang[this.settings.lang];
     let action = e.target.dataset.action,
     popup_title = this.lang.gte_editor_popupheader_create,
     popup_button = this.lang.gte_editor_sendbtn_create;
@@ -522,7 +521,7 @@ class Reactables extends React.Component {
   setHeads()
   {
     const { sortButtons } = this.state;
-    const { columns } = this.props.settings;
+    const { columns } = this.settings;
     let sortedCols = [];
 
     this.props.children.map((th, index) => {

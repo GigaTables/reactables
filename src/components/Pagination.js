@@ -25,7 +25,8 @@ class Pagination extends React.Component {
     perPage = this.props.perPage,
     pages = Math.ceil(countRows / perPage),
     selectedPage = from / perPage + 1,
-    tail = parseInt(pages) - CommonConstants.MORE_PAGES;
+    tail = parseInt(pages) - CommonConstants.MORE_PAGES,
+    prevFrom = 0, nextFrom = 0;
 
     let pagesContent = [];
     for (var p = 0;p < pages;++p) {
@@ -36,33 +37,39 @@ class Pagination extends React.Component {
       });
       if (p > CommonConstants.MORE_PAGES) {
           if (selectedPage < CommonConstants.MORE_PAGES) { // head
-              pagesContent[p] = <div class="gt_page_dots">...</div>;
-              pagesContent[p+1] = <div key={p} onClick={this.props.updatePagination}
-                data-from={p*perPage} className={pageClasses}>{currentPage}</div>;
+              pagesContent[p] = <span key={p}><div className="gt_page_dots">...</div><div key={p+1} onClick={this.props.updatePagination}
+                data-from={p*perPage} className={pageClasses}>{currentPage}</div></span>;
               break;
           } else if (selectedPage >= CommonConstants.MORE_PAGES && selectedPage <= pages - CommonConstants.MORE_PAGES) { //middle
               prevPage = selectedPage - 1;
               nextPage = selectedPage + 1;
-              prevFrom = (selectedPage - 2) * amount;
-              nextFrom = (selectedPage) * amount;
+              prevFrom = (selectedPage - 2) * perPage;
+              nextFrom = (selectedPage) * perPage;
 
-              pagesContent[p] = <div><div data-from="0" class="gt_page">1</div><div class="gt_page_dots">...</div>
-              <div data-from={prevFrom} class="gt_page">{selectedPage - 1}</div>
-              <div data-from={(selectedPage - 1) * amount} class={pageClasses}>{selectedPage}</div>
-              <div data-from={nextFrom} class="gt_page">{selectedPage + 1}</div><div class="gt_page_dots">...</div>
-              <div data-from={(pages - 1) * amount} class="gt_page">{pages}</div></div>;
+              let midClasses = classNames({
+                gt_page: true,
+                selected: (selectedPage === page) ? true : false
+              });
+              // console.log(pagesContent[p]);
+              pagesContent[p] = <span key={p}><div data-from="0" onClick={this.props.updatePagination} className="gt_page">1</div>
+              <div className="gt_page_dots">...</div>
+              <div data-from={prevFrom} onClick={this.props.updatePagination} className="gt_page">{selectedPage - 1}</div>
+              <div data-from={(selectedPage - 1) * perPage} onClick={this.props.updatePagination} className={midClasses}>{selectedPage}</div>
+              <div data-from={nextFrom} onClick={this.props.updatePagination} className="gt_page">{selectedPage + 1}</div>
+              <div className="gt_page_dots">...</div>
+              <div data-from={(pages - 1) * perPage} onClick={this.props.updatePagination} className="gt_page">{pages}</div></span>;
               break;
           } else if (selectedPage > tail) { // tail
               let innerPages = [];
               for (var i = tail - 1; i < pages; ++i) {
-                  let from = i * amount;
+                  let from = i * perPage;
                   var prevPage = i - 1, nextPage = i + 1;
                   if (selectedPage === nextPage) {
-                      prevFrom = prevPage * amount;
+                      prevFrom = prevPage * perPage;
                       if (prevPage < 0) {
-                          prevFrom = (pages - 1) * amount;
+                          prevFrom = (pages - 1) * perPage;
                       }
-                      nextFrom = nextPage * amount;
+                      nextFrom = nextPage * perPage;
                       if (nextPage === pages) {
                           nextFrom = 0;
                       }
@@ -72,18 +79,20 @@ class Pagination extends React.Component {
                       });
                   }
 
-                  innerPages[i] = <div data-from={from} class={pageClasses}>{i + 1}</div>;
+                  innerPages[i] = <div key={i} onClick={this.props.updatePagination} data-from={from} className={pageClasses}>{i + 1}</div>;
                   pageClasses = classNames({
                     gt_page: true,
                     selected: false
                   });
               }
-              pagesContent[p] = <div><div data-from="0" class="gt_page">1</div><div class="gt_page_dots">...</div>{innerPages}</div>;
+              pagesContent[p] = <span key={p}><div data-from="0" onClick={this.props.updatePagination} className="gt_page">1</div><div className="gt_page_dots">...</div>{innerPages}</span>;
               break;
           }
         } else {
-          pagesContent[p] = <div key={p} onClick={this.props.updatePagination}
-            data-from={p*perPage} className={pageClasses}>{currentPage}</div>;
+          if (selectedPage < CommonConstants.MORE_PAGES) {
+            pagesContent[p] = <div key={p} onClick={this.props.updatePagination}
+              data-from={p*perPage} className={pageClasses}>{currentPage}</div>;
+          }
         }
     }
 

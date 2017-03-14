@@ -210,7 +210,7 @@ td {
 :global .sorting_desc {
   background:url('../images/sort_desc.png') right top no-repeat;
 }
-.unselectable {
+:global .unselectable {
   -moz-user-select:-moz-none;
   -moz-user-select:none;
   -o-user-select:none;

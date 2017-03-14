@@ -186,7 +186,8 @@ class Reactables extends Main {
         fromRow,
         popup_button,
         popup_title,
-        search
+        search,
+        fieldsEdit
       } = this.state;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
@@ -249,6 +250,7 @@ class Reactables extends Main {
             editorUpdate={this.editorUpdate.bind(this)}
             selectedRows={selectedRows}
             selectedIds={selectedIds}
+            fieldsEdit={fieldsEdit}
             opacity={opacity}
             popupButton={popup_button}
             popupTitle={popup_title}

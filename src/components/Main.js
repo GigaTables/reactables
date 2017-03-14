@@ -297,12 +297,18 @@ class Main extends React.Component {
     let action = e.target.dataset.action,
     popup_title = this.lang.gte_editor_popupheader_create,
     popup_button = this.lang.gte_editor_sendbtn_create;
+    let fieldsEdit = {};
 
     if (action === EditorConstants.ACTION_EDIT) {
       popup_title = this.lang.gte_editor_popupheader_edit;
       popup_button = this.lang.gte_editor_sendbtn_update;
       // collect data for fields filling in Editor
-      console.log(this.jsonData[this.jsonData.indexOf(this.state.selectedRows[0])]);
+      // console.log(this.jsonData);
+      for (var k in this.jsonData) {
+        if (parseInt(k) === parseInt(this.state.selectedRows[0])) {
+          fieldsEdit = this.jsonData[k];
+        }
+      }
     } else if (action === EditorConstants.ACTION_DELETE) {
       popup_title = this.lang.gte_editor_popupheader_delete;
       popup_button = this.lang.gte_editor_sendbtn_delete;
@@ -313,7 +319,8 @@ class Main extends React.Component {
       active: true,
       popup_title: popup_title,
       popup_button: popup_button,
-      opacity: 1
+      opacity: 1,
+      fieldsEdit: fieldsEdit
     });
   }
 

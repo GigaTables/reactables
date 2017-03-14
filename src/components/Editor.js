@@ -94,7 +94,8 @@ class Editor extends React.Component {
     var fieldType = object.type,
             fieldName = object.name,
             fieldLabel = object.label,
-            action = this.props.action;
+            action = this.props.action,
+            fieldValue = '';
     // settting attrs
     var attributes = [];
     if (typeof object.attrs !== CommonConstants.UNDEFINED) {
@@ -106,13 +107,20 @@ class Editor extends React.Component {
       }
     }
 
+    if (action === EditorConstants.ACTION_EDIT) {
+      fieldValue = this.props.fieldsEdit[fieldName];
+    }
+
     let i = 0,
     htmlFields = [];
     switch (fieldType) {
+      // uncontrolled input element, so we can put value here
       case EditorConstants.TYPE_TEXT:
       case EditorConstants.TYPE_HIDDEN:
       case EditorConstants.TYPE_EMAIL:
       case EditorConstants.TYPE_PASSWORD:
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} value={fieldValue} /></div><div className="clear"></div></div>;
+        break;
       case EditorConstants.TYPE_COLOR:
       case EditorConstants.TYPE_DATE:
       case EditorConstants.TYPE_DATETIME:
@@ -125,7 +133,7 @@ class Editor extends React.Component {
       case EditorConstants.TYPE_MONTH:
       case EditorConstants.TYPE_WEEK:
       case EditorConstants.TYPE_FILE:
-        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} data-value=""/></div><div className="clear"></div></div>;
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} /></div><div className="clear"></div></div>;
         break;
       case EditorConstants.TYPE_TEXTAREA:
         htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><textarea onChange={this.onChange.bind(this)} {...attributes} id={fieldName} name={fieldName}></textarea></div><div className="clear"></div></div>;

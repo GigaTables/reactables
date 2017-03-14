@@ -14,5 +14,6 @@ module.exports = {
   VISIBLE: 'visible',
   DATA: 'data',
   PERIOD_SEARCH: 200,
-  TIMEOUT_SEARCH: 300
+  TIMEOUT_SEARCH: 300,
+  MORE_PAGES: 5
 }

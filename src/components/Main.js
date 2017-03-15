@@ -9,6 +9,14 @@ var Lang = require('./Lang');
 
 class Main extends React.Component {
 
+  constructor(props)
+  {
+    super(props);
+    // init search flags
+    this.nothing = false,
+    this.tOut = [], this.c = 0;
+  }
+
   setSearchableCols(object)
   {
     this.searchableCols[object[CommonConstants.DATA]] = false;
@@ -44,20 +52,21 @@ class Main extends React.Component {
 
     let name = e.target.name,
     val = e.target.value,
-    len = val.length,
-    nothing = false,
-    tOut = [], c = 0;
+    len = val.length;
 
     this.nowMillis = (new Date()).getTime();
     var period = this.nowMillis - this.lastTimeKeyup;
 
     if (len > 0 || (len === 0 && val === '')) { // do search
-      if (nothing === true && val === '') {
+      this.setState({
+        [name]: val
+      });
+      if (this.nothing === true && val === '') {
           return; // exit - user pressed not a symbol keys or teared down
       }
-      if (nothing === false && val === '') { // rebuild full table if teared down
+      if (this.nothing === false && val === '') { // rebuild full table if teared down
           this.createTable(this.jsonData, this.state.sortedButtons);
-          nothing = true;
+          this.nothing = true;
           return;
       }
       var nJson = [], str = '', i = 0, json = this.jsonData;
@@ -74,21 +83,20 @@ class Main extends React.Component {
           }
       }
       if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
-          for (var j in tOut) {
-              clearTimeout(tOut[j]);
+          for (var j in this.tOut) {
+              clearTimeout(this.tOut[j]);
           }
-          tOut = [];
-          c = 0;
+          this.tOut = [];
+          this.c = 0;
           this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
       } else {
-          tOut[c] = setTimeout(function () {
+          this.tOut[this.c] = setTimeout(function () {
               that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
           }, CommonConstants.TIMEOUT_SEARCH);
-          c++;
+          this.c++;
       }
-      nothing = false;
+      this.nothing = false;
       this.setState({
-        [name]: val,
         dataSearch: nJson
       });
     }

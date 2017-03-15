@@ -203,7 +203,7 @@ class Reactables extends Main {
               lang={lang}
               selectedRows={selectedRows}
               search={search}
-              struct={struct}/>
+              struct={struct} />
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>

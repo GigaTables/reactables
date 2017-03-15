@@ -13,14 +13,15 @@ class Search extends React.Component {
 
   render()
   {
-    const { lang, doSearch, search } = this.props;
+    const { lang, doSearch, search, searchKey } = this.props;
     var language = Lang[lang];
     return (
       <div className={styles.gt_main_search}>
         <input
           tabIndex="1"
-          defaultValue={search}
+          value={search}
           onKeyUp={doSearch}
+          onChange={doSearch}
           type="text"
           name="search"
           className={styles.gt_search}

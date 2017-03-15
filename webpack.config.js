@@ -3,8 +3,8 @@ const webpack = require('webpack');
 const path = require('path');
 
 const config = {
-   entry: './main.js',
-  // entry: './src/Reactables.jsx',
+  //  entry: './main.js',
+  entry: './src/Reactables.jsx',
    output: {
       path: path.normalize(__dirname + '/build'),
       publicPath: '',
@@ -44,7 +44,7 @@ const config = {
      .concat(require('./helpers/plugins/dedupe'))
      .concat(require('./helpers/plugins/css'))
      .concat(require('./helpers/plugins/uglify'))
-     .concat(require('./helpers/plugins/html')),   
+     .concat(require('./helpers/plugins/html')),
    externals: {
      'react/addons': true
    }

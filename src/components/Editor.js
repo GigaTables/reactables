@@ -19,12 +19,12 @@ class Editor extends React.Component {
       throw new EditorException('You should define at least one field in "fields" option.');
     }
     this.lang = Lang[props.lang];
-    this.setFields(props);
     this.state = {
       dataIndices: {},
       popup_title: this.lang.gte_editor_popupheader_create,
       popup_button: this.lang.gte_editor_sendbtn_create
     }
+    this.setFields(props);
     this.setDataIndices(props);
   }
 
@@ -108,7 +108,13 @@ class Editor extends React.Component {
     }
 
     if (action === EditorConstants.ACTION_EDIT) {
-      fieldValue = this.props.fieldsEdit[fieldName];
+      if (typeof this.state.dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+        fieldValue = this.state.dataIndices[fieldName];
+      } else {
+        fieldValue = this.props.fieldsEdit[fieldName];
+      }
+    } else if (action === EditorConstants.ACTION_CREATE && typeof this.state.dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+      fieldValue = this.state.dataIndices[fieldName];
     }
 
     let i = 0,
@@ -119,7 +125,13 @@ class Editor extends React.Component {
       case EditorConstants.TYPE_HIDDEN:
       case EditorConstants.TYPE_EMAIL:
       case EditorConstants.TYPE_PASSWORD:
-        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} value={fieldValue} /></div><div className="clear"></div></div>;
+        htmlFields[i] = <div className="gte_editor_fields">
+          <label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label>
+          <div className={editorStyles.gte_field}>
+            <input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName}
+              value={fieldValue} />
+          </div>
+          <div className="clear"></div></div>;
         break;
       case EditorConstants.TYPE_COLOR:
       case EditorConstants.TYPE_DATE:
@@ -136,7 +148,12 @@ class Editor extends React.Component {
         htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} /></div><div className="clear"></div></div>;
         break;
       case EditorConstants.TYPE_TEXTAREA:
-        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><textarea onChange={this.onChange.bind(this)} {...attributes} id={fieldName} name={fieldName}></textarea></div><div className="clear"></div></div>;
+        htmlFields[i] = <div className="gte_editor_fields">
+          <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
+          <div className={editorStyles.gte_field}>
+            <textarea onChange={this.onChange.bind(this)} {...attributes} id={fieldName} name={fieldName} value={fieldValue}></textarea>
+          </div>
+          <div className="clear"></div></div>;
         break;
       case EditorConstants.TYPE_SELECT:
         var values = object.values;
@@ -147,7 +164,12 @@ class Editor extends React.Component {
             options[k] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>;
           }
         }
-        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><select onChange={this.onChange.bind(this)} {...attributes} id={fieldName} name={fieldName}>{options}</select></div><div className="clear"></div></div>;
+        htmlFields[i] = <div className="gte_editor_fields">
+          <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
+          <div className={editorStyles.gte_field}>
+            <select value={fieldValue} onChange={this.onChange.bind(this)} {...attributes} id={fieldName} name={fieldName}>{options}</select>
+          </div>
+          <div className="clear"></div></div>;
         break;
       case EditorConstants.TYPE_CHECKBOX:
       case EditorConstants.TYPE_RADIO:
@@ -158,7 +180,8 @@ class Editor extends React.Component {
         for (var k in values) {
           for (var key in values[k]) {
             val = values[k][key].trim();
-            options[k] = <label key={key} className="gte_label_text"><input onClick={this.onChange.bind(this)} key={key} {...attributes} id={id} type={fieldType} name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
+            options[k] = <label key={key} className="gte_label_text">
+              <input defaultChecked={(val === fieldValue) ? 1 : 0 } onClick={this.onChange.bind(this)} key={key} {...attributes} id={id} type={fieldType} name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
           }
         }
         htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label">{fieldLabel}</label><div className={editorStyles.gte_field}>{options}</div><div className="clear"></div></div>;
@@ -170,7 +193,7 @@ class Editor extends React.Component {
   btnClicked(e)
   {
     e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
-    const { action } = this.props;
+    const { action, editorUpdate } = this.props;
     let ajaxUrl = this.props.editor.ajax, that = this;
     var dataResp = that.state.dataIndices;
     if (action === EditorConstants.ACTION_CREATE) {
@@ -180,14 +203,14 @@ class Editor extends React.Component {
       }).then(response => response.json()).then((data) => {
         dataResp['id'] = data['row']['id'];
         dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
-        this.props.editorUpdate(e, dataResp);
+        editorUpdate(e, dataResp);
       });
     } else if (action === EditorConstants.ACTION_EDIT) {
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_PUT,
       body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
-        this.props.editorUpdate(e, dataResp);
+        editorUpdate(e, dataResp);
       });
     } else if (action === EditorConstants.ACTION_DELETE) {
       fetch(ajaxUrl, {
@@ -195,7 +218,7 @@ class Editor extends React.Component {
         body: JSON.stringify(this.props.dataIndices)
       }).then(response => response.json()).then((data) => {
         // call editorUpdate method with passing all user-input values
-        this.props.editorUpdate(e, dataResp);
+        editorUpdate(e, dataResp);
       });
     }
   }

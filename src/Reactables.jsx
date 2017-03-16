@@ -1,38 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Main from './components/Main.js'
 import Tools from './components/Tools.js'
 import Editor from './components/Editor.js'
 import Pagination from './components/Pagination.js'
-import classNames from 'classnames/bind';
 import styles from './css/styles.css'
 import { DataException } from './components/Exceptions';
 
 var CommonConstants = require('./components/CommonConstants');
-var EditorConstants = require('./components/EditorConstants');
 var loAssign = require('lodash/assign');
-
-export class Header extends React.Component {
-  render() {
-    let sorting = this.props.gteSort === CommonConstants.SORTABLE,
-    // 0 - default data-direction, 1 - asc, -1 - desc
-    desc = (this.props.sortDirection === -1) ? true : false,
-    asc = (this.props.sortDirection === 1) ? true : false;
-    let thClasses = classNames({
-      gt_head_tr_th: true,
-      sorting: sorting ? true : false,
-      sorting_desc: desc,
-      sorting_asc: asc
-    });
-    return (
-      <th onClick={this.props.updateSort} className={thClasses} data-sortindex={this.props.sortId}
-      data-direction={this.props.sortDirection}
-      style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
-        <div className={styles.gt_th_box}>{this.props.children}</div>
-      </th>
-    )
-  }
-}
 
 class Reactables extends Main {
   constructor(props)
@@ -46,7 +21,7 @@ class Reactables extends Main {
       fromRow:0,
       dataSearch:null,
       sortButtons:[],
-      action: EditorConstants.ACTION_CREATE,
+      action: 'create', // optimized - not importing EditorConstants
       active: false,
       selectedRows: [],
       selectedIds: [],

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Reactables, {Header} from './src/Reactables.jsx'
+import Reactables from './src/Reactables.jsx'
+import Header from './src/components/Header.js'
 
 var editor = {
   ajax: 'http://gigatables.loc/editor.php',

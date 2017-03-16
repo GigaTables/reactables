@@ -43,7 +43,7 @@
       }
     },
     "build:prod": {
-      "command": "rimraf build && webpack",
+      "command": "webpack --config webpack.config.prod.js",
       "env": {
         "NODE_ENV": "production",
         "PLATFORM": 1

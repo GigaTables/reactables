@@ -3,13 +3,15 @@ const webpack = require('webpack');
 const path = require('path');
 
 const config = {
-   entry: './src/Reactables.jsx',
+   entry: './main.prod.js',
    output: {
       path: path.normalize(__dirname + '/build'),
       publicPath: '',
       filename: 'index.js',
       library: '[name]',
-      chunkFilename: '[name].[chunkhash].js'
+      chunkFilename: '[name].[chunkhash].js',
+      libraryTarget: 'umd',
+      umdNamedDefine: true
    },
    devServer: {
       inline: true,
@@ -33,13 +35,13 @@ const config = {
       ]
    },
    plugins: []
-    //  .concat(require('./helpers/plugins/injectVars')({
-    //    bundleName: package.name,
-    //    bundleVersion: package.version,
-    //    bundleDescription: package.description,
-    //    bundleAuthor: package.author,
-    //    isPlatform: false,
-    //  }))
+     .concat(require('./helpers/plugins/injectVars')({
+       bundleName: package.name,
+       bundleVersion: package.version,
+       bundleDescription: package.description,
+       bundleAuthor: package.author,
+       isPlatform: false,
+     }))
      .concat(require('./helpers/plugins/css'))
      .concat(require('./helpers/plugins/uglify'))
      .concat(require('./helpers/plugins/html')),

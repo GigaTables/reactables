@@ -52,17 +52,6 @@ The `<Reactables>` tag, it's `Headers` and all the stuff like pagination, per pa
 
 ```
 
-To turn on/off parts You can simply define this in struct, for instance to turn off pagination and rowsSelector
-do the following:
-
-```JS
-          struct: {
-            search: ['top', 'bottom'],
-            rowsSelector: [], // turn off selectors
-            pagination: []  // turn off pagination
-          },
-```
-
 ### Advanced configuration with opts and editor
 
 ```JS
@@ -182,7 +171,7 @@ JSON structure to return from provided url in "ajax" GigaTables option:
 
 ## An example of using GigaTables with Editor tool
 
-First of all You should define a class Editor like this:
+First of all You should define an object Editor like this:
 
 ```JS
 var editor = {

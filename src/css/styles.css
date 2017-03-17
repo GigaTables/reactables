@@ -57,7 +57,7 @@ td {
   font-weight: bold;
   /*border-bottom: 1px solid #333;*/
 }
-:global .gt_head_tr {
+.gt_head_tr {
   border-bottom: 1px solid #333;
 }
 :global .gt_head_tr_th {

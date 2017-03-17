@@ -11,7 +11,7 @@ class Header extends React.Component {
     desc = (this.props.sortDirection === -1) ? true : false,
     asc = (this.props.sortDirection === 1) ? true : false;
     let thClasses = classNames({
-      gt_head_tr_th: true,
+      // gt_head_tr_th: true,
       sorting: sorting ? true : false,
       sorting_desc: desc,
       sorting_asc: asc

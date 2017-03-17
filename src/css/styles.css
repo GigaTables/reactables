@@ -60,9 +60,9 @@ td {
 .gt_head_tr {
   border-bottom: 1px solid #333;
 }
-:global .gt_head_tr_th {
+/*:global .gt_head_tr_th {
   padding:0 0 10px 0;
-}
+}*/
 .c_pointer {
   cursor:pointer;
 }
@@ -90,9 +90,9 @@ td {
 .gt_foot tr {
   border-top: 1px solid #333;
 }
-.gt_foot tr th {
-  padding:10px 0 0 0;
-}
+/*.gt_foot tr th {
+  padding:0 0 0 0;
+}*/
 .gt_loader {
   text-align: center;
 }

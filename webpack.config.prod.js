@@ -33,14 +33,13 @@ const config = {
       ]
    },
    plugins: []
-     .concat(require('./helpers/plugins/injectVars')({
-       bundleName: package.name,
-       bundleVersion: package.version,
-       bundleDescription: package.description,
-       bundleAuthor: package.author,
-       isPlatform: false,
-     }))
-     .concat(require('./helpers/plugins/dedupe'))
+    //  .concat(require('./helpers/plugins/injectVars')({
+    //    bundleName: package.name,
+    //    bundleVersion: package.version,
+    //    bundleDescription: package.description,
+    //    bundleAuthor: package.author,
+    //    isPlatform: false,
+    //  }))
      .concat(require('./helpers/plugins/css'))
      .concat(require('./helpers/plugins/uglify'))
      .concat(require('./helpers/plugins/html')),

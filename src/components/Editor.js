@@ -190,6 +190,28 @@ class Editor extends React.Component {
     return htmlFields;
   }
 
+  triggerBefore(type)
+  {
+    const { tableOpts } = this.props;
+    // call triggerBefore if it has been set
+    tableOpts.buttons.map((obj, idx) => {
+      if (obj.extended === type && typeof obj.triggerBefore !== CommonConstants.UNDEFINED) {
+          obj.triggerBefore();
+      }
+    });
+  }
+
+  triggerAfter(type)
+  {
+    const { tableOpts } = this.props;
+    // call triggerAfter if it has been set
+    tableOpts.buttons.map((obj, idx) => {
+      if (obj.extended === type && typeof obj.triggerAfter !== CommonConstants.UNDEFINED) {
+          obj.triggerAfter();
+      }
+    });
+  }
+
   btnClicked(e)
   {
     e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
@@ -197,6 +219,8 @@ class Editor extends React.Component {
     let ajaxUrl = this.props.editor.ajax, that = this;
     var dataResp = that.state.dataIndices;
     if (action === EditorConstants.ACTION_CREATE) {
+      this.triggerBefore(EditorConstants.EDITOR_CREATE);
+
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_POST,
       body: JSON.stringify(this.state.dataIndices)
@@ -204,21 +228,26 @@ class Editor extends React.Component {
         dataResp['id'] = data['row']['id'];
         dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
         editorUpdate(e, dataResp);
+        this.triggerAfter(EditorConstants.EDITOR_CREATE);
       });
     } else if (action === EditorConstants.ACTION_EDIT) {
+      this.triggerBefore(EditorConstants.EDITOR_EDIT);
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_PUT,
       body: JSON.stringify(this.state.dataIndices)
       }).then(response => response.json()).then((data) => {
         editorUpdate(e, dataResp);
+        this.triggerAfter(EditorConstants.EDITOR_EDIT);
       });
     } else if (action === EditorConstants.ACTION_DELETE) {
+      this.triggerBefore(EditorConstants.EDITOR_REMOVE);
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
         body: JSON.stringify(this.props.dataIndices)
       }).then(response => response.json()).then((data) => {
         // call editorUpdate method with passing all user-input values
         editorUpdate(e, dataResp);
+        this.triggerAfter(EditorConstants.EDITOR_REMOVE);
       });
     }
   }

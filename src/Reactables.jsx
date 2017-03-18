@@ -231,7 +231,8 @@ class Reactables extends Main {
             popupTitle={popup_title}
             hidePopup={this.hidePopup.bind(this)}
             lang={lang}
-            struct={struct}/>
+            struct={struct}
+            tableOpts={tableOpts} />
         </div>
       )
   }

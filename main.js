@@ -112,7 +112,9 @@ var settings = {
        }), triggerBefore: (function () {
          console.log('before create');
        })},
-     {extended: "editor_edit", editor: editor},
+     {extended: "editor_edit", editor: editor, triggerBefore: (function () {
+       console.log('before edit');
+     })},
      {extended: "editor_remove", editor: editor, triggerAfter: (function () {
          console.log('after del');
        })}

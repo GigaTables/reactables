@@ -9,6 +9,49 @@ var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
 class Tools extends React.Component {
+
+  getPagesSelection()
+  {
+    const {
+      struct,
+      display,
+      defaultPerPage,
+      perPage,
+      updatePerPage,
+      perPageRows,
+      lang
+    } = this.props;
+
+    if (struct.rowsSelector.indexOf(display) === -1) {
+      return '';
+    }
+    return (<PagesSelector
+      perPage={perPage}
+      updatePerPage={updatePerPage}
+      defaultPerPage={defaultPerPage}
+      perPageRows={perPageRows}
+      lang={lang} />)
+  }
+
+  getSearch()
+  {
+    const {
+      struct,
+      display,
+      search,
+      doSearch,
+      lang
+    } = this.props;
+    console.log(struct.search.indexOf(display));
+    if (struct.search.indexOf(display) === -1) {
+      return '';
+    }
+    return (<Search
+      search={search}
+      doSearch={doSearch}
+      lang={lang}/>)
+  }
+
   render()
   {
     const {
@@ -53,16 +96,8 @@ class Tools extends React.Component {
     return (
       <div className="gt_head_tools">
         {buttons}
-        <PagesSelector
-          perPage={perPage}
-          updatePerPage={updatePerPage}
-          defaultPerPage={defaultPerPage}
-          perPageRows={perPageRows}
-          lang={lang} />
-        <Search
-          search={search}
-          doSearch={doSearch}
-          lang={lang}/>
+        {this.getPagesSelection()}
+        {this.getSearch()}
         <div className={styles.clear}></div>
       </div>
     )

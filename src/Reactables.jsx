@@ -136,6 +136,108 @@ class Reactables extends Main {
     });
   }
 
+  getTools(display)
+  {
+    const {
+      selectedRows,
+      search,
+      perPage
+    } = this.state;
+
+    const {
+      tableOpts,
+      perPageRows,
+      defaultPerPage,
+      lang,
+      struct
+    } = this.settings;
+
+    return (<Tools
+      updatePerPage={this.updatePerPage.bind(this)}
+      showPopup={this.showPopup.bind(this)}
+      doSearch={this.doSearch.bind(this)}
+      tableOpts={tableOpts}
+      perPageRows={perPageRows}
+      perPage={perPage}
+      defaultPerPage={defaultPerPage}
+      lang={lang}
+      selectedRows={selectedRows}
+      search={search}
+      struct={struct}
+      display={display} />)
+  }
+
+  getEditor(display)
+  {
+    const { editor } = this.props;
+    const {
+      active,
+      action,
+      selectedRows,
+      selectedIds,
+      countRows,
+      page,
+      opacity,
+      popup_button,
+      popup_title,
+      search,
+      fieldsEdit
+    } = this.state;
+
+    const {
+      tableOpts,
+      lang,
+      struct
+    } = this.settings;
+
+    return (
+      <Editor
+        active={active}
+        action={action}
+        editor={editor}
+        columns={editor.fields}
+        editorUpdate={this.editorUpdate.bind(this)}
+        selectedRows={selectedRows}
+        selectedIds={selectedIds}
+        fieldsEdit={fieldsEdit}
+        opacity={opacity}
+        popupButton={popup_button}
+        popupTitle={popup_title}
+        hidePopup={this.hidePopup.bind(this)}
+        lang={lang}
+        struct={struct}
+        display={display}
+        tableOpts={tableOpts} />
+    )
+  }
+
+  getPagination(display)
+  {
+    const {
+      lang,
+      struct
+    } = this.settings;
+
+    if (struct.pagination.indexOf(display) === -1) {
+      return '';
+    }
+    const {
+      selectedIds,
+      countRows,
+      page,
+      perPage,
+      fromRow
+    } = this.state;
+
+    return (<Pagination
+      updatePagination={this.handlePagination.bind(this)}
+      countRows={countRows}
+      page={page}
+      perPage={perPage}
+      fromRow={fromRow}
+      lang={lang} />)
+  }
+
   render() {
       let sortedCols = this.setHeads();
       // ==== settings
@@ -167,18 +269,10 @@ class Reactables extends Main {
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
           <div className={styles.gt_head_tools}>
-            <Tools
-              updatePerPage={this.updatePerPage.bind(this)}
-              showPopup={this.showPopup.bind(this)}
-              doSearch={this.doSearch.bind(this)}
-              tableOpts={tableOpts}
-              perPageRows={perPageRows}
-              perPage={perPage}
-              defaultPerPage={defaultPerPage}
-              lang={lang}
-              selectedRows={selectedRows}
-              search={search}
-              struct={struct} />
+            {this.getTools(CommonConstants.DISPLAY_TOP)}
+          </div>
+          <div className={styles.gt_pagination}>
+            {this.getPagination(CommonConstants.DISPLAY_TOP)}
           </div>
           <table id="gigatable" className={styles.gigatable}>
             <thead className={styles.gt_head}>
@@ -196,43 +290,12 @@ class Reactables extends Main {
             </tfoot>
           </table>
           <div className={styles.gt_pagination}>
-            <Pagination
-              updatePagination={this.handlePagination.bind(this)}
-              countRows={countRows}
-              page={page}
-              perPage={perPage}
-              fromRow={fromRow}
-              lang={lang} />
+            {this.getPagination(CommonConstants.DISPLAY_BOTTOM)}
           </div>
           <div className={styles.gt_foot_tools}>
-            <Tools
-              updatePerPage={this.updatePerPage.bind(this)}
-              showPopup={this.showPopup.bind(this)}
-              doSearch={this.doSearch.bind(this)}
-              tableOpts={tableOpts}
-              perPageRows={perPageRows}
-              perPage={perPage}
-              defaultPerPage={defaultPerPage}
-              lang={lang}
-              selectedRows={selectedRows}
-              search={search} />
+            {this.getTools(CommonConstants.DISPLAY_BOTTOM)}
           </div>
-          <Editor
-            active={active}
-            action={action}
-            editor={editor}
-            columns={editor.fields}
-            editorUpdate={this.editorUpdate.bind(this)}
-            selectedRows={selectedRows}
-            selectedIds={selectedIds}
-            fieldsEdit={fieldsEdit}
-            opacity={opacity}
-            popupButton={popup_button}
-            popupTitle={popup_title}
-            hidePopup={this.hidePopup.bind(this)}
-            lang={lang}
-            struct={struct}
-            tableOpts={tableOpts} />
+          {this.getEditor()}
         </div>
       )
   }

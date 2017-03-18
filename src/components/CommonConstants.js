@@ -15,5 +15,7 @@ module.exports = {
   DATA: 'data',
   PERIOD_SEARCH: 200,
   TIMEOUT_SEARCH: 300,
-  MORE_PAGES: 5
+  MORE_PAGES: 5,
+  DISPLAY_TOP: 'top',
+  DISPLAY_BOTTOM: 'bottom'
 }

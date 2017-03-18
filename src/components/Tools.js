@@ -9,7 +9,6 @@ var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
 class Tools extends React.Component {
-
   getPagesSelection()
   {
     const {
@@ -42,7 +41,7 @@ class Tools extends React.Component {
       doSearch,
       lang
     } = this.props;
-    console.log(struct.search.indexOf(display));
+
     if (struct.search.indexOf(display) === -1) {
       return '';
     }
@@ -63,12 +62,14 @@ class Tools extends React.Component {
       updatePerPage,
       perPageRows,
       doSearch,
-      lang
+      lang,
+      tableOpts
     } = this.props;
 
     var language = Lang[lang];
     let buttons = [];
-    this.props.tableOpts.buttons.map((btn, i) => {
+    if (typeof tableOpts.buttons !== CommonConstants.UNDEFINED) {
+      tableOpts.buttons.map((btn, i) => {
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
         buttons[i] = <Button
           active={false}
@@ -92,7 +93,8 @@ class Tools extends React.Component {
           showPopup={showPopup}
           key={i}>{language.editor_remove}</Button>;
       }
-    });
+      });
+    }
     return (
       <div className="gt_head_tools">
         {buttons}

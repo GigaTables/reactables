@@ -33,10 +33,13 @@ export default StyleSheet.create({
         "borderCollapse": "collapse",
         "borderTop": "1px solid #ddd"
     },
-    "tbody tractive": {
+    ":global tbody tractive": {
         "backgroundColor": "#25adf1 !important"
     },
-    "tbody tractive:hover": {
+    ":global active": {
+        "backgroundColor": "#25adf1 !important"
+    },
+    ":global tbody tractive:hover": {
         "backgroundColor": "#1098dc !important"
     },
     "tbody treven": {
@@ -63,14 +66,8 @@ export default StyleSheet.create({
         "fontSize": 14,
         "fontWeight": "bold"
     },
-    ":global gt_head_tr": {
+    "gt_head_tr": {
         "borderBottom": "1px solid #333"
-    },
-    ":global gt_head_tr_th": {
-        "paddingTop": 0,
-        "paddingRight": 0,
-        "paddingBottom": 10,
-        "paddingLeft": 0
     },
     "c_pointer": {
         "cursor": "pointer"
@@ -107,12 +104,6 @@ export default StyleSheet.create({
     },
     "gt_foot tr": {
         "borderTop": "1px solid #333"
-    },
-    "gt_foot tr th": {
-        "paddingTop": 10,
-        "paddingRight": 0,
-        "paddingBottom": 0,
-        "paddingLeft": 0
     },
     "gt_loader": {
         "textAlign": "center"
@@ -160,7 +151,12 @@ export default StyleSheet.create({
         "marginLeft": 0
     },
     "gt_pgn_pages": {
-        "float": "right"
+        "float": "right",
+        "MozUserSelect": "-moz-none",
+        "KhtmlUserSelect": "none",
+        "WebkitUserSelect": "none",
+        "MsUserSelect": "none",
+        "userSelect": "none"
     },
     ":global gt_page": {
         "cursor": "pointer",
@@ -177,7 +173,7 @@ export default StyleSheet.create({
         "position": "relative",
         "textDecoration": "none"
     },
-    "gt_page_dots": {
+    ":global gt_page_dots": {
         "cursor": "not-allowed",
         "backgroundColor": "#fff",
         "border": "1px solid #ddd",
@@ -192,7 +188,7 @@ export default StyleSheet.create({
         "position": "relative",
         "textDecoration": "none"
     },
-    "gt_page:hover": {
+    ":global gt_page:hover": {
         "backgroundColor": "#eee",
         "borderColor": "#ddd",
         "color": "#23527c"
@@ -246,13 +242,13 @@ export default StyleSheet.create({
     ":global sorting": {
         "background": "url('../images/sort_both.png') right center no-repeat"
     },
-    "sorting_asc": {
+    ":global sorting_asc": {
         "background": "url('../images/sort_asc.png') right top no-repeat"
     },
-    "sorting_desc": {
+    ":global sorting_desc": {
         "background": "url('../images/sort_desc.png') right top no-repeat"
     },
-    "unselectable": {
+    ":global unselectable": {
         "MozUserSelect": "none",
         "OUserSelect": "none",
         "KhtmlUserSelect": "none",

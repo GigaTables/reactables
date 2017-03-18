@@ -129,6 +129,11 @@ td {
 }
 .gt_pgn_pages {
   float:right;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 :global .gt_page {
   cursor:pointer;

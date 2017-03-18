@@ -38,7 +38,7 @@ class Pagination extends React.Component {
       if (p > CommonConstants.MORE_PAGES) {
           if (selectedPage < CommonConstants.MORE_PAGES) { // head
               pagesContent[p] = <span key={p}><div className="gt_page_dots">...</div><div key={p+1} onClick={this.props.updatePagination}
-                data-from={p*perPage} className={pageClasses}>{currentPage}</div></span>;
+                data-from={(pages-1) * perPage} className={pageClasses}>{pages}</div></span>;
               break;
           } else if (selectedPage >= CommonConstants.MORE_PAGES && selectedPage <= pages - CommonConstants.MORE_PAGES) { //middle
               prevPage = selectedPage - 1;

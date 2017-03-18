@@ -35,7 +35,7 @@ class Pagination extends React.Component {
         gt_page: true,
         selected: (currentPage === page) ? true : false
       });
-      
+
       if (p > CommonConstants.MORE_PAGES) {
           if (selectedPage < CommonConstants.MORE_PAGES) { // head
               pagesContent[p] = <span key={p}><div className="gt_page_dots">...</div><div key={p+1} onClick={this.props.updatePagination}

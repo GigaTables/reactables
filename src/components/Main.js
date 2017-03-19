@@ -230,6 +230,19 @@ class Main extends React.Component {
     this.setState({
       selectedRows: rows,
       selectedIds: ids
+    }, () => {
+      // use querySelector to gather all active rows
+      if (shiftDown === true) {
+        let arr = document.querySelectorAll('tr.active'), innerIds = [];
+        for (let k in arr) {
+          if (typeof arr[k].dataset !== CommonConstants.UNDEFINED) {
+            innerIds.push(parseInt(arr[k].dataset.realid));
+          }
+        }
+        this.setState({
+          selectedIds: innerIds
+        });
+      }
     });
   }
 

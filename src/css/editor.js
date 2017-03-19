@@ -51,7 +51,6 @@ export default StyleSheet.create({
         "color": "#999 !important"
     },
     ":global gte_editor_popup": {
-        "display": "none",
         "height": "100%",
         "left": "50%",
         "marginLeft": -390,
@@ -62,7 +61,7 @@ export default StyleSheet.create({
         "opacity": 0
     },
     ":global gte_popup_background": {
-        "display": "none",
+        "visibility": "hidden",
         "background": "rgba(0, 0, 0, 0) radial-gradient(ellipse farthest-corner at center center , rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%) repeat scroll 0 0",
         "height": "100%",
         "left": 0,
@@ -369,7 +368,14 @@ export default StyleSheet.create({
         "paddingLeft": 6,
         "textAlign": "center"
     },
-    ":global display": {
-        "display": "block"
+    ":global fade_in": {
+        "visibility": "visible",
+        "opacity": 1,
+        "transition": "opacity 0.3s linear"
+    },
+    ":global fade_out": {
+        "visibility": "hidden",
+        "opacity": 0,
+        "transition": "visibility 0s 0.3s, opacity 0.3s linear"
     }
 });

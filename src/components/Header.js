@@ -5,11 +5,52 @@ import styles from '../css/styles.css'
 var CommonConstants = require('./CommonConstants');
 
 class Header extends React.Component {
+
+  constructor(props)
+  {
+    super(props);
+    this.isDiscreteSearch = false;
+  }
+
+  getHeaderContent()
+  {
+    const {
+      children,
+      columns,
+      data,
+      sortId,
+      doDiscreteSearch
+    } = this.props;
+
+    if (this.isDiscreteSearch === true) {
+        return (
+          <div className={styles.gt_th_box}>
+            <input onChange={doDiscreteSearch}
+              placeholder={columns[sortId].discreteSearchValue(data)} />
+          </div>
+        );
+    }
+    return <div className={styles.gt_th_box}>{children}</div>;
+  }
+
   render() {
-    let sorting = this.props.gteSort === CommonConstants.SORTABLE,
+    const {
+      sortDirection,
+      gteSort,
+      sortId,
+      updateSort,
+      columns
+    } = this.props;
+
+    if (typeof columns[sortId].discreteSearch !== CommonConstants.UNDEFINED
+      && columns[sortId].discreteSearch === true) {
+        this.isDiscreteSearch = true;
+    }
+
+    let sorting = gteSort === CommonConstants.SORTABLE,
     // 0 - default data-direction, 1 - asc, -1 - desc
-    desc = (this.props.sortDirection === -1) ? true : false,
-    asc = (this.props.sortDirection === 1) ? true : false;
+    desc = (sortDirection === -1) ? true : false,
+    asc = (sortDirection === 1) ? true : false;
     let thClasses = classNames({
       // gt_head_tr_th: true,
       sorting: sorting ? true : false,
@@ -17,10 +58,10 @@ class Header extends React.Component {
       sorting_asc: asc
     });
     return (
-      <th onClick={this.props.updateSort} className={thClasses} data-sortindex={this.props.sortId}
-      data-direction={this.props.sortDirection}
+      <th onClick={(this.isDiscreteSearch === false) ? updateSort : false} className={thClasses} data-sortindex={sortId}
+      data-direction={sortDirection}
       style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
-        <div className={styles.gt_th_box}>{this.props.children}</div>
+        {this.getHeaderContent()}
       </th>
     )
   }

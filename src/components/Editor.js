@@ -220,7 +220,6 @@ class Editor extends React.Component {
     var dataResp = that.state.dataIndices;
     if (action === EditorConstants.ACTION_CREATE) {
       this.triggerBefore(EditorConstants.EDITOR_CREATE);
-
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_POST,
       body: JSON.stringify(this.state.dataIndices)
@@ -252,6 +251,12 @@ class Editor extends React.Component {
     }
   }
 
+  stopPropagation(e)
+  {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
   render()
   {
     const {
@@ -259,23 +264,26 @@ class Editor extends React.Component {
       opacity,
       popupTitle,
       action,
-      popupButton
+      popupButton,
+      active
     } = this.props;
     this.setFields(this.props);
     let editorClasses = classNames({
       gte_editor_popup: true,
-      display: this.props.active
+      fade_in: active,
+      fade_out: !active
     }),
     backgroundClasses = classNames({
       gte_popup_background:true,
-      display: this.props.active
+      fade_in: active,
+      fade_out: !active
     });
     return (
       <div>
-      <div className={editorClasses} style={{opacity:opacity, transition: "opacity 1s"}}>
+      <div onClick={hidePopup} className={editorClasses}>
         <div className="gte_popup_container">
           <div className="gte_popup_container_wrapper">
-            <div className="gte_form_border_box">
+            <div onClick={this.stopPropagation.bind(this)} className="gte_form_border_box">
               <div className="gte_form_fields">
                 <div className="gte_header">
                   <div className="gte_editor_title">{popupTitle}</div>

@@ -72,7 +72,7 @@ var settings = {
      searchable: true, // true by defualt
      discreteSearch: true, // false by default
      discreteSearchValue: function (title) {
-       return 'Поиск по полю ' + title;
+       return 'Search by field - ' + title;
      }
    },
    {data: "title"},

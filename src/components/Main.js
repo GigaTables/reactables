@@ -451,6 +451,13 @@ class Main extends React.Component {
     return sJson;
   }
 
+  doDiscreteSearch(e)
+  {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log(e.target.value);
+  }
+
   setHeads()
   {
     const { sortButtons } = this.state;
@@ -467,6 +474,8 @@ class Main extends React.Component {
         sortId: index+'',
         sortDirection: (typeof sortButtons[data] === CommonConstants.UNDEFINED) ? sortButtons[data] : 0
       };
+        clonedOpts['columns'] = columns;
+        clonedOpts['doDiscreteSearch'] = this.doDiscreteSearch.bind(this);
         if (this.sortableCols[data] === true) {
           clonedOpts['gteSort'] = CommonConstants.SORTABLE;
           if(typeof sortButtons[data] !== CommonConstants.UNDEFINED) {

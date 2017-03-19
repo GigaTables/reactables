@@ -1,15 +1,12 @@
 # GigaTables ReactJS plug-in
-GigaTables is a ReactJS plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems.
-It supports ajax data processing/editing (CRUD), pagination, cross-sorting, global search,
-shft/ctrl rows selection, 7 popular languages and more.
+GigaTables supports ajax data processing/editing (CRUD), pagination, cross-sorting, global search,
+shft/ctrl rows selection, trigger functions, 7 popular languages and more.
 
-### Supported package managers
+### Installation
 
 - npm i gigatables-react
-- bower install gigatables-react (--allow-root, for sudo)
-- composer require gt/gigatables-react
 
-## Fiew screen-shots
+## Few screen-shots
 
 ### Multiple select with Ctrl and Shift
 ![alt tag](https://raw.githubusercontent.com/GigaTables/gigatables/master/GigaTables_basic_view.png)
@@ -26,7 +23,7 @@ shft/ctrl rows selection, 7 popular languages and more.
 
 ## Getting Started
 
-To initialize plug-in and to bind GigaTables with table structure You don't need to do a lot - just set the settings prop with options and set table structure in JSX format.
+To initialize plug-in and to bind GigaTables with table structure - set settings prop with options and table structure in JSX format.
 The `<Reactables>` tag, it's `Headers` and all the stuff like pagination, per page selector will be constructed on the fly.
 
 ### Minimal configuration

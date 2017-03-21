@@ -61,7 +61,7 @@ var settings = {
  lang: 'en', // english default
  perPageRows: [25, 50, 100, 200, 500],
  defaultPerPage: 50,
- ajax: 'http://example.com/your/tabledata',
+ ajax: 'https://example.com/your/tabledata',
  requestType: 'GET',
  columns: [
    {// include all defaults
@@ -149,7 +149,7 @@ JSON structure to return from provided url in "ajax" GigaTables option:
             "GT_RowId": 2, // optional
             "id": 2, // if there is no GT_RowId - try to fetch "id"
             "title": "Test 2st row",
-            "desc": "<input type=\"text\" name=\"ttl\" value=\"Test 2st row Test 2st row Test 2st row
+            "desc": "<input type=\"text\" name=\"ttl\" value=\"Test 2nd row Test 2nd row Test 2nd row
  Test 2st row Test 2st row\" \/> ",
             "date": "20:40:37 17:06:2015",
             "info": "some info some info some info some info"
@@ -172,8 +172,8 @@ First of all You should define an object Editor like this:
 
 ```JS
 var editor = {
-  ajax: 'http://example.com/your/tabledata',
-  ajaxFiles: 'uploadFiles.php',
+  ajax: 'https://example.com/update/tabledata',
+  ajaxFiles: 'https://example.com/upload/files',
   struct: {
     buttons: ['top', 'bottom'] // buttons
   },

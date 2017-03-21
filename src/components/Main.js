@@ -470,11 +470,9 @@ class Main extends React.Component {
         })
       });
       if (this.nothing === true && val === '') {
-          console.log('nothing');
           return; // exit - user pressed not a symbol keys or teared down
       }
       if (this.nothing === false && val === '') { // rebuild full table if teared down
-          console.log('teared down');
           this.createTable(this.jsonData, this.state.sortedButtons);
           this.nothing = true;
           return;

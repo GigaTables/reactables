@@ -354,6 +354,9 @@ class Main extends React.Component {
 
   setTableSort(indexData, e)
   {
+    if (this.state.discreteFocus === true) {
+      return;
+    }
     const { columns } = this.settings;
     if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
       let sortedButtons = [];
@@ -529,8 +532,12 @@ class Main extends React.Component {
         sortDirection: (typeof sortButtons[data] === CommonConstants.UNDEFINED) ? sortButtons[data] : 0
       };
         clonedOpts['columns'] = columns;
-        clonedOpts['doDiscreteSearch'] = this.doDiscreteSearch.bind(this);
-        clonedOpts['columnsSearch'] = this.state.columnsSearch;
+        if (this.searchableCols[data] === true) {
+          clonedOpts['doDiscreteSearch'] = this.doDiscreteSearch.bind(this);
+          clonedOpts['discreteFocus'] = this.discreteFocus.bind(this);
+          clonedOpts['discreteBlur'] = this.discreteBlur.bind(this);
+          clonedOpts['columnsSearch'] = this.state.columnsSearch;
+        }
         if (this.sortableCols[data] === true) {
           clonedOpts['gteSort'] = CommonConstants.SORTABLE;
           if(typeof sortButtons[data] !== CommonConstants.UNDEFINED) {
@@ -542,6 +549,20 @@ class Main extends React.Component {
       }
     })
     return sortedCols;
+  }
+
+  discreteFocus()
+  {
+    this.setState({
+      discreteFocus: true
+    });
+  }
+
+  discreteBlur()
+  {
+    this.setState({
+      discreteFocus: false
+    });
   }
 
 }

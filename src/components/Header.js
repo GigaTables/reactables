@@ -20,7 +20,9 @@ class Header extends React.Component {
       data,
       sortId,
       doDiscreteSearch,
-      columnsSearch
+      columnsSearch,
+      discreteFocus,
+      discreteBlur
     } = this.props;
 
     if (this.isDiscreteSearch === true) {
@@ -33,6 +35,8 @@ class Header extends React.Component {
           <input
             data-index={data}
             name={data}
+            onFocus={discreteFocus}
+            onBlur={discreteBlur}
             onKeyUp={doDiscreteSearch}
             onChange={doDiscreteSearch}
             placeholder={columns[sortId].discreteSearchValue(data)}
@@ -68,7 +72,7 @@ class Header extends React.Component {
       sorting_asc: asc
     });
     return (
-      <th onClick={(this.isDiscreteSearch === false) ? updateSort : false} className={thClasses} data-sortindex={sortId}
+      <th onClick={updateSort} className={thClasses} data-sortindex={sortId}
       data-direction={sortDirection}
       style={(sorting) ? {cursor:"pointer"} : {cursor:"default"}}>
         {this.getHeaderContent()}

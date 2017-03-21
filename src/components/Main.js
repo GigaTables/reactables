@@ -58,9 +58,9 @@ class Main extends React.Component {
     var period = this.nowMillis - this.lastTimeKeyup;
 
     if (len > 0 || (len === 0 && val === '')) { // do search
-      // this.setState({
-      //   [name]: val
-      // });
+      this.setState({
+        [name]: val
+      });
       if (this.nothing === true && val === '') {
           return; // exit - user pressed not a symbol keys or teared down
       }
@@ -96,9 +96,9 @@ class Main extends React.Component {
           this.c++;
       }
       this.nothing = false;
-      // this.setState({
-      //   dataSearch: nJson
-      // });
+      this.setState({
+        dataSearch: nJson
+      });
     }
     this.lastTimeKeyup = this.nowMillis;
   }
@@ -470,9 +470,11 @@ class Main extends React.Component {
         })
       });
       if (this.nothing === true && val === '') {
+          console.log('nothing');
           return; // exit - user pressed not a symbol keys or teared down
       }
       if (this.nothing === false && val === '') { // rebuild full table if teared down
+          console.log('teared down');
           this.createTable(this.jsonData, this.state.sortedButtons);
           this.nothing = true;
           return;

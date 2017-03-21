@@ -464,8 +464,10 @@ class Main extends React.Component {
     var period = this.nowMillis - this.lastTimeKeyup;
 
     if (len > 0 || (len === 0 && val === '')) { // do search
-      this.setState({
-        [name]: val
+      this.setState({columnsSearch:
+        Object.assign({}, this.state.columnsSearch, {
+          [name]: val
+        })
       });
       if (this.nothing === true && val === '') {
           return; // exit - user pressed not a symbol keys or teared down
@@ -528,6 +530,7 @@ class Main extends React.Component {
       };
         clonedOpts['columns'] = columns;
         clonedOpts['doDiscreteSearch'] = this.doDiscreteSearch.bind(this);
+        clonedOpts['columnsSearch'] = this.state.columnsSearch;
         if (this.sortableCols[data] === true) {
           clonedOpts['gteSort'] = CommonConstants.SORTABLE;
           if(typeof sortButtons[data] !== CommonConstants.UNDEFINED) {

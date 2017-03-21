@@ -19,14 +19,23 @@ class Header extends React.Component {
       columns,
       data,
       sortId,
-      doDiscreteSearch
+      doDiscreteSearch,
+      columnsSearch
     } = this.props;
 
     if (this.isDiscreteSearch === true) {
+      let val = '';
+      if (columnsSearch[data] !== CommonConstants.UNDEFINED) {
+        val = columnsSearch[data];
+      }
         return (
           <div className={styles.gt_th_box}>
-            <input data-index={data} name={data} onChange={doDiscreteSearch}
-              placeholder={columns[sortId].discreteSearchValue(data)} />
+            <input
+              data-index={data}
+              name={data}
+              onChange={doDiscreteSearch}
+              placeholder={columns[sortId].discreteSearchValue(data)}
+              value={val} />
           </div>
         );
     }

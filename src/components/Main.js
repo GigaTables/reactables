@@ -58,9 +58,9 @@ class Main extends React.Component {
     var period = this.nowMillis - this.lastTimeKeyup;
 
     if (len > 0 || (len === 0 && val === '')) { // do search
-      this.setState({
-        [name]: val
-      });
+      // this.setState({
+      //   [name]: val
+      // });
       if (this.nothing === true && val === '') {
           return; // exit - user pressed not a symbol keys or teared down
       }
@@ -96,9 +96,9 @@ class Main extends React.Component {
           this.c++;
       }
       this.nothing = false;
-      this.setState({
-        dataSearch: nJson
-      });
+      // this.setState({
+      //   dataSearch: nJson
+      // });
     }
     this.lastTimeKeyup = this.nowMillis;
   }
@@ -482,7 +482,6 @@ class Main extends React.Component {
                   && k === data) { // do not search unsearchable and only this column
                   str = json[key][k] + '';
                   if (str.indexOf(val) !== -1) {
-                      console.log(str, val);
                       nJson[i] = json[key];
                       ++i;
                       break;

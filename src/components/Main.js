@@ -453,9 +453,62 @@ class Main extends React.Component {
 
   doDiscreteSearch(e)
   {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log(e.target.value);
+    var that = this;
+
+    let name = e.target.name,
+    val = e.target.value,
+    data = e.target.dataset.index,
+    len = val.length;
+
+    this.nowMillis = (new Date()).getTime();
+    var period = this.nowMillis - this.lastTimeKeyup;
+
+    if (len > 0 || (len === 0 && val === '')) { // do search
+      this.setState({
+        [name]: val
+      });
+      if (this.nothing === true && val === '') {
+          return; // exit - user pressed not a symbol keys or teared down
+      }
+      if (this.nothing === false && val === '') { // rebuild full table if teared down
+          this.createTable(this.jsonData, this.state.sortedButtons);
+          this.nothing = true;
+          return;
+      }
+      var nJson = [], str = '', i = 0, json = this.jsonData;
+      for (let key in json) {
+          for (let k in json[key]) {
+              if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true
+                  && k === data) { // do not search unsearchable and only this column
+                  str = json[key][k] + '';
+                  if (str.indexOf(val) !== -1) {
+                      console.log(str, val);
+                      nJson[i] = json[key];
+                      ++i;
+                      break;
+                  }
+              }
+          }
+      }
+      if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
+          for (var j in this.tOut) {
+              clearTimeout(this.tOut[j]);
+          }
+          this.tOut = [];
+          this.c = 0;
+          this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+      } else {
+          this.tOut[this.c] = setTimeout(function () {
+              that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
+          }, CommonConstants.TIMEOUT_SEARCH);
+          this.c++;
+      }
+      this.nothing = false;
+      this.setState({
+        dataSearch: nJson
+      });
+    }
+    this.lastTimeKeyup = this.nowMillis;
   }
 
   setHeads()

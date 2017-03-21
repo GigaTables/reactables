@@ -25,7 +25,7 @@ class Header extends React.Component {
     if (this.isDiscreteSearch === true) {
         return (
           <div className={styles.gt_th_box}>
-            <input onChange={doDiscreteSearch}
+            <input data-index={data} onChange={doDiscreteSearch}
               placeholder={columns[sortId].discreteSearchValue(data)} />
           </div>
         );

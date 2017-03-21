@@ -1,13 +1,22 @@
 # GigaTables ReactJS plug-in
 GigaTables supports the following capabilities:
-- ajax data processing/editing (CRUD),
-- pagination,
-- cross-sorting,
-- global search,
-- discrete (per column) search,  
-- shft/ctrl rows selection,
-- trigger functions,
-- 7 popular languages
+
+-- ajax data processing/editing (CRUD),
+
+-- pagination,
+
+-- cross-sorting,
+
+-- global search,
+
+-- discrete (per column) search,
+
+-- shft/ctrl rows selection,
+
+-- trigger functions,
+
+-- 7 popular languages
+
 and more...
 
 * [Installation](#user-content-installation)

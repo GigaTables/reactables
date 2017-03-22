@@ -357,6 +357,7 @@ class Main extends React.Component {
     if (this.state.discreteFocus === true) {
       return;
     }
+
     const { columns } = this.settings;
     if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
       let sortedButtons = [];
@@ -376,6 +377,10 @@ class Main extends React.Component {
         sortButtons : sortedButtons
       });
     } else { // clicked
+      this.nowMillis = (new Date()).getTime();
+      let period = this.nowMillis - this.lastTimeKeyup;
+
+      if (period > CommonConstants.SORT_PERIOD) {
       this.props.children.map((th, idx) => {
         var that = this;
         const { sortButtons, dataSearch } = that.state;
@@ -388,15 +393,15 @@ class Main extends React.Component {
           sJson = dataSearch;
         }
         // check and sort for other columns
-        if (typeof sortButtons[data] !== CommonConstants.UNDEFINED
-          && sortButtons[data] !== 0
-          && data !== indexData) {
-            if (sortButtons[data] === 1) {
-              sJson = this.sortAsc(data, sJson);
-            } else {
-              sJson = this.sortDesc(data, sJson);
-            }
-        }
+        // if (typeof sortButtons[data] !== CommonConstants.UNDEFINED
+        //   && sortButtons[data] !== 0
+        //   && data !== indexData) {
+        //     if (sortButtons[data] === 1) {
+        //       sJson = this.sortAsc(data, sJson);
+        //     } else {
+        //       sJson = this.sortDesc(data, sJson);
+        //     }
+        // }
 
         if (indexData === data) { // iff the cols match
           if (sortButtons[data] === 1) {
@@ -409,6 +414,8 @@ class Main extends React.Component {
           that.createTable(sJson, sortedButtons);
         }
       });
+      }
+      this.lastTimeKeyup = this.nowMillis;
     }
   }
 

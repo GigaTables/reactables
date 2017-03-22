@@ -17,5 +17,6 @@ module.exports = {
   TIMEOUT_SEARCH: 300,
   MORE_PAGES: 5,
   DISPLAY_TOP: 'top',
-  DISPLAY_BOTTOM: 'bottom'
+  DISPLAY_BOTTOM: 'bottom',
+  SORT_PERIOD: 2500
 }

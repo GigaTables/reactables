@@ -27,7 +27,7 @@ class Header extends React.Component {
 
     if (this.isDiscreteSearch === true) {
       let val = '';
-      if (columnsSearch[data] !== CommonConstants.UNDEFINED) {
+      if (typeof columnsSearch[data] !== CommonConstants.UNDEFINED) {
         val = columnsSearch[data];
       }
       return (

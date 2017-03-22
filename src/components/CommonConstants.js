@@ -18,5 +18,5 @@ module.exports = {
   MORE_PAGES: 5,
   DISPLAY_TOP: 'top',
   DISPLAY_BOTTOM: 'bottom',
-  SORT_PERIOD: 2500
+  SORT_PERIOD: 200
 }

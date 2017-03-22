@@ -324,7 +324,6 @@ class Main extends React.Component {
       popup_title = this.lang.gte_editor_popupheader_edit;
       popup_button = this.lang.gte_editor_sendbtn_update;
       // collect data for fields filling in Editor
-      // console.log(this.jsonData);
       for (var k in this.jsonData) {
         if (parseInt(k) === parseInt(this.state.selectedRows[0])) {
           fieldsEdit = this.jsonData[k];
@@ -423,9 +422,8 @@ class Main extends React.Component {
   {
     let check = 0, isNan = 0;
     sJson.sort(function (a, b) {
-      var an = eval('a.' + data), bn = eval('b.' + data);
-      a = (an === null) ? '' : an + '';
-      b = (bn === null) ? '' : bn + '';
+      a = (a[data] === null) ? '' : a[data] + '';
+      b = (b[data] === null) ? '' : b[data] + '';
       if (check === 0) { // check just the 1st time
         if (isNaN(a - b)) {
           isNan = 1;
@@ -444,9 +442,8 @@ class Main extends React.Component {
   {
     let check = 0, isNan = 0;
     sJson.sort(function (a, b) {
-      var an = eval('a.' + data), bn = eval('b.' + data);
-      a = (an === null) ? '' : an + '';
-      b = (bn === null) ? '' : bn + '';
+      a = (a[data] === null) ? '' : a[data] + '';
+      b = (b[data] === null) ? '' : b[data] + '';
       if (check === 0) { // check just the 1st time
           if (isNaN(a - b)) {
               isNan = 1;

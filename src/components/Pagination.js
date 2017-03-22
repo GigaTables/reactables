@@ -35,7 +35,6 @@ class Pagination extends React.Component {
         gt_page: true,
         selected: (currentPage === page) ? true : false
       });
-
       if (p > CommonConstants.MORE_PAGES) {
           if (selectedPage < CommonConstants.MORE_PAGES) { // head
               pagesContent[p] = <span key={p}><div className="gt_page_dots">...</div><div key={p+1} onClick={this.props.updatePagination}
@@ -51,7 +50,6 @@ class Pagination extends React.Component {
                 gt_page: true,
                 selected: (selectedPage === page) ? true : false
               });
-              // console.log(pagesContent[p]);
               pagesContent[p] = <span key={p}><div data-from="0" onClick={this.props.updatePagination} className="gt_page">1</div>
               <div className="gt_page_dots">...</div>
               <div data-from={prevFrom} onClick={this.props.updatePagination} className="gt_page">{selectedPage - 1}</div>
@@ -90,7 +88,7 @@ class Pagination extends React.Component {
               break;
           }
         } else {
-          if (selectedPage < CommonConstants.MORE_PAGES) {
+          if (selectedPage < CommonConstants.MORE_PAGES || (selectedPage >= CommonConstants.MORE_PAGES && tail === 1)) {
             pagesContent[p] = <div key={p} onClick={this.props.updatePagination}
               data-from={p*perPage} className={pageClasses}>{currentPage}</div>;
           }

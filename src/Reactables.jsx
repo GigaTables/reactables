@@ -70,7 +70,11 @@ class Reactables extends Main {
       // visibility must be the last - it unsets search & sort if false
       this.setVisibleCols(object, index);
     });
-    fetch(this.settings.ajax).then(response => response.json())
+    fetch(this.settings.ajax).then((response) =>
+    {// set ajax loader fo BD
+      this.setLoader(columns.length);
+      return response.json();
+    })
     .then((data) => {
       let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
       if (typeof jsonData === CommonConstants.UNDEFINED) {

@@ -32,6 +32,13 @@ and more...
 
 - npm i gigatables-react
 
+After installation will be completed add import to your `main.js` like this:
+
+```JS
+import { Reactables, Header } from 'gigatables-react'
+```
+
+see how to create table with JSX bellow.
 ## Few screen-shots
 
 ### Multiple select with Ctrl and Shift

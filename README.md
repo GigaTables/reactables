@@ -173,6 +173,8 @@ ReactDOM.render(
   document.getElementById('app'))
 ```
 
+data attribute is needed to glue columns to json data steadily.
+
 JSON structure to return from provided url in "ajax" GigaTables option:
 
 ```JS

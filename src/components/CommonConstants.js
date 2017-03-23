@@ -1,5 +1,6 @@
 module.exports = {
   UNDEFINED: 'undefined',
+  FUNCTION: 'function',
   // keys
   ESCAPE_KEY: 27,
   CTRL_KEY: 17,
@@ -18,5 +19,7 @@ module.exports = {
   MORE_PAGES: 5,
   DISPLAY_TOP: 'top',
   DISPLAY_BOTTOM: 'bottom',
-  SORT_PERIOD: 200
+  SORT_PERIOD: 200,
+  TARGET: 'target',
+  RENDER: 'render'
 }

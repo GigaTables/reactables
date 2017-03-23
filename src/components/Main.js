@@ -46,6 +46,11 @@ class Main extends React.Component {
     }
   }
 
+  setCustomColumns(object)
+  {
+    this.customColumns[object[CommonConstants.TARGET]] = object[CommonConstants.RENDER];
+  }
+
   doSearch(e)
   {
     var that = this;
@@ -131,6 +136,13 @@ class Main extends React.Component {
           const { data } = th.props;
           // check if a JSON object has this data field + visible
           if(typeof data !== CommonConstants.UNDEFINED && this.visibleCols[data] === true) {
+            let content = null;
+            if (typeof this.customColumns[data] !== CommonConstants.UNDEFINED
+              && typeof this.customColumns[data] === CommonConstants.FUNCTION) { // custom column
+              content = this.customColumns[data](object[data], object, data);
+            } else {
+              content = object[data];
+            }
             cols.push(<Column
               dataIndex={data}
               selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
@@ -138,7 +150,7 @@ class Main extends React.Component {
               maxRow={maxRow}
               count={objectIndex}
               gteRowId={rowId}
-              key={idx}>{object[data]}</Column>);
+              key={idx}>{content}</Column>);
           }
         });
         // count is used to shft key + click selection of rows, ex.: sorted

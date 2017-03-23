@@ -39,6 +39,7 @@ class Reactables extends Main {
     this.searchableCols = [];
     this.visibleCols = [];
     this.sortableCols = [];
+    this.customColumns = [];
     this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0;
     // these default sets will merge with users sets
     this.defaultSettings = {
@@ -63,13 +64,18 @@ class Reactables extends Main {
   build()
   {
     this.settings = loAssign({}, this.defaultSettings, this.props.settings);
-    const { columns } = this.settings;
+    const { columns, columnOpts } = this.settings;
     columns.map((object, index) => {
       this.setSearchableCols(object, index);
       this.setSortableCols(object, index);
       // visibility must be the last - it unsets search & sort if false
       this.setVisibleCols(object, index);
     });
+    if (typeof columnOpts !== CommonConstants.UNDEFINED) {
+      columnOpts.map((object, index) => {
+        this.setCustomColumns(object, index);
+      });
+    }
     fetch(this.settings.ajax).then((response) =>
     {// set ajax loader fo BD
       this.setLoader(columns.length);

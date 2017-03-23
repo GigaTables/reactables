@@ -93,15 +93,23 @@ var settings = {
  ],
  columnOpts: [
    {
-     render: function (data, row, type) {
-       return '<div><form method="post" class="accForm" action=""><input type="hidden" name="action" value="forms" /><input type="hidden" name="id" value="' + row.id + '" /><div>' + data + '</div></form></div>';
-     },
+     render: (data, row, type) => (
+       <div>
+         <form method="post" action="">
+          <input type="hidden" name="action" value="forms" />
+          <input type="hidden" name="id" value={row.id} />
+          <div>{data}</div>
+        </form>
+      </div>),
      target: 'title' // provide data column index to match opts
    },
    {
-     render: function (data, row, type) {
-       return '<div><form method="post" class="accForm" action=""><input type="hidden" name="action" value="forms" /><input type="hidden" name="id" value="' + row.id + '" /><div>' + data + '</div></form></div>';
-     },
+     render: (data, row, type) => (
+        <div>
+          <div>{data}</div>
+          <div>{(row.id % 2 === 0) ? '**' : '*'}</div>
+        </div>
+       ),
      target: 'date'
    }
  ],

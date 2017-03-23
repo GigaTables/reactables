@@ -569,6 +569,27 @@ class Main extends React.Component {
     });
   }
 
+  setLoader(cols)
+  {
+    let
+      minRow = 0,
+      maxRow = 1,
+      objectIndex = 1,
+      rowId = 1,
+      rowsData = <Row
+      selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
+      minRow={minRow}
+      maxRow={maxRow}
+      key={objectIndex}
+      count={objectIndex}
+      gteRowId={rowId}>
+        <td colSpan={cols}><div style={{textAlign: 'center'}}>Loading...</div></td>
+      </Row>;
+      this.setState({
+        dataRows: rowsData
+      });
+  }
+
 }
 
 export default Main

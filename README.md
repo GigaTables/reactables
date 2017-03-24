@@ -1,3 +1,6 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/build-status/master)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 # GigaTables ReactJS plug-in
 GigaTables supports the following capabilities:
 

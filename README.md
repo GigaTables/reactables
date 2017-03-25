@@ -348,7 +348,7 @@ Sure, You can pick one of 7 languages: English, German, Russian, French, Spanish
 
 GigaTables plug-in has 2 types of triggers **triggerBefore** and **triggerAfter** which can be applied to any action button - Create, Edit or Delete.
 
-** Can I set case insensitive search to either common and/or discrete search? **
+**Can I set case insensitive search to either common and/or discrete search?**
 
 Yes. For common search You should choose for which particular column it is needed and place `cISearch: true` option there,
 for discrete search use `discreteCISearch: true`.

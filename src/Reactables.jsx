@@ -37,6 +37,8 @@ class Reactables extends Main {
     }
     // cols opts
     this.searchableCols = [];
+    this.searchableCase = [];
+    this.discreteSearchableCase = [];
     this.visibleCols = [];
     this.sortableCols = [];
     this.customColumns = [];
@@ -66,14 +68,15 @@ class Reactables extends Main {
     this.settings = loAssign({}, this.defaultSettings, this.props.settings);
     const { columns, columnOpts } = this.settings;
     columns.map((object, index) => {
-      this.setSearchableCols(object, index);
-      this.setSortableCols(object, index);
+      this.setSearchableCols(object);
+      this.setSearchableCase(object);
+      this.setSortableCols(object);
       // visibility must be the last - it unsets search & sort if false
-      this.setVisibleCols(object, index);
+      this.setVisibleCols(object);
     });
     if (typeof columnOpts !== CommonConstants.UNDEFINED) {
       columnOpts.map((object, index) => {
-        this.setCustomColumns(object, index);
+        this.setCustomColumns(object);
       });
     }
     fetch(this.settings.ajax).then((response) =>

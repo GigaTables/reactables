@@ -1,6 +1,7 @@
 module.exports = {
   UNDEFINED: 'undefined',
   FUNCTION: 'function',
+  DISCRETE_SEARCH_VALUE: 'discreteSearchValue',
   // keys
   ESCAPE_KEY: 27,
   CTRL_KEY: 17,
@@ -12,6 +13,8 @@ module.exports = {
   GT_ROW_ID:'GT_RowId',
   SORTABLE:'sortable',
   SEARCHABLE: 'searchable',
+  CASE_INSENSITIVE_SEARCH: 'cISearch',
+  DISCRETE_CASE_INSENSITIVE_SEARCH: 'discreteCISearch',
   VISIBLE: 'visible',
   DATA: 'data',
   PERIOD_SEARCH: 200,

@@ -26,6 +26,22 @@ class Main extends React.Component {
     }
   }
 
+  setSearchableCase(object)
+  {
+      // common search
+      this.searchableCase[object[CommonConstants.DATA]] = true; // case sensitive
+      if(typeof object[CommonConstants.CASE_INSENSITIVE_SEARCH] !== CommonConstants.UNDEFINED
+      && object[CommonConstants.CASE_INSENSITIVE_SEARCH] === true) {
+        this.searchableCase[object[CommonConstants.DATA]] = false; // case insensitive
+      }
+      // discrete search
+      this.discreteSearchableCase[object[CommonConstants.DATA]] = true;
+      if(typeof object[CommonConstants.DISCRETE_CASE_INSENSITIVE_SEARCH] !== CommonConstants.UNDEFINED
+      && object[CommonConstants.DISCRETE_CASE_INSENSITIVE_SEARCH] === true) {
+        this.discreteSearchableCase[object[CommonConstants.DATA]] = false;
+      }
+  }
+
   setVisibleCols(object)
   {
     this.visibleCols[object[CommonConstants.DATA]] = true;
@@ -79,10 +95,18 @@ class Main extends React.Component {
           for (let k in json[key]) {
               if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
                   str = json[key][k] + '';
-                  if (str.indexOf(val) !== -1) {
+                  if (this.searchableCase[k] === false) {// case insensitive
+                    if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
                       nJson[i] = json[key];
                       ++i;
                       break;
+                    }
+                  } else {
+                    if (str.indexOf(val) !== -1) {
+                      nJson[i] = json[key];
+                      ++i;
+                      break;
+                    }
                   }
               }
           }
@@ -502,10 +526,18 @@ class Main extends React.Component {
               if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true
                   && k === data) { // do not search unsearchable and only this column
                   str = json[key][k] + '';
-                  if (str.indexOf(val) !== -1) {
-                      nJson[i] = json[key];
-                      ++i;
-                      break;
+                  if (this.discreteSearchableCase[k] === false) {// case insensitive
+                      if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
+                        nJson[i] = json[key];
+                        ++i;
+                        break;
+                      }
+                  } else {
+                      if (str.indexOf(val) !== -1) {
+                        nJson[i] = json[key];
+                        ++i;
+                        break;
+                      }
                   }
               }
           }

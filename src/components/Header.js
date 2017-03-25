@@ -26,9 +26,13 @@ class Header extends React.Component {
     } = this.props;
 
     if (this.isDiscreteSearch === true) {
-      let val = '';
+      let val = '', placeholder = data;
       if (typeof columnsSearch[data] !== CommonConstants.UNDEFINED) {
         val = columnsSearch[data];
+      }
+      if (typeof columns[sortId][CommonConstants.DISCRETE_SEARCH_VALUE] !== CommonConstants.UNDEFINED
+        && typeof columns[sortId][CommonConstants.DISCRETE_SEARCH_VALUE] === CommonConstants.FUNCTION) { // custom column
+          placeholder = columns[sortId].discreteSearchValue(data);
       }
       return (
         <div className={styles.gt_th_box}>
@@ -39,7 +43,7 @@ class Header extends React.Component {
             onBlur={discreteBlur}
             onKeyUp={doDiscreteSearch}
             onChange={doDiscreteSearch}
-            placeholder={columns[sortId].discreteSearchValue(data)}
+            placeholder={placeholder}
             value={val} />
         </div>
       );

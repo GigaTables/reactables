@@ -10,7 +10,7 @@ GigaTables supports the following capabilities:
 
 -- cross-sorting,
 
--- global search,
+-- common search (through all columns),
 
 -- discrete (per column) search,
 
@@ -110,10 +110,15 @@ var settings = {
        return 'Поиск по полю ' + title;
      }
    },
-   {data: "title"},
+   {
+     data: "title",
+     cISearch: true // default false
+   },
    {
      data: "desc",
-     sortable: false
+     sortable: false,
+     discreteSearch: true,
+     discreteCISearch: true // default false
    },
    {
      data: "date",
@@ -160,7 +165,7 @@ var settings = {
 
 The table is defined like in example below:
 
-```HTML
+```JSX
 ReactDOM.render(
   <Reactables editor={editor} settings={settings}>
     <Header data="id">ID</Header>
@@ -339,3 +344,8 @@ Sure, You can pick one of 7 languages: English, German, Russian, French, Spanish
 **Does GT have any event-triggered functions, ex.: to run something before/after pop-up?**
 
 GigaTables plug-in has 2 types of triggers **triggerBefore** and **triggerAfter** which can be applied to any action button - Create, Edit or Delete.
+
+** Can I set case insensitive search to either common and/or discrete search? **
+
+Yes. For common search You should choose for which particular column it is needed and place `cISearch: true` option there,
+for discrete search use `discreteCISearch: true`.

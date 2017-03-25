@@ -60,8 +60,8 @@ var settings = {
    pagination: ['bottom']
  },
  lang: 'en', // english default
- perPageRows: [25, 50, 100],
- defaultPerPage: 50,
+ perPageRows: [25, 50, 100, 200],
+ defaultPerPage: 100,
  ajax: 'http://gigatables.loc/gigatables.php',
  requestType: 'GET',
  columns: [
@@ -75,10 +75,15 @@ var settings = {
        return 'Search by field - ' + title;
      }
    },
-   {data: "title"},
+   {
+     data: "title",
+     cISearch: true // default false
+   },
    {
      data: "desc",
-     sortable: false
+     sortable: false,
+     discreteSearch: true,
+     discreteCISearch: true // default false
    },
    {
      data: "date",

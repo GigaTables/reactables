@@ -69,66 +69,65 @@ class Main extends React.Component {
 
   doSearch(e)
   {
-    var that = this;
+    let keyCode = e.keyCode;
+    if (CommonConstants.SYMBOLLESS_KEYS.indexOf(keyCode) !== -1) {
+        return; // exit - user pressed not a symbol key(s)
+    }
 
+    var that = this;
     let name = e.target.name,
     val = e.target.value,
     len = val.length;
-
     this.nowMillis = (new Date()).getTime();
     var period = this.nowMillis - this.lastTimeKeyup;
+    this.setState({
+      [name]: val
+    });
 
-    if (len > 0 || (len === 0 && val === '')) { // do search
-      this.setState({
-        [name]: val
-      });
-      if (this.nothing === true && val === '') {
-          return; // exit - user pressed not a symbol keys or teared down
-      }
-      if (this.nothing === false && val === '') { // rebuild full table if teared down
-          this.createTable(this.jsonData, this.state.sortedButtons);
-          this.nothing = true;
-          return;
-      }
-      var nJson = [], str = '', i = 0, json = this.jsonData;
-      for (let key in json) {
-          for (let k in json[key]) {
-              if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
-                  str = json[key][k] + '';
-                  if (this.searchableCase[k] === false) {// case insensitive
-                    if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
-                      nJson[i] = json[key];
-                      ++i;
-                      break;
-                    }
-                  } else {
-                    if (str.indexOf(val) !== -1) {
-                      nJson[i] = json[key];
-                      ++i;
-                      break;
-                    }
-                  }
-              }
-          }
-      }
-      if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
-          for (var j in this.tOut) {
-              clearTimeout(this.tOut[j]);
-          }
-          this.tOut = [];
-          this.c = 0;
-          this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
-      } else {
-          this.tOut[this.c] = setTimeout(function () {
-              that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
-          }, CommonConstants.TIMEOUT_SEARCH);
-          this.c++;
-      }
-      this.nothing = false;
-      this.setState({
-        dataSearch: nJson
-      });
+    if (val === '' && (keyCode === CommonConstants.BACKSPACE_KEY || keyCode === CommonConstants.DELETE_KEY)) { // rebuild full table if teared down
+        this.createTable(this.jsonData, this.state.sortedButtons);
+        return;
     }
+
+    var nJson = [], str = '', i = 0, json = this.jsonData;
+    for (let key in json) {
+        for (let k in json[key]) {
+            if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
+                str = json[key][k] + '';
+                if (this.searchableCase[k] === false) {// case insensitive
+                  if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
+                    nJson[i] = json[key];
+                    ++i;
+                    break;
+                  }
+                } else {
+                  if (str.indexOf(val) !== -1) {
+                    nJson[i] = json[key];
+                    ++i;
+                    break;
+                  }
+                }
+            }
+        }
+    }
+
+    if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
+        for (var j in this.tOut) {
+            clearTimeout(this.tOut[j]);
+        }
+        this.tOut = [];
+        this.c = 0;
+        this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+    } else {
+        this.tOut[this.c] = setTimeout(function () {
+            that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
+        }, CommonConstants.TIMEOUT_SEARCH);
+        this.c++;
+    }
+    this.setState({
+      dataSearch: nJson
+    });
+
     this.lastTimeKeyup = this.nowMillis;
   }
 
@@ -496,6 +495,11 @@ class Main extends React.Component {
 
   doDiscreteSearch(e)
   {
+    let keyCode = e.keyCode;
+    if (CommonConstants.SYMBOLLESS_KEYS.indexOf(keyCode) !== -1) {
+        return; // exit - user pressed not a symbol key(s)
+    }
+
     var that = this;
 
     let name = e.target.name,
@@ -506,60 +510,56 @@ class Main extends React.Component {
     this.nowMillis = (new Date()).getTime();
     var period = this.nowMillis - this.lastTimeKeyup;
 
-    if (len > 0 || (len === 0 && val === '')) { // do search
-      this.setState({columnsSearch:
-        Object.assign({}, this.state.columnsSearch, {
-          [name]: val
-        })
-      });
-      if (this.nothing === true && val === '') {
-          return; // exit - user pressed not a symbol keys or teared down
-      }
-      if (this.nothing === false && val === '') { // rebuild full table if teared down
-          this.createTable(this.jsonData, this.state.sortedButtons);
-          this.nothing = true;
-          return;
-      }
-      var nJson = [], str = '', i = 0, json = this.jsonData;
-      for (let key in json) {
-          for (let k in json[key]) {
-              if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true
-                  && k === data) { // do not search unsearchable and only this column
-                  str = json[key][k] + '';
-                  if (this.discreteSearchableCase[k] === false) {// case insensitive
-                      if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
-                        nJson[i] = json[key];
-                        ++i;
-                        break;
-                      }
-                  } else {
-                      if (str.indexOf(val) !== -1) {
-                        nJson[i] = json[key];
-                        ++i;
-                        break;
-                      }
-                  }
-              }
-          }
-      }
-      if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
-          for (var j in this.tOut) {
-              clearTimeout(this.tOut[j]);
-          }
-          this.tOut = [];
-          this.c = 0;
-          this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
-      } else {
-          this.tOut[this.c] = setTimeout(function () {
-              that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
-          }, CommonConstants.TIMEOUT_SEARCH);
-          this.c++;
-      }
-      this.nothing = false;
-      this.setState({
-        dataSearch: nJson
-      });
+    this.setState({columnsSearch:
+      Object.assign({}, this.state.columnsSearch, {
+        [name]: val
+      })
+    });
+
+    if (val === '' && (keyCode === CommonConstants.BACKSPACE_KEY || keyCode === CommonConstants.DELETE_KEY)) { // rebuild full table if teared down
+        this.createTable(this.jsonData, this.state.sortedButtons);
+        return;
     }
+
+    var nJson = [], str = '', i = 0, json = this.jsonData;
+    for (let key in json) {
+        for (let k in json[key]) {
+            if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true
+                && k === data) { // do not search unsearchable and only this column
+                str = json[key][k] + '';
+                if (this.discreteSearchableCase[k] === false) {// case insensitive
+                    if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
+                      nJson[i] = json[key];
+                      ++i;
+                      break;
+                    }
+                } else {
+                    if (str.indexOf(val) !== -1) {
+                      nJson[i] = json[key];
+                      ++i;
+                      break;
+                    }
+                }
+            }
+        }
+    }
+    if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
+        for (var j in this.tOut) {
+            clearTimeout(this.tOut[j]);
+        }
+        this.tOut = [];
+        this.c = 0;
+        this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+    } else {
+        this.tOut[this.c] = setTimeout(function () {
+            that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
+        }, CommonConstants.TIMEOUT_SEARCH);
+        this.c++;
+    }
+
+    this.setState({
+      dataSearch: nJson
+    });
     this.lastTimeKeyup = this.nowMillis;
   }
 

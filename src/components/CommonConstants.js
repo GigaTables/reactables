@@ -9,6 +9,22 @@ module.exports = {
   CTRL_KEY_MAC_FF: 224,
   SHIFT_KEY: 16,
   ENTER_KEY: 13,
+  BACKSPACE_KEY: 8,
+  DELETE_KEY: 46,
+  SYMBOLLESS_KEYS: [
+    16, // SHIFT
+    13, // ENTER
+    20, // CAPSLOCK
+    9, // TAB
+    18, // ALT
+    27, // ESC
+    37, // ARROW LEFT
+    38, // ARROW UP
+    39, // ARROW RIGHT
+    40, // ARROW DOWN,
+    35, // END
+    36  // HOME
+  ],
   // table
   GT_ROW_ID:'GT_RowId',
   SORTABLE:'sortable',

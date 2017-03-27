@@ -16,7 +16,8 @@ class Header extends React.Component {
   {
     return this.props.sortId !== nextProps.sortId
     || this.props.columns[this.props.sortId] !== nextProps.columns[this.props.sortId]
-    || this.props.sortDirection !== nextProps.sortDirection;
+    || this.props.sortDirection !== nextProps.sortDirection
+    || this.props.columnsSearch !== nextProps.columnsSearch;
   }
 
   getHeaderContent()

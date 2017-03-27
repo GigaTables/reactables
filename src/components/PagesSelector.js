@@ -7,12 +7,8 @@ var Lang = require('./Lang');
 
 class PagesSelector extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const {
-      perPageRows,
-      perPage
-    } = this.props;
-    return perPageRows !== nextProps.perPageRows
-      || perPage !== nextProps.perPage;
+    return this.props.perPageRows !== nextProps.perPageRows
+      || this.props.perPage !== nextProps.perPage;
   }
 
   render()

@@ -91,6 +91,7 @@ class Editor extends React.Component {
 
   getFieldByType(index, object)
   {
+    const { dataIndices } = this.state;
     var fieldType = object.type,
             fieldName = object.name,
             fieldLabel = object.label,
@@ -108,13 +109,13 @@ class Editor extends React.Component {
     }
 
     if (action === EditorConstants.ACTION_EDIT) {
-      if (typeof this.state.dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
-        fieldValue = this.state.dataIndices[fieldName];
+      if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+        fieldValue = dataIndices[fieldName];
       } else {
         fieldValue = this.props.fieldsEdit[fieldName];
       }
-    } else if (action === EditorConstants.ACTION_CREATE && typeof this.state.dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
-      fieldValue = this.state.dataIndices[fieldName];
+    } else if (action === EditorConstants.ACTION_CREATE && typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+      fieldValue = dataIndices[fieldName];
     }
 
     let i = 0,
@@ -181,7 +182,7 @@ class Editor extends React.Component {
           for (var key in values[k]) {
             val = values[k][key].trim();
             options[k] = <label key={key} className="gte_label_text">
-              <input defaultChecked={(val === fieldValue) ? 1 : 0 } onClick={this.onChange.bind(this)} key={key} {...attributes} id={id} type={fieldType} name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
+              <input defaultChecked={(val === fieldValue) ? 1 : 0 } onClick={this.onChange.bind(this)} {...attributes} id={id} type={fieldType} name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
           }
         }
         htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label">{fieldLabel}</label><div className={editorStyles.gte_field}>{options}</div><div className="clear"></div></div>;
@@ -254,7 +255,6 @@ class Editor extends React.Component {
   stopPropagation(e)
   {
     e.stopPropagation();
-    e.preventDefault();
   }
 
   render()

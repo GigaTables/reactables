@@ -53,6 +53,12 @@ see how to create table with JSX bellow.
 ### CRUD pop-ups
 ![alt tag](https://raw.githubusercontent.com/GigaTables/gigatables/master/GigaTables_edit_item.png)
 
+### Pagination + sorting
+![alt tag](https://raw.githubusercontent.com/GigaTables/gigatables/master/GigaTables_pagination_with_sort.png)
+
+### Delete items
+![alt tag](https://raw.githubusercontent.com/GigaTables/gigatables/master/GigaTables_delete_items.png)
+
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML
     <script src="build/index.js"></script>

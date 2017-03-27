@@ -3,6 +3,17 @@ import styles from '../css/styles.css'
 import classNames from 'classnames/bind'
 
 export default class Row extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const { gteRowId, count, selectedRows, minRow, maxRow } = this.props;
+    return gteRowId !== nextProps.gteRowId
+      || count !== nextProps.count
+      || selectedRows.length !== nextProps.selectedRows.length
+      || selectedRows.indexOf(count) !== nextProps.selectedRows.indexOf(count) // on multiple merged rows selection Shift+Clk
+      || selectedRows.indexOf(count) !== -1 // on multiple splited rows selection Ctrl+Clk
+      || minRow !== nextProps.minRow
+      || maxRow !== nextProps.maxRow;
+  }
+
   render()
   {
     const {

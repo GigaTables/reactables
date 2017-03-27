@@ -48,10 +48,16 @@ see how to create table with JSX bellow.
 ## Few screen-shots
 
 ### Multiple select with Ctrl and Shift
-![alt tag](https://raw.githubusercontent.com/GigaTables/gigatables/master/GigaTables_basic_view.png)
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_basic_view.png)
 
 ### CRUD pop-ups
-![alt tag](https://raw.githubusercontent.com/GigaTables/gigatables/master/GigaTables_edit_item.png)
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_edit_item.png)
+
+### Pagination + sorting
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_pagination_with_sort.png)
+
+### Delete items
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_delete_items.png)
 
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML

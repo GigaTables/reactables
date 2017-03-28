@@ -11,6 +11,8 @@ module.exports = {
   ENTER_KEY: 13,
   BACKSPACE_KEY: 8,
   DELETE_KEY: 46,
+  ARROW_UP: 38,
+  ARROW_DOWN: 40,
   SYMBOLLESS_KEYS: [
     16, // SHIFT
     13, // ENTER
@@ -25,6 +27,8 @@ module.exports = {
     35, // END
     36  // HOME
   ],
+  // symbol keys
+  A_KEY: 65,
   // table
   GT_ROW_ID:'GT_RowId',
   SORTABLE:'sortable',

@@ -27,6 +27,8 @@ class Reactables extends Main {
       selectedIds: [],
       ctrlDown: false,
       shiftDown: false,
+      arrowDown: false,
+      arrowUp: false,
       minRow: 0,
       maxRow: 0,
       opacity: 0,
@@ -98,6 +100,7 @@ class Reactables extends Main {
   componentDidMount()
   {
     var that = this;
+    // enabling keys
     document.addEventListener('keydown', (e) => {
       switch (e.which) {
         case CommonConstants.CTRL_KEY:
@@ -123,8 +126,25 @@ class Reactables extends Main {
         case CommonConstants.ESCAPE_KEY:
           that.hidePopup();
           break;
+        case CommonConstants.ARROW_UP:
+          that.setState({
+            arrowUp: true
+          });
+          break;
+        case CommonConstants.ARROW_DOWN:
+          that.setState({
+            arrowDown: true
+          });
+          break;
+        case CommonConstants.A_KEY:
+          that.setState({
+            aDown: true
+          });
+          break;
       }
+      that.addSelectedRows();
     });
+    // disabling keys
     document.addEventListener('keyup', (e) => {
       switch (e.which) {
         case CommonConstants.CTRL_KEY:
@@ -145,6 +165,21 @@ class Reactables extends Main {
         case CommonConstants.SHIFT_KEY:
           that.setState({
             shiftDown: false
+          });
+          break;
+        case CommonConstants.ARROW_UP:
+          that.setState({
+            arrowUp: false
+          });
+          break;
+        case CommonConstants.ARROW_DOWN:
+          that.setState({
+            arrowDown: false
+          });
+          break;
+        case CommonConstants.A_KEY:
+          that.setState({
+            aDown: false
           });
           break;
       }

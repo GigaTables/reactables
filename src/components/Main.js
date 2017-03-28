@@ -634,6 +634,46 @@ class Main extends React.Component {
       });
   }
 
+  addSelectedRows()
+  {
+    const {
+      selectedRows,
+      shiftDown,
+      ctrlDown,
+      arrowUp,
+      arrowDown,
+      perPage,
+      aDown
+    } = this.state;
+    if (shiftDown === true && arrowUp === true && selectedRows.length > 0) {
+      let min = Math.min(...selectedRows),
+      rows = selectedRows;
+      if (min > 0) {
+        rows.push(min-1);
+        this.setState({
+          selectedRows: rows
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      }
+    } else if (arrowDown === true && shiftDown === true && selectedRows.length > 0) {
+      let max = Math.max(...selectedRows),
+      rows = selectedRows;
+      if (max < perPage - 1) {
+        rows.push(max+1);
+        this.setState({
+          selectedRows: rows
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      }
+    } else if (ctrlDown === true && aDown === true) {
+      let rows = [];
+      for (let i = 0;i < perPage;++i) {
+        rows[i] = i;
+      }
+      this.setState({
+        selectedRows: rows
+      }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+    }
+  }
+
 }
 
 export default Main

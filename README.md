@@ -299,6 +299,12 @@ To efficiently manage table behavior You can use the following hot keys:
 
 - Ctrl+A - selects all rows in a current table view
 
+- Ctrl+Arrow Right - next page
+
+- Ctrl+Arrow Left - prev page
+
+PS In some OS like Macintosh can be default conflicting hot keys, ex.: Cmd+Arrow Left get back in browsers
+
 ## FAQ
 
 **Can I use file types in GT editor to upload files through AJAX on server?**

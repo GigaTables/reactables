@@ -693,12 +693,14 @@ class Main extends React.Component {
         let pages = Math.ceil(countRows / perPage);
         this.setState({
           fromRow: (pages - 1) * perPage,
-          page: pages
+          page: pages,
+          arrowLeft: false
         }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
       } else {
         this.setState({
           fromRow: (page - 1) * perPage,
-          page: page - 1
+          page: page - 1,
+          arrowLeft: false
         }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
       }
     } else if (ctrlDown === true && arrowRight === true) {
@@ -706,12 +708,14 @@ class Main extends React.Component {
       if (page === pages) {
         this.setState({
           fromRow: 0,
-          page: 1
+          page: 1,
+          arrowRight: false
         }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
       } else {
         this.setState({
           fromRow: page * perPage,
-          page: page + 1
+          page: page + 1,
+          arrowRight: false
         }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
       }
     }

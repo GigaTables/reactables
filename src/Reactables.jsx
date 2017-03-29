@@ -29,6 +29,8 @@ class Reactables extends Main {
       shiftDown: false,
       arrowDown: false,
       arrowUp: false,
+      arrowLeft: false,
+      arrowRight: false,
       minRow: 0,
       maxRow: 0,
       opacity: 0,
@@ -136,6 +138,16 @@ class Reactables extends Main {
             arrowDown: true
           });
           break;
+        case CommonConstants.ARROW_LEFT:
+          that.setState({
+            arrowLeft: true
+          });
+          break;
+        case CommonConstants.ARROW_RIGHT:
+          that.setState({
+            arrowRight: true
+          });
+          break;
         case CommonConstants.A_KEY:
           that.setState({
             aDown: true
@@ -143,6 +155,7 @@ class Reactables extends Main {
           break;
       }
       that.addSelectedRows();
+      that.setPagination();
     });
     // disabling keys
     document.addEventListener('keyup', (e) => {
@@ -175,6 +188,16 @@ class Reactables extends Main {
         case CommonConstants.ARROW_DOWN:
           that.setState({
             arrowDown: false
+          });
+          break;
+        case CommonConstants.ARROW_LEFT:
+          that.setState({
+            arrowLeft: false
+          });
+          break;
+        case CommonConstants.ARROW_RIGHT:
+          that.setState({
+            arrowRight: false
           });
           break;
         case CommonConstants.A_KEY:

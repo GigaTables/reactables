@@ -287,7 +287,23 @@ and then pass variable (in this case - editor) to GigaTables main options in tab
           }
 ```
 
-That's it then You will be able to CRUD any record You want :-)
+That's it then You will be able to CRUD any record You want.
+
+## Hot keys
+
+To efficiently manage table behavior You can use the following hot keys:
+
+- Ctrl+Arrow Up - selects rows above the selected
+
+- Ctrl+Arrow Down - selects rows below the selected
+
+- Ctrl+A - selects all rows in a current table view
+
+- Ctrl+Arrow Right - next page
+
+- Ctrl+Arrow Left - prev page
+
+PS In some OS like Macintosh can be default conflicting hot keys, ex.: Cmd+Arrow Left get back in browsers
 
 ## FAQ
 

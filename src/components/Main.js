@@ -645,6 +645,7 @@ class Main extends React.Component {
       perPage,
       aDown
     } = this.state;
+
     if (shiftDown === true && arrowUp === true && selectedRows.length > 0) {
       let min = Math.min(...selectedRows),
       rows = selectedRows;
@@ -671,6 +672,52 @@ class Main extends React.Component {
       this.setState({
         selectedRows: rows
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+    }
+  }
+
+  setPagination()
+  {
+    const {
+      ctrlDown,
+      arrowLeft,
+      arrowRight,
+      fromRow,
+      page,
+      perPage,
+      countRows
+    } = this.state;
+
+    // let fromRow = parseInt(fromRow);
+    if (ctrlDown === true && arrowLeft === true) {
+      if (page === 1) {
+        let pages = Math.ceil(countRows / perPage);
+        this.setState({
+          fromRow: (pages - 1) * perPage,
+          page: pages,
+          arrowLeft: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      } else {
+        this.setState({
+          fromRow: (page - 1) * perPage,
+          page: page - 1,
+          arrowLeft: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      }
+    } else if (ctrlDown === true && arrowRight === true) {
+      let pages = Math.ceil(countRows / perPage);
+      if (page === pages) {
+        this.setState({
+          fromRow: 0,
+          page: 1,
+          arrowRight: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      } else {
+        this.setState({
+          fromRow: page * perPage,
+          page: page + 1,
+          arrowRight: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      }
     }
   }
 

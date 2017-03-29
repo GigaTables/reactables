@@ -7,7 +7,7 @@ GigaTables supports the following capabilities:
 
 -- ajax data processing/editing (CRUD),
 
--- pagination,
+-- classic pagination or infinite scroll,
 
 -- sorting,
 
@@ -21,7 +21,9 @@ GigaTables supports the following capabilities:
 
 -- dynamic column content functions,
 
--- 7 popular languages
+-- 7 popular languages,
+
+-- hot keys
 
 and more...
 

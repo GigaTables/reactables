@@ -32,6 +32,8 @@ and more...
   * [Minimal configuration](#user-content-minimal-configuration)
   * [Advanced configuration with opts and editor](#user-content-advanced-configuration-with-opts-and-editor)  
 * [An example of using GigaTables with Editor tool](#user-content-an-example-of-using-gigatables-with-editor-tool)
+* [Pagination or Infinite scroll](#user-content-pagination-or-infinite-scroll)
+* [Hot keys](#user-content-hot-keys)
 * [FAQ](#user-content-faq)
 
 ### Installation
@@ -288,6 +290,21 @@ and then pass variable (in this case - editor) to GigaTables main options in tab
 ```
 
 That's it then You will be able to CRUD any record You want.
+
+## Pagination or Infinite scroll
+
+It is sometimes convenient to use an infinite scroll rather then classic pagination, ex.: sort and see only part of data, watching an updated list etc.
+To initialize an infinite scroll - set `infiniteScroll: true` property in `struct` object.
+
+```JS
+struct: {
+  search: ['top', 'bottom'],
+  rowsSelector: ['desc', 'top', 'bottom'],
+  pagination: ['bottom'],
+  infiniteScroll: true
+},
+```
+even if You leave `pagination` option there - infinite scroll will take precedence.
 
 ## Hot keys
 

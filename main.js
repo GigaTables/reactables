@@ -57,7 +57,8 @@ var settings = {
  struct: {
    search: ['top', 'bottom'],
    rowsSelector: ['desc', 'top', 'bottom'],
-   pagination: ['bottom']
+   pagination: ['bottom'],
+   infiniteScroll: true
  },
  lang: 'en', // english default
  perPageRows: [25, 50, 100, 200],

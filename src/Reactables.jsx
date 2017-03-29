@@ -29,13 +29,16 @@ class Reactables extends Main {
       shiftDown: false,
       arrowDown: false,
       arrowUp: false,
+      arrowLeft: false,
+      arrowRight: false,
       minRow: 0,
       maxRow: 0,
       opacity: 0,
       search: '',
       fieldsEdit: {},
       columnsSearch: {},
-      discreteFocus: false
+      discreteFocus: false,
+      scrolledDown: false
     }
     // cols opts
     this.searchableCols = [];
@@ -50,7 +53,8 @@ class Reactables extends Main {
       struct: {
         search: ['top', 'bottom'],
         rowsSelector: ['asc', 'top', 'bottom'],
-        pagination: ['bottom']
+        pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
+        infiniteScroll: false
       },
       lang: 'en',
       perPageRows: [25, 50, 100, 200, 500],
@@ -136,6 +140,16 @@ class Reactables extends Main {
             arrowDown: true
           });
           break;
+        case CommonConstants.ARROW_LEFT:
+          that.setState({
+            arrowLeft: true
+          });
+          break;
+        case CommonConstants.ARROW_RIGHT:
+          that.setState({
+            arrowRight: true
+          });
+          break;
         case CommonConstants.A_KEY:
           that.setState({
             aDown: true
@@ -143,7 +157,15 @@ class Reactables extends Main {
           break;
       }
       that.addSelectedRows();
+      that.setPagination();
     });
+
+    if (this.settings.struct.infiniteScroll === true) {
+      window.addEventListener('scroll', (e) => {
+        this.handleScroll();
+      });
+    }
+
     // disabling keys
     document.addEventListener('keyup', (e) => {
       switch (e.which) {
@@ -175,6 +197,16 @@ class Reactables extends Main {
         case CommonConstants.ARROW_DOWN:
           that.setState({
             arrowDown: false
+          });
+          break;
+        case CommonConstants.ARROW_LEFT:
+          that.setState({
+            arrowLeft: false
+          });
+          break;
+        case CommonConstants.ARROW_RIGHT:
+          that.setState({
+            arrowRight: false
           });
           break;
         case CommonConstants.A_KEY:
@@ -268,9 +300,10 @@ class Reactables extends Main {
       struct
     } = this.settings;
 
-    if (struct.pagination.indexOf(display) === -1) {
+    if (struct.pagination.indexOf(display) === -1 || struct.infiniteScroll === true) {
       return '';
     }
+
     const {
       selectedIds,
       countRows,

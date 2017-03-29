@@ -138,7 +138,8 @@ class Main extends React.Component {
       perPage,
       fromRow,
       minRow,
-      maxRow
+      maxRow,
+      scrolledDown
     } = this.state;
     let rows = [];
     if (dataSearch !== null) {
@@ -148,7 +149,12 @@ class Main extends React.Component {
     if (jsonData.length > perPage) {
       let from = parseInt(fromRow),
       to = from + parseInt(perPage);
-      jsonDataPerPage = jsonData.slice(from, to);
+
+      if (scrolledDown === true) { // infiniteScroll cut
+        jsonDataPerPage = jsonData.slice(0, to);
+      } else { // classic pagination cut
+        jsonDataPerPage = jsonData.slice(from, to);
+      }
     }
     // process rows
     jsonDataPerPage.map((object, objectIndex) => {
@@ -645,6 +651,7 @@ class Main extends React.Component {
       perPage,
       aDown
     } = this.state;
+
     if (shiftDown === true && arrowUp === true && selectedRows.length > 0) {
       let min = Math.min(...selectedRows),
       rows = selectedRows;
@@ -671,6 +678,82 @@ class Main extends React.Component {
       this.setState({
         selectedRows: rows
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+    }
+  }
+
+  setPagination()
+  {
+    const {
+      ctrlDown,
+      arrowLeft,
+      arrowRight,
+      fromRow,
+      page,
+      perPage,
+      countRows
+    } = this.state;
+
+    // let fromRow = parseInt(fromRow);
+    if (ctrlDown === true && arrowLeft === true) {
+      if (page === 1) {
+        let pages = Math.ceil(countRows / perPage);
+        this.setState({
+          fromRow: (pages - 1) * perPage,
+          page: pages,
+          arrowLeft: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      } else {
+        this.setState({
+          fromRow: (page - 1) * perPage,
+          page: page - 1,
+          arrowLeft: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      }
+    } else if (ctrlDown === true && arrowRight === true) {
+      let pages = Math.ceil(countRows / perPage);
+      if (page === pages) {
+        this.setState({
+          fromRow: 0,
+          page: 1,
+          arrowRight: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      } else {
+        this.setState({
+          fromRow: page * perPage,
+          page: page + 1,
+          arrowRight: false
+        }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      }
+    }
+  }
+
+  handleScroll(that)
+  {
+    const {
+      fromRow,
+      perPage,
+      countRows
+    } = this.state;
+
+    if ((fromRow + perPage) >= countRows) {
+      return;
+    }
+
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+
+    if (windowBottom >= docHeight) {
+      this.setState({
+        fromRow: fromRow + perPage,
+        scrolledDown: true
+      }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+    } else {
+      this.setState({
+        scrolledDown: false
+      });
     }
   }
 

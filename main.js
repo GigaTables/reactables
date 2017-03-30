@@ -63,6 +63,8 @@ var settings = {
  perPageRows: [25, 50, 100, 200],
  defaultPerPage: 100,
  ajax: 'http://gigatables.loc/gigatables.php',
+ // ajaxAutoloadData: true, // default false
+ // ajaxAutoloadPeriod: 8, // sec
  requestType: 'GET',
  columns: [
    {// include all defaults

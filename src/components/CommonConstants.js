@@ -46,5 +46,7 @@ module.exports = {
   DISPLAY_BOTTOM: 'bottom',
   SORT_PERIOD: 200,
   TARGET: 'target',
-  RENDER: 'render'
+  RENDER: 'render',
+  MIN_AUTOLOAD_PERIOD: 5, // 5 sec
+  MAX_AUTOLOAD_PERIOD: 300 // 5 min
 }

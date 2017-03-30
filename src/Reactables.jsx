@@ -85,6 +85,7 @@ class Reactables extends Main {
         this.setCustomColumns(object);
       });
     }
+
     fetch(this.settings.ajax).then((response) =>
     {// set ajax loader fo BD
       this.setLoader(columns.length);
@@ -99,6 +100,29 @@ class Reactables extends Main {
       this.createTable(jsonData);
       this.setTableSort();
     });
+    // only set interval if both properties set and period >= 5 sec
+    if (typeof this.settings.ajaxAutoloadData !== CommonConstants.UNDEFINED
+      && typeof this.settings.ajaxAutoloadPeriod !== CommonConstants.UNDEFINED
+      && this.settings.ajaxAutoloadData === true
+      && parseInt(this.settings.ajaxAutoloadPeriod) >= CommonConstants.MIN_AUTOLOAD_PERIOD
+      && parseInt(this.settings.ajaxAutoloadPeriod) <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
+      setInterval(() => {
+        fetch(this.settings.ajax).then((response) =>
+        {// set ajax loader fo BD
+          this.setLoader(columns.length);
+          return response.json();
+        })
+        .then((data) => {
+          let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
+          if (typeof jsonData === CommonConstants.UNDEFINED) {
+            throw new DataException('JSON must contain "rows" field.');
+          }
+          this.jsonData = jsonData;
+          this.createTable(jsonData);
+          this.setTableSort();
+        });
+      }, parseInt(this.settings.ajaxAutoloadPeriod) * 1000);
+    }
   }
 
   componentDidMount()

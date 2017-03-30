@@ -23,6 +23,8 @@ GigaTables supports the following capabilities:
 
 -- 7 popular languages,
 
+-- data load period,
+
 -- hot keys
 
 and more...
@@ -35,6 +37,7 @@ and more...
   * [Advanced configuration with opts and editor](#user-content-advanced-configuration-with-opts-and-editor)  
 * [An example of using GigaTables with Editor tool](#user-content-an-example-of-using-gigatables-with-editor-tool)
 * [Pagination or Infinite scroll](#user-content-pagination-or-infinite-scroll)
+* [Ajax autoload period](#user-content-ajax-autoload-period)
 * [Hot keys](#user-content-hot-keys)
 * [FAQ](#user-content-faq)
 
@@ -307,6 +310,18 @@ struct: {
 },
 ```
 even if You leave `pagination` option there - infinite scroll will take precedence.
+
+## Ajax autoload period
+
+If You need an autoload period set for online live-loaded grid data, just add 2 properties to settings object:
+
+```JS
+ajaxAutoloadData: true, // default false
+ajaxAutoloadPeriod: 8, // sec
+```
+
+the `ajaxAutoloadPeriod` must be set in seconds and the interval should be placed between 5 and 300 seconds, 
+if U wish to switch the mode to classic loader without touching settings structure - set the `ajaxAutoloadData: false`.
 
 ## Hot keys
 

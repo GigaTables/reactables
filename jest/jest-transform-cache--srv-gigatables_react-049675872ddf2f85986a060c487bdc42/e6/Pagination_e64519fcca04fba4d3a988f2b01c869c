@@ -1,0 +1,123 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_bind = require('classnames/bind'); /* istanbul ignore next */var _bind2 = _interopRequireDefault(_bind);
+var /* istanbul ignore next */_styles = require('../css/styles.css'); /* istanbul ignore next */var _styles2 = _interopRequireDefault(_styles);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var CommonConstants = require('./CommonConstants');
+var EditorConstants = require('./EditorConstants');
+var Lang = require('./Lang'); /* istanbul ignore next */var
+
+Pagination = function (_React$Component) {_inherits(Pagination, _React$Component);function Pagination() {_classCallCheck(this, Pagination);return _possibleConstructorReturn(this, (Pagination.__proto__ || Object.getPrototypeOf(Pagination)).apply(this, arguments));}_createClass(Pagination, [{ key: 'shouldComponentUpdate', value: function shouldComponentUpdate(
+    nextProps)
+    {
+      return this.props.countRows !== nextProps.countRows ||
+      this.props.page !== nextProps.page ||
+      this.props.perPage !== nextProps.perPage ||
+      this.props.fromRow !== nextProps.fromRow;
+    } }, { key: 'render', value: function render()
+
+
+    {
+      var lang = Lang[this.props.lang];
+      var prevClasses = /* istanbul ignore next */(0, _bind2.default)({
+        gt_page: true,
+        prev: true });
+
+      var nextClasses = /* istanbul ignore next */(0, _bind2.default)({
+        gt_page: true,
+        next: true });
+
+
+      var from = parseInt(this.props.fromRow);
+      var countRows = this.props.countRows,
+      page = this.props.page,
+      perPage = this.props.perPage,
+      pages = Math.ceil(countRows / perPage),
+      selectedPage = from / perPage + 1,
+      tail = parseInt(pages) - CommonConstants.MORE_PAGES,
+      prevFrom = 0,nextFrom = 0;
+
+      var pagesContent = [];
+      for (var p = 0; p < pages; ++p) {
+        var currentPage = p + 1,_prevPage = p - 1,_nextPage = p + 1;
+        var pageClasses = /* istanbul ignore next */(0, _bind2.default)({
+          gt_page: true,
+          selected: currentPage === page ? true : false });
+
+        if (p > CommonConstants.MORE_PAGES) {
+          if (selectedPage < CommonConstants.MORE_PAGES) {// head
+            pagesContent[p] = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ key: p }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gt_page_dots' }, /* istanbul ignore next */'...'), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: p + 1, onClick: this.props.updatePagination,
+                  /* istanbul ignore next */'data-from': (pages - 1) * perPage, className: pageClasses }, pages));
+            break;
+          } else if (selectedPage >= CommonConstants.MORE_PAGES && selectedPage <= pages - CommonConstants.MORE_PAGES) {//middle
+            _prevPage = selectedPage - 1;
+            _nextPage = selectedPage + 1;
+            prevFrom = (selectedPage - 2) * perPage;
+            nextFrom = selectedPage * perPage;
+
+            var midClasses = /* istanbul ignore next */(0, _bind2.default)({
+              gt_page: true,
+              selected: selectedPage === page ? true : false });
+
+            pagesContent[p] = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ key: p }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': '0', onClick: this.props.updatePagination, className: 'gt_page' }, /* istanbul ignore next */'1'),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gt_page_dots' }, /* istanbul ignore next */'...'),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': prevFrom, onClick: this.props.updatePagination, className: 'gt_page' }, selectedPage - 1),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': (selectedPage - 1) * perPage, onClick: this.props.updatePagination, className: midClasses }, selectedPage),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': nextFrom, onClick: this.props.updatePagination, className: 'gt_page' }, selectedPage + 1),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gt_page_dots' }, /* istanbul ignore next */'...'),
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': (pages - 1) * perPage, onClick: this.props.updatePagination, className: 'gt_page' }, pages));
+            break;
+          } else if (selectedPage > tail) {// tail
+            var innerPages = [];
+            for (var i = tail - 1; i < pages; ++i) {
+              var _from = i * perPage;
+              var _prevPage = i - 1,_nextPage = i + 1;
+              if (selectedPage === _nextPage) {
+                prevFrom = _prevPage * perPage;
+                if (_prevPage < 0) {
+                  prevFrom = (pages - 1) * perPage;
+                }
+                nextFrom = _nextPage * perPage;
+                if (_nextPage === pages) {
+                  nextFrom = 0;
+                }
+              }
+              pageClasses = /* istanbul ignore next */(0, _bind2.default)({
+                gt_page: true,
+                selected: i + 1 === page ? true : false });
+
+              innerPages[i] = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: i, onClick: this.props.updatePagination, /* istanbul ignore next */'data-from': _from, className: pageClasses }, i + 1);
+            }
+            pagesContent[p] = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ key: p }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': '0', onClick: this.props.updatePagination,
+                  className: 'gt_page' }, /* istanbul ignore next */'1'), /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'gt_page_dots' }, /* istanbul ignore next */'...'), innerPages);
+            break;
+          }
+        } else {
+          if (selectedPage < CommonConstants.MORE_PAGES || selectedPage >= CommonConstants.MORE_PAGES && tail === 1) {
+            pagesContent[p] = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: p, onClick: this.props.updatePagination,
+                /* istanbul ignore next */'data-from': p * perPage, className: pageClasses }, currentPage);
+          }
+        }
+      }
+
+      var prev = page === 1 ? perPage * (pages - 1) : perPage * (page - 2),
+      next = page === pages ? 0 : perPage * page;
+
+      var description = lang.showing + ' ' + (from + 1) + ' ' +
+      lang.to + ' ' + page * perPage + ' ' + lang.of + ' ' + countRows + ' ' + lang.entries + '.';
+      return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_styles2.default.gt_pagination },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_styles2.default.gt_pgn_ttl }, description),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_styles2.default.gt_pgn_pages },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_styles2.default.gt_pagn },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': prev, onClick: this.props.updatePagination, className: prevClasses }, lang.prev),
+              pagesContent,
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ /* istanbul ignore next */'data-from': next, onClick: this.props.updatePagination, className: nextClasses }, lang.next))),
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_styles2.default.clear })));
+
+
+    } }]);return Pagination;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default =
+
+
+Pagination;

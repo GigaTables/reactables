@@ -1,0 +1,63 @@
+exports[`test renders Editor correctly 1`] = `
+<div>
+  <div
+    className="gte_editor_popup fade_in"
+    onClick={undefined}>
+    <div
+      className="gte_popup_container">
+      <div
+        className="gte_popup_container_wrapper">
+        <div
+          className="gte_form_border_box"
+          onClick={[Function]}>
+          <div
+            className="gte_form_fields">
+            <div
+              className="gte_header">
+              <div
+                className="gte_editor_title" />
+            </div>
+            <div
+              className="gte_form_body">
+              <div
+                className="gte_form_body_content">
+                <form
+                  action=""
+                  id="gte_form"
+                  method="post">
+                  <div
+                    className="gte_form_content">
+                    <div>
+                      <input
+                        name="action"
+                        type="hidden"
+                        value={undefined} />
+                    </div>
+                    <div />
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div
+              className="gte_footer">
+              <div
+                className="gte_form_err" />
+              <div
+                className="gte_form_buttons">
+                <button
+                  className="btn"
+                  data-action={undefined}
+                  id="gte_sent_btn"
+                  onClick={[Function]} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="gte_popup_background fade_in"
+    onClick={undefined} />
+</div>
+`;

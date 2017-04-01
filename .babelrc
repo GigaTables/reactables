@@ -1,4 +1,9 @@
 {
-    "presets": ["es2015", "react"],
-    "plugins": ["transform-object-rest-spread"]
+    "presets": ["es2015", "react", "babel-preset-react"],
+    "plugins": ["transform-object-rest-spread"],
+    "env": {
+      "test": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      }
+    }
 }

@@ -1,5 +1,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/build-status/master)
+[![Code Coverage](https://img.shields.io/badge/coverage-%2062%25%20-yellowgreen.svg)](https://img.shields.io/badge/coverage-%2062%25%20-yellowgreen.svg)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 # GigaTables ReactJS plug-in
@@ -320,7 +321,7 @@ ajaxAutoloadData: true, // default false
 ajaxAutoloadPeriod: 8, // sec
 ```
 
-the `ajaxAutoloadPeriod` must be set in seconds and the interval should be placed between 5 and 300 seconds, 
+the `ajaxAutoloadPeriod` must be set in seconds and the interval should be placed between 5 and 300 seconds,
 if U wish to switch the mode to classic loader without touching settings structure - set the `ajaxAutoloadData: false`.
 
 ## Hot keys

@@ -1,0 +1,14 @@
+filter:
+    excluded_paths: [tests/*]
+build:
+    dependencies:
+        before:
+            - npm install istanbul   # or add it as part of your package.json
+
+    tests:
+        override:
+            -
+                command: 'istanbul cover --report clover test.js'
+                coverage:
+                    file: 'coverage/clover.xml'
+                    format: 'clover'

@@ -45,6 +45,7 @@ class Button extends React.Component {
 
 Button.propTypes = {
   action: PropTypes.string,
+  active: PropTypes.bool
 }
 
 export default Button

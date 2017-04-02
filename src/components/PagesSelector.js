@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import styles from '../css/styles.css'
 
 var CommonConstants = require('./CommonConstants');
@@ -37,6 +37,13 @@ class PagesSelector extends React.Component {
       </div>
     )
   }
+}
+
+PagesSelector.propTypes = {
+  lang: PropTypes.string,
+  perPage: PropTypes.number,
+  perPageRows: PropTypes.array,
+  updatePerPage: PropTypes.func
 }
 
 export default PagesSelector

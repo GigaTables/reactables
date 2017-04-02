@@ -1,2 +1,8 @@
+.DS_Store
 node_modules/
 npm-debug.log.*
+jest/*
+*.log*
+.idea/*
+__tests__/components/__snapshots__/*
+coverage/lcov-report/*

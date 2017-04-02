@@ -339,8 +339,8 @@ class Main extends React.Component {
     const { from } = e.target.dataset;
     const { perPage, sortedButtons } = this.state;
     this.setState({
-      fromRow: from,
-      page: from / perPage + 1,
+      fromRow: parseInt(from),
+      page: parseInt(from / perPage + 1),
       selectedRows: [],
       selectedIds: []
     }, () => {this.createTable(this.jsonData, sortedButtons)});

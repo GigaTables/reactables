@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">23.08% </span>
+        <span class="strong">46.15% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/13</span>
+        <span class='fraction'>6/13</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>6/6</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -97,19 +97,42 @@
 52
 53
 54
-55</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+55
+56
+57</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,26 +148,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,15 +160,15 @@ import styles from '../css/styles.css'
 import classNames from 'classnames/bind'
 &nbsp;
 class Row extends React.Component {
-<span class="fstat-no" title="function not covered" >  sh</span>ouldComponentUpdate(nextProps) {
-    const { gteRowId, count, selectedRows, minRow, maxRow } = <span class="cstat-no" title="statement not covered" >this.props;</span>
-<span class="cstat-no" title="statement not covered" >    return gteRowId !== nextProps.gteRowId</span>
-      || count !== nextProps.count
-      || selectedRows.length !== nextProps.selectedRows.length
-      || selectedRows.indexOf(count) !== nextProps.selectedRows.indexOf(count) // on multiple merged rows selection Shift+Clk
-      || selectedRows.indexOf(count) !== -1 // on multiple splited rows selection Ctrl+Clk
-      || minRow !== nextProps.minRow
-      || maxRow !== nextProps.maxRow;
+  shouldComponentUpdate(nextProps) {
+    const { gteRowId, count, selectedRows, minRow, maxRow } = this.props;
+    return gteRowId !== nextProps.gteRowId
+      || <span class="branch-1 cbranch-no" title="branch not covered" >count !== nextProps.count</span>
+      || <span class="branch-2 cbranch-no" title="branch not covered" >selectedRows.length !== nextProps.selectedRows.length</span>
+      || <span class="branch-3 cbranch-no" title="branch not covered" >selectedRows.indexOf(count) !== nextProps.selectedRows.indexOf(count) </span>// on multiple merged rows selection Shift+Clk
+      || <span class="branch-4 cbranch-no" title="branch not covered" >selectedRows.indexOf(count) !== -1 </span>// on multiple splited rows selection Ctrl+Clk
+      || <span class="branch-5 cbranch-no" title="branch not covered" >minRow !== nextProps.minRow</span>
+      || <span class="branch-6 cbranch-no" title="branch not covered" >maxRow !== nextProps.maxRow;</span>
   }
 &nbsp;
   render()
@@ -180,8 +184,8 @@ class Row extends React.Component {
     } = this.props;
 &nbsp;
     let rowClasses = classNames({
-      even:(count % 2 === 0)?true:<span class="branch-1 cbranch-no" title="branch not covered" >false,</span>
-      odd:(count % 2 === 0)?false:<span class="branch-1 cbranch-no" title="branch not covered" >true,</span>
+      even:(count % 2 === 0)?true:false,
+      odd:(count % 2 === 0)?false:true,
       active: (selectedRows.indexOf(count) !== -1) ? <span class="branch-0 cbranch-no" title="branch not covered" >true </span>: false
     });
     return (
@@ -201,6 +205,8 @@ class Row extends React.Component {
 Row.propTypes = {
   gteRowId: PropTypes.number,
   count: PropTypes.number,
+  minRow: PropTypes.number,
+  maxRow: PropTypes.number,
   selectedRows: PropTypes.array
 }
 &nbsp;
@@ -211,7 +217,7 @@ export default Row
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Apr 02 2017 14:28:28 GMT+0300 (MSK)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Apr 02 2017 18:11:54 GMT+0300 (MSK)
 </div>
 </div>
 <script src="prettify.js"></script>

@@ -10,7 +10,7 @@ it('renders PagesSelector correctly', () => {
     defaultPerPage="100"
     perPageRows={[25, 50, 100, 200]}
     page="1"
-    perPage="50" />
+    perPage={50} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 
@@ -20,7 +20,7 @@ it('renders PagesSelector correctly', () => {
     defaultPerPage="100"
     perPageRows={[25, 50, 100, 200]}
     page="1"
-    perPage="50" />
+    perPage={50} />
   );
 
   obj.instance().shouldComponentUpdate({

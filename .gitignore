@@ -3,5 +3,5 @@ node_modules/
 npm-debug.log.*
 jest/*
 *.log*
-.idea/
-__tests__/components/__snapshots__/
+.idea/*
+__tests__/components/__snapshots__/*

@@ -11,12 +11,12 @@ exports[`test renders Pagination correctly 1`] = `
       className={undefined}>
       <div
         className="gt_page prev"
-        data-from={-50}
+        data-from={200}
         onClick={undefined}>
         Previous
       </div>
       <div
-        className="gt_page"
+        className="gt_page selected"
         data-from={0}
         onClick={undefined}>
         1

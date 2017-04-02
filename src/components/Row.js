@@ -48,6 +48,8 @@ class Row extends React.Component {
 Row.propTypes = {
   gteRowId: PropTypes.number,
   count: PropTypes.number,
+  minRow: PropTypes.number,
+  maxRow: PropTypes.number,
   selectedRows: PropTypes.array
 }
 

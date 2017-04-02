@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import classNames from 'classnames/bind';
 import styles from '../css/styles.css'
 
@@ -118,6 +118,13 @@ class Pagination extends React.Component {
       </div>
     )
   }
+}
+
+Pagination.propTypes = {
+  page: PropTypes.number,
+  perPage: PropTypes.number,
+  countRows: PropTypes.number,
+  fromRow: PropTypes.number
 }
 
 export default Pagination

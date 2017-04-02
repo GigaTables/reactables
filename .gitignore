@@ -5,3 +5,4 @@ jest/*
 *.log*
 .idea/*
 __tests__/components/__snapshots__/*
+coverage/lcov-report/*

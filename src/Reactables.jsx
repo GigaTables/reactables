@@ -13,10 +13,28 @@ class Reactables extends Main {
   constructor(props)
   {
     super(props);
+    this.defaultSettings = {
+      struct: {
+        search: ['top', 'bottom'],
+        rowsSelector: ['asc', 'top', 'bottom'],
+        pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
+        infiniteScroll: false
+      },
+      lang: 'en',
+      perPageRows: [25, 50, 100, 200, 500],
+      defaultPerPage: 50,
+      columns: [],
+      columnOpts: [],
+      tableOpts: {
+          buttons: [],
+          theme: 'std'
+      }
+    };
+
     this.state = {
       dataRows:null,
       countRows:0,
-      perPage:50,
+      perPage: (typeof props.settings.defaultPerPage !== CommonConstants.UNDEFINED) ? props.settings.defaultPerPage : this.defaultSettings.defaultPerPage,
       page:1,
       fromRow:0,
       dataSearch:null,
@@ -49,23 +67,6 @@ class Reactables extends Main {
     this.customColumns = [];
     this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0;
     // these default sets will merge with users sets
-    this.defaultSettings = {
-      struct: {
-        search: ['top', 'bottom'],
-        rowsSelector: ['asc', 'top', 'bottom'],
-        pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
-        infiniteScroll: false
-      },
-      lang: 'en',
-      perPageRows: [25, 50, 100, 200, 500],
-      defaultPerPage: 25,
-      columns: [],
-      columnOpts: [],
-      tableOpts: {
-          buttons: [],
-          theme: 'std'
-      }
-    };
     this.build();
   }
 

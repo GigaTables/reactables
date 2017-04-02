@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1491130890392" clover="3.2.0">
-  <project timestamp="1491130890392" name="All files">
-    <metrics statements="244" coveredstatements="98" conditionals="142" coveredconditionals="24" methods="47" coveredmethods="18" elements="433" coveredelements="140" complexity="0" loc="244" ncloc="244" packages="1" files="12" classes="12">
+<coverage generated="1491132508148" clover="3.2.0">
+  <project timestamp="1491132508148" name="All files">
+    <metrics statements="244" coveredstatements="108" conditionals="142" coveredconditionals="34" methods="47" coveredmethods="21" elements="433" coveredelements="163" complexity="0" loc="244" ncloc="244" packages="1" files="12" classes="12">
       <file name="Button.js" path="/srv/gigatables_react/src/components/Button.js">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="6" count="2" type="stmt"/>
@@ -17,11 +17,11 @@
         <line num="46" count="2" type="stmt"/>
       </file>
       <file name="Column.js" path="/srv/gigatables_react/src/components/Column.js">
-        <metrics statements="5" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="1"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
       </file>
       <file name="CommonConstants.js" path="/srv/gigatables_react/src/components/CommonConstants.js">
@@ -168,44 +168,44 @@
         <line num="9" count="0" type="stmt"/>
       </file>
       <file name="Header.js" path="/srv/gigatables_react/src/components/Header.js">
-        <metrics statements="21" coveredstatements="13" conditionals="24" coveredconditionals="7" methods="4" coveredmethods="3"/>
+        <metrics statements="21" coveredstatements="20" conditionals="24" coveredconditionals="15" methods="4" coveredmethods="4"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="78" count="2" type="stmt"/>
+        <line num="79" count="2" type="stmt"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
       </file>
       <file name="Lang.js" path="/srv/gigatables_react/src/components/Lang.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="4" type="stmt"/>
       </file>
       <file name="PagesSelector.js" path="/srv/gigatables_react/src/components/PagesSelector.js">
-        <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="3"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="31" count="4" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
       </file>
       <file name="Pagination.js" path="/srv/gigatables_react/src/components/Pagination.js">
         <metrics statements="53" coveredstatements="25" conditionals="35" coveredconditionals="6" methods="2" coveredmethods="1"/>

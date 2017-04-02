@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Header from '../../src/components/Header.js'
+import { shallow } from 'enzyme';
 
 const columns = [
    {// include all defaults
@@ -46,4 +47,20 @@ it('renders Header title correctly', () => {
     columns={columns}>Title</Header>
   ).toJSON();
   expect(tree).toMatchSnapshot();
+
+  const obj = shallow(
+    <Header
+    gteSort="sortable"
+    data="id"
+    sortDirection="1"
+    sortId="0"
+    columnsSearch={{}}
+    columns={columns}>Id</Header>
+  );
+
+  obj.instance().shouldComponentUpdate({
+    gteSort: "sortable",
+    sortId: 1,
+    sortDirection: 0
+  });
 });

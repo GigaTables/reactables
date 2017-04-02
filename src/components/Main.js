@@ -349,7 +349,7 @@ class Main extends React.Component {
   updatePerPage(e)
   {
     this.setState({
-        perPage: e.target.value
+        perPage: parseInt(e.target.value)
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
   }
 

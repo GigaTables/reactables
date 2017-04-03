@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Editor from '../../src/components/Editor.js'
+import { shallow } from 'enzyme';
 
 var editor = {
   ajax: 'http://gigatables.loc/editor.php',
@@ -156,4 +157,61 @@ it('renders Editor correctly', () => {
     fieldsEdit={{}} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
+
+  const obj = shallow(
+    <Editor
+    lang="en"
+    countRows="229"
+    fromRow="0"
+    page="1"
+    perPage="50"
+    active={true}
+    editor={editor}
+    columns={editor.fields}
+    struct={settings.struct}
+    tableOpts={settings.tableOpts}
+    selectedRows={[1]}
+    selectedIds={[187]}
+    fieldsEdit={{}} />
+  );
+
+  obj.instance().setDataIndices({
+    columns: settings.columns
+  });
+
+  obj.instance().setFields({
+    action: 'create',
+    editor: editor
+  });
+
+  obj.instance().setFields({
+    action: 'edit',
+    editor: editor
+  });
+
+  obj.instance().setFields({
+    action: 'delete',
+    editor: editor,
+    selectedRows: [1, 2, 3]
+  });
+
+  obj.instance().triggerBefore({
+    type: 'editor_create'
+  });
+
+  obj.instance().triggerAfter({
+    type: 'editor_remove'
+  });
+
+  obj.instance().onChange({
+    target: {
+      name: 'foo',
+      value: 'bar'
+    }
+  });
+
+  obj.instance().stopPropagation({
+    stopPropagation: () => {}
+  });
+
 });

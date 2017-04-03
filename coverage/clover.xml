@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1491145914332" clover="3.2.0">
-  <project timestamp="1491145914333" name="All files">
-    <metrics statements="246" coveredstatements="113" conditionals="142" coveredconditionals="39" methods="47" coveredmethods="23" elements="435" coveredelements="175" complexity="0" loc="246" ncloc="246" packages="1" files="12" classes="12">
-      <file name="Button.js" path="/srv/gigatables_react/src/components/Button.js">
+<coverage generated="1491218025045" clover="3.2.0">
+  <project timestamp="1491218025045" name="All files">
+    <metrics statements="246" coveredstatements="187" conditionals="142" coveredconditionals="89" methods="47" coveredmethods="35" elements="435" coveredelements="311" complexity="0" loc="246" ncloc="246" packages="1" files="12" classes="12">
+      <file name="Button.js" path="/Users/arthur/www/gigatables_react/src/components/Button.js">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
@@ -16,7 +16,7 @@
         <line num="32" count="3" type="stmt"/>
         <line num="46" count="2" type="stmt"/>
       </file>
-      <file name="Column.js" path="/srv/gigatables_react/src/components/Column.js">
+      <file name="Column.js" path="/Users/arthur/www/gigatables_react/src/components/Column.js">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
@@ -24,79 +24,79 @@
         <line num="15" count="3" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
       </file>
-      <file name="CommonConstants.js" path="/srv/gigatables_react/src/components/CommonConstants.js">
+      <file name="CommonConstants.js" path="/Users/arthur/www/gigatables_react/src/components/CommonConstants.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
       </file>
-      <file name="Editor.js" path="/srv/gigatables_react/src/components/Editor.js">
-        <metrics statements="123" coveredstatements="24" conditionals="60" coveredconditionals="5" methods="25" coveredmethods="5"/>
+      <file name="Editor.js" path="/Users/arthur/www/gigatables_react/src/components/Editor.js">
+        <metrics statements="123" coveredstatements="82" conditionals="60" coveredconditionals="39" methods="25" coveredmethods="17"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="6" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="2" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="106" count="0" type="stmt"/>
-        <line num="111" count="0" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="20" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="43" count="8" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="7" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="6" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="6" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="6" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="94" count="12" type="stmt"/>
+        <line num="95" count="12" type="stmt"/>
+        <line num="96" count="12" type="stmt"/>
+        <line num="97" count="12" type="stmt"/>
+        <line num="98" count="12" type="stmt"/>
+        <line num="99" count="12" type="stmt"/>
+        <line num="101" count="12" type="stmt"/>
+        <line num="102" count="12" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+        <line num="104" count="2" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+        <line num="106" count="2" type="stmt"/>
+        <line num="111" count="12" type="stmt"/>
         <line num="112" count="0" type="stmt"/>
         <line num="113" count="0" type="stmt"/>
         <line num="115" count="0" type="stmt"/>
-        <line num="117" count="0" type="stmt"/>
+        <line num="117" count="12" type="stmt"/>
         <line num="118" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="129" count="0" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
-        <line num="149" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="158" count="0" type="stmt"/>
+        <line num="121" count="12" type="stmt"/>
+        <line num="122" count="12" type="stmt"/>
+        <line num="123" count="12" type="stmt"/>
+        <line num="129" count="4" type="stmt"/>
+        <line num="136" count="4" type="stmt"/>
+        <line num="149" count="4" type="stmt"/>
+        <line num="150" count="4" type="stmt"/>
+        <line num="152" count="2" type="stmt"/>
+        <line num="158" count="2" type="stmt"/>
         <line num="160" count="0" type="stmt"/>
         <line num="161" count="0" type="stmt"/>
         <line num="162" count="0" type="stmt"/>
@@ -105,23 +105,23 @@
         <line num="165" count="0" type="stmt"/>
         <line num="168" count="0" type="stmt"/>
         <line num="174" count="0" type="stmt"/>
-        <line num="177" count="0" type="stmt"/>
-        <line num="178" count="0" type="stmt"/>
-        <line num="180" count="0" type="stmt"/>
-        <line num="181" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="183" count="0" type="stmt"/>
-        <line num="184" count="0" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
-        <line num="189" count="0" type="stmt"/>
-        <line num="191" count="0" type="stmt"/>
-        <line num="196" count="0" type="stmt"/>
-        <line num="198" count="0" type="stmt"/>
-        <line num="199" count="0" type="stmt"/>
+        <line num="177" count="2" type="stmt"/>
+        <line num="178" count="2" type="stmt"/>
+        <line num="180" count="2" type="stmt"/>
+        <line num="181" count="2" type="stmt"/>
+        <line num="182" count="4" type="stmt"/>
+        <line num="183" count="4" type="stmt"/>
+        <line num="184" count="4" type="stmt"/>
+        <line num="188" count="2" type="stmt"/>
+        <line num="189" count="2" type="stmt"/>
+        <line num="191" count="12" type="stmt"/>
+        <line num="196" count="1" type="stmt"/>
+        <line num="198" count="1" type="stmt"/>
+        <line num="199" count="3" type="stmt"/>
         <line num="200" count="0" type="stmt"/>
-        <line num="207" count="0" type="stmt"/>
-        <line num="209" count="0" type="stmt"/>
-        <line num="210" count="0" type="stmt"/>
+        <line num="207" count="1" type="stmt"/>
+        <line num="209" count="1" type="stmt"/>
+        <line num="210" count="3" type="stmt"/>
         <line num="211" count="0" type="stmt"/>
         <line num="218" count="0" type="stmt"/>
         <line num="219" count="0" type="stmt"/>
@@ -148,17 +148,17 @@
         <line num="249" count="0" type="stmt"/>
         <line num="250" count="0" type="stmt"/>
         <line num="257" count="0" type="stmt"/>
-        <line num="269" count="1" type="stmt"/>
-        <line num="270" count="1" type="stmt"/>
-        <line num="271" count="1" type="stmt"/>
-        <line num="276" count="1" type="stmt"/>
-        <line num="281" count="1" type="stmt"/>
+        <line num="269" count="3" type="stmt"/>
+        <line num="270" count="3" type="stmt"/>
+        <line num="271" count="3" type="stmt"/>
+        <line num="276" count="3" type="stmt"/>
+        <line num="281" count="3" type="stmt"/>
       </file>
-      <file name="EditorConstants.js" path="/srv/gigatables_react/src/components/EditorConstants.js">
+      <file name="EditorConstants.js" path="/Users/arthur/www/gigatables_react/src/components/EditorConstants.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="6" type="stmt"/>
       </file>
-      <file name="Exceptions.js" path="/srv/gigatables_react/src/components/Exceptions.js">
+      <file name="Exceptions.js" path="/Users/arthur/www/gigatables_react/src/components/Exceptions.js">
         <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -167,7 +167,7 @@
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
       </file>
-      <file name="Header.js" path="/srv/gigatables_react/src/components/Header.js">
+      <file name="Header.js" path="/Users/arthur/www/gigatables_react/src/components/Header.js">
         <metrics statements="21" coveredstatements="20" conditionals="24" coveredconditionals="15" methods="4" coveredmethods="4"/>
         <line num="5" count="1" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
@@ -191,11 +191,11 @@
         <line num="80" count="2" type="stmt"/>
         <line num="86" count="2" type="stmt"/>
       </file>
-      <file name="Lang.js" path="/srv/gigatables_react/src/components/Lang.js">
+      <file name="Lang.js" path="/Users/arthur/www/gigatables_react/src/components/Lang.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="4" type="stmt"/>
       </file>
-      <file name="PagesSelector.js" path="/srv/gigatables_react/src/components/PagesSelector.js">
+      <file name="PagesSelector.js" path="/Users/arthur/www/gigatables_react/src/components/PagesSelector.js">
         <metrics statements="10" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="3"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -208,32 +208,32 @@
         <line num="31" count="8" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
       </file>
-      <file name="Pagination.js" path="/srv/gigatables_react/src/components/Pagination.js">
-        <metrics statements="54" coveredstatements="27" conditionals="35" coveredconditionals="8" methods="2" coveredmethods="2"/>
+      <file name="Pagination.js" path="/Users/arthur/www/gigatables_react/src/components/Pagination.js">
+        <metrics statements="54" coveredstatements="43" conditionals="35" coveredconditionals="24" methods="2" coveredmethods="2"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="41" count="10" type="stmt"/>
-        <line num="42" count="10" type="stmt"/>
-        <line num="46" count="10" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="41" count="17" type="stmt"/>
+        <line num="42" count="17" type="stmt"/>
+        <line num="46" count="17" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
@@ -241,31 +241,31 @@
         <line num="57" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="6" type="stmt"/>
+        <line num="73" count="6" type="stmt"/>
+        <line num="74" count="6" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
         <line num="77" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
         <line num="81" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="95" count="10" type="stmt"/>
+        <line num="84" count="6" type="stmt"/>
+        <line num="88" count="6" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="95" count="16" type="stmt"/>
         <line num="96" count="10" type="stmt"/>
-        <line num="102" count="2" type="stmt"/>
-        <line num="103" count="2" type="stmt"/>
-        <line num="105" count="2" type="stmt"/>
-        <line num="107" count="2" type="stmt"/>
+        <line num="102" count="3" type="stmt"/>
+        <line num="103" count="3" type="stmt"/>
+        <line num="105" count="3" type="stmt"/>
+        <line num="107" count="3" type="stmt"/>
         <line num="123" count="1" type="stmt"/>
       </file>
-      <file name="Row.js" path="/srv/gigatables_react/src/components/Row.js">
+      <file name="Row.js" path="/Users/arthur/www/gigatables_react/src/components/Row.js">
         <metrics statements="6" coveredstatements="6" conditionals="13" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
@@ -274,7 +274,7 @@
         <line num="34" count="2" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
       </file>
-      <file name="Search.js" path="/srv/gigatables_react/src/components/Search.js">
+      <file name="Search.js" path="/Users/arthur/www/gigatables_react/src/components/Search.js">
         <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>

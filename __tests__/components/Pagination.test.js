@@ -7,12 +7,22 @@ it('renders Pagination correctly', () => {
   const tree = renderer.create(
     <Pagination
     lang="en"
-    countRows={229}
+    countRows={249}
     fromRow={0}
     page={1}
     perPage={50} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
+
+  const treeMore = renderer.create(
+    <Pagination
+    lang="en"
+    countRows={555}
+    fromRow={450}
+    page={9}
+    perPage={50} />
+  ).toJSON();
+  expect(treeMore).toMatchSnapshot();
 
   const obj = shallow(
     <Pagination

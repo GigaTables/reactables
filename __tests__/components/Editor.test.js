@@ -210,4 +210,8 @@ it('renders Editor correctly', () => {
     }
   });
 
+  obj.instance().stopPropagation({
+    stopPropagation: () => {}
+  });
+
 });

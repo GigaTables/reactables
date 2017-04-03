@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1491218025045" clover="3.2.0">
-  <project timestamp="1491218025045" name="All files">
-    <metrics statements="246" coveredstatements="187" conditionals="142" coveredconditionals="89" methods="47" coveredmethods="35" elements="435" coveredelements="311" complexity="0" loc="246" ncloc="246" packages="1" files="12" classes="12">
+<coverage generated="1491218778165" clover="3.2.0">
+  <project timestamp="1491218778165" name="All files">
+    <metrics statements="246" coveredstatements="188" conditionals="142" coveredconditionals="89" methods="47" coveredmethods="36" elements="435" coveredelements="313" complexity="0" loc="246" ncloc="246" packages="1" files="12" classes="12">
       <file name="Button.js" path="/Users/arthur/www/gigatables_react/src/components/Button.js">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="6" count="2" type="stmt"/>
@@ -29,7 +29,7 @@
         <line num="1" count="7" type="stmt"/>
       </file>
       <file name="Editor.js" path="/Users/arthur/www/gigatables_react/src/components/Editor.js">
-        <metrics statements="123" coveredstatements="82" conditionals="60" coveredconditionals="39" methods="25" coveredmethods="17"/>
+        <metrics statements="123" coveredstatements="83" conditionals="60" coveredconditionals="39" methods="25" coveredmethods="18"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -147,7 +147,7 @@
         <line num="247" count="0" type="stmt"/>
         <line num="249" count="0" type="stmt"/>
         <line num="250" count="0" type="stmt"/>
-        <line num="257" count="0" type="stmt"/>
+        <line num="257" count="1" type="stmt"/>
         <line num="269" count="3" type="stmt"/>
         <line num="270" count="3" type="stmt"/>
         <line num="271" count="3" type="stmt"/>

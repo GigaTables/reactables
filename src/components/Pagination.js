@@ -99,6 +99,18 @@ class Pagination extends React.Component {
         }
     }
 
+    if (pages > 0 && pagesContent.length === 0) { // bug-fix with CommonConstants.MORE_PAGES === pages
+      for (var p = 0;p < pages;++p) {
+        let currentPage = p + 1, prevPage = p - 1, nextPage = p + 1;
+        let pageClasses = classNames({
+          gt_page: true,
+          selected: (currentPage === page) ? true : false
+        });
+        pagesContent[p] = <div key={p} onClick={this.props.updatePagination}
+          data-from={p*perPage} className={pageClasses}>{currentPage}</div>;
+      }
+    }
+
     let prev = (page === 1) ? perPage * (pages - 1) : perPage * (page - 2),
     next = (page === pages) ? 0 : perPage * (page);
 

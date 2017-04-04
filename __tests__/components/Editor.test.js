@@ -139,10 +139,43 @@ var settings = {
  }
 };
 
+describe("Editor", () => {
+
+beforeEach(() => {
+  global.editorUpdate = jest.fn().mockImplementation((e, dataResp) => {
+
+  });
+  global.fetch = jest.fn().mockImplementation(() => {
+      var p = new Promise((resolve, reject) => {
+        resolve({
+          ok: true,
+          Id: '123',
+          json: function() {
+            return {"rows":[
+              {
+                "GT_RowId":123,
+                "title":"Test Bar 123st row",
+                "id":123,
+                "desc":"Lorem Ipsum is simply dummy Bar 7196 text of the printing and typesetting",
+                "info":"some info some info some info some info",
+                "date":"13:23:43 02:04:2017",
+                "field1":123,
+                "field2":1357,
+                "field3":12468
+              }
+            ]};
+          }
+        });
+      });
+      return p;
+  });
+});
+
 it('renders Editor correctly', () => {
   const tree = renderer.create(
     <Editor
     lang="en"
+    action="create"
     countRows="229"
     fromRow="0"
     page="1"
@@ -165,6 +198,7 @@ it('renders Editor correctly', () => {
     fromRow="0"
     page="1"
     perPage="50"
+    action="delete"
     active={true}
     editor={editor}
     columns={editor.fields}
@@ -213,5 +247,33 @@ it('renders Editor correctly', () => {
   obj.instance().stopPropagation({
     stopPropagation: () => {}
   });
+
+  obj.instance().btnClicked({
+    persist: () => {}
+  });
+
+  const objEdit = shallow(
+    <Editor
+    lang="en"
+    countRows="229"
+    fromRow="0"
+    page="1"
+    perPage="50"
+    action="edit"
+    active={true}
+    editor={editor}
+    columns={editor.fields}
+    struct={settings.struct}
+    tableOpts={settings.tableOpts}
+    selectedRows={[1]}
+    selectedIds={[187]}
+    fieldsEdit={{}} />
+  );
+
+  objEdit.instance().btnClicked({
+    persist: () => {}
+  });
+
+});
 
 });

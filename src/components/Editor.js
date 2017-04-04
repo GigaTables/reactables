@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import {EditorException} from './Exceptions';
-import editorStyles from '../css/editor.css'
+import editorStyles from '../css/editor.css';
 import classNames from 'classnames/bind';
-import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import superagent from 'superagent';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
@@ -89,6 +89,32 @@ class Editor extends React.Component {
     })
   }
 
+  fileUpload()
+  {
+    if (this.filesInput.files !== CommonConstants.UNDEFINED) {
+      const { ajaxFiles } = this.props.editor;
+      let formData = new FormData();
+      const files = this.filesInput.files;
+      for (var key in files) {
+        // check if this is a file:
+        if (files.hasOwnProperty(key) && files[key] instanceof File) {
+            formData.append(key, files[key]);
+        }
+      }
+
+      superagent.post(ajaxFiles)
+      .send(formData)
+      .end((err, response) => {
+        if(err) {
+            console.log('Error was accured while uploading files: ');
+            console.log(err);
+        } else if(response.ok) {
+            //this was successful, handle it here
+        }
+      });
+    }
+  }
+
   getFieldByType(index, object)
   {
     const { dataIndices } = this.state;
@@ -145,8 +171,16 @@ class Editor extends React.Component {
       case EditorConstants.TYPE_URL:
       case EditorConstants.TYPE_MONTH:
       case EditorConstants.TYPE_WEEK:
+        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} /></div><div className="clear"></div></div>;
+        break;
       case EditorConstants.TYPE_FILE:
-        htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label" htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label><div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes} id={fieldName} type={fieldType} name={fieldName} /></div><div className="clear"></div></div>;
+        htmlFields[i] = <div className="gte_editor_fields">
+          <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
+            <div className={editorStyles.gte_field}>
+              <input ref={(input) => { this.filesInput = input; }} {...attributes} id={fieldName} type={fieldType} name={fieldName} />
+            </div>
+            <div className="clear"></div>
+          </div>;
         break;
       case EditorConstants.TYPE_TEXTAREA:
         htmlFields[i] = <div className="gte_editor_fields">
@@ -221,6 +255,7 @@ class Editor extends React.Component {
     var dataResp = that.state.dataIndices;
     if (action === EditorConstants.ACTION_CREATE) {
       this.triggerBefore(EditorConstants.EDITOR_CREATE);
+      this.fileUpload();
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_POST,
       body: JSON.stringify(this.state.dataIndices)
@@ -232,6 +267,7 @@ class Editor extends React.Component {
       });
     } else if (action === EditorConstants.ACTION_EDIT) {
       this.triggerBefore(EditorConstants.EDITOR_EDIT);
+      this.fileUpload();
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_PUT,
       body: JSON.stringify(this.state.dataIndices)

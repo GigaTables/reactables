@@ -5,7 +5,7 @@ import Header from './src/components/Header.js'
 
 var editor = {
   ajax: 'http://gigatables.loc/editor.php',
-  ajaxFiles: 'uploadFiles.php',
+  ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
   struct: {
     buttons: ['top', 'bottom'] // buttons
   },

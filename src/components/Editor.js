@@ -106,7 +106,7 @@ class Editor extends React.Component {
       .send(formData)
       .end((err, response) => {
         if(err) {
-            console.log('Error was accured while uploading files: ');
+            console.log('Error has accured while uploading files: ');
             console.log(err);
         } else if(response.ok) {
             //this was successful, handle it here

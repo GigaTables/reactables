@@ -126,7 +126,7 @@ var settings = {
      searchable: true, // true by defualt
      discreteSearch: true, // false by default
      discreteSearchValue: function (title) {
-       return 'Поиск по полю ' + title;
+       return 'Search in field ' + title;
      }
    },
    {
@@ -252,10 +252,7 @@ var editor = {
         {'key1': 'val1'},
         {'key2': 'val2'}
       ],
-      type: 'checkbox', // select,checkbox,radio
-//              attrs: [
-//                {'multiple':true}
-//              ]
+      type: 'checkbox' // select,checkbox,radio
     },
     {
       label: "Article title:",

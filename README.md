@@ -16,6 +16,8 @@ GigaTables supports the following capabilities:
 
 -- discrete (per column) search,
 
+-- ajax files upload,
+
 -- shft/ctrl rows selection,
 
 -- trigger functions,
@@ -124,7 +126,7 @@ var settings = {
      searchable: true, // true by defualt
      discreteSearch: true, // false by default
      discreteSearchValue: function (title) {
-       return 'Поиск по полю ' + title;
+       return 'Search in field ' + title;
      }
    },
    {
@@ -250,10 +252,7 @@ var editor = {
         {'key1': 'val1'},
         {'key2': 'val2'}
       ],
-      type: 'checkbox', // select,checkbox,radio
-//              attrs: [
-//                {'multiple':true}
-//              ]
+      type: 'checkbox' // select,checkbox,radio
     },
     {
       label: "Article title:",
@@ -347,18 +346,18 @@ PS In some OS like Macintosh can be default conflicting hot keys, ex.: Cmd+Arrow
 Sure, it can be done by this additional option in editor:
 
 ```JS
-ajaxFiles: 'uploadFiles.php',
+ajaxFiles: 'https://example.com/upload/files',
 ```
 
-wich is point on script on the server where it should upload the file(s).
+which is pointing on script on the server where it should upload the file(s).
 
 And to add the actual field which will send the file to the server script:
 ```JS
-            {
-              label: "Image:",
-              name: "image",
-              type: 'file'
-            }
+    {
+      label: "Image:",
+      name: "image",
+      type: 'file'
+    }
 ```
 Ensure that the field is in *fields: [* option.
 
@@ -370,15 +369,16 @@ is on Your side.
 **Can I choose more then one row?**
 
 Yes, U can even choose not only the bunch of rows, but several bunches and some between them, by manipulating with:
-Ctrl+Left click (one row anywhere) and Shift+Left click (several rows).
+Ctrl+Left click (one row anywhere) and Shift+Left click (several rows). Also U can use hot-keys to select above/below Ctrl+Arrow Up/Ctrl+Arrow Down
+and Ctrl+A will select them all for current table-view.
 
 **Can I sort columns content?**
 
-Defenitelly, also it is simple enough to sort them jointly.
+Definitely, also it is simple enough to sort them jointly.
 
 **What does search field mean?**
 
-The main search field above (which is the default state, U can make it visible in the bottom) is useful for searching through all columns.
+The main search field is useful for searching through all columns.
 
 **Is it possible to search for a particular column in GT?**
 

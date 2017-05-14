@@ -1,5 +1,5 @@
-import React from 'react';
-import {EditorException} from './Exceptions';
+import React, { Component } from 'react';
+import { EditorException } from './Exceptions';
 import editorStyles from '../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
@@ -8,7 +8,7 @@ var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
-class Editor extends React.Component {
+class Editor extends Component {
   constructor(props)
   {
     super(props);

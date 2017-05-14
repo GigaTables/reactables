@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react'
-import styles from '../css/styles.css'
-import editor from '../css/editor.css'
+import React, { Component, PropTypes } from 'react';
+import styles from '../css/styles.css';
+import editor from '../css/editor.css';
 import classNames from 'classnames/bind';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 
-class Button extends React.Component {
+class Button extends Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);

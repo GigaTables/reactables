@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
-import styles from '../css/styles.css'
-import classNames from 'classnames/bind'
+import React, { Component, PropTypes } from 'react';
+import styles from '../css/styles.css';
+import classNames from 'classnames/bind';
 
-class Row extends React.Component {
+class Row extends Component {
   shouldComponentUpdate(nextProps) {
     const { gteRowId, count, selectedRows, minRow, maxRow } = this.props;
     return gteRowId !== nextProps.gteRowId

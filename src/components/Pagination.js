@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
-import styles from '../css/styles.css'
+import styles from '../css/styles.css';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
-class Pagination extends React.Component {
+class Pagination extends Component {
   shouldComponentUpdate(nextProps)
   {
     return this.props.countRows !== nextProps.countRows

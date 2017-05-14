@@ -1,12 +1,12 @@
-import React from 'react'
-import styles from '../css/styles.css'
-import editor from '../css/editor.css'
+import React, { Component } from 'react';
+import styles from '../css/styles.css';
+import editor from '../css/editor.css';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
-class Search extends React.Component {
+class Search extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.search !== nextProps.search;
   }

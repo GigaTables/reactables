@@ -1,9 +1,9 @@
-import React from 'react'
-import Main from './components/Main.js'
-import Tools from './components/Tools.js'
-import Editor from './components/Editor.js'
-import Pagination from './components/Pagination.js'
-import styles from './css/styles.css'
+import React, { PropTypes } from 'react';
+import Main from './components/Main.js';
+import Tools from './components/Tools.js';
+import Editor from './components/Editor.js';
+import Pagination from './components/Pagination.js';
+import styles from './css/styles.css';
 import { DataException } from './components/Exceptions';
 
 var CommonConstants = require('./components/CommonConstants');
@@ -410,8 +410,8 @@ class Reactables extends Main {
 }
 
 Reactables.propTypes = {
-  editor: React.PropTypes.object,
-  settings: React.PropTypes.object.isRequired
+  editor: PropTypes.object,
+  settings: PropTypes.object.isRequired
 }
 
 export default Reactables

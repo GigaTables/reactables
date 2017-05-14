@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react'
-import styles from '../css/styles.css'
+import React, { Component, PropTypes } from 'react';
+import styles from '../css/styles.css';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
-class PagesSelector extends React.Component {
+class PagesSelector extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.perPageRows !== nextProps.perPageRows
       || this.props.perPage !== nextProps.perPage;

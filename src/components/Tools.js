@@ -1,14 +1,14 @@
-import React from 'react'
-import Button from './Button.js'
-import PagesSelector from './PagesSelector.js'
-import Search from './Search.js'
-import styles from '../css/styles.css'
+import React, { Component } from 'react';
+import Button from './Button.js';
+import PagesSelector from './PagesSelector.js';
+import Search from './Search.js';
+import styles from '../css/styles.css';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
-class Tools extends React.Component {
+class Tools extends Component {
   getPagesSelection()
   {
     const {

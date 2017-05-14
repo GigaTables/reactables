@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react';
 import classNames from 'classnames/bind';
-import styles from '../css/styles.css'
+import styles from '../css/styles.css';
 
 var CommonConstants = require('./CommonConstants');
 
-class Header extends React.Component {
+class Header extends Component {
 
   constructor(props)
   {

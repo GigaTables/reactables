@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 
-class Column extends React.Component {
+class Column extends Component {
   shouldComponentUpdate(nextProps) {
     const { gteRowId, count, selectedRows, dataIndex } = this.props;
     return gteRowId !== nextProps.gteRowId

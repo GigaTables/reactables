@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Row from './Row.js'
-import Column from './Column.js'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Row from './Row.js';
+import Column from './Column.js';
 
 var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 var Lang = require('./Lang');
 
-class Main extends React.Component {
+class Main extends Component {
 
   constructor(props)
   {

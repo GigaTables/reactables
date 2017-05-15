@@ -185,10 +185,16 @@ class Reactables extends Main {
       that.setPagination();
     });
 
+    // turn on infinite scroll
     if (this.settings.struct.infiniteScroll === true) {
       window.addEventListener('scroll', (e) => {
         this.handleScroll();
       });
+    }
+
+    // turn on fixed headers
+    if (this.settings.struct.fixedHeader === true) {
+      this.fixHeaders();
     }
 
     // disabling keys
@@ -344,6 +350,38 @@ class Reactables extends Main {
       perPage={perPage}
       fromRow={fromRow}
       lang={lang} />)
+  }
+
+  fixHeaders()
+  {
+    var h = document.getElementsByTagName("thead")[0], readout = document.getElementsByTagName("tbody")[0];
+    var stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth;
+
+    window.onscroll = function(e) {
+      var ths = document.getElementsByTagName("tbody")[0].children[0].children;
+      var offset = window.pageYOffset;
+      var distance = h.offsetTop - offset;
+
+      if ((distance <= 0) && stuck === false) {
+        h.style.position = 'fixed';
+        h.style.top = '0px';
+        h.style.backgroundColor = '#f9f9f9';
+        stuck = true;
+        let fixedThs = document.getElementsByTagName("thead")[0].childNodes[0].childNodes;
+
+        for (let k in ths) {
+          if (typeof fixedThs[k] !== CommonConstants.UNDEFINED
+            && typeof fixedThs[k].style !== CommonConstants.UNDEFINED) {
+            fixedThs[k].style.width = ths[k].offsetWidth;
+          }
+        }
+      } else if (stuck === true && (offset <= stickPoint)) {
+        console.log('static');
+        h.style.position = 'static';
+        h.style.backgroundColor = '#fff';
+        stuck = false;
+      }
+    }
   }
 
   render() {

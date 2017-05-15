@@ -4,7 +4,6 @@
   min-width:650px;
 }
 table.gigatable {
-  border-collapse: separate;
   border-spacing: 0;
   /*box-sizing: content-box;*/
   font:normal 12px Tahoma;

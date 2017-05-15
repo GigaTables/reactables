@@ -15,9 +15,9 @@ export default StyleSheet.create({
         "minWidth": 650
     },
     "tablegigatable": {
-        "borderCollapse": "collapse",
         "borderSpacing": 0,
         "font": "normal 12px Tahoma",
+        "borderCollapse": "collapse",
         "marginTop": 0,
         "marginRight": "auto",
         "marginBottom": 0,

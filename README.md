@@ -111,7 +111,8 @@ var settings = {
  struct: {
    search: ['top', 'bottom'],
    rowsSelector: ['asc', 'top', 'bottom'],
-   pagination: ['bottom']
+   pagination: ['bottom'],
+   fixedHeader: true // default false
  },
  lang: 'en', // english default
  perPageRows: [25, 50, 100, 200, 500],
@@ -359,7 +360,13 @@ And to add the actual field which will send the file to the server script:
       type: 'file'
     }
 ```
-Ensure that the field is in *fields: [* option.
+Ensure that the field is in *fields: [* option. U can even specify:
+```JS
+attrs: [
+  {'multiple': ''}
+]
+```   
+to upload as many files as U need.
 
 **What types of fields can be used in editor?**
 
@@ -409,3 +416,11 @@ GigaTables plug-in has 2 types of triggers **triggerBefore** and **triggerAfter*
 
 Yes. For common search You should choose for which particular column it is needed and place `cISearch: true` option there,
 for discrete search use `discreteCISearch: true`.
+
+**Does GT have an ability to fix header while scrolling?**
+
+It has such an ability, U need only add:
+```JS
+  fixedHeader: true
+```
+to `struct` section of `settings` variable as in example above.

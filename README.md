@@ -371,21 +371,13 @@ to upload as many files as U need.
 
 **What types of fields can be used in editor?**
 
-You can use any HTML5 types, but responsibility for cross-browser supported is on Your side.
+You can use any HTML5 types, but responsibility for cross-browser support is on Your side.
 
 **Can I choose more then one row?**
 
 It is possible to even select not only the bunch of rows, but several bunches and some between them, by manipulating with:
 Ctrl+Left click (one row anywhere) and Shift+Left click (several rows). Also U can use hot-keys to select above/below Ctrl+Arrow Up/Ctrl+Arrow Down
 and Ctrl+A will select them all for current table-view.
-
-**Can I sort columns content?**
-
-Definitely, also it is simple enough to sort them jointly.
-
-**What does search field mean?**
-
-The main search field is useful for searching through all columns.
 
 **Is it possible to search for a particular column in GT?**
 
@@ -401,8 +393,6 @@ Specify any column U wanted to search by setting these options in *columns* part
               }              
             }
 ```
-
-additionally U may want to set a custom placeholder - it is possible via *discreteSearchValue* option.
 
 **Is there languages support?**
 

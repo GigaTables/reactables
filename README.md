@@ -20,6 +20,8 @@ GigaTables supports the following capabilities:
 
 -- shft/ctrl rows selection,
 
+-- fixed header
+
 -- trigger functions,
 
 -- dynamic column content functions,
@@ -325,7 +327,6 @@ the `ajaxAutoloadPeriod` must be set in seconds and the interval should be place
 if U wish to switch the mode to classic loader without touching settings structure - set the `ajaxAutoloadData: false`.
 
 ## Hot keys
-
 To efficiently manage table behavior You can use the following hot keys:
 
 - Ctrl+Arrow Up - selects rows above the selected
@@ -370,12 +371,11 @@ to upload as many files as U need.
 
 **What types of fields can be used in editor?**
 
-Any, really - You can use any HTML5 types, they are already embedded, but responsibility of supported ones (in different Browsers)
-is on Your side.
+You can use any HTML5 types, but responsibility for cross-browser supported is on Your side.
 
 **Can I choose more then one row?**
 
-Yes, U can even choose not only the bunch of rows, but several bunches and some between them, by manipulating with:
+It is possible to even select not only the bunch of rows, but several bunches and some between them, by manipulating with:
 Ctrl+Left click (one row anywhere) and Shift+Left click (several rows). Also U can use hot-keys to select above/below Ctrl+Arrow Up/Ctrl+Arrow Down
 and Ctrl+A will select them all for current table-view.
 
@@ -389,7 +389,7 @@ The main search field is useful for searching through all columns.
 
 **Is it possible to search for a particular column in GT?**
 
-Yes it is, U can specify any column U wanted to search by setting these options in *columns* parts eg.:
+Specify any column U wanted to search by setting these options in *columns* parts eg.:
 
 ```JS
           columns: [
@@ -406,7 +406,7 @@ additionally U may want to set a custom placeholder - it is possible via *discre
 
 **Is there languages support?**
 
-Sure, You can pick one of 7 languages: English, German, Russian, French, Spanish, Chinese, Hindi - en, gr, ru, fr, es, ch, hi respectively.   
+You can pick one of 7 languages: English, German, Russian, French, Spanish, Chinese, Hindi - en, gr, ru, fr, es, ch, hi respectively.   
 
 **Does GT have any event-triggered functions, ex.: to run something before/after pop-up?**
 
@@ -419,7 +419,7 @@ for discrete search use `discreteCISearch: true`.
 
 **Does GT have an ability to fix header while scrolling?**
 
-It has such an ability, U need only add:
+Just add:
 ```JS
   fixedHeader: true
 ```

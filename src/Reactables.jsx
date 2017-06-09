@@ -358,7 +358,6 @@ class Reactables extends Main {
   {
     var h = document.getElementsByTagName("thead")[0], readout = document.getElementsByTagName("tbody")[0];
     var stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth;
-
     window.onscroll = function(e) {
       var ths = document.getElementsByTagName("tbody")[0].children[0].children;
       var offset = window.pageYOffset;
@@ -378,7 +377,6 @@ class Reactables extends Main {
           }
         }
       } else if (stuck === true && (offset <= stickPoint)) {
-        console.log('static');
         h.style.position = 'static';
         h.style.backgroundColor = '#fff';
         stuck = false;

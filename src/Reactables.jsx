@@ -283,27 +283,28 @@ class Reactables extends Main {
   getEditor(display)
   {
     const { editor } = this.props;
-    const {
-      active,
-      action,
-      selectedRows,
-      selectedIds,
-      countRows,
-      page,
-      opacity,
-      popup_button,
-      popup_title,
-      search,
-      fieldsEdit
-    } = this.state;
+    if(typeof editor !== CommonConstants.UNDEFINED) {
+      const {
+        active,
+        action,
+        selectedRows,
+        selectedIds,
+        countRows,
+        page,
+        opacity,
+        popup_button,
+        popup_title,
+        search,
+        fieldsEdit
+      } = this.state;
 
-    const {
-      tableOpts,
-      lang,
-      struct
-    } = this.settings;
+      const {
+        tableOpts,
+        lang,
+        struct
+      } = this.settings;
 
-    return (
+      return (
       <Editor
         active={active}
         action={action}
@@ -321,7 +322,8 @@ class Reactables extends Main {
         struct={struct}
         display={display}
         tableOpts={tableOpts} />
-    )
+      )
+    }
   }
 
   getPagination(display)
@@ -395,7 +397,6 @@ class Reactables extends Main {
         struct
       } = this.settings;
       // ==== settings ===
-      const { editor } = this.props;
       const {
         dataRows,
         active,

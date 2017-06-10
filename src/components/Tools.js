@@ -62,7 +62,6 @@ class Tools extends Component {
       display
     } = this.props;
 
-    if(typeof tableOpts !== CommonConstants.UNDEFINED) {
     var language = Lang[lang];
     let buttons = [];
     if (typeof tableOpts.buttons !== CommonConstants.UNDEFINED
@@ -95,7 +94,6 @@ class Tools extends Component {
       });
     }
     return buttons;
-  }
   }
 
   render()

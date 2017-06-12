@@ -65,7 +65,7 @@ class Tools extends Component {
     var language = Lang[lang];
     let buttons = [];
     if (typeof tableOpts.buttons !== CommonConstants.UNDEFINED
-      && tableOpts.buttons > 0
+      && tableOpts.buttons.length > 0
       && tableOpts.buttonsPosition.indexOf(display) !== -1) {
       tableOpts.buttons.map((btn, i) => {
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {

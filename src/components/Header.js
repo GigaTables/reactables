@@ -59,13 +59,14 @@ class Header extends Component {
     return <div className={styles.gt_th_box}>{children}</div>;
   }
 
-  render() {
+  getHeader()
+  {
     const {
       sortDirection,
       gteSort,
       sortId,
       updateSort,
-      columns
+      columns,
     } = this.props;
 
     if (typeof columns[sortId].discreteSearch !== CommonConstants.UNDEFINED
@@ -90,6 +91,10 @@ class Header extends Component {
         {this.getHeaderContent()}
       </th>
     )
+  }
+
+  render() {
+    return this.getHeader();
   }
 }
 

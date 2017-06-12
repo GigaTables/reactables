@@ -157,11 +157,11 @@ class Main extends Component {
       }
     }
     // process rows
-    jsonDataPerPage.map((object, objectIndex) => {
+    jsonDataPerPage.forEach((object, objectIndex) => {
         let cols = [], rowId = 0;
         rowId = this.getRowId(object);
         // process cols
-        this.props.children.map((th, idx) => {
+        this.props.children.forEach((th, idx) => {
           const { data } = th.props;
           // check if a JSON object has this data field + visible
           if(typeof data !== CommonConstants.UNDEFINED && this.visibleCols[data] === true) {
@@ -401,10 +401,10 @@ class Main extends Component {
     const { columns } = this.settings;
     if (typeof e === CommonConstants.UNDEFINED) { // on start-up - setting default
       let sortedButtons = [];
-      this.props.children.map((th, index) => {
+      this.props.children.forEach((th, index) => {
         const { data } = th.props;
         if(typeof data !== CommonConstants.UNDEFINED) {
-          columns.map((column, colIdx) => {
+          columns.forEach((column, colIdx) => {
             if(column[CommonConstants.DATA] === data
               && (typeof column[CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
                 || column[CommonConstants.SORTABLE] === true)) {
@@ -421,7 +421,7 @@ class Main extends Component {
       let period = this.nowMillis - this.lastTimeKeyup;
 
       if (period > CommonConstants.SORT_PERIOD) {
-      this.props.children.map((th, idx) => {
+      this.props.children.forEach((th, idx) => {
         var that = this;
         const { sortButtons, dataSearch } = that.state;
         const { data } = th.props;
@@ -575,7 +575,7 @@ class Main extends Component {
     const { columns } = this.settings;
     let sortedCols = [];
 
-    this.props.children.map((th, index) => {
+    this.props.children.forEach((th, index) => {
     const { data } = th.props;
     if (typeof data !== CommonConstants.UNDEFINED
         && this.visibleCols[data] === true) {

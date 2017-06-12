@@ -74,7 +74,7 @@ class Reactables extends Main {
   {
     this.settings = loAssign({}, this.defaultSettings, this.props.settings);
     const { columns, columnOpts } = this.settings;
-    columns.map((object, index) => {
+    columns.forEach((object, index) => {
       this.setSearchableCols(object);
       this.setSearchableCase(object);
       this.setSortableCols(object);
@@ -82,7 +82,7 @@ class Reactables extends Main {
       this.setVisibleCols(object);
     });
     if (typeof columnOpts !== CommonConstants.UNDEFINED) {
-      columnOpts.map((object, index) => {
+      columnOpts.forEach((object, index) => {
         this.setCustomColumns(object);
       });
     }

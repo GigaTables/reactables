@@ -32,7 +32,7 @@ class Editor extends Component {
   {
     let cols = props.columns;
     this.dataIndices = [];
-    cols.map((column, index) => {
+    cols.forEach((column, index) => {
       this.dataIndices[column.name] = '';
     });
   }
@@ -53,7 +53,7 @@ class Editor extends Component {
   setCreateFields(editorFields)
   {
     let fields = [];
-    editorFields.map((object, index) => {
+    editorFields.forEach((object, index) => {
       fields[index] = this.getFieldByType(index, object);
     });
     return fields;
@@ -62,7 +62,7 @@ class Editor extends Component {
   setEditFields(editorFields)
   {
     let fields = [];
-    editorFields.map((object, index) => {
+    editorFields.forEach((object, index) => {
       fields[index] = this.getFieldByType(index, object);
     });
     return fields;
@@ -72,7 +72,7 @@ class Editor extends Component {
   {
     let fields = [], lastId = 0;
     this.state.dataIndices = this.props.selectedIds;
-    this.props.selectedIds.map((object, index) => {
+    this.props.selectedIds.forEach((object, index) => {
       fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object} />;
       lastId = index;
     });

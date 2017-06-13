@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { EditorException } from './Exceptions';
 import editorStyles from '../css/editor.css';
 import classNames from 'classnames/bind';
@@ -32,7 +32,7 @@ class Editor extends Component {
   {
     let cols = props.columns;
     this.dataIndices = [];
-    cols.map((column, index) => {
+    cols.forEach((column, index) => {
       this.dataIndices[column.name] = '';
     });
   }
@@ -53,7 +53,7 @@ class Editor extends Component {
   setCreateFields(editorFields)
   {
     let fields = [];
-    editorFields.map((object, index) => {
+    editorFields.forEach((object, index) => {
       fields[index] = this.getFieldByType(index, object);
     });
     return fields;
@@ -62,7 +62,7 @@ class Editor extends Component {
   setEditFields(editorFields)
   {
     let fields = [];
-    editorFields.map((object, index) => {
+    editorFields.forEach((object, index) => {
       fields[index] = this.getFieldByType(index, object);
     });
     return fields;
@@ -72,7 +72,7 @@ class Editor extends Component {
   {
     let fields = [], lastId = 0;
     this.state.dataIndices = this.props.selectedIds;
-    this.props.selectedIds.map((object, index) => {
+    this.props.selectedIds.forEach((object, index) => {
       fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object} />;
       lastId = index;
     });
@@ -250,7 +250,7 @@ class Editor extends Component {
   btnClicked(e)
   {
     e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
-    const { action, editorUpdate } = this.props;
+    const { action, editorUpdate, selectedIds } = this.props;
     let ajaxUrl = this.props.editor.ajax, that = this;
     var dataResp = that.state.dataIndices;
     if (action === EditorConstants.ACTION_CREATE) {
@@ -268,9 +268,13 @@ class Editor extends Component {
     } else if (action === EditorConstants.ACTION_EDIT) {
       this.triggerBefore(EditorConstants.EDITOR_EDIT);
       this.fileUpload();
+      // fill-in id
+      let payload = Object.assign({}, this.state.dataIndices, {
+          ['id']: selectedIds[0]
+      });
       fetch(ajaxUrl, {
       method: EditorConstants.HTTP_METHOD_PUT,
-      body: JSON.stringify(this.state.dataIndices)
+      body: JSON.stringify(payload)
       }).then(response => response.json()).then((data) => {
         editorUpdate(e, dataResp);
         this.triggerAfter(EditorConstants.EDITOR_EDIT);
@@ -279,7 +283,7 @@ class Editor extends Component {
       this.triggerBefore(EditorConstants.EDITOR_REMOVE);
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
-        body: JSON.stringify(this.props.dataIndices)
+        body: JSON.stringify(this.props.dataIndices) // prop ids are passed from Reactables
       }).then(response => response.json()).then((data) => {
         // call editorUpdate method with passing all user-input values
         editorUpdate(e, dataResp);
@@ -293,6 +297,13 @@ class Editor extends Component {
     e.stopPropagation();
   }
 
+  btnClickedEnter(e)
+  {
+    if(e.keyCode === CommonConstants.ENTER_KEY) {
+      document.getElementById('gte_sent_btn').click();
+    }
+  }
+
   render()
   {
     const {
@@ -301,7 +312,7 @@ class Editor extends Component {
       popupTitle,
       action,
       popupButton,
-      active
+      active,
     } = this.props;
     this.setFields(this.props);
     let editorClasses = classNames({
@@ -319,7 +330,7 @@ class Editor extends Component {
       <div onClick={hidePopup} className={editorClasses}>
         <div className="gte_popup_container">
           <div className="gte_popup_container_wrapper">
-            <div onClick={this.stopPropagation.bind(this)} className="gte_form_border_box">
+            <div onKeyUp={this.btnClickedEnter.bind(this)} onClick={this.stopPropagation.bind(this)} className="gte_form_border_box">
               <div className="gte_form_fields">
                 <div className="gte_header">
                   <div className="gte_editor_title">{popupTitle}</div>
@@ -357,6 +368,14 @@ class Editor extends Component {
       </div>
     )
   }
+}
+
+Editor.PropTYpes = {
+  active: PropTypes.bool.isRequired,
+  editor: PropTypes.object.isRequired,
+  action: PropTypes.string.isRequired,
+  popupTitle: PropTypes.string.isRequired,
+  popupButton: PropTypes.string.isRequired,
 }
 
 export default Editor

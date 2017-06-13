@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styles from '../css/styles.css';
 import classNames from 'classnames/bind';
 
+var CommonConstants = require('./CommonConstants');
 var EditorConstants = require('./EditorConstants');
 
 class Column extends Component {
@@ -24,15 +25,43 @@ class Column extends Component {
   {
     super(props);
     this.state = {
-      cellValue: this.props.children,
+      dataIndices: {},
+      cellValue: props.children
     };
+    this.cell = props.cell;
   }
 
   changeCell(e)
   {
     this.setState({
-      cellValue: e.target.value
-    });
+      dataIndices: Object.assign({}, this.state.dataIndices, {
+        [e.target.dataset.index]: e.target.value
+      }),
+      cellValue: e.target.value,
+    })
+  }
+
+  btnClickedEnter(e)
+  {
+    e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
+    const { editorUpdate, selectedIds, editor } = this.props;
+    const { dataIndices } = this.state;
+    let ajaxUrl = editor.ajax, that = this;
+    var dataResp = that.state.dataIndices;
+    if(e.keyCode === CommonConstants.ENTER_KEY) {
+      // fill-in id
+      let payload = Object.assign({}, this.state.dataIndices, {
+          ['id']: parseInt(e.target.dataset.realid)
+      });
+      fetch(ajaxUrl, {
+      method: EditorConstants.HTTP_METHOD_PUT,
+      body: JSON.stringify(payload)
+      }).then(response => response.json()).then((data) => {
+        editorUpdate(e, dataResp);
+      });
+      // close cell
+      this.cell = 0;
+    }
   }
 
   getColumn()
@@ -83,11 +112,16 @@ class Column extends Component {
         data-index={dataIndex}
         data-cell={cell}
         onClick={editCell}>
-          {(editedCell === cell) ?
+          {(editedCell === this.cell) ?
             <input type={EditorConstants.TYPE_TEXT}
             value={cellValue}
+            data-realid={gteRowId}
+            data-index={dataIndex}
             data-cell={cell}
+            data-action="edit"
+            data-rowid={count}
             onClick={editCell}
+            onKeyUp={this.btnClickedEnter.bind(this)}
             onChange={(e) => {this.changeCell(e)}}/> : children}
       </td>
     )

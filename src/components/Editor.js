@@ -250,9 +250,15 @@ class Editor extends Component {
   btnClicked(e)
   {
     e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
-    const { action, editorUpdate, selectedIds } = this.props;
-    let ajaxUrl = this.props.editor.ajax, that = this;
+    const {
+      action,
+      editorUpdate,
+      selectedIds,
+      editor,
+    } = this.props;
+    let ajaxUrl = editor.ajax, that = this;
     var dataResp = that.state.dataIndices;
+
     if (action === EditorConstants.ACTION_CREATE) {
       this.triggerBefore(EditorConstants.EDITOR_CREATE);
       this.fileUpload();

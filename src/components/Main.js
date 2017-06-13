@@ -159,7 +159,6 @@ class Main extends Component {
         jsonDataPerPage = jsonData.slice(from, to);
       }
     }
-    console.log(editedCell);
     // process rows
     jsonDataPerPage.forEach((object, objectIndex) => {
         let cols = [], rowId = 0;
@@ -199,7 +198,9 @@ class Main extends Component {
               key={idx}
               editableCells={editableCells}
               editedCell={editedCell}
+              editor={this.props.editor}
               editCell={this.editCell.bind(this)}
+              editorUpdate={this.editorUpdate.bind(this)}
               cell={'' + objectIndex + idx}>{content}</Column>);
           }
         });
@@ -340,7 +341,6 @@ class Main extends Component {
     let action = e.target.dataset.action,
     rowId = 0,
     selectedRows = this.state.selectedRows;
-
     if (action === EditorConstants.ACTION_DELETE) {
       for (var dataKey in dataIndices) {
         for (var key in this.jsonData) {
@@ -358,8 +358,11 @@ class Main extends Component {
     } else if (action === EditorConstants.ACTION_CREATE) {
       this.jsonData.unshift(dataIndices);
     } else if (action === EditorConstants.ACTION_EDIT) {
+      if (selectedRows.length === 0) {
+        selectedRows[0] = e.target.dataset.rowid;
+      }
       for (var key in dataIndices) {
-        this.jsonData[this.state.selectedRows[0]][key] = dataIndices[key];
+        this.jsonData[selectedRows[0]][key] = dataIndices[key];
       }
     }
     this.createTable(this.jsonData, this.state.sortedButtons);

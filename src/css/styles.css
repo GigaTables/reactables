@@ -240,6 +240,6 @@ td {
 :global .select_checkbox::after {
   content: "\2713";
   text-shadow: 1px 1px #25adf1, -1px -1px #25adf1, 1px -1px #25adf1, -1px 1px #25adf1;
-  margin-left: -4px;
-  margin-top: -11px;
+  margin-left: 1px;
+  /*margin-top: -11px;*/
 }

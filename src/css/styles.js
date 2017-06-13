@@ -273,7 +273,6 @@ export default StyleSheet.create({
     ":global select_checkbox::after": {
         "content": "\\2713",
         "textShadow": "1px 1px #25adf1, -1px -1px #25adf1, 1px -1px #25adf1, -1px 1px #25adf1",
-        "marginLeft": -4,
-        "marginTop": -11
+        "marginLeft": 1
     }
 });

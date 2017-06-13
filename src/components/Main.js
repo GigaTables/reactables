@@ -640,6 +640,20 @@ class Main extends Component {
       });
   }
 
+  setSelectedIds()
+  {
+    let ids = [], elements  = document.querySelectorAll('.active');
+    for (let k in elements) {
+      if (typeof elements[k].dataset !== CommonConstants.UNDEFINED
+        && typeof elements[k].dataset.realid !== CommonConstants.UNDEFINED) {
+          ids.push(parseInt(elements[k].dataset.realid));
+      }
+    }
+    this.setState({
+      selectedIds: ids,
+    });
+  }
+
   addSelectedRows()
   {
     const {
@@ -649,7 +663,7 @@ class Main extends Component {
       arrowUp,
       arrowDown,
       perPage,
-      aDown
+      aDown,
     } = this.state;
 
     if (shiftDown === true && arrowUp === true && selectedRows.length > 0) {
@@ -658,8 +672,9 @@ class Main extends Component {
       if (min > 0) {
         rows.push(min-1);
         this.setState({
-          selectedRows: rows
+          selectedRows: rows,
         }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+        this.setSelectedIds();
       }
     } else if (arrowDown === true && shiftDown === true && selectedRows.length > 0) {
       let max = Math.max(...selectedRows),
@@ -667,8 +682,9 @@ class Main extends Component {
       if (max < perPage - 1) {
         rows.push(max+1);
         this.setState({
-          selectedRows: rows
+          selectedRows: rows,
         }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+        this.setSelectedIds();
       }
     } else if (ctrlDown === true && aDown === true) {
       let rows = [];
@@ -676,8 +692,9 @@ class Main extends Component {
         rows[i] = i;
       }
       this.setState({
-        selectedRows: rows
+        selectedRows: rows,
       }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+      this.setSelectedIds();
     }
   }
 

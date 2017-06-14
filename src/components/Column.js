@@ -26,9 +26,16 @@ class Column extends Component {
     super(props);
     this.state = {
       dataIndices: {},
-      cellValue: props.children
+      cellValue: props.children,
     };
     this.cell = props.cell;
+  }
+
+  componentDidUpdate()
+  {
+    if (typeof this.dataIn !== CommonConstants.UNDEFINED && this.dataIn !== null) {
+      this.dataIn.focus();
+    }
   }
 
   changeCell(e)
@@ -91,7 +98,6 @@ class Column extends Component {
       });
       return (
         <td
-          onClick={editRow}
           key={gteRowId}
           data-rowid={count}
           data-realid={gteRowId}
@@ -99,10 +105,19 @@ class Column extends Component {
           data-index={dataIndex}
           data-minrow={minRow}
           data-maxrow={maxRow}
-          ><div onClick={editRow} className={cellClasses}></div></td>
+          ><div
+          onClick={editRow}
+          className={cellClasses}
+          key={gteRowId}
+          data-rowid={count}
+          data-realid={gteRowId}
+          data-selectedrows={selectedRows}
+          data-index={dataIndex}
+          data-minrow={minRow}
+          data-maxrow={maxRow}></div>
+        </td>
       )
     }
-    // console.log('d: ' + editedCell + ' c: ' + cell);
     return (
       <td
         key={gteRowId}
@@ -113,7 +128,10 @@ class Column extends Component {
         data-cell={cell}
         onClick={editCell}>
           {(editedCell === this.cell) ?
-            <input type={EditorConstants.TYPE_TEXT}
+            <input
+            ref={(input) => {this.dataIn = input;}}
+            id="edit_cell"
+            type={EditorConstants.TYPE_TEXT}
             value={cellValue}
             data-realid={gteRowId}
             data-index={dataIndex}

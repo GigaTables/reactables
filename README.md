@@ -116,7 +116,8 @@ var settings = {
    search: ['top', 'bottom'],
    rowsSelector: ['asc', 'top', 'bottom'],
    pagination: ['bottom'],
-   fixedHeader: true // default false
+   fixedHeader: true, // default false
+   editableCells: true, // default false
  },
  lang: 'en', // english default
  perPageRows: [25, 50, 100, 200, 500],
@@ -416,3 +417,11 @@ Just add:
   fixedHeader: true
 ```
 to `struct` section of `settings` variable as in example above.
+
+** Is there a way to edit cells in a "real-time"?**
+
+`editableCells` option will transform table to per-cell edit bases:
+```js
+editableCells: true
+```
+Thus, You can click on any cell - edit the content and press Enter to send the AJAX request to the specified url.

@@ -418,7 +418,7 @@ Just add:
 ```
 to `struct` section of `settings` variable as in example above.
 
-** Is there a way to edit cells in a "real-time"?**
+**Is there a way to edit cells in a real-time?**
 
 `editableCells` option will transform table to per-cell edit bases:
 ```js

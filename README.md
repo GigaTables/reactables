@@ -10,7 +10,9 @@ GigaTables supports the following capabilities:
 
 -- classic pagination or infinite scroll,
 
--- sorting,
+-- column sorting,
+
+-- live cell edit,
 
 -- common search (through all columns),
 
@@ -20,7 +22,7 @@ GigaTables supports the following capabilities:
 
 -- shft/ctrl rows selection,
 
--- fixed header
+-- fixed header,
 
 -- trigger functions,
 
@@ -28,9 +30,9 @@ GigaTables supports the following capabilities:
 
 -- 7 popular languages,
 
--- data load period,
+-- data load for period interval,
 
--- hot keys
+-- hot keys,
 
 and more...
 

@@ -18,7 +18,8 @@ class Reactables extends Main {
         search: ['top', 'bottom'],
         rowsSelector: ['asc', 'top', 'bottom'],
         pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
-        infiniteScroll: false
+        infiniteScroll: false,
+        editbaleCells: false,
       },
       lang: 'en',
       perPageRows: [25, 50, 100, 200, 500],
@@ -57,6 +58,7 @@ class Reactables extends Main {
       columnsSearch: {},
       discreteFocus: false,
       scrolledDown: false,
+      editedCell: '',
     }
     // cols opts
     this.searchableCols = [];
@@ -409,7 +411,7 @@ class Reactables extends Main {
         popup_button,
         popup_title,
         search,
-        fieldsEdit
+        fieldsEdit,
       } = this.state;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>

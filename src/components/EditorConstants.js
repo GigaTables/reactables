@@ -34,4 +34,6 @@ module.exports = {
   HTTP_METHOD_POST: 'POST',
   HTTP_METHOD_PUT: 'PUT',
   HTTP_METHOD_DELETE: 'DELETE',
+
+  EDITABLE_CELLS_INDEX: 'editable-cells',
 }

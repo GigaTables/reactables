@@ -58,7 +58,8 @@ var settings = {
    search: ['top', 'bottom'],
    rowsSelector: ['desc', 'top', 'bottom'],
    pagination: ['bottom'],
-   fixedHeader: true, // default false
+   fixedHeader: false, // default false
+   editableCells: true, // default false
  },
  lang: 'en', // english default
  perPageRows: [25, 50, 100, 200],

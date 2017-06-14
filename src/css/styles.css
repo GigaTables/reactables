@@ -223,3 +223,23 @@ td {
   -ms-user-select:none;
   user-select:none;
 }
+:global .normal_checkbox {
+  border: 1px solid black !important;
+  border-radius: 3px;
+  content: " ";
+  margin-left: 12px;
+  margin-top: -20px;
+  text-align: center;
+  box-sizing: border-box;
+  display: block;
+  width: 13px;
+  height: 12px;
+  top: 1.2em;
+  position: relative;
+}
+:global .select_checkbox::after {
+  content: "\2713";
+  text-shadow: 1px 1px #25adf1, -1px -1px #25adf1, 1px -1px #25adf1, -1px 1px #25adf1;
+  margin-left: 1px;
+  /*margin-top: -11px;*/
+}

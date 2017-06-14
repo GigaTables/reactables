@@ -139,8 +139,11 @@ class Main extends Component {
       fromRow,
       minRow,
       maxRow,
-      scrolledDown
+      scrolledDown,
+      editedCell,
     } = this.state;
+
+    let editableCells = this.settings.struct.editableCells;
     let rows = [];
     if (dataSearch !== null) {
       jsonData = dataSearch;
@@ -160,6 +163,19 @@ class Main extends Component {
     jsonDataPerPage.forEach((object, objectIndex) => {
         let cols = [], rowId = 0;
         rowId = this.getRowId(object);
+        // set checkbox for editable cells
+        if(editableCells === true) {
+          cols.push(<Column
+            editRow={this.editRow.bind(this)}
+            dataIndex={EditorConstants.EDITABLE_CELLS_INDEX}
+            selectedRows={(typeof selectedRows !== CommonConstants.UNDEFINED) ? selectedRows : this.state.selectedRows}
+            minRow={minRow}
+            maxRow={maxRow}
+            count={objectIndex}
+            gteRowId={rowId}
+            key={-1}
+            editableCells={editableCells}></Column>);
+        }
         // process cols
         this.props.children.forEach((th, idx) => {
           const { data } = th.props;
@@ -179,7 +195,13 @@ class Main extends Component {
               maxRow={maxRow}
               count={objectIndex}
               gteRowId={rowId}
-              key={idx}>{content}</Column>);
+              key={idx}
+              editableCells={editableCells}
+              editedCell={editedCell}
+              editor={this.props.editor}
+              editCell={this.editCell.bind(this)}
+              editorUpdate={this.editorUpdate.bind(this)}
+              cell={'' + objectIndex + idx}>{content}</Column>);
           }
         });
         // count is used to shft key + click selection of rows, ex.: sorted
@@ -190,7 +212,8 @@ class Main extends Component {
           maxRow={maxRow}
           key={objectIndex}
           count={objectIndex}
-          gteRowId={rowId}>{cols}</Row>);
+          gteRowId={rowId}
+          editableCells={editableCells}>{cols}</Row>);
     });
     let state = {
       dataRows:rows,
@@ -287,6 +310,19 @@ class Main extends Component {
     });
   }
 
+  editRow(e)
+  {
+    console.log(e.target);
+    this.clickedRow(e);
+  }
+
+  editCell(e)
+  {
+    this.setState({
+      editedCell: e.target.dataset.cell
+    }, () => {this.createTable(this.jsonData, this.state.sortedButtons)});
+  }
+
   getButtonsState(indexData, value)
   {
     const { sortButtons } = this.state;
@@ -305,7 +341,6 @@ class Main extends Component {
     let action = e.target.dataset.action,
     rowId = 0,
     selectedRows = this.state.selectedRows;
-
     if (action === EditorConstants.ACTION_DELETE) {
       for (var dataKey in dataIndices) {
         for (var key in this.jsonData) {
@@ -323,8 +358,11 @@ class Main extends Component {
     } else if (action === EditorConstants.ACTION_CREATE) {
       this.jsonData.unshift(dataIndices);
     } else if (action === EditorConstants.ACTION_EDIT) {
+      if (selectedRows.length === 0) {
+        selectedRows[0] = e.target.dataset.rowid;
+      }
       for (var key in dataIndices) {
-        this.jsonData[this.state.selectedRows[0]][key] = dataIndices[key];
+        this.jsonData[selectedRows[0]][key] = dataIndices[key];
       }
     }
     this.createTable(this.jsonData, this.state.sortedButtons);
@@ -574,18 +612,25 @@ class Main extends Component {
     const { sortButtons } = this.state;
     const { columns } = this.settings;
     let sortedCols = [];
+    let editableCells = this.settings.struct.editableCells;
+    let idx = 0;
 
+    if(editableCells === true) {
+      sortedCols[idx] = <th key={idx} style={{cursor:"default"}}></th>;
+      idx = 1;
+    }
     this.props.children.forEach((th, index) => {
     const { data } = th.props;
     if (typeof data !== CommonConstants.UNDEFINED
         && this.visibleCols[data] === true) {
       var thh = React.Children.only(th);
       var clonedOpts = {
-        key: index,
-        sortId: index+'',
+        key: index + idx,
+        sortId: index + idx +'',
         sortDirection: (typeof sortButtons[data] === CommonConstants.UNDEFINED) ? sortButtons[data] : 0
       };
         clonedOpts['columns'] = columns;
+        clonedOpts['key'] = index + idx;
         if (this.searchableCols[data] === true) {
           clonedOpts['doDiscreteSearch'] = this.doDiscreteSearch.bind(this);
           clonedOpts['discreteFocus'] = this.discreteFocus.bind(this);
@@ -599,7 +644,7 @@ class Main extends Component {
             clonedOpts['sortDirection'] = sortButtons[data];
           }
         }
-        sortedCols[index] = React.cloneElement(thh, clonedOpts);
+        sortedCols[index + idx] = React.cloneElement(thh, clonedOpts);
       }
     })
     return sortedCols;

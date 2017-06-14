@@ -250,9 +250,15 @@ class Editor extends Component {
   btnClicked(e)
   {
     e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
-    const { action, editorUpdate, selectedIds } = this.props;
-    let ajaxUrl = this.props.editor.ajax, that = this;
+    const {
+      action,
+      editorUpdate,
+      selectedIds,
+      editor,
+    } = this.props;
+    let ajaxUrl = editor.ajax, that = this;
     var dataResp = that.state.dataIndices;
+
     if (action === EditorConstants.ACTION_CREATE) {
       this.triggerBefore(EditorConstants.EDITOR_CREATE);
       this.fileUpload();
@@ -283,7 +289,7 @@ class Editor extends Component {
       this.triggerBefore(EditorConstants.EDITOR_REMOVE);
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
-        body: JSON.stringify(this.props.dataIndices) // prop ids are passed from Reactables
+        body: JSON.stringify(this.state.dataIndices) // prop ids are passed from Reactables
       }).then(response => response.json()).then((data) => {
         // call editorUpdate method with passing all user-input values
         editorUpdate(e, dataResp);

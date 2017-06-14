@@ -255,5 +255,24 @@ export default StyleSheet.create({
         "WebkitUserSelect": "none",
         "MsUserSelect": "none",
         "userSelect": "none"
+    },
+    ":global normal_checkbox": {
+        "border": "1px solid black !important",
+        "borderRadius": 3,
+        "content": " ",
+        "marginLeft": 12,
+        "marginTop": -20,
+        "textAlign": "center",
+        "boxSizing": "border-box",
+        "display": "block",
+        "width": 13,
+        "height": 12,
+        "top": 1.2,
+        "position": "relative"
+    },
+    ":global select_checkbox::after": {
+        "content": "\\2713",
+        "textShadow": "1px 1px #25adf1, -1px -1px #25adf1, 1px -1px #25adf1, -1px 1px #25adf1",
+        "marginLeft": 1
     }
 });

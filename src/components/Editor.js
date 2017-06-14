@@ -289,7 +289,7 @@ class Editor extends Component {
       this.triggerBefore(EditorConstants.EDITOR_REMOVE);
       fetch(ajaxUrl, {
         method: EditorConstants.HTTP_METHOD_DELETE,
-        body: JSON.stringify(this.props.dataIndices) // prop ids are passed from Reactables
+        body: JSON.stringify(this.state.dataIndices) // prop ids are passed from Reactables
       }).then(response => response.json()).then((data) => {
         // call editorUpdate method with passing all user-input values
         editorUpdate(e, dataResp);

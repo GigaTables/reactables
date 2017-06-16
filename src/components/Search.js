@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../css/styles.css';
 import editor from '../css/editor.css';
 
@@ -13,7 +14,12 @@ class Search extends Component {
 
   render()
   {
-    const { lang, doSearch, search, searchKey } = this.props;
+    const {
+      lang,
+      doSearch,
+      search,
+    } = this.props;
+
     var language = Lang[lang];
     return (
       <div className={styles.gt_main_search}>
@@ -30,6 +36,12 @@ class Search extends Component {
       </div>
     )
   }
+}
+
+Search.propTypes = {
+  lang: PropTypes.string.isRequired,
+  doSearch: PropTypes.func.isRequired,
+  search: PropTypes.string,
 }
 
 export default Search

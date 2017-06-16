@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { EditorException } from './Exceptions';
 import editorStyles from '../css/editor.css';
 import classNames from 'classnames/bind';
@@ -376,12 +377,14 @@ class Editor extends Component {
   }
 }
 
-Editor.PropTYpes = {
+Editor.propTYpes = {
   active: PropTypes.bool.isRequired,
   editor: PropTypes.object.isRequired,
   action: PropTypes.string.isRequired,
   popupTitle: PropTypes.string.isRequired,
   popupButton: PropTypes.string.isRequired,
+  editorUpdate: PropTypes.func.isRequired,
+  selectedIds: PropTypes.array.isRequired,
 }
 
 export default Editor

@@ -312,7 +312,6 @@ class Main extends Component {
 
   editRow(e)
   {
-    console.log(e.target);
     this.clickedRow(e);
   }
 

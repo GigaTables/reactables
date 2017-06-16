@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from '../css/styles.css';
 
@@ -17,6 +18,12 @@ class Pagination extends Component {
 
   render()
   {
+    const {
+      fromRow,
+      countRows,
+      page,
+      perPage,
+    } = this.props;
     var lang = Lang[this.props.lang];
     let prevClasses = classNames({
       gt_page: true,
@@ -27,11 +34,8 @@ class Pagination extends Component {
       next: true
     });
 
-    let from = parseInt(this.props.fromRow);
-    let countRows = this.props.countRows,
-    page = this.props.page,
-    perPage = this.props.perPage,
-    pages = Math.ceil(countRows / perPage),
+    let from = parseInt(fromRow);
+    let pages = Math.ceil(countRows / perPage),
     selectedPage = from / perPage + 1,
     tail = parseInt(pages) - CommonConstants.MORE_PAGES,
     prevFrom = 0, nextFrom = 0;

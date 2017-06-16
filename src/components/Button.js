@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../css/styles.css';
 import editor from '../css/editor.css';
 import classNames from 'classnames/bind';
@@ -24,16 +25,16 @@ class Button extends Component {
 
   render()
   {
-    const { action, children } = this.props;
+    const { action, children, active } = this.props;
     let buttonClasses = classNames({
       gte_button: true,
-      gte_btn_disabled: this.props.active
+      gte_btn_disabled: active
     });
     return (
       <div
         className="gte_buttons_container"
         data-action={action}
-        onClick={(this.props.active === false) ? this.onClick : false}>
+        onClick={(active === false) ? this.onClick : false}>
         <div data-action={action} className={buttonClasses}>
           <span data-action={action} >{children}</span>
         </div>
@@ -45,7 +46,8 @@ class Button extends Component {
 
 Button.propTypes = {
   action: PropTypes.string,
-  active: PropTypes.bool
+  active: PropTypes.bool,
+  showPopup: PropTypes.func,
 }
 
 export default Button

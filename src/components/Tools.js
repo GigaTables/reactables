@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button.js';
 import PagesSelector from './PagesSelector.js';
 import Search from './Search.js';
@@ -149,6 +150,19 @@ class Tools extends Component {
       </div>
     )
   }
+}
+
+Tools.propTypes = {
+  updatePerPage: PropTypes.func.isRequired,
+  perPageRows: PropTypes.array,
+  doSearch: PropTypes.func,
+  tableOpts: PropTypes.object,
+  showPopup: PropTypes.func,
+  defaultPerPage: PropTypes.number,
+  perPage: PropTypes.number,
+  search: PropTypes.string,
+  selectedRows: PropTypes.array,
+  lang: PropTypes.string,
 }
 
 export default Tools

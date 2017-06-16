@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../css/styles.css';
 import classNames from 'classnames/bind';
 
@@ -56,8 +57,8 @@ class Row extends Component {
 }
 
 Row.propTypes = {
-  gteRowId: PropTypes.number,
-  count: PropTypes.number,
+  gteRowId: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   minRow: PropTypes.number,
   maxRow: PropTypes.number,
   selectedRows: PropTypes.array

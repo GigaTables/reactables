@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from '../css/styles.css';
 
@@ -96,6 +97,13 @@ class Header extends Component {
   render() {
     return this.getHeader();
   }
+}
+
+Header.propTypes = {
+  sortId: PropTypes.string,
+  columns: PropTypes.array,
+  sortDirection: PropTypes.number,
+  columnsSearch: PropTypes.object,
 }
 
 export default Header

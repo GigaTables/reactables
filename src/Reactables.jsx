@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Main from './components/Main.js';
 import Tools from './components/Tools.js';
 import Editor from './components/Editor.js';

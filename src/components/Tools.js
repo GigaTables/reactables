@@ -19,7 +19,7 @@ class Tools extends Component {
       perPage,
       updatePerPage,
       perPageRows,
-      lang
+      lang,
     } = this.props;
 
     if (struct.rowsSelector.indexOf(display) === -1) {
@@ -40,7 +40,7 @@ class Tools extends Component {
       display,
       search,
       doSearch,
-      lang
+      lang,
     } = this.props;
 
     if (struct.search.indexOf(display) === -1) {
@@ -60,7 +60,7 @@ class Tools extends Component {
       defaultPerPage,
       lang,
       tableOpts,
-      display
+      display,
     } = this.props;
 
     var language = Lang[lang];
@@ -109,7 +109,7 @@ class Tools extends Component {
       perPageRows,
       doSearch,
       lang,
-      tableOpts
+      tableOpts,
     } = this.props;
 
     var language = Lang[lang];

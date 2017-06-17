@@ -246,9 +246,12 @@ class Main extends Component {
       selectedIds,
       sortedButtons,
       ctrlDown,
-      shiftDown
+      shiftDown,
     } = this.state;
-    const { rowid, realid } = e.target.dataset;
+    const {
+      rowid,
+      realid,
+    } = e.target.dataset;
 
     let rows = selectedRows,
     ids = selectedIds;
@@ -613,6 +616,9 @@ class Main extends Component {
     let sortedCols = [];
     let editableCells = this.settings.struct.editableCells;
     let idx = 0;
+    if (editableCells === true && typeof this.props.editor === CommonConstants.UNDEFINED) {
+      console.error('You trying to use editable cells without editor settings provided. You have 2 options add an editor settings to get editable cells work correctly or set editableCells to false to work with view mode.');
+    }
 
     if(editableCells === true) {
       sortedCols[idx] = <th key={idx} style={{cursor:"default"}}></th>;

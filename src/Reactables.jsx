@@ -20,7 +20,7 @@ class Reactables extends Main {
         rowsSelector: ['asc', 'top', 'bottom'],
         pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
         infiniteScroll: false,
-        editbaleCells: false,
+        editableCells: false,
       },
       lang: 'en',
       perPageRows: [25, 50, 100, 200, 500],
@@ -257,7 +257,7 @@ class Reactables extends Main {
     const {
       selectedRows,
       search,
-      perPage
+      perPage,
     } = this.state;
 
     const {

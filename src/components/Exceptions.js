@@ -1,9 +1,9 @@
-const DataException = (message) =>
+const DataException = function(message)
 {
   this.message = message;
   this.name = 'DataException';
 }
-const EditorException = (message) =>
+const EditorException = function(message)
 {
   this.message = message;
   this.name = 'EditorException';

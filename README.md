@@ -73,6 +73,9 @@ see how to create table with JSX bellow.
 ### Delete items
 ![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_delete_items.png)
 
+### One-click cell edit
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_cell_edit.png)
+
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML
     <script src="build/index.js"></script>

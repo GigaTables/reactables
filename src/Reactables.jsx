@@ -7,8 +7,8 @@ import Pagination from './components/Pagination.js';
 import styles from './css/styles.css';
 import { DataException } from './components/Exceptions';
 
-var CommonConstants = require('./components/CommonConstants');
-var loAssign = require('lodash/assign');
+const CommonConstants = require('./components/CommonConstants');
+const loAssign = require('lodash/assign');
 
 class Reactables extends Main {
   constructor(props)
@@ -60,7 +60,7 @@ class Reactables extends Main {
       discreteFocus: false,
       scrolledDown: false,
       editedCell: '',
-    }
+    };
     // cols opts
     this.searchableCols = [];
     this.searchableCase = [];
@@ -131,7 +131,7 @@ class Reactables extends Main {
 
   componentDidMount()
   {
-    var that = this;
+    let that = this;
     // enabling keys
     document.addEventListener('keydown', (e) => {
       switch (e.which) {
@@ -292,12 +292,9 @@ class Reactables extends Main {
         action,
         selectedRows,
         selectedIds,
-        countRows,
-        page,
         opacity,
         popup_button,
         popup_title,
-        search,
         fieldsEdit
       } = this.state;
 
@@ -341,7 +338,6 @@ class Reactables extends Main {
     }
 
     const {
-      selectedIds,
       countRows,
       page,
       perPage,
@@ -359,12 +355,12 @@ class Reactables extends Main {
 
   fixHeaders()
   {
-    var h = document.getElementsByTagName("thead")[0], readout = document.getElementsByTagName("tbody")[0];
-    var stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth;
+    let h = document.getElementsByTagName("thead")[0], readout = document.getElementsByTagName("tbody")[0];
+    let stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth;
     window.onscroll = function(e) {
-      var ths = document.getElementsByTagName("tbody")[0].children[0].children;
-      var offset = window.pageYOffset;
-      var distance = h.offsetTop - offset;
+      let ths = document.getElementsByTagName("tbody")[0].children[0].children;
+      let offset = window.pageYOffset;
+      let distance = h.offsetTop - offset;
 
       if ((distance <= 0) && stuck === false) {
         h.style.position = 'fixed';
@@ -389,30 +385,8 @@ class Reactables extends Main {
 
   render() {
       let sortedCols = this.setHeads();
-      // ==== settings
       const {
-        tableOpts,
-        perPageRows,
-        defaultPerPage,
-        lang,
-        struct
-      } = this.settings;
-      // ==== settings ===
-      const {
-        dataRows,
-        active,
-        action,
-        selectedRows,
-        selectedIds,
-        countRows,
-        page,
-        opacity,
-        perPage,
-        fromRow,
-        popup_button,
-        popup_title,
-        search,
-        fieldsEdit,
+        dataRows
       } = this.state;
       return (
         <div className={styles.gt_container} style={{width: "1128px"}}>
@@ -452,6 +426,6 @@ class Reactables extends Main {
 Reactables.propTypes = {
   editor: PropTypes.object,
   settings: PropTypes.object.isRequired
-}
+};
 
 export default Reactables

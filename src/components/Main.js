@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Row from './Row.js';
 import Column from './Column.js';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
-var Lang = require('./Lang');
+const CommonConstants = require('./CommonConstants');
+const EditorConstants = require('./EditorConstants');
+const Lang = require('./Lang');
 
 class Main extends Component {
 
@@ -74,12 +73,12 @@ class Main extends Component {
         return; // exit - user pressed not a symbol key(s)
     }
 
-    var that = this;
+    let that = this;
     let name = e.target.name,
     val = e.target.value,
     len = val.length;
     this.nowMillis = (new Date()).getTime();
-    var period = this.nowMillis - this.lastTimeKeyup;
+    let period = this.nowMillis - this.lastTimeKeyup;
     this.setState({
       [name]: val
     });
@@ -89,7 +88,7 @@ class Main extends Component {
         return;
     }
 
-    var nJson = [], str = '', i = 0, json = this.jsonData;
+    let nJson = [], str = '', i = 0, json = this.jsonData;
     for (let key in json) {
         for (let k in json[key]) {
             if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
@@ -112,7 +111,7 @@ class Main extends Component {
     }
 
     if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
-        for (var j in this.tOut) {
+        for (let j in this.tOut) {
             clearTimeout(this.tOut[j]);
         }
         this.tOut = [];
@@ -273,7 +272,7 @@ class Main extends Component {
         rows.push(parseInt(rowid));
         ids.push(parseInt(realid));
         min = rows[0], max = rows[0];
-        for (var row in rows) {
+        for (let row in rows) {
           if (rows[row] < min) {
             min = rows[row];
           }
@@ -283,7 +282,7 @@ class Main extends Component {
         }
         rows = [], this.state.selectedRows = [];
         // fill in the items
-        for (var i = min; i <= max;++i) {
+        for (let i = min; i <= max;++i) {
           rows.push(i);
         }
         this.state.selectedRows = rows;
@@ -344,8 +343,8 @@ class Main extends Component {
     rowId = 0,
     selectedRows = this.state.selectedRows;
     if (action === EditorConstants.ACTION_DELETE) {
-      for (var dataKey in dataIndices) {
-        for (var key in this.jsonData) {
+      for (let dataKey in dataIndices) {
+        for (let key in this.jsonData) {
           if(typeof this.jsonData[key][CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
               rowId = this.jsonData[key][CommonConstants.GT_ROW_ID];
           } else if (typeof this.jsonData[key]['id'] !== CommonConstants.UNDEFINED) {
@@ -363,7 +362,7 @@ class Main extends Component {
       if (selectedRows.length === 0) {
         selectedRows[0] = e.target.dataset.rowid;
       }
-      for (var key in dataIndices) {
+      for (let key in dataIndices) {
         this.jsonData[selectedRows[0]][key] = dataIndices[key];
       }
     }
@@ -405,7 +404,7 @@ class Main extends Component {
       popup_title = this.lang.gte_editor_popupheader_edit;
       popup_button = this.lang.gte_editor_sendbtn_update;
       // collect data for fields filling in Editor
-      for (var k in this.jsonData) {
+      for (let k in this.jsonData) {
         if (parseInt(k) === parseInt(this.state.selectedRows[0])) {
           fieldsEdit = this.jsonData[k];
         }
@@ -462,7 +461,7 @@ class Main extends Component {
 
       if (period > CommonConstants.SORT_PERIOD) {
       this.props.children.forEach((th, idx) => {
-        var that = this;
+        let that = this;
         const { sortButtons, dataSearch } = that.state;
         const { data } = th.props;
 
@@ -546,15 +545,14 @@ class Main extends Component {
         return; // exit - user pressed not a symbol key(s)
     }
 
-    var that = this;
-
+    let that = this;
     let name = e.target.name,
     val = e.target.value,
     data = e.target.dataset.index,
     len = val.length;
 
     this.nowMillis = (new Date()).getTime();
-    var period = this.nowMillis - this.lastTimeKeyup;
+    let period = this.nowMillis - this.lastTimeKeyup;
 
     this.setState({columnsSearch:
       Object.assign({}, this.state.columnsSearch, {
@@ -567,7 +565,7 @@ class Main extends Component {
         return;
     }
 
-    var nJson = [], str = '', i = 0, json = this.jsonData;
+    let nJson = [], str = '', i = 0, json = this.jsonData;
     for (let key in json) {
         for (let k in json[key]) {
             if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true
@@ -590,7 +588,7 @@ class Main extends Component {
         }
     }
     if (period > CommonConstants.PERIOD_SEARCH) {// show quick results and tear down all timeouts if they are present
-        for (var j in this.tOut) {
+        for (let j in this.tOut) {
             clearTimeout(this.tOut[j]);
         }
         this.tOut = [];
@@ -628,8 +626,8 @@ class Main extends Component {
     const { data } = th.props;
     if (typeof data !== CommonConstants.UNDEFINED
         && this.visibleCols[data] === true) {
-      var thh = React.Children.only(th);
-      var clonedOpts = {
+      let thh = React.Children.only(th);
+      let clonedOpts = {
         key: index + idx,
         sortId: index + idx +'',
         sortDirection: (typeof sortButtons[data] === CommonConstants.UNDEFINED) ? sortButtons[data] : 0
@@ -651,7 +649,7 @@ class Main extends Component {
         }
         sortedCols[index + idx] = React.cloneElement(thh, clonedOpts);
       }
-    })
+    });
     return sortedCols;
   }
 
@@ -754,7 +752,6 @@ class Main extends Component {
       ctrlDown,
       arrowLeft,
       arrowRight,
-      fromRow,
       page,
       perPage,
       countRows
@@ -823,7 +820,6 @@ class Main extends Component {
       });
     }
   }
-
 }
 
 export default Main

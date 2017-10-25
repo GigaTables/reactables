@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../css/styles.css';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
-var Lang = require('./Lang');
+const Lang = require('./Lang');
 
 class PagesSelector extends Component {
   shouldComponentUpdate(nextProps) {
@@ -20,7 +18,7 @@ class PagesSelector extends Component {
       perPage,
       updatePerPage
     } = this.props;
-    var language = Lang[lang];
+    let language = Lang[lang];
     return (
       <div className={styles.gt_rows_selector}>
         <span>{language.show}&nbsp;</span>
@@ -45,6 +43,6 @@ PagesSelector.propTypes = {
   perPage: PropTypes.number,
   perPageRows: PropTypes.array,
   updatePerPage: PropTypes.func
-}
+};
 
 export default PagesSelector

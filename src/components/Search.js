@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../css/styles.css';
-import editor from '../css/editor.css';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
-var Lang = require('./Lang');
+const Lang = require('./Lang');
 
 class Search extends Component {
   shouldComponentUpdate(nextProps) {
@@ -20,7 +17,7 @@ class Search extends Component {
       search,
     } = this.props;
 
-    var language = Lang[lang];
+    const language = Lang[lang];
     return (
       <div className={styles.gt_main_search}>
         <input
@@ -42,6 +39,6 @@ Search.propTypes = {
   lang: PropTypes.string.isRequired,
   doSearch: PropTypes.func.isRequired,
   search: PropTypes.string,
-}
+};
 
 export default Search

@@ -5,9 +5,9 @@ import PagesSelector from './PagesSelector.js';
 import Search from './Search.js';
 import styles from '../css/styles.css';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
-var Lang = require('./Lang');
+let CommonConstants = require('./CommonConstants');
+let EditorConstants = require('./EditorConstants');
+let Lang = require('./Lang');
 
 class Tools extends Component {
   getPagesSelection()
@@ -57,13 +57,12 @@ class Tools extends Component {
     const {
       selectedRows,
       showPopup,
-      defaultPerPage,
       lang,
       tableOpts,
       display,
     } = this.props;
 
-    var language = Lang[lang];
+    let language = Lang[lang];
     let buttons = [];
     if (typeof tableOpts.buttons !== CommonConstants.UNDEFINED
       && tableOpts.buttons.length > 0
@@ -100,19 +99,13 @@ class Tools extends Component {
   render()
   {
     const {
-      search,
       selectedRows,
       showPopup,
-      defaultPerPage,
-      perPage,
-      updatePerPage,
-      perPageRows,
-      doSearch,
       lang,
       tableOpts,
     } = this.props;
 
-    var language = Lang[lang];
+    let language = Lang[lang];
     let buttons = [];
     if (typeof tableOpts.buttons !== CommonConstants.UNDEFINED) {
       tableOpts.buttons.map((btn, i) => {
@@ -163,6 +156,6 @@ Tools.propTypes = {
   search: PropTypes.string,
   selectedRows: PropTypes.array,
   lang: PropTypes.string,
-}
+};
 
 export default Tools

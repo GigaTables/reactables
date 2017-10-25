@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../css/styles.css';
 import classNames from 'classnames/bind';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
+const CommonConstants = require('./CommonConstants');
+const EditorConstants = require('./EditorConstants');
 
 class Column extends Component {
   shouldComponentUpdate(nextProps) {
@@ -55,7 +54,7 @@ class Column extends Component {
     const { editorUpdate, selectedIds, editor } = this.props;
     const { dataIndices } = this.state;
     let ajaxUrl = editor.ajax, that = this;
-    var dataResp = that.state.dataIndices;
+    let dataResp = that.state.dataIndices;
     if(e.keyCode === CommonConstants.ENTER_KEY) {
       // fill-in id
       let payload = Object.assign({}, this.state.dataIndices, {
@@ -160,6 +159,6 @@ Column.propTypes = {
   dataIndex: PropTypes.string,
   editor: PropTypes.object,
   editorUpdate: PropTypes.func,
-}
+};
 
 export default Column

@@ -5,9 +5,9 @@ import editorStyles from '../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
-var Lang = require('./Lang');
+const CommonConstants = require('./CommonConstants');
+const EditorConstants = require('./EditorConstants');
+const Lang = require('./Lang');
 
 class Editor extends Component {
   constructor(props)
@@ -24,7 +24,7 @@ class Editor extends Component {
       dataIndices: {},
       popup_title: this.lang.gte_editor_popupheader_create,
       popup_button: this.lang.gte_editor_sendbtn_create
-    }
+    };
     this.setFields(props);
     this.setDataIndices(props);
   }
@@ -96,7 +96,7 @@ class Editor extends Component {
       const { ajaxFiles } = this.props.editor;
       let formData = new FormData();
       const files = this.filesInput.files;
-      for (var key in files) {
+      for (let key in files) {
         // check if this is a file:
         if (files.hasOwnProperty(key) && files[key] instanceof File) {
             formData.append(key, files[key]);
@@ -119,7 +119,7 @@ class Editor extends Component {
   getFieldByType(index, object)
   {
     const { dataIndices } = this.state;
-    var fieldType = object.type,
+    let fieldType = object.type,
             fieldName = object.name,
             fieldLabel = object.label,
             action = this.props.action,
@@ -128,8 +128,8 @@ class Editor extends Component {
     var attributes = [];
     if (typeof object.attrs !== CommonConstants.UNDEFINED) {
       var fieldOpts = object.attrs;
-      for (var opt in fieldOpts) {
-        for (var attr in fieldOpts[opt]) {
+      for (let opt in fieldOpts) {
+        for (let attr in fieldOpts[opt]) {
           attributes[attr] = fieldOpts[opt][attr];
         }
       }
@@ -193,9 +193,9 @@ class Editor extends Component {
         break;
       case EditorConstants.TYPE_SELECT:
         var values = object.values;
-        var options = [], val = '';
-        for (var k in values) {
-          for (var key in values[k]) {
+          var options = [], val = '';
+        for (let k in values) {
+          for (let key in values[k]) {
             val = values[k][key].trim();
             options[k] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>;
           }
@@ -213,8 +213,8 @@ class Editor extends Component {
         var options = [], val = '',
                 //@fixme regexp to remove ex: [3] etc
                 id = fieldName.replace('[]', '');
-        for (var k in values) {
-          for (var key in values[k]) {
+        for (let k in values) {
+          for (let key in values[k]) {
             val = values[k][key].trim();
             options[k] = <label key={key} className="gte_label_text">
               <input defaultChecked={(val === fieldValue) ? 1 : 0 } onClick={this.onChange.bind(this)} {...attributes} id={id} type={fieldType} name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
@@ -258,7 +258,7 @@ class Editor extends Component {
       editor,
     } = this.props;
     let ajaxUrl = editor.ajax, that = this;
-    var dataResp = that.state.dataIndices;
+    let dataResp = that.state.dataIndices;
 
     if (action === EditorConstants.ACTION_CREATE) {
       this.triggerBefore(EditorConstants.EDITOR_CREATE);
@@ -315,7 +315,6 @@ class Editor extends Component {
   {
     const {
       hidePopup,
-      opacity,
       popupTitle,
       action,
       popupButton,
@@ -385,6 +384,6 @@ Editor.propTYpes = {
   popupButton: PropTypes.string.isRequired,
   editorUpdate: PropTypes.func.isRequired,
   selectedIds: PropTypes.array.isRequired,
-}
+};
 
 export default Editor

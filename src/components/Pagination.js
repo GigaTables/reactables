@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from '../css/styles.css';
 
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
-var Lang = require('./Lang');
+const CommonConstants = require('./CommonConstants');
+const EditorConstants = require('./EditorConstants');
+const Lang = require('./Lang');
 
 class Pagination extends Component {
   shouldComponentUpdate(nextProps)
@@ -24,7 +24,7 @@ class Pagination extends Component {
       page,
       perPage,
     } = this.props;
-    var lang = Lang[this.props.lang];
+    let lang = Lang[this.props.lang];
     let prevClasses = classNames({
       gt_page: true,
       prev: true
@@ -41,7 +41,7 @@ class Pagination extends Component {
     prevFrom = 0, nextFrom = 0;
 
     let pagesContent = [];
-    for (var p = 0;p < pages;++p) {
+    for (let p = 0;p < pages;++p) {
       let currentPage = p + 1, prevPage = p - 1, nextPage = p + 1;
       let pageClasses = classNames({
         gt_page: true,
@@ -72,9 +72,9 @@ class Pagination extends Component {
               break;
           } else if (selectedPage > tail) { // tail
               let innerPages = [];
-              for (var i = tail - 1; i < pages; ++i) {
+              for (let i = tail - 1; i < pages; ++i) {
                   let from = i * perPage;
-                  var prevPage = i - 1, nextPage = i + 1;
+                  let prevPage = i - 1, nextPage = i + 1;
                   if (selectedPage === nextPage) {
                       prevFrom = prevPage * perPage;
                       if (prevPage < 0) {
@@ -104,7 +104,7 @@ class Pagination extends Component {
     }
 
     if (pages > 0 && pagesContent.length === 0) { // bug-fix with CommonConstants.MORE_PAGES === pages
-      for (var p = 0;p < pages;++p) {
+      for (let p = 0;p < pages;++p) {
         let currentPage = p + 1, prevPage = p - 1, nextPage = p + 1;
         let pageClasses = classNames({
           gt_page: true,
@@ -141,6 +141,6 @@ Pagination.propTypes = {
   perPage: PropTypes.number,
   countRows: PropTypes.number,
   fromRow: PropTypes.number
-}
+};
 
 export default Pagination

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import styles from '../css/styles.css';
 
-var CommonConstants = require('./CommonConstants');
+const CommonConstants = require('./CommonConstants');
 
 class Header extends Component {
 
@@ -104,6 +104,6 @@ Header.propTypes = {
   columns: PropTypes.array,
   sortDirection: PropTypes.number,
   columnsSearch: PropTypes.object,
-}
+};
 
 export default Header

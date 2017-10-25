@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Reactables from './src/Reactables.jsx'
 import Header from './src/components/Header.js'
 
-var editor = {
+let editor = {
   ajax: 'http://gigatables.loc/editor.php',
   ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
   struct: {
@@ -53,7 +53,7 @@ var editor = {
   ]
 };
 
-var settings = {
+let settings = {
  struct: {
    search: ['top', 'bottom'],
    rowsSelector: ['desc', 'top', 'bottom'],
@@ -153,4 +153,4 @@ ReactDOM.render(
     <Header data="field3">Field3 invisible</Header>
     <Header>Field3 invisible</Header>
   </Reactables>,
-  document.getElementById('app'))
+  document.getElementById('app'));

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../css/styles.css';
-import editor from '../css/editor.css';
 import classNames from 'classnames/bind';
-
-var CommonConstants = require('./CommonConstants');
-var EditorConstants = require('./EditorConstants');
 
 class Button extends Component {
   constructor(props) {

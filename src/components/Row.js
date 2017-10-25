@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../css/styles.css';
 import classNames from 'classnames/bind';
 
 class Row extends Component {
@@ -33,7 +32,6 @@ class Row extends Component {
       minRow,
       maxRow,
       clickedRow,
-      editRow,
       editableCells,
     } = this.props;
 
@@ -62,6 +60,6 @@ Row.propTypes = {
   minRow: PropTypes.number,
   maxRow: PropTypes.number,
   selectedRows: PropTypes.array
-}
+};
 
 export default Row

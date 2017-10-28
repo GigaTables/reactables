@@ -77,7 +77,7 @@ class Tools extends Component {
       }
       if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
         buttons[i] = <Button
-          active={(selectedRows.length === 1) ? false : true}
+          active={(selectedRows.length >= 1) ? false : true}
           selectedRows={selectedRows}
           action={EditorConstants.ACTION_EDIT}
           showPopup={showPopup}

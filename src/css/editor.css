@@ -270,3 +270,11 @@ div.gte_field input, div.gte_field textarea {
   opacity: 0;
   transition: visibility 0s 0.3s, opacity 0.3s linear;
 }
+:global .multi_value {
+  display: none;
+  border: 1px dotted #666;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: #fafafa;
+  cursor: pointer;
+}

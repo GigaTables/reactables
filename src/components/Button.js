@@ -44,6 +44,6 @@ Button.propTypes = {
   action: PropTypes.string,
   active: PropTypes.bool,
   showPopup: PropTypes.func,
-}
+};
 
 export default Button

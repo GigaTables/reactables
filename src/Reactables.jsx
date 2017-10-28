@@ -297,7 +297,6 @@ class Reactables extends Main {
         popup_title,
         fieldsEdit
       } = this.state;
-
       const {
         tableOpts,
         lang,

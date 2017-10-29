@@ -123,7 +123,7 @@ class Column extends Component {
                 data-index={dataIndex}
                 data-cell={cell}
                 onClick={editCell}>
-                {(editedCell === this.cell) ?
+                {(editableCells === true && editedCell === this.cell) ?
                     <input
                         ref={(input) => {
                             this.dataIn = input;

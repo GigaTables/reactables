@@ -612,7 +612,7 @@ class Main extends Component {
                 let thh = React.Children.only(th);
                 let clonedOpts = {
                     key: index + idx,
-                    sortId: index + idx + '',
+                    sortId: index + '',
                     sortDirection: (typeof sortButtons[data] === CommonConstants.UNDEFINED) ? sortButtons[data] : 0
                 };
                 clonedOpts['columns'] = columns;

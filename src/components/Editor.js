@@ -363,7 +363,6 @@ class Editor extends Component {
             action,
             popupButton,
             active,
-            fieldsEdit,
         } = this.props;
         this.setFields(this.props);
         let editorClasses = classNames({
@@ -381,8 +380,13 @@ class Editor extends Component {
                 <div onClick={hidePopup} className={editorClasses}>
                     <div className="gte_popup_container">
                         <div className="gte_popup_container_wrapper">
-                            <div onKeyUp={this.btnClickedEnter.bind(this)} onClick={this.stopPropagation.bind(this)}
-                                 className="gte_form_border_box">
+                            <div
+                                onKeyUp={this.btnClickedEnter.bind(this)}
+                                onClick={this.stopPropagation.bind(this)}
+                                className="gte_form_border_box">
+                                <div
+                                    className="close_btn"
+                                    onClick={hidePopup}></div>
                                 <div className="gte_form_fields">
                                     <div className="gte_header">
                                         <div className="gte_editor_title">{popupTitle}</div>

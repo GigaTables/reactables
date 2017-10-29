@@ -428,3 +428,8 @@ to `struct` section of `settings` variable as in example above.
 editableCells: true
 ```
 Thus, You can click on any cell - edit the content and press Enter to send the AJAX request to the specified url.
+
+**Is it possible to edit multiple rows?
+
+Sure, but you should understand the fact, that if you edit a field - it will be changed for all selected rows, 
+those fields that were left unchanged will be sent in their current state. 

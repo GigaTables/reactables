@@ -6,6 +6,7 @@ import Editor from './components/Editor.js';
 import Pagination from './components/Pagination.js';
 import styles from './css/styles.css';
 import {DataException} from './components/Exceptions';
+import TBody from "./components/TBody";
 
 const CommonConstants = require('./components/CommonConstants');
 const loAssign = require('lodash/assign');
@@ -373,11 +374,22 @@ class Reactables extends Main {
         }
     }
 
+    rerenderTable() {
+        this.setState({
+            editedCell: '',
+        }, () => {
+            this.createTable(this.jsonData, this.state.sortButtons, this.state.selectedRows);
+        });
+    }
+
     render() {
         let sortedCols = this.setHeads();
         const {
-            dataRows
+            dataRows,
         } = this.state;
+        const {
+            struct,
+        } = this.settings;
         return (
             <div className={styles.gt_container} style={{width: "1128px"}}>
                 <div className={styles.gt_head_tools}>
@@ -392,9 +404,11 @@ class Reactables extends Main {
                         {sortedCols}
                     </tr>
                     </thead>
-                    <tbody className={styles.gt_body}>
+                    <TBody
+                        rerenderTable={this.rerenderTable.bind(this)}
+                        struct={struct}>
                     {dataRows}
-                    </tbody>
+                    </TBody>
                     <tfoot className={styles.gt_foot}>
                     <tr>
                         {sortedCols}

@@ -12,6 +12,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-onclickoutside": "^6.6.2",
     "resolve-url": "^0.2.1",
     "style-loader": "^0.13.1",
     "superagent": "^3.5.2",

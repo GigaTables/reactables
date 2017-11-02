@@ -7,6 +7,8 @@ import Pagination from './components/Pagination.js';
 import styles from './css/styles.css';
 import {DataException} from './components/Exceptions';
 import TBody from "./components/TBody";
+import TFoot from "./components/TFoot";
+import THead from "./components/THead";
 
 const CommonConstants = require('./components/CommonConstants');
 const loAssign = require('lodash/assign');
@@ -399,21 +401,17 @@ class Reactables extends Main {
                     {this.getPagination(CommonConstants.DISPLAY_TOP)}
                 </div>
                 <table id="gigatable" className={styles.gigatable}>
-                    <thead className={styles.gt_head}>
-                    <tr className={styles.gt_head_tr}>
+                    <THead>
                         {sortedCols}
-                    </tr>
-                    </thead>
+                    </THead>
                     <TBody
                         rerenderTable={this.rerenderTable.bind(this)}
                         struct={struct}>
                     {dataRows}
                     </TBody>
-                    <tfoot className={styles.gt_foot}>
-                    <tr>
+                    <TFoot>
                         {sortedCols}
-                    </tr>
-                    </tfoot>
+                    </TFoot>
                 </table>
                 <div className={styles.gt_pagination}>
                     {this.getPagination(CommonConstants.DISPLAY_BOTTOM)}

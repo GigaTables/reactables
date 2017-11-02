@@ -432,4 +432,14 @@ Thus, You can click on any cell - edit the content and press Enter to send the A
 **Is it possible to edit multiple rows?**
 
 Sure, but you should understand the fact, that if you edit a field - it will be changed for all selected rows, 
-those fields that were left unchanged will be sent in their current state. 
+those fields that were left unchanged will be sent in their current state.
+ 
+**How can I set css styling to form fields?**
+
+Simply by specifying:
+```JS
+attrs: [
+  {'className': 'myClass1 myClass2'}
+]
+``` 
+in the field settings, don't forget to `import` the styles file with global cascades. 

@@ -5,5 +5,7 @@
 }
 
 :global .descriptionField {
-
+    color:#333;
+    background-color:yellowgreen !important;
+    border: 1px solid #999;
 }

@@ -442,4 +442,8 @@ attrs: [
   {'className': 'myClass1 myClass2'}
 ]
 ``` 
-in the field settings, don't forget to `import` the styles file with global cascades. 
+in the field settings, don't forget to `import` the styles file with global cascades like this: 
+```JS
+import mainStyles from './main.css'
+``` 
+you can see an example in main.js file (do not worry if some IDEs will tell u that import is not used, they never mind our hacks ;-). 

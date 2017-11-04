@@ -1,0 +1,9 @@
+:global .titleField {
+    color:#333;
+    background-color:#eeeeee;
+    border: 1px solid #999;
+}
+
+:global .descriptionField {
+
+}

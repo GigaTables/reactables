@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Reactables from './src/Reactables.jsx'
 import Header from './src/components/Header.js'
+import mainStyles from './main.css'
 
 let editor = {
   ajax: 'http://gigatables.loc/editor.php',
@@ -32,7 +33,8 @@ let editor = {
       name: "title",
       type: 'text', // default, other: password, file, select, multiselect etc
       attrs: [
-        {'pattern': '^[A-Za-z0-9_]+$'}
+        {'pattern': '^[A-Za-z0-9_]+$'},
+          {'className': 'titleField'}
       ]
     },
     {

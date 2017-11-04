@@ -446,4 +446,22 @@ in the field settings, don't forget to `import` the styles file with global casc
 ```JS
 import mainStyles from './main.css'
 ``` 
-you can see an example in main.js file (do not worry if some IDEs will tell u that import is not used, they never mind our hacks ;-). 
+you can see an example in `main.js` file (do not worry if some IDEs will report that import is not used, they never mind hacks ;-).
+ 
+For those who like `fieldset legend` form styling GT offers:
+```js
+        {
+            ...
+            fieldsetOpen: true,
+            legend: 'Required fields',
+            ...
+        }
+``` 
+to open fieldset tag and set legend, to close previous fieldset in any further object use syntax like this:
+```js
+        {
+            ...
+            fieldsetClose: true,
+            ...
+        },
+```

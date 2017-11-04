@@ -32,6 +32,8 @@ let editor = {
             label: "Article title:",
             name: "title",
             type: 'text', // default, other: password, file, select, multiselect etc
+            fieldsetOpen: true,
+            legend: 'Required fields',
             attrs: [
                 {'pattern': '^[A-Za-z0-9_]+$'},
                 {'className': 'titleField'}
@@ -43,7 +45,8 @@ let editor = {
             type: 'textarea',
             attrs: [
                 {'className': 'descriptionField'}
-            ]
+            ],
+            fieldsetClose: true,
         },
         {
             label: "Date Time:",

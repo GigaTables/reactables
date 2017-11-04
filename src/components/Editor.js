@@ -28,6 +28,9 @@ class Editor extends Component {
         };
         this.setFields(props);
         this.setDataIndices(props);
+        this.fieldsetOpen = 0;
+        this.fieldsetClose = 0;
+        this.fieldsetLegend = '';
     }
 
     setDataIndices(props) {
@@ -53,17 +56,57 @@ class Editor extends Component {
     setCreateFields(editorFields) {
         let fields = [];
         editorFields.forEach((object, index) => {
+            this.setFieldsets(index, object);
             fields[index] = this.getFieldByType(index, object);
         });
+        if (this.fieldsetClose > 0) {
+            fields = this.setFieldsetFields(fields);
+        }
         return fields;
     }
 
     setEditFields(editorFields) {
         let fields = [];
         editorFields.forEach((object, index) => {
+            this.setFieldsets(index, object);
             fields[index] = this.getFieldByType(index, object);
         });
+        if (this.fieldsetClose > 0) {
+            fields = this.setFieldsetFields(fields);
+        }
         return fields;
+    }
+
+    setFieldsets(index, object) {
+        if (typeof object.fieldsetOpen !== CommonConstants.UNDEFINED) {
+            if (typeof object.legend === CommonConstants.UNDEFINED) {
+                throw new EditorException('the "legend" property must be specified within fieldsetOpen');
+            }
+            this.fieldsetOpen = index;
+            this.fieldsetLegend = object.legend;
+        }
+        if (typeof object.fieldsetClose !== CommonConstants.UNDEFINED) {
+            this.fieldsetClose = index;
+        }
+    }
+
+    setFieldsetFields(fields) {
+        let fieldsInSets = [];
+        fields.forEach((object, index) => {
+            if (index >= this.fieldsetOpen && index <= this.fieldsetClose) {
+                fieldsInSets[index] = object;
+            }
+        });
+        let reFields = [];
+        reFields.push(fields.slice(0, this.fieldsetOpen));
+        reFields.push(<div key={this.fieldsetClose} className="gte_editor_fields">
+            <fieldset>
+                <legend>{this.fieldsetLegend}</legend>
+                {fieldsInSets}
+            </fieldset>
+        </div>);
+        reFields.push(fields.slice(this.fieldsetClose + 1));
+        return reFields;
     }
 
     setDeleteFields(items) {
@@ -136,7 +179,7 @@ class Editor extends Component {
             fieldLabel = object.label,
             fieldValue = '';
         if (true === isMultiple && setMultipleText === 0) {
-            fieldValue = 'multiple rows mode - changed fields will be sent for selected rows';
+            fieldValue = 'note: multiple rows mode - changed fields will be sent for selected rows';
         } else {
             if (action === EditorConstants.ACTION_EDIT) {
                 if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {

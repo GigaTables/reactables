@@ -13,7 +13,7 @@ const loAssign = require('lodash/assign');
 class Editor extends Component {
     constructor(props) {
         super(props);
-        if (typeof props.editor.fields === EditorConstants.UNDEFINED) {
+        if (typeof props.editor.fields === CommonConstants.UNDEFINED) {
             throw new EditorException('You should define "fields" option.');
         }
         if (props.editor.fields.length === 0) {

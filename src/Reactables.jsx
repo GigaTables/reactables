@@ -130,122 +130,126 @@ class Reactables extends Main {
 
     componentDidMount() {
         let that = this;
-        // enabling keys
-        document.addEventListener('keydown', (e) => {
-            switch (e.which) {
-                case CommonConstants.CTRL_KEY:
-                    that.setState({
-                        ctrlDown: true
-                    });
-                    break;
-                case CommonConstants.CTRL_KEY_MAC_CHROME:
-                    that.setState({
-                        ctrlDown: true
-                    });
-                    break;
-                case CommonConstants.CTRL_KEY_MAC_FF:
-                    that.setState({
-                        ctrlDown: true
-                    });
-                    break;
-                case CommonConstants.SHIFT_KEY:
-                    that.setState({
-                        shiftDown: true
-                    });
-                    break;
-                case CommonConstants.ESCAPE_KEY:
-                    that.hidePopup();
-                    break;
-                case CommonConstants.ARROW_UP:
-                    that.setState({
-                        arrowUp: true
-                    });
-                    break;
-                case CommonConstants.ARROW_DOWN:
-                    that.setState({
-                        arrowDown: true
-                    });
-                    break;
-                case CommonConstants.ARROW_LEFT:
-                    that.setState({
-                        arrowLeft: true
-                    });
-                    break;
-                case CommonConstants.ARROW_RIGHT:
-                    that.setState({
-                        arrowRight: true
-                    });
-                    break;
-                case CommonConstants.A_KEY:
-                    that.setState({
-                        aDown: true
-                    });
-                    break;
-            }
-            that.addSelectedRows();
-            that.setPagination();
-        });
-
         // turn on infinite scroll
         if (this.settings.struct.infiniteScroll === true) {
             window.addEventListener('scroll', (e) => {
                 this.handleScroll();
             });
         }
-
         // turn on fixed headers
         if (this.settings.struct.fixedHeader === true) {
             this.fixHeaders();
         }
+        // enabling keys
+        document.addEventListener('keydown', (e) => {
+            if (this.state.active === false) {// turn off events with active pop-up
+                switch (e.which) {
+                    case CommonConstants.CTRL_KEY:
+                        that.setState({
+                            ctrlDown: true
+                        });
+                        break;
+                    case CommonConstants.CTRL_KEY_MAC_CHROME:
+                        that.setState({
+                            ctrlDown: true
+                        });
+                        break;
+                    case CommonConstants.CTRL_KEY_MAC_FF:
+                        that.setState({
+                            ctrlDown: true
+                        });
+                        break;
+                    case CommonConstants.SHIFT_KEY:
+                        that.setState({
+                            shiftDown: true
+                        });
+                        break;
+                    case CommonConstants.ESCAPE_KEY:
+                        that.hidePopup();
+                        break;
+                    case CommonConstants.ARROW_UP:
+                        that.setState({
+                            arrowUp: true
+                        });
+                        break;
+                    case CommonConstants.ARROW_DOWN:
+                        that.setState({
+                            arrowDown: true
+                        });
+                        break;
+                    case CommonConstants.ARROW_LEFT:
+                        that.setState({
+                            arrowLeft: true
+                        });
+                        break;
+                    case CommonConstants.ARROW_RIGHT:
+                        that.setState({
+                            arrowRight: true
+                        });
+                        break;
+                    case CommonConstants.A_KEY:
+                        that.setState({
+                            aDown: true
+                        });
+                        break;
+                }
+                that.addSelectedRows();
+                that.setPagination();
+            }
+        });
 
         // disabling keys
         document.addEventListener('keyup', (e) => {
-            switch (e.which) {
-                case CommonConstants.CTRL_KEY:
-                    that.setState({
-                        ctrlDown: false
-                    });
-                    break;
-                case CommonConstants.CTRL_KEY_MAC_CHROME:
-                    that.setState({
-                        ctrlDown: false
-                    });
-                    break;
-                case CommonConstants.CTRL_KEY_MAC_FF:
-                    that.setState({
-                        ctrlDown: false
-                    });
-                    break;
-                case CommonConstants.SHIFT_KEY:
-                    that.setState({
-                        shiftDown: false
-                    });
-                    break;
-                case CommonConstants.ARROW_UP:
-                    that.setState({
-                        arrowUp: false
-                    });
-                    break;
-                case CommonConstants.ARROW_DOWN:
-                    that.setState({
-                        arrowDown: false
-                    });
-                    break;
-                case CommonConstants.ARROW_LEFT:
-                    that.setState({
-                        arrowLeft: false
-                    });
-                    break;
-                case CommonConstants.ARROW_RIGHT:
-                    that.setState({
-                        arrowRight: false
-                    });
-                    break;
-                case CommonConstants.A_KEY:
-                    that.setState({
-                        aDown: false
-                    });
-                    break;
+            if (this.state.active === false) {// turn off events with active pop-up
+                switch (e.which) {
+                    case CommonConstants.CTRL_KEY:
+                        that.setState({
+                            ctrlDown: false
+                        });
+                        break;
+                    case CommonConstants.CTRL_KEY_MAC_CHROME:
+                        that.setState({
+                            ctrlDown: false
+                        });
+                        break;
+                    case CommonConstants.CTRL_KEY_MAC_FF:
+                        that.setState({
+                            ctrlDown: false
+                        });
+                        break;
+                    case CommonConstants.SHIFT_KEY:
+                        if (this.state.active === false) {// only if pop-up is closed
+                            that.setState({
+                                shiftDown: false
+                            });
+                        }
+                        break;
+                    case CommonConstants.ARROW_UP:
+                        that.setState({
+                            arrowUp: false
+                        });
+                        break;
+                    case CommonConstants.ARROW_DOWN:
+                        that.setState({
+                            arrowDown: false
+                        });
+                        break;
+                    case CommonConstants.ARROW_LEFT:
+                        that.setState({
+                            arrowLeft: false
+                        });
+                        break;
+                    case CommonConstants.ARROW_RIGHT:
+                        that.setState({
+                            arrowRight: false
+                        });
+                        break;
+                    case CommonConstants.A_KEY:
+                        that.setState({
+                            aDown: false
+                        });
+                        break;
+                }
             }
         });
     }
@@ -402,7 +406,7 @@ class Reactables extends Main {
                 </div>
                 <table id="gigatable" className={styles.gigatable}>
                     <THead>
-                        {sortedCols}
+                    {sortedCols}
                     </THead>
                     <TBody
                         rerenderTable={this.rerenderTable.bind(this)}
@@ -410,7 +414,7 @@ class Reactables extends Main {
                     {dataRows}
                     </TBody>
                     <TFoot>
-                        {sortedCols}
+                    {sortedCols}
                     </TFoot>
                 </table>
                 <div className={styles.gt_pagination}>

@@ -6,6 +6,8 @@ import classNames from 'classnames/bind';
 import superagent from 'superagent';
 import Input from "./fields/Input";
 import HTML5Input from "./fields/HTML5Input";
+import TextArea from "./fields/TextArea";
+import Select from "./fields/Select";
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -249,16 +251,17 @@ class Editor extends Component {
                     type={fieldType}
                     name={fieldName}
                     label={fieldLabel}
-                    />;
+                />;
                 break;
             case EditorConstants.TYPE_FILE:
+                // todo: it can't be passed through rfc from File component
                 htmlFields[i] = <div className="gte_editor_fields">
                     <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
                     <div className={editorStyles.gte_field}>
                         <input
                             ref={(input) => {
-                            this.filesInput = input;
-                        }}
+                                this.filesInput = input;
+                            }}
                             {...attributes}
                             id={fieldName}
                             type={fieldType}
@@ -268,37 +271,26 @@ class Editor extends Component {
                 </div>;
                 break;
             case EditorConstants.TYPE_TEXTAREA:
-                htmlFields[i] = <div className="gte_editor_fields">
-                    <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
-                    <div className={editorStyles.gte_field}>
-                        <textarea
-                            onFocus={this.onFocus.bind(this)}
-                            onChange={this.onChange.bind(this)}
-                            {...attributes}
-                            id={fieldName}
-                            name={fieldName}
-                            value={fieldValue}></textarea>
-                    </div>
-                    <div className="clear"></div>
-                </div>;
+                htmlFields[i] = <TextArea
+                    onFocus={this.onFocus.bind(this)}
+                    onChange={this.onChange.bind(this)}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    value={fieldValue}
+                />;
                 break;
             case EditorConstants.TYPE_SELECT:
-                var values = object.values;
-                var options = [], val = '';
-                for (let k in values) {
-                    for (let key in values[k]) {
-                        val = values[k][key].trim();
-                        options[k] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>;
-                    }
-                }
-                htmlFields[i] = <div className="gte_editor_fields">
-                    <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
-                    <div className={editorStyles.gte_field}>
-                        <select value={fieldValue} onChange={this.onChange.bind(this)} {...attributes} id={fieldName}
-                                name={fieldName}>{options}</select>
-                    </div>
-                    <div className="clear"></div>
-                </div>;
+                htmlFields[i] = <Select
+                    onChange={this.onChange.bind(this)}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    value={fieldValue}
+                    objectValues={object.values}
+                />;
                 break;
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:

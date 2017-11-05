@@ -1,34 +1,43 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import editorStyles from '../../../css/editor.css';
-const EditorConstants = require('../../EditorConstants');
 
-class Input extends Component {
+class Select extends Component {
     render() {
         const {
             attributes,
             id,
-            type,
             name,
             value,
-            isMultiple,
             label,
-            onFocus,
             onChange,
+            objectValues,
         } = this.props;
+
+        let values = objectValues;
+        let options = [], val = '';
+        for (let k in values) {
+            if (values.hasOwnProperty(k)) {
+                for (let key in values[k]) {
+                    if (values[k].hasOwnProperty(key)) {
+                        val = values[k][key].trim();
+                        options[k] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>;
+                    }
+                }
+            }
+        }
         return (
             <div className="gte_editor_fields">
                 <label className="gte_label"
-                       htmlFor={id}>{(type !== EditorConstants.TYPE_HIDDEN) ? label : null}</label>
+                       htmlFor={id}>{label}</label>
                 <div className={editorStyles.gte_field}>
-                    <input onFocus={onFocus}
-                           onChange={onChange}
-                           {...attributes}
-                           id={id}
-                           type={type}
-                           name={name}
-                           value={value}
-                           data-multiple={isMultiple}/>
+                    <select
+                        onChange={onChange}
+                        {...attributes}
+                        id={id}
+                        name={name}
+                        value={value}
+                    >{options}</select>
                 </div>
                 <div className="clear"></div>
             </div>
@@ -36,15 +45,13 @@ class Input extends Component {
     }
 }
 
-Input.propTypes = {
+Select.propTypes = {
     onChange: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isMultiple: PropTypes.bool,
-    onFocus: PropTypes.func,
     attributes: PropTypes.array,
     label: PropTypes.string,
+    value: PropTypes.string,
 };
 
-export default Input
+export default Select

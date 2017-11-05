@@ -280,6 +280,7 @@ class Editor extends Component {
                     name={fieldName}
                     label={fieldLabel}
                     value={fieldValue}
+                    attributes={attributes}
                 />;
                 break;
             case EditorConstants.TYPE_SELECT:

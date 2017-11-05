@@ -8,6 +8,7 @@ import Input from "./fields/Input";
 import HTML5Input from "./fields/HTML5Input";
 import TextArea from "./fields/TextArea";
 import Select from "./fields/Select";
+import CheckRadio from "./fields/CheckRadio";
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -294,23 +295,15 @@ class Editor extends Component {
                 break;
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:
-                var values = object.values;
-                var options = [], val = '',
-                    //@fixme regexp to remove ex: [3] etc
-                    id = fieldName.replace('[]', '');
-                for (let k in values) {
-                    for (let key in values[k]) {
-                        val = values[k][key].trim();
-                        options[k] = <label key={key} className="gte_label_text">
-                            <input defaultChecked={(val === fieldValue) ? 1 : 0 }
-                                   onClick={this.onChange.bind(this)} {...attributes} id={id} type={fieldType}
-                                   name={fieldName} data-value={val.toLowerCase()} value={key}/>{val}</label>;
-                    }
-                }
-                htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label">{fieldLabel}</label>
-                    <div className={editorStyles.gte_field}>{options}</div>
-                    <div className="clear"></div>
-                </div>;
+                htmlFields[i] = <CheckRadio
+                    onChange={this.onChange.bind(this)}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    value={fieldValue}
+                    objectValues={object.values}
+                />;
                 break;
         }
         return htmlFields;

@@ -409,7 +409,10 @@ class Main extends Component {
             popup_title: popup_title,
             popup_button: popup_button,
             opacity: 1,
-            fieldsEdit: fieldsEdit
+            fieldsEdit: fieldsEdit,
+            // turn off key selection
+            shiftDown: false,
+            ctrlDown: false,
         });
     }
 

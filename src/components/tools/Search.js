@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../css/styles.css';
+import styles from '../../css/styles.css';
 
-const Lang = require('./Lang');
+const Lang = require('../Lang');
 
 class Search extends Component {
   shouldComponentUpdate(nextProps) {

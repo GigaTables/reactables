@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Reactables from './src/Reactables.jsx'
-import Header from './src/components/Header.js'
+import Header from './src/components/table/Header.js'
 import mainStyles from './main.css'
 
 let editor = {

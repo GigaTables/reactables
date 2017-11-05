@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import styles from '../css/styles.css';
+import styles from '../../css/styles.css';
 
-const CommonConstants = require('./CommonConstants');
-const EditorConstants = require('./EditorConstants');
-const Lang = require('./Lang');
+const CommonConstants = require('../CommonConstants');
+const EditorConstants = require('../EditorConstants');
+const Lang = require('../Lang');
 
 class Pagination extends Component {
   shouldComponentUpdate(nextProps)

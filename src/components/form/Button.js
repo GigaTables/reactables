@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../css/styles.css';
+import styles from '../../css/styles.css';
 import classNames from 'classnames/bind';
 
 class Button extends Component {

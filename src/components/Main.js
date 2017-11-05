@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Row from './Row.js';
-import Column from './Column.js';
+import Row from './table/Row.js';
+import Column from './table/Column.js';
 
 const CommonConstants = require('./CommonConstants');
 const EditorConstants = require('./EditorConstants');

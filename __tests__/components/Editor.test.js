@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Editor from '../../src/components/Editor.js'
+import Editor from '../../src/components/form/Editor.js'
 import { shallow } from 'enzyme';
 
 var editor = {

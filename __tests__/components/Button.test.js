@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Button from '../../src/components/Button.js'
+import Button from '../../src/components/form/Button.js'
 import { shallow } from 'enzyme';
 
 it('renders Button correctly', () => {

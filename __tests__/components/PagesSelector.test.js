@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PagesSelector from '../../src/components/PagesSelector.js'
+import PagesSelector from '../../src/components/tools/PagesSelector.js'
 import { shallow } from 'enzyme';
 
 it('renders PagesSelector correctly', () => {

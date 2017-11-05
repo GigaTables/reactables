@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Header from '../../src/components/Header.js'
+import Header from '../../src/components/table/Header.js'
 import { shallow } from 'enzyme';
 
 const columns = [

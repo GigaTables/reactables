@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from '../css/styles.css';
+import styles from '../../css/styles.css';
 import onClickOutside from 'react-onclickoutside'
 
 class TBody extends Component {

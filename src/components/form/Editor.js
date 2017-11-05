@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {EditorException} from './Exceptions';
-import editorStyles from '../css/editor.css';
+import {EditorException} from '../Exceptions';
+import editorStyles from '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
+import Input from "./fields/Input";
+import HTML5Input from "./fields/HTML5Input";
 
-const CommonConstants = require('./CommonConstants');
-const EditorConstants = require('./EditorConstants');
-const Lang = require('./Lang');
+const CommonConstants = require('../CommonConstants');
+const EditorConstants = require('../EditorConstants');
+const Lang = require('../Lang');
 const loAssign = require('lodash/assign');
 
 class Editor extends Component {
@@ -144,8 +146,11 @@ class Editor extends Component {
         })
     }
 
+    /**
+     * Uploads files via AJAX with FormData object
+     */
     fileUpload() {
-        if (this.filesInput.files !== CommonConstants.UNDEFINED) {
+        if (typeof this.filesInput.files !== CommonConstants.UNDEFINED) {
             const {ajaxFiles} = this.props.editor;
             let formData = new FormData();
             const files = this.filesInput.files;
@@ -215,21 +220,16 @@ class Editor extends Component {
             case EditorConstants.TYPE_HIDDEN:
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
-                htmlFields[i] = <div className="gte_editor_fields">
-                    <label className="gte_label"
-                           htmlFor={fieldName}>{(fieldType !== EditorConstants.TYPE_HIDDEN) ? fieldLabel : null}</label>
-                    <div className={editorStyles.gte_field}>
-                        <input onFocus={this.onFocus.bind(this)}
-                               onChange={this.onChange.bind(this)}
-                               {...attributes}
-                               id={fieldName}
-                               type={fieldType}
-                               name={fieldName}
-                               value={fieldValue}
-                               data-multiple={isMultiple}/>
-                    </div>
-                    <div className="clear"></div>
-                </div>;
+                htmlFields[i] = <Input
+                    onFocus={this.onFocus.bind(this)}
+                    onChange={this.onChange.bind(this)}
+                    attributes={attributes}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    value={fieldValue}
+                    isMultiple={isMultiple}/>;
                 break;
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:
@@ -242,21 +242,27 @@ class Editor extends Component {
             case EditorConstants.TYPE_URL:
             case EditorConstants.TYPE_MONTH:
             case EditorConstants.TYPE_WEEK:
-                htmlFields[i] = <div className="gte_editor_fields"><label className="gte_label"
-                                                                          htmlFor={fieldName}>{fieldLabel}</label>
-                    <div className={editorStyles.gte_field}><input onChange={this.onChange.bind(this)} {...attributes}
-                                                                   id={fieldName} type={fieldType} name={fieldName}/>
-                    </div>
-                    <div className="clear"></div>
-                </div>;
+                htmlFields[i] = <HTML5Input
+                    onChange={this.onChange.bind(this)}
+                    attributes={attributes}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    />;
                 break;
             case EditorConstants.TYPE_FILE:
                 htmlFields[i] = <div className="gte_editor_fields">
                     <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
                     <div className={editorStyles.gte_field}>
-                        <input ref={(input) => {
+                        <input
+                            ref={(input) => {
                             this.filesInput = input;
-                        }} {...attributes} id={fieldName} type={fieldType} name={fieldName}/>
+                        }}
+                            {...attributes}
+                            id={fieldName}
+                            type={fieldType}
+                            name={fieldName}/>
                     </div>
                     <div className="clear"></div>
                 </div>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Column from '../../src/components/Column.js'
+import Column from '../../src/components/table/Column.js'
 import { shallow } from 'enzyme';
 
 it('renders Column correctly', () => {

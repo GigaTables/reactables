@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button.js';
+import Button from '../form/Button.js';
 import PagesSelector from './PagesSelector.js';
 import Search from './Search.js';
-import styles from '../css/styles.css';
+import styles from '../../css/styles.css';
 
-let CommonConstants = require('./CommonConstants');
-let EditorConstants = require('./EditorConstants');
-let Lang = require('./Lang');
+let CommonConstants = require('../CommonConstants');
+let EditorConstants = require('../EditorConstants');
+let Lang = require('../Lang');
 
 class Tools extends Component {
   getPagesSelection()

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-const CommonConstants = require('./CommonConstants');
-const EditorConstants = require('./EditorConstants');
+const CommonConstants = require('../CommonConstants');
+const EditorConstants = require('../EditorConstants');
 
 class Column extends Component {
     shouldComponentUpdate(nextProps) {

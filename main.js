@@ -43,6 +43,7 @@ let editor = {
             label: "Description:",
             name: "desc",
             type: 'textarea',
+            plugins: 'draft',
             attrs: [
                 {'className': 'descriptionField'}
             ],

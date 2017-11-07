@@ -1,9 +1,23 @@
 {
-    "presets": ["es2015", "react", "babel-preset-react"],
-    "plugins": [],
-    "env": {
-      "test": {
-        "plugins": ["transform-es2015-modules-commonjs"]
+  "presets": [
+    "es2015",
+    "react",
+    "stage-0",
+    "babel-preset-react"
+  ],
+  "plugins": [
+    [
+      "transform-class-properties",
+      {
+        "spec": true
       }
+    ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
     }
+  }
 }

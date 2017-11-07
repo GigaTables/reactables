@@ -22,7 +22,7 @@ const config = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'react'] // stage-2 = transform-object-rest-spread etc
+                    presets: ['es2015', 'react', 'stage-0'] // stage-2 = transform-object-rest-spread etc
                 }
             },
             {
@@ -34,6 +34,6 @@ const config = {
     },
     externals: {
         'react/addons': true
-    }
-}
+    },
+};
 module.exports = config;

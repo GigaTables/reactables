@@ -9,6 +9,7 @@ import HTML5Input from "./fields/HTML5Input";
 import TextArea from "./fields/TextArea";
 import Select from "./fields/Select";
 import CheckRadio from "./fields/CheckRadio";
+import Draft from "./fields/Draft";
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -139,8 +140,8 @@ class Editor extends Component {
     onChange(e) {
         const {setMultipleText} = this.state;
         let isMultiple = e.target.dataset.multiple;
-        // console.log(isMultiple);
         let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value;
+
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
                 [e.target.name]: val
@@ -272,16 +273,30 @@ class Editor extends Component {
                 </div>;
                 break;
             case EditorConstants.TYPE_TEXTAREA:
-                htmlFields[i] = <TextArea
-                    onFocus={this.onFocus.bind(this)}
-                    onChange={this.onChange.bind(this)}
-                    id={fieldName}
-                    type={fieldType}
-                    name={fieldName}
-                    label={fieldLabel}
-                    value={fieldValue}
-                    attributes={attributes}
-                />;
+                if (typeof object.plugins !== CommonConstants.UNDEFINED
+                    && object.plugins.indexOf(EditorConstants.PLUGINS_DRAFT) !== -1) {
+                    htmlFields[i] = <Draft
+                        onFocus={this.onFocus.bind(this)}
+                        onChange={this.onChange.bind(this)}
+                        id={fieldName}
+                        type={fieldType}
+                        name={fieldName}
+                        label={fieldLabel}
+                        value={fieldValue}
+                        attributes={attributes}
+                    />;
+                } else {
+                    htmlFields[i] = <TextArea
+                        onFocus={this.onFocus.bind(this)}
+                        onChange={this.onChange.bind(this)}
+                        id={fieldName}
+                        type={fieldType}
+                        name={fieldName}
+                        label={fieldLabel}
+                        value={fieldValue}
+                        attributes={attributes}
+                    />;
+                }
                 break;
             case EditorConstants.TYPE_SELECT:
                 htmlFields[i] = <Select

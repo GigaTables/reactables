@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Reactables from './src/Reactables.jsx'
 import Header from './src/components/table/Header.js'
-import mainStyles from './main.css'
+import './main.css'
 
 let editor = {
     ajax: 'http://gigatables.loc/editor.php',
@@ -43,7 +43,7 @@ let editor = {
             label: "Description:",
             name: "desc",
             type: 'textarea',
-            plugins: 'draft',
+            plugins: 'rte',
             attrs: [
                 {'className': 'descriptionField'}
             ],

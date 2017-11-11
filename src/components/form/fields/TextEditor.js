@@ -3,10 +3,6 @@ import RichTextEditor from 'react-rte';
 import editorStyles from '../../../css/editor.css';
 
 class TextEditor extends Component {
-    // state = {
-    //     value: RichTextEditor.createEmptyValue()
-    // };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -46,6 +42,7 @@ class TextEditor extends Component {
                         onChange={this.onChange}
                         name={name}
                         onFocus={onFocus}
+                        data-textarea={true}
                     />
                 </div>
                 <div className="clear"></div>

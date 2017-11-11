@@ -36,5 +36,5 @@ module.exports = {
     HTTP_METHOD_DELETE: 'DELETE',
 
     EDITABLE_CELLS_INDEX: 'editable-cells',
-    PLUGINS_DRAFT: 'draft',
-}
+    PLUGINS_RTE: 'rte',
+};

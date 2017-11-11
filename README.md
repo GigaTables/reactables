@@ -34,6 +34,8 @@ GigaTables supports the following capabilities:
 
 -- hot keys,
 
+-- plugins
+
 and more...
 
 * [Installation](#user-content-installation)
@@ -46,6 +48,7 @@ and more...
 * [Pagination or Infinite scroll](#user-content-pagination-or-infinite-scroll)
 * [Ajax autoload period](#user-content-ajax-autoload-period)
 * [Hot keys](#user-content-hot-keys)
+* [Plugins](#user-content-plugins)
 * [FAQ](#user-content-faq)
 
 ### Installation
@@ -75,6 +78,9 @@ see how to create table with JSX bellow.
 
 ### One-click cell edit
 ![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_cell_edit.png)
+
+### Form styling (css+fieldset/legend)
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_form_styling.png)
 
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML
@@ -347,6 +353,19 @@ To efficiently manage table behavior You can use the following hot keys:
 
 PS In some OS like Macintosh can be default conflicting hot keys, ex.: Cmd+Arrow Left get back in browsers
 
+## Plugins
+Plugins can be helpful to build convenient features around form elements, 
+for example - to edit text with HTML tags (aka WYSIWYG) and then save it in DB you can set the `rte` (Rich Text Editor):
+
+```js
+{
+    ...
+    type: 'textarea',
+    plugins: 'rte',
+    ...
+}
+``` 
+
 ## FAQ
 
 **Can I use file types in GT editor to upload files through AJAX on server?**
@@ -444,11 +463,11 @@ attrs: [
 ``` 
 in the field settings, don't forget to `import` the styles file with global cascades like this: 
 ```JS
-import mainStyles from './main.css'
+import './main.css'
 ``` 
-you can see an example in `main.js` file (do not worry if some IDEs will report that import is not used, they never mind hacks ;-).
+you can see an example in `main.js` file.
  
-For those who like `fieldset legend` form styling GT offers:
+For those who like `fieldset legend` form structure GT offers:
 ```js
         {
             ...

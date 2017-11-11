@@ -16,12 +16,12 @@ class TextEditor extends Component {
 
     onChange = (value) => {
         this.setState({value});
-        console.log(this.state.value.children);
-        if (this.props.onChange) {
+        // console.log(value.toString('html'));
+        if (this.props.onChangeHtml) {
             // Send the changes up to the parent component as an HTML string.
             // This is here to demonstrate using `.toString()` but in a real app it
             // would be better to avoid generating a string on each change.
-            this.props.onChange(
+            this.props.onChangeHtml(this,
                 value.toString('html')
             );
         }
@@ -29,13 +29,10 @@ class TextEditor extends Component {
 
     render() {
         const {
-            attributes,
             id,
             name,
             label,
-            value,
             onFocus,
-            onChange,
             multiple,
         } = this.props;
         return (
@@ -47,6 +44,8 @@ class TextEditor extends Component {
                         data-multiple={multiple}
                         value={this.state.value}
                         onChange={this.onChange}
+                        name={name}
+                        onFocus={onFocus}
                     />
                 </div>
                 <div className="clear"></div>

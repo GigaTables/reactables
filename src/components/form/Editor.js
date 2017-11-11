@@ -149,7 +149,7 @@ class Editor extends Component {
                 [e.target.name]: val
             }),
             setMultipleText: 1,
-        })
+        });
     }
 
     /**
@@ -178,6 +178,14 @@ class Editor extends Component {
                     }
                 });
         }
+    }
+
+    onChangeHtml(el, html) {
+        this.setState({
+            dataIndices: Object.assign({}, this.state.dataIndices, {
+                [el.props.name]: html
+            })
+        });
     }
 
     getFieldByType(index, object) {
@@ -278,8 +286,8 @@ class Editor extends Component {
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_DRAFT) !== -1) {
                     htmlFields[i] = <TextEditor
-                        // onFocus={this.onFocus.bind(this)}
-                        // onChange={this.onChange.bind(this)}
+                        onFocus={this.onFocus.bind(this)}
+                        onChangeHtml={this.onChangeHtml.bind(this)}
                         id={fieldName}
                         type={fieldType}
                         name={fieldName}

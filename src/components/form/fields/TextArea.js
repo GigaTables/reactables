@@ -12,6 +12,7 @@ class TextArea extends Component {
             value,
             onFocus,
             onChange,
+            isMultiple,
         } = this.props;
         return (
             <div className="gte_editor_fields">
@@ -24,7 +25,10 @@ class TextArea extends Component {
                     {...attributes}
                     id={id}
                     name={name}
-                    value={value}></textarea>
+                    value={value}
+                    data-multiple={isMultiple}
+                    data-textarea={true}
+                ></textarea>
                 </div>
                 <div className="clear"></div>
             </div>

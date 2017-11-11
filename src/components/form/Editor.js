@@ -29,7 +29,8 @@ class Editor extends Component {
             dataIndices: {},
             popup_title: this.lang.gte_editor_popupheader_create,
             popup_button: this.lang.gte_editor_sendbtn_create,
-            setMultipleText: 0
+            setMultipleText: 0,
+            isTextArea: false,
         };
         this.setFields(props);
         this.setDataIndices(props);
@@ -128,11 +129,18 @@ class Editor extends Component {
 
     onFocus(e) {
         const {setMultipleText} = this.state;
-        if (true === e.target.dataset.multiple && setMultipleText === 0) {
+        let isTextArea = false;
+        if (typeof e.target.dataset.multiple !== CommonConstants.UNDEFINED
+            && true === e.target.dataset.multiple && setMultipleText === 0) {
             document.querySelectorAll('input').value = '';
+        }
+        if (typeof e.target.dataset.textarea !== CommonConstants.UNDEFINED
+            && e.target.dataset.textarea === CommonConstants.STR_TRUE) {
+            isTextArea = true;
         }
         this.setState({
             setMultipleText: 1,
+            isTextArea: isTextArea,
         });
     }
 
@@ -246,6 +254,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_MONTH:
             case EditorConstants.TYPE_WEEK:
                 htmlFields[i] = <HTML5Input
+                    onFocus={this.onFocus.bind(this)}
                     onChange={this.onChange.bind(this)}
                     attributes={attributes}
                     id={fieldName}
@@ -281,6 +290,8 @@ class Editor extends Component {
                     label={fieldLabel}
                     value={fieldValue}
                     attributes={attributes}
+                    isMultiple={isMultiple}
+                    data-textarea={true}
                 />;
                 break;
             case EditorConstants.TYPE_SELECT:
@@ -386,7 +397,7 @@ class Editor extends Component {
     }
 
     btnClickedEnter(e) {
-        if (e.keyCode === CommonConstants.ENTER_KEY) {
+        if (e.keyCode === CommonConstants.ENTER_KEY && this.state.isTextArea === false) {
             document.getElementById('gte_sent_btn').click();
         }
     }

@@ -142,6 +142,24 @@ class Reactables extends Main {
         }
         // enabling keys
         document.addEventListener('keydown', (e) => {
+            // independent keys (ex.: pop-up)
+            switch (e.which) {
+                case CommonConstants.CTRL_KEY:
+                    that.setState({
+                        ctrlDown: true
+                    });
+                    break;
+                case CommonConstants.CTRL_KEY_MAC_CHROME:
+                    that.setState({
+                        ctrlDown: true
+                    });
+                    break;
+                case CommonConstants.CTRL_KEY_MAC_FF:
+                    that.setState({
+                        ctrlDown: true
+                    });
+                    break;
+            }
             if (this.state.active === false) {// turn off events with active pop-up
                 switch (e.which) {
                     case CommonConstants.CTRL_KEY:
@@ -200,6 +218,26 @@ class Reactables extends Main {
 
         // disabling keys
         document.addEventListener('keyup', (e) => {
+            switch (e.which) {
+                case CommonConstants.CTRL_KEY:
+                    that.setState({
+                        ctrlDown: false
+                    });
+                    break;
+                case CommonConstants.CTRL_KEY_MAC_CHROME:
+                    that.setState({
+                        ctrlDown: false
+                    });
+                    break;
+                case CommonConstants.CTRL_KEY_MAC_FF:
+                    that.setState({
+                        ctrlDown: false
+                    });
+                    break;
+                case CommonConstants.ESCAPE_KEY:
+                    that.hidePopup();
+                    break;
+            }
             if (this.state.active === false) {// turn off events with active pop-up
                 switch (e.which) {
                     case CommonConstants.CTRL_KEY:
@@ -218,11 +256,9 @@ class Reactables extends Main {
                         });
                         break;
                     case CommonConstants.SHIFT_KEY:
-                        if (this.state.active === false) {// only if pop-up is closed
-                            that.setState({
-                                shiftDown: false
-                            });
-                        }
+                        that.setState({
+                            shiftDown: false
+                        });
                         break;
                     case CommonConstants.ARROW_UP:
                         that.setState({
@@ -295,7 +331,8 @@ class Reactables extends Main {
                 opacity,
                 popup_button,
                 popup_title,
-                fieldsEdit
+                fieldsEdit,
+                ctrlDown,
             } = this.state;
             const {
                 tableOpts,
@@ -320,7 +357,9 @@ class Reactables extends Main {
                     lang={lang}
                     struct={struct}
                     display={display}
-                    tableOpts={tableOpts}/>
+                    tableOpts={tableOpts}
+                    ctrlDown={ctrlDown}
+                />
             )
         }
     }

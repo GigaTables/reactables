@@ -1,9 +1,11 @@
-/* eslint-disable react/no-multi-comp */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import  '../../../../node_modules/draft-js-inline-toolbar-plugin/lib/plugin.css';
+import '../../../../node_modules/draft-js-image-plugin/lib/plugin.css';
+import '../../../../node_modules/draft-js/dist/Draft.css';
+import editorStyles from '../../../css/editor.css';
 
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
-
-import createToolbarPlugin, { Separator } from 'draft-js-static-toolbar-plugin';
+import Editor, {createEditorStateWithText} from 'draft-js-plugins-editor';
+import createToolbarPlugin, {Separator} from 'draft-js-static-toolbar-plugin';
 import {
     ItalicButton,
     BoldButton,
@@ -17,12 +19,13 @@ import {
     BlockquoteButton,
     CodeBlockButton,
 } from 'draft-js-buttons';
-import editorStyles from '../../../css/editor.css';
 
 
 class HeadlinesPicker extends Component {
     componentDidMount() {
-        setTimeout(() => { window.addEventListener('click', this.onWindowClick); });
+        setTimeout(() => {
+            window.addEventListener('click', this.onWindowClick);
+        });
     }
 
     componentWillUnmount() {
@@ -78,7 +81,7 @@ const toolbarPlugin = createToolbarPlugin({
         CodeBlockButton
     ]
 });
-const { Toolbar } = toolbarPlugin;
+const {Toolbar} = toolbarPlugin;
 const plugins = [toolbarPlugin];
 const text = 'In this editor a toolbar shows up once you select part of the text …';
 
@@ -106,7 +109,9 @@ export default class CustomToolbarEditor extends Component {
                         editorState={this.state.editorState}
                         onChange={this.onChange}
                         plugins={plugins}
-                        ref={(element) => { this.editor = element; }}
+                        ref={(element) => {
+                            this.editor = element;
+                        }}
                     />
                     <Toolbar />
                 </div>

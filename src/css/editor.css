@@ -337,11 +337,11 @@ div.gte_field input, div.gte_field textarea {
     box-shadow: 2px 2px 9px #111;
 }
 
-.draftJsToolbar__buttonWrapper__1Dmqh {
+:global .draftJsToolbar__buttonWrapper__1Dmqh {
     display: inline-block;
 }
 
-.draftJsToolbar__button__qi1gf {
+:global .draftJsToolbar__button__qi1gf {
     background: #fbfbfb;
     color: #888;
     font-size: 18px;
@@ -352,7 +352,7 @@ div.gte_field input, div.gte_field textarea {
     width: 36px;
 }
 
-.draftJsToolbar__button__qi1gf svg {
+:global .draftJsToolbar__button__qi1gf svg {
     fill: #888;
 }
 
@@ -361,15 +361,15 @@ div.gte_field input, div.gte_field textarea {
     outline: 0; /* reset for :focus */
 }
 
-.draftJsToolbar__active__3qcpF {
+:global .draftJsToolbar__active__3qcpF {
     background: #efefef;
     color: #444;
 }
 
-.draftJsToolbar__active__3qcpF svg {
+:global .draftJsToolbar__active__3qcpF svg {
     fill: #444;
 }
-.draftJsToolbar__separator__3U7qt {
+:global .draftJsToolbar__separator__3U7qt {
     display: inline-block;
     border-right: 1px solid #ddd;
     height: 24px;
@@ -427,11 +427,11 @@ div.gte_field input, div.gte_field textarea {
     min-height: 140px;
 }
 
-.headlineButtonWrapper {
+:global .headlineButtonWrapper {
     display: inline-block;
 }
 
-.headlineButton {
+:global  .headlineButton {
     background: #fbfbfb;
     color: #888;
     font-size: 18px;

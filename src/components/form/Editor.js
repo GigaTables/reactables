@@ -1,3 +1,5 @@
+"use strict";
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {EditorException} from '../Exceptions';
@@ -9,7 +11,7 @@ import HTML5Input from "./fields/HTML5Input";
 import TextArea from "./fields/TextArea";
 import Select from "./fields/Select";
 import CheckRadio from "./fields/CheckRadio";
-import Draft from "./fields/Draft";
+import TextEditor from "./fields/TextEditor";
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -275,15 +277,16 @@ class Editor extends Component {
             case EditorConstants.TYPE_TEXTAREA:
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_DRAFT) !== -1) {
-                    htmlFields[i] = <Draft
-                        onFocus={this.onFocus.bind(this)}
-                        onChange={this.onChange.bind(this)}
+                    htmlFields[i] = <TextEditor
+                        // onFocus={this.onFocus.bind(this)}
+                        // onChange={this.onChange.bind(this)}
                         id={fieldName}
                         type={fieldType}
                         name={fieldName}
                         label={fieldLabel}
                         value={fieldValue}
                         attributes={attributes}
+                        isMultiple={isMultiple}
                     />;
                 } else {
                     htmlFields[i] = <TextArea

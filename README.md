@@ -76,6 +76,9 @@ see how to create table with JSX bellow.
 ### One-click cell edit
 ![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_cell_edit.png)
 
+### Form styling (css+fieldset/legend)
+![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GigaTables_form_styling.png)
+
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML
     <script src="build/index.js"></script>
@@ -444,11 +447,11 @@ attrs: [
 ``` 
 in the field settings, don't forget to `import` the styles file with global cascades like this: 
 ```JS
-import mainStyles from './main.css'
+import './main.css'
 ``` 
-you can see an example in `main.js` file (do not worry if some IDEs will report that import is not used, they never mind hacks ;-).
+you can see an example in `main.js` file.
  
-For those who like `fieldset legend` form styling GT offers:
+For those who like `fieldset legend` form structure GT offers:
 ```js
         {
             ...

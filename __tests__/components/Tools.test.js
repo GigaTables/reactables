@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Tools from '../../src/components/form/Button.js'
 
-var editor = {
+const editor = {
   ajax: 'http://gigatables.loc/editor.php',
   ajaxFiles: 'uploadFiles.php',
   struct: {

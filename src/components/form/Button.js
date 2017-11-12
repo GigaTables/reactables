@@ -30,7 +30,7 @@ class Button extends Component {
       <div
         className="gte_buttons_container"
         data-action={action}
-        onClick={(active === false) ? this.onClick : false}>
+        onClick={(active === false) ? this.onClick : undefined}>
         <div data-action={action} className={buttonClasses}>
           <span data-action={action} >{children}</span>
         </div>

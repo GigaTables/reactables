@@ -40,6 +40,7 @@ class Editor extends Component {
         this.fieldsetOpen = 0;
         this.fieldsetClose = 0;
         this.fieldsetLegend = '';
+        this.filesInput = {};
     }
 
     setDataIndices(props) {

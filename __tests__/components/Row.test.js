@@ -2,7 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Column from '../../src/components/table/Column.js'
 import Row from '../../src/components/table/Row.js'
-import { shallow } from 'enzyme';
+import {shallow, configure} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({adapter: new Adapter()});
 
 it('renders Row correctly', () => {
   const tree = renderer.create(

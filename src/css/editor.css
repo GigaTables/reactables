@@ -113,6 +113,8 @@
     border-radius: 6px;
     box-shadow: 0 0 5px #555;
     box-sizing: border-box;
+    overflow: auto;
+    height: 500px;
 }
 
 :global .gte_editor_fields {
@@ -144,6 +146,7 @@
     right: 2px;
     top: 2px;
     width: auto;
+    z-index: 10;
 }
 
 :global .gte_footer {
@@ -162,6 +165,7 @@
     left: 2px;
     right: 2px;
     width: auto;
+    z-index: 10;
 }
 
 :global .gte_form_err {

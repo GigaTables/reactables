@@ -22,7 +22,7 @@ class File extends Component {
             label,
         } = this.props;
         return (
-            <div className="gte_editor_fields">
+            <div key={id} className="gte_editor_fields">
                 <label className="gte_label" htmlFor={id}>{label}</label>
                 <div className={editorStyles.gte_field}>
                     <input

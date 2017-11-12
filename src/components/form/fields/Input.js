@@ -17,7 +17,7 @@ class Input extends Component {
             onChange,
         } = this.props;
         return (
-            <div className="gte_editor_fields">
+            <div key={id} className="gte_editor_fields">
                 <label className="gte_label"
                        htmlFor={id}>{(type !== EditorConstants.TYPE_HIDDEN) ? label : null}</label>
                 <div className={editorStyles.gte_field}>

@@ -13,7 +13,7 @@ class HTML5Input extends Component {
             onChange,
         } = this.props;
         return (
-            <div className="gte_editor_fields">
+            <div key={id} className="gte_editor_fields">
                 <label
                     className="gte_label"
                     htmlFor={id}>

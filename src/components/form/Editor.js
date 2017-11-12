@@ -109,7 +109,7 @@ class Editor extends Component {
         });
         let reFields = [];
         reFields.push(fields.slice(0, this.fieldsetOpen));
-        reFields.push(<div key={this.fieldsetClose} className="gte_editor_fields">
+        reFields.push(<div key={0} className="gte_editor_fields">
             <fieldset>
                 <legend>{this.fieldsetLegend}</legend>
                 {fieldsInSets}
@@ -247,7 +247,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_HIDDEN:
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
-                htmlFields[i] = <Input
+                htmlFields[i] = <Input key={i}
                     onFocus={this.onFocus.bind(this)}
                     onChange={this.onChange.bind(this)}
                     attributes={attributes}
@@ -270,6 +270,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_MONTH:
             case EditorConstants.TYPE_WEEK:
                 htmlFields[i] = <HTML5Input
+                    key={i}
                     onFocus={this.onFocus.bind(this)}
                     onChange={this.onChange.bind(this)}
                     attributes={attributes}
@@ -281,7 +282,7 @@ class Editor extends Component {
                 break;
             case EditorConstants.TYPE_FILE:
                 // todo: it can't be passed through rfc from File component
-                htmlFields[i] = <div className="gte_editor_fields">
+                htmlFields[i] = <div key={i} className="gte_editor_fields">
                     <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
                     <div className={editorStyles.gte_field}>
                         <input
@@ -300,6 +301,7 @@ class Editor extends Component {
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_RTE) !== -1) {
                     htmlFields[i] = <TextEditor
+                        key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChangeHtml={this.onChangeHtml.bind(this)}
                         id={fieldName}
@@ -313,6 +315,7 @@ class Editor extends Component {
                     />;
                 } else {
                     htmlFields[i] = <TextArea
+                        key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChange={this.onChange.bind(this)}
                         id={fieldName}
@@ -328,6 +331,7 @@ class Editor extends Component {
                 break;
             case EditorConstants.TYPE_SELECT:
                 htmlFields[i] = <Select
+                    key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
                     type={fieldType}
@@ -340,6 +344,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:
                 htmlFields[i] = <CheckRadio
+                    key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
                     type={fieldType}
@@ -356,7 +361,7 @@ class Editor extends Component {
     triggerBefore(type) {
         const {tableOpts} = this.props;
         // call triggerBefore if it has been set
-        tableOpts.buttons.map((obj, idx) => {
+        tableOpts.buttons.map((obj) => {
             if (obj.extended === type && typeof obj.triggerBefore !== CommonConstants.UNDEFINED) {
                 obj.triggerBefore();
             }
@@ -366,7 +371,7 @@ class Editor extends Component {
     triggerAfter(type) {
         const {tableOpts} = this.props;
         // call triggerAfter if it has been set
-        tableOpts.buttons.map((obj, idx) => {
+        tableOpts.buttons.map((obj) => {
             if (obj.extended === type && typeof obj.triggerAfter !== CommonConstants.UNDEFINED) {
                 obj.triggerAfter();
             }

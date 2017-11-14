@@ -105,7 +105,10 @@ let settings = {
         {
             data: "info"
         },
-        {data: "field1"},
+        {
+            data: "field1",
+            plugins: "progressbar",
+        },
         {data: "field2"},
         {data: "field3", visible: false}
     ],

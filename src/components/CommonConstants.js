@@ -38,6 +38,7 @@ module.exports = {
     CASE_INSENSITIVE_SEARCH: 'cISearch',
     DISCRETE_CASE_INSENSITIVE_SEARCH: 'discreteCISearch',
     VISIBLE: 'visible',
+    PROGRESS_BAR: 'progressbar',
     DATA: 'data',
     PERIOD_SEARCH: 200,
     TIMEOUT_SEARCH: 300,

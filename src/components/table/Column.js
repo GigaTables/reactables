@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import Progress from 'react-progress';
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -81,6 +82,7 @@ class Column extends Component {
             minRow,
             maxRow,
             children,
+            isProgressBar,
         } = this.props;
         const {
             cellValue,
@@ -114,6 +116,14 @@ class Column extends Component {
                 </td>
             )
         }
+        let cellContent = children;
+        if (isProgressBar === true) {
+            cellContent = <Progress
+                classname=""
+                percent={children}
+                height={10}
+            />
+        }
         return (
             <td
                 key={gteRowId}
@@ -140,7 +150,7 @@ class Column extends Component {
                         onKeyUp={this.btnClickedEnter.bind(this)}
                         onChange={(e) => {
                             this.changeCell(e)
-                        }}/> : children}
+                        }}/> : cellContent}
             </td>
         )
     }

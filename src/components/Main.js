@@ -47,6 +47,14 @@ class Main extends Component {
         }
     }
 
+    setProgressBars(object) {
+        this.progressBars[object[CommonConstants.DATA]] = true;
+        if (typeof object[CommonConstants.PROGRESS_BAR] !== CommonConstants.UNDEFINED
+            && object[CommonConstants.PROGRESS_BAR] === false) {
+            this.progressBars[object[CommonConstants.DATA]] = false;
+        }
+    }
+
     setSortableCols(object) {
         this.sortableCols[object[CommonConstants.DATA]] = false;
         if (typeof object[CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
@@ -191,7 +199,9 @@ class Main extends Component {
                         editor={this.props.editor}
                         editCell={this.editCell.bind(this)}
                         editorUpdate={this.editorUpdate.bind(this)}
-                        cell={'' + objectIndex + idx}>{content}</Column>);
+                        cell={'' + objectIndex + idx}
+                        isProgressBar={this.progressBars[data]}
+                    >{content}</Column>);
                 }
             });
             // count is used to shft key + click selection of rows, ex.: sorted

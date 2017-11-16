@@ -340,6 +340,7 @@ td {
 :global .progress_bar_color_light_green {
     background-color: #abcb42;
 }
+
 :global .progress_bar_color_green {
     background-color: #5c7943;
 }

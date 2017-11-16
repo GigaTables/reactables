@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import ProgressBar from './ProgressBar';
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -81,6 +82,7 @@ class Column extends Component {
             minRow,
             maxRow,
             children,
+            isProgressBar,
         } = this.props;
         const {
             cellValue,
@@ -89,7 +91,7 @@ class Column extends Component {
         if (editableCells === true && dataIndex === EditorConstants.EDITABLE_CELLS_INDEX) {
             let cellClasses = classNames({
                 normal_checkbox: true,
-                select_checkbox: (selectedRows.indexOf(count) !== -1) ? true : false
+                select_checkbox: (selectedRows.indexOf(count) !== -1)
             });
             return (
                 <td
@@ -113,6 +115,15 @@ class Column extends Component {
                         data-maxrow={maxRow}></div>
                 </td>
             )
+        }
+        let cellContent = children;
+        if (isProgressBar === true) {
+            // todo: flexible settings
+            cellContent = <ProgressBar
+                classname="progress_bar"
+                percent={children}
+                height={20}
+            />
         }
         return (
             <td
@@ -140,7 +151,7 @@ class Column extends Component {
                         onKeyUp={this.btnClickedEnter.bind(this)}
                         onChange={(e) => {
                             this.changeCell(e)
-                        }}/> : children}
+                        }}/> : cellContent}
             </td>
         )
     }

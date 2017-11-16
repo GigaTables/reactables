@@ -38,6 +38,7 @@ module.exports = {
     CASE_INSENSITIVE_SEARCH: 'cISearch',
     DISCRETE_CASE_INSENSITIVE_SEARCH: 'discreteCISearch',
     VISIBLE: 'visible',
+    PROGRESS_BAR: 'progressbar',
     DATA: 'data',
     PERIOD_SEARCH: 200,
     TIMEOUT_SEARCH: 300,
@@ -49,6 +50,7 @@ module.exports = {
     RENDER: 'render',
     MIN_AUTOLOAD_PERIOD: 5, // 5 sec
     MAX_AUTOLOAD_PERIOD: 300, // 5 min
-    STR_FALSE: 'true',
+    STR_FALSE: 'false',
     STR_TRUE: 'true',
+    PLUGINS: 'plugins',
 };

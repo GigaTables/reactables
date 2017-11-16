@@ -354,8 +354,8 @@ To efficiently manage table behavior You can use the following hot keys:
 PS In some OS like Macintosh can be default conflicting hot keys, ex.: Cmd+Arrow Left get back in browsers
 
 ## Plugins
-Plugins can be helpful to build convenient features around form elements, 
-for example - to edit text with HTML tags (aka WYSIWYG) and then save it in DB you can set the `rte` (Rich Text Editor):
+Plugins can be helpful to build convenient features around form elements and table rows/columns. 
+For instance - to edit text with HTML tags (aka WYSIWYG) and then save it in DB you can set the `rte` (Rich Text Editor):
 
 ```js
 {
@@ -365,6 +365,17 @@ for example - to edit text with HTML tags (aka WYSIWYG) and then save it in DB y
     ...
 }
 ``` 
+
+Progress bar plugin:
+
+```
+    ...
+    data: "statistics",
+    plugins: "progressbar",
+    ...
+```
+this will build 5 colored (left-to-right) progress bar for every row in the column, with percent number.
+Protected from `null` and `negative` numbers as well as `more then 100`.
 
 ## FAQ
 

@@ -50,6 +50,7 @@ module.exports = {
     RENDER: 'render',
     MIN_AUTOLOAD_PERIOD: 5, // 5 sec
     MAX_AUTOLOAD_PERIOD: 300, // 5 min
-    STR_FALSE: 'true',
+    STR_FALSE: 'false',
     STR_TRUE: 'true',
+    PLUGINS: 'plugins',
 };

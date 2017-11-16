@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import Progress from 'react-progress';
+import ProgressBar from './ProgressBar';
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -91,7 +91,7 @@ class Column extends Component {
         if (editableCells === true && dataIndex === EditorConstants.EDITABLE_CELLS_INDEX) {
             let cellClasses = classNames({
                 normal_checkbox: true,
-                select_checkbox: (selectedRows.indexOf(count) !== -1) ? true : false
+                select_checkbox: (selectedRows.indexOf(count) !== -1)
             });
             return (
                 <td
@@ -118,10 +118,11 @@ class Column extends Component {
         }
         let cellContent = children;
         if (isProgressBar === true) {
-            cellContent = <Progress
-                classname=""
+            // todo: flexible settings
+            cellContent = <ProgressBar
+                classname="progress_bar"
                 percent={children}
-                height={10}
+                height={20}
             />
         }
         return (

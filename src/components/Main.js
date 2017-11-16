@@ -10,8 +10,7 @@ class Main extends Component {
     constructor(props) {
         super(props);
         // init search flags
-        this.nothing = false,
-            this.tOut = [], this.c = 0;
+        this.tOut = [], this.c = 0;
     }
 
     setSearchableCols(object) {
@@ -48,10 +47,10 @@ class Main extends Component {
     }
 
     setProgressBars(object) {
-        this.progressBars[object[CommonConstants.DATA]] = true;
-        if (typeof object[CommonConstants.PROGRESS_BAR] !== CommonConstants.UNDEFINED
-            && object[CommonConstants.PROGRESS_BAR] === false) {
-            this.progressBars[object[CommonConstants.DATA]] = false;
+        this.progressBars[object[CommonConstants.DATA]] = false;
+        if (typeof object[CommonConstants.PLUGINS] !== CommonConstants.UNDEFINED
+            && object[CommonConstants.PLUGINS] === CommonConstants.PROGRESS_BAR) {
+            this.progressBars[object[CommonConstants.DATA]] = true;
         }
     }
 

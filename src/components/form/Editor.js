@@ -126,7 +126,7 @@ class Editor extends Component {
             fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>;
             lastId = index;
         });
-        fields.push(<div key={++lastId} className="gte_msg">Are You sure You wish to delete {items.length}
+        fields.push(<div key={++lastId} className="gte_msg">Are You sure You wish to delete {items.length}&nbsp;
             row(s)?</div>);
         return fields;
     }
@@ -140,7 +140,7 @@ class Editor extends Component {
         }
         if ((typeof e.target.dataset.textarea !== CommonConstants.UNDEFINED
             && e.target.dataset.textarea === CommonConstants.STR_TRUE)
-                // for RTE focus check
+            // for RTE focus check
             || (typeof e.target.children[0] !== CommonConstants.UNDEFINED
             && typeof e.target.children[0].getAttribute('data-contents') !== CommonConstants.UNDEFINED
             && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
@@ -229,12 +229,16 @@ class Editor extends Component {
             }
         }
         // settting attrs
-        var attributes = [];
+        let attributes = [];
         if (typeof object.attrs !== CommonConstants.UNDEFINED) {
-            var fieldOpts = object.attrs;
+            let fieldOpts = object.attrs;
             for (let opt in fieldOpts) {
-                for (let attr in fieldOpts[opt]) {
-                    attributes[attr] = fieldOpts[opt][attr];
+                if (fieldOpts.hasOwnProperty(opt)) {
+                    for (let attr in fieldOpts[opt]) {
+                        if (fieldOpts[opt].hasOwnProperty(attr)) {
+                            attributes[attr] = fieldOpts[opt][attr];
+                        }
+                    }
                 }
             }
         }
@@ -248,15 +252,15 @@ class Editor extends Component {
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
                 htmlFields[i] = <Input key={i}
-                    onFocus={this.onFocus.bind(this)}
-                    onChange={this.onChange.bind(this)}
-                    attributes={attributes}
-                    id={fieldName}
-                    type={fieldType}
-                    name={fieldName}
-                    label={fieldLabel}
-                    value={fieldValue}
-                    isMultiple={isMultiple}/>;
+                                       onFocus={this.onFocus.bind(this)}
+                                       onChange={this.onChange.bind(this)}
+                                       attributes={attributes}
+                                       id={fieldName}
+                                       type={fieldType}
+                                       name={fieldName}
+                                       label={fieldLabel}
+                                       value={fieldValue}
+                                       isMultiple={isMultiple}/>;
                 break;
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:
@@ -383,18 +387,24 @@ class Editor extends Component {
         const {
             action,
             editorUpdate,
-            editor,
             fieldsEdit,
         } = this.props;
         const {dataIndices} = this.state;
 
-        let ajaxUrl = editor.ajax;
+        let settings = this.getAjaxSettings(action);
+        let ajaxUrl = settings.url;
         let dataResp = dataIndices;
         if (action === EditorConstants.ACTION_CREATE) {
             this.triggerBefore(EditorConstants.EDITOR_CREATE);
             this.fileUpload();
+            if (typeof dataIndices['id'] !== CommonConstants.UNDEFINED) { // clear the id
+                delete dataIndices['id'];
+            }
+            if (typeof dataIndices[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
+                delete dataIndices[CommonConstants.GT_ROW_ID];
+            }
             fetch(ajaxUrl, {
-                method: EditorConstants.HTTP_METHOD_POST,
+                method: settings.method,
                 body: JSON.stringify(dataIndices)
             }).then(response => response.json()).then((data) => {
                 dataResp['id'] = data['row']['id'];
@@ -407,10 +417,12 @@ class Editor extends Component {
             this.fileUpload();
             let payload = [];
             for (let k in fieldsEdit) {
-                payload[k] = loAssign({}, fieldsEdit[k], dataIndices);
+                if (fieldsEdit.hasOwnProperty(k)) {
+                    payload[k] = loAssign({}, fieldsEdit[k], dataIndices);
+                }
             }
             fetch(ajaxUrl, {
-                method: EditorConstants.HTTP_METHOD_PUT,
+                method: settings.method,
                 body: JSON.stringify(payload)
             }).then(response => response.json()).then((data) => {
                 editorUpdate(e, dataResp);
@@ -419,13 +431,42 @@ class Editor extends Component {
         } else if (action === EditorConstants.ACTION_DELETE) {
             this.triggerBefore(EditorConstants.EDITOR_REMOVE);
             fetch(ajaxUrl, {
-                method: EditorConstants.HTTP_METHOD_DELETE,
+                method: settings.method,
                 body: JSON.stringify(dataIndices) // prop ids are passed from Reactables
             }).then(response => response.json()).then((data) => {
                 // call editorUpdate method with passing all user-input values
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_REMOVE);
             });
+        }
+    }
+
+    getAjaxSettings(action) {
+        const {
+            editor,
+        } = this.props;
+        if (typeof editor.ajax === CommonConstants.STRING) {
+            let httpMethod = EditorConstants.HTTP_METHOD_POST; // action - create
+            if (action === EditorConstants.ACTION_EDIT) {
+                httpMethod = EditorConstants.HTTP_METHOD_PUT;
+            } else if (action === EditorConstants.ACTION_DELETE) {
+                httpMethod = EditorConstants.HTTP_METHOD_DELETE;
+            }
+            return {
+                url: editor.ajax,
+                method: httpMethod,
+            };
+        }
+        if (typeof editor.ajax === CommonConstants.OBJECT
+            && typeof editor.ajax[action] !== CommonConstants.UNDEFINED
+            && typeof editor.ajax[action].url !== CommonConstants.UNDEFINED) {
+            return {
+                url: editor.ajax[action].url,
+                method: editor.ajax[action].type,
+            };
+        } else { // setting error
+            throw new EditorException('"ajax" property must be set either as string url ' +
+                'or object with "' + action + '" and "url", "type" properties set-up respectively.');
         }
     }
 
@@ -457,6 +498,10 @@ class Editor extends Component {
                 gte_popup_background: true,
                 fade_in: active,
                 fade_out: !active
+            }),
+            formFieldsClasses = classNames({
+                gte_form_fields: true,
+                gte_form_fields_delete: (action === EditorConstants.ACTION_DELETE),
             });
         return (
             <div>
@@ -470,7 +515,7 @@ class Editor extends Component {
                                 <div
                                     className="close_btn"
                                     onClick={hidePopup}></div>
-                                <div className="gte_form_fields">
+                                <div className={formFieldsClasses}>
                                     <div className="gte_header">
                                         <div className="gte_editor_title">{popupTitle}</div>
                                     </div>

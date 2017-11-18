@@ -120,7 +120,7 @@ The `<Reactables>` tag, it's `Headers` and all the stuff like pagination, per pa
 ### Advanced configuration with opts and editor
 
 ```JS
-var settings = {
+let settings = {
  struct: {
    search: ['top', 'bottom'],
    rowsSelector: ['asc', 'top', 'bottom'],
@@ -248,51 +248,74 @@ JSON structure to return from provided url in "ajax" GigaTables option:
 First of all You should define an object Editor like this:
 
 ```JS
-var editor = {
-  ajax: 'https://example.com/update/tabledata',
-  ajaxFiles: 'https://example.com/upload/files',
-  struct: {
-    buttons: ['top', 'bottom'] // buttons
-  },
-  fields: [
-    {
-      label: "ID",
-      name: "id",
-      type: 'hidden'
+let editor = {
+    ajax: 'http://www.example.com/editor.php',
+    // it is possible to set discrete urls and http methods for any type of request
+    // ajax: {
+    //     create: {
+    //         url: 'http://www.example.com/create.php',
+    //         type: 'POST',
+    //     },
+    //     edit: {
+    //         url: 'http://www.example.com/edit.php',
+    //         type: 'PUT',
+    //     },
+    //     delete: {
+    //         url: 'http://www.example.com/delete.php',
+    //         type: 'DELETE',
+    //     },
+    // },
+    ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
+    struct: {
+        buttons: ['top', 'bottom'] // buttons
     },
-    {// an example of using select - automatically selected if matches with data in table column
-      label: "Types:",
-      name: "types[]",
-      values: [// if select,checkbox,radio etc types - need this pre-set structure of values
-        {'key1': 'val1'},
-        {'key2': 'val2'}
-      ],
-      type: 'checkbox' // select,checkbox,radio
-    },
-    {
-      label: "Article title:",
-      name: "title",
-      type: 'text', // default, other: password, file, select, multiselect etc
-      attrs: [
-        {'pattern': '^[A-Za-z0-9_]+$'}
-      ]
-    },
-    {
-      label: "Description:",
-      name: "desc",
-      type: 'textarea'
-    },
-    {
-      label: "Date Time:",
-      name: "date",
-      type: 'date'
-    },
-    {
-      label: "Image:",
-      name: "image",
-      type: 'file'
-    },
-  ]
+    fields: [
+        {
+            label: "ID",
+            name: "id",
+            type: 'hidden'
+        },
+        {// an example of using select - automatically selected if matches with data in table column
+            label: "Types:",
+            name: "types[]",
+            values: [// if select,checkbox,radio etc types - need this pre-set structure of values
+                {'key1': 'val1'},
+                {'key2': 'val2'}
+            ],
+            type: 'checkbox', // select,checkbox,radio
+        },
+        {
+            label: "Article title:",
+            name: "title",
+            type: 'text', // default, other: password, file, select, multiselect etc
+            fieldsetOpen: true,
+            legend: 'Required fields',
+            attrs: [
+                {'pattern': '^[A-Za-z0-9_]+$'},
+                {'className': 'titleField'}
+            ]
+        },
+        {
+            label: "Description:",
+            name: "desc",
+            type: 'textarea',
+            plugins: 'rte',
+            attrs: [
+                {'className': 'descriptionField'}
+            ],
+            fieldsetClose: true,
+        },
+        {
+            label: "Date Time:",
+            name: "date",
+            type: 'date'
+        },
+        {
+            label: "Image:",
+            name: "image",
+            type: 'file'
+        },
+    ]
 };
 ```        
 

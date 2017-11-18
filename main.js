@@ -6,6 +6,21 @@ import './main.css'
 
 let editor = {
     ajax: 'http://gigatables.loc/editor.php',
+    // it is possible to set discrete urls, http methods for any type of request
+    // ajax: {
+    //     create: {
+    //         url: 'http://gigatables.loc/editor.php',
+    //         type: 'POST',
+    //     },
+    //     edit: {
+    //         url: 'http://gigatables.loc/editor.php',
+    //         type: 'PUT',
+    //     },
+    //     delete: {
+    //         url: 'http://gigatables.loc/editor.php',
+    //         type: 'DELETE',
+    //     },
+    // },
     ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
     struct: {
         buttons: ['top', 'bottom'] // buttons

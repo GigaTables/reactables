@@ -1,6 +1,8 @@
 module.exports = {
     UNDEFINED: 'undefined',
     FUNCTION: 'function',
+    STRING: 'string',
+    OBJECT: 'object',
     DISCRETE_SEARCH_VALUE: 'discreteSearchValue',
     // keys
     ESCAPE_KEY: 27,

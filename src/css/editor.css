@@ -117,6 +117,10 @@
     height: 500px;
 }
 
+:global .gte_form_fields_delete {
+    height: 180px;
+}
+
 :global .gte_editor_fields {
     border: 1px solid transparent;
     clear: both;

@@ -49,6 +49,7 @@ and more...
 * [Ajax autoload period](#user-content-ajax-autoload-period)
 * [Hot keys](#user-content-hot-keys)
 * [Plugins](#user-content-plugins)
+* [Aggregate Footer](#user-content-aggregate-footer)
 * [FAQ](#user-content-faq)
 
 ### Installation
@@ -391,7 +392,7 @@ For instance - to edit text with HTML tags (aka WYSIWYG) and then save it in DB 
 
 Progress bar plugin:
 
-```
+```js
     ...
     data: "statistics",
     plugins: "progressbar",
@@ -399,6 +400,47 @@ Progress bar plugin:
 ```
 this will build 5 colored (left-to-right) progress bar for every row in the column, with percent number.
 Protected from `null` and `negative` numbers as well as `more then 100`.
+
+## Aggregate Footer
+
+To set an aggregate footer, to be able to collect statistical data with different functions/methods 
+use the following property in `struct` object:
+```js
+    struct: {
+        ...
+        aggregateFooter: true
+        ...
+    }
+```
+then you can declare whatever function needed to be processed for particular columns like this:
+```js
+        {
+            data: "title",
+            ...
+            footer: 'frequency',
+            ...
+        },
+```
+to get most frequently used sentences/words,
+```js
+        {
+            data: "price",
+            ...
+            footer: "avg",
+            ...
+        },
+```
+to count an average value of all numbers in column,
+
+```js
+        {
+            data: "amount",
+            ...
+            footer: "sum",
+            ...
+        },
+```
+there are also `minLength` - `maxLength` footer settings to get a string lengths.
 
 ## FAQ
 

@@ -344,3 +344,8 @@ td {
 :global .progress_bar_color_green {
     background-color: #5c7943;
 }
+:global .footer {
+    background-color: #eee;
+    border-radius: 5px;
+    border:1px solid #333;
+}

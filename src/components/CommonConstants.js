@@ -55,4 +55,11 @@ module.exports = {
     STR_FALSE: 'false',
     STR_TRUE: 'true',
     PLUGINS: 'plugins',
+    // footer settings
+    FOOTER: 'footer',
+    FOOTER_AVG: 'avg',
+    FOOTER_SUM: 'sum',
+    FOOTER_MAX_LENGTH: 'maxLength',
+    FOOTER_MIN_LENGTH: 'minLength',
+    FOOTER_FREQUENCY: 'frequency',
 };

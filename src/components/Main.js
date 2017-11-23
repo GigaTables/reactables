@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Row from './table/Row.js';
 import Column from './table/Column.js';
+import Footer from "./table/Footer";
 
 const CommonConstants = require('./CommonConstants');
 const EditorConstants = require('./EditorConstants');
@@ -140,7 +141,8 @@ class Main extends Component {
             editedCell,
         } = this.state;
 
-        let editableCells = this.settings.struct.editableCells;
+        let editableCells = this.settings.struct.editableCells,
+            aggregateFooter = this.settings.struct.aggregateFooter;
         let rows = [];
         if (dataSearch !== null) {
             jsonData = dataSearch;
@@ -214,6 +216,9 @@ class Main extends Component {
                 gteRowId={rowId}
                 editableCells={editableCells}>{cols}</Row>);
         });
+        if (aggregateFooter === true) {
+            this.setFooter(jsonDataPerPage, rows);
+        }
         let state = {
             dataRows: rows,
             countRows: jsonData.length
@@ -222,6 +227,158 @@ class Main extends Component {
             state['sortButtons'] = sortedButtons;
         }
         this.setState(state);
+    }
+
+    setFooter(jsonDataPerPage, rows) {
+        const {columns} = this.settings;
+        let sum = 0,
+            avg = 0,
+            minLength = 0,
+            maxLength = 0,
+            frequency = [];
+        // process rows
+        this.jsonData.forEach((object) => {
+            // process cols
+            this.props.children.forEach((th) => {
+                const {data} = th.props;
+                columns.forEach((cObject) => {
+                    if (cObject[CommonConstants.DATA] === data
+                        && cObject[CommonConstants.FOOTER] !== CommonConstants.UNDEFINED) {
+                        let content = object[data];
+                        switch (cObject[CommonConstants.FOOTER]) {
+                            case CommonConstants.FOOTER_SUM:
+                                sum += parseFloat(content);
+                                break;
+                            case CommonConstants.FOOTER_AVG:
+                                avg += parseFloat(content);
+                                break;
+                            case CommonConstants.FOOTER_MIN_LENGTH:
+                                const len = content.length;
+                                if (minLength > len || minLength === 0) {
+                                    minLength = len;
+                                }
+                                break;
+                            case CommonConstants.FOOTER_MAX_LENGTH:
+                                const maxLen = content.length;
+                                if (maxLength < maxLen || maxLength === 0) {
+                                    maxLength = maxLen;
+                                }
+                                break;
+                            case CommonConstants.FOOTER_FREQUENCY:
+                                if (typeof frequency[content] === CommonConstants.UNDEFINED) {
+                                    frequency[content] = 1; // 1st occurrence
+                                } else {
+                                    frequency[content]++;
+                                }
+                                break;
+                        }
+                    }
+                });
+            });
+        });
+
+        let cols = [];
+        let editableCells = this.settings.struct.editableCells;
+        if (editableCells === true) { // set empty column on editable cells
+            cols.push(
+                <Column
+                    key={-1}
+                    selectedRows={[]}
+                    count={-1}
+                    gteRowId={-1}
+                >&nbsp;</Column>
+            );
+        }
+
+        // set footer cols
+        this.props.children.forEach((th, idx) => {
+            const {data} = th.props;
+            columns.forEach((cObject) => {
+                if (cObject[CommonConstants.DATA] === data
+                    && cObject[CommonConstants.FOOTER] !== CommonConstants.UNDEFINED
+                    && this.visibleCols[data] === true) { // setting object matches header column
+                    console.log(cObject[CommonConstants.DATA], data);
+                    switch (cObject[CommonConstants.FOOTER]) {
+                        case CommonConstants.FOOTER_SUM:
+                            cols.push(
+                                <Column
+                                    key={idx}
+                                    selectedRows={[]}
+                                    count={-1}
+                                    gteRowId={-1}
+                                >{(sum > 0) ? sum : 0}</Column>
+                            );
+                            break;
+                        case CommonConstants.FOOTER_AVG:
+                            cols.push(
+                                <Column
+                                    key={idx}
+                                    selectedRows={[]}
+                                    count={-1}
+                                    gteRowId={-1}
+                                >{(avg > 0) ? (avg / jsonDataPerPage.length) : 0}</Column>
+                            );
+                            break;
+                        case CommonConstants.FOOTER_MIN_LENGTH:
+                            cols.push(
+                                <Column
+                                    key={idx}
+                                    selectedRows={[]}
+                                    count={-1}
+                                    gteRowId={-1}
+                                >{minLength}</Column>
+                            );
+                            break;
+                        case CommonConstants.FOOTER_MAX_LENGTH:
+                            cols.push(
+                                <Column
+                                    key={idx}
+                                    selectedRows={[]}
+                                    count={-1}
+                                    gteRowId={-1}
+                                >{maxLength}</Column>
+                            );
+                            break;
+                        case CommonConstants.FOOTER_FREQUENCY:
+                            let mostFrequent = '', i = 0;
+                            for (let word in frequency) {
+                                if (i === 0) {
+                                    mostFrequent = word;
+                                }
+                                if (frequency[word] > frequency[mostFrequent]) {
+                                    mostFrequent = word;
+                                }
+                                ++i;
+                            }
+                            cols.push(
+                                <Column
+                                    key={idx}
+                                    selectedRows={[]}
+                                    count={-1}
+                                    gteRowId={-1}
+                                >{mostFrequent}</Column>
+                            );
+                            break;
+                        default: // add an empty column
+                            cols.push(
+                                <Column
+                                    key={idx}
+                                    selectedRows={[]}
+                                    count={-1}
+                                    gteRowId={-1}
+                                >&nbsp;</Column>
+                            );
+                            break;
+                    }
+                }
+            });
+        });
+        // set footer
+        rows.push(
+            <Footer
+                key={-1}
+            >{cols}</Footer>
+        );
     }
 
     getRowId(object) {

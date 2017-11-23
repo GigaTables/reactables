@@ -84,6 +84,7 @@ let settings = {
         pagination: ['bottom'],
         fixedHeader: false, // default false
         editableCells: true, // default false
+        aggregateFooter: true, // default false
     },
     lang: 'en', // english default
     perPageRows: [25, 50, 100, 200],
@@ -105,7 +106,8 @@ let settings = {
         },
         {
             data: "title",
-            cISearch: true // default false
+            cISearch: true, // default false
+            footer: 'frequency',
         },
         {
             data: "desc",
@@ -118,13 +120,16 @@ let settings = {
             searchable: false
         },
         {
-            data: "info"
+            data: "info",
         },
         {
             data: "field1",
             plugins: "progressbar",
         },
-        {data: "field2"},
+        {
+            data: "field2",
+            footer: "avg",
+        },
         {data: "field3", visible: false}
     ],
     columnOpts: [

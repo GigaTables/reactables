@@ -85,6 +85,9 @@ let settings = {
         fixedHeader: false, // default false
         editableCells: true, // default false
         aggregateFooter: true, // default false
+        download: {
+            csv: false,
+        },
     },
     lang: 'en', // english default
     perPageRows: [25, 50, 100, 200],
@@ -156,6 +159,10 @@ let settings = {
     ],
     tableOpts: {
         buttons: [
+            // {// to set CSV Download button
+            //     extended: "editor_csv",
+            //     editor: editor,
+            // },
             {
                 extended: "editor_create", editor: editor, triggerAfter: (function () {
                 console.log('after create');

@@ -28,6 +28,7 @@ module.exports = {
     EDITOR_CREATE: 'editor_create',
     EDITOR_EDIT: 'editor_edit',
     EDITOR_REMOVE: 'editor_remove',
+    EDITOR_CSV: 'editor_csv',
     // different opts
     EXTENDED: 'extended',
     // http methods

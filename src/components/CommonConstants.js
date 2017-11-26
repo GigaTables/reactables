@@ -62,4 +62,6 @@ module.exports = {
     FOOTER_MAX_LENGTH: 'maxLength',
     FOOTER_MIN_LENGTH: 'minLength',
     FOOTER_FREQUENCY: 'frequency',
+    CSV_HEADER: 'data:text/csv;charset=utf-8,',
+    NEW_LINE: '\r\n',
 };

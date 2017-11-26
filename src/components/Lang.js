@@ -132,4 +132,4 @@ module.exports = {
       'editor_edit': 'संपादन करना',
       'editor_remove': 'हटाना'
   }
-}
+};

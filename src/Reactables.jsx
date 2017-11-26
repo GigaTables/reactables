@@ -23,6 +23,10 @@ class Reactables extends Main {
                 pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
                 infiniteScroll: false,
                 editableCells: false,
+                aggregateFooter: false,
+                download: {
+                    csv: false,
+                },
             },
             lang: 'en',
             perPageRows: [25, 50, 100, 200, 500],
@@ -307,6 +311,11 @@ class Reactables extends Main {
             struct,
         } = this.settings;
 
+        let dataToPass = [];
+        // prevent big data flow if it needless to pass to Tools for exports
+        if (struct.download.csv === true) {
+            dataToPass = this.jsonData;
+        }
         return (<Tools
             updatePerPage={this.updatePerPage.bind(this)}
             showPopup={this.showPopup.bind(this)}
@@ -319,7 +328,9 @@ class Reactables extends Main {
             selectedRows={selectedRows}
             search={search}
             struct={struct}
-            display={display}/>)
+            display={display}
+            jsonData={dataToPass}
+        />)
     }
 
     getEditor(display) {

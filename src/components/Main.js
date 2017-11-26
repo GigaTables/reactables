@@ -297,7 +297,6 @@ class Main extends Component {
                 if (cObject[CommonConstants.DATA] === data
                     && cObject[CommonConstants.FOOTER] !== CommonConstants.UNDEFINED
                     && this.visibleCols[data] === true) { // setting object matches header column
-                    console.log(cObject[CommonConstants.DATA], data);
                     switch (cObject[CommonConstants.FOOTER]) {
                         case CommonConstants.FOOTER_SUM:
                             cols.push(

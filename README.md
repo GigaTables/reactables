@@ -50,6 +50,7 @@ and more...
 * [Hot keys](#user-content-hot-keys)
 * [Plugins](#user-content-plugins)
 * [Aggregate Footer](#user-content-aggregate-footer)
+* [Data export](#user-content-data-export)
 * [FAQ](#user-content-faq)
 
 ### Installation
@@ -414,33 +415,52 @@ use the following property in `struct` object:
 ```
 then you can declare whatever function needed to be processed for particular columns like this:
 ```js
-        {
-            data: "title",
-            ...
-            footer: 'frequency',
-            ...
-        },
+    {
+        data: "title",
+        ...
+        footer: 'frequency',
+        ...
+    },
 ```
 to get most frequently used sentences/words,
 ```js
-        {
-            data: "price",
-            ...
-            footer: "avg",
-            ...
-        },
+    {
+        data: "price",
+        ...
+        footer: "avg",
+        ...
+    },
 ```
 to count an average value of all numbers in column,
 
 ```js
-        {
-            data: "amount",
-            ...
-            footer: "sum",
-            ...
-        },
+    {
+        data: "amount",
+        ...
+        footer: "sum",
+        ...
+    },
 ```
 there are also `minLength` - `maxLength` footer settings to get a string lengths.
+
+## Data export
+
+Sometimes users need to export data in different formats, the most popular is csv, so here we go:
+- define `download` object with `csv` property in `settings->struct`
+```js
+    download: {
+        csv: true,
+    },
+``` 
+
+- define button object in `settings->tableOpts->buttons` like this:
+```js
+    {
+        extended: "editor_csv",
+        editor: editor,
+    },
+```
+You'll see an extra button `CSV Export` on the left, right before standard buttons for CRUD. 
 
 ## FAQ
 
@@ -545,18 +565,18 @@ you can see an example in `main.js` file.
  
 For those who like `fieldset legend` form structure GT offers:
 ```js
-        {
-            ...
-            fieldsetOpen: true,
-            legend: 'Required fields',
-            ...
-        }
+    {
+        ...
+        fieldsetOpen: true,
+        legend: 'Required fields',
+        ...
+    }
 ``` 
 to open fieldset tag and set legend, to close previous fieldset in any further object use syntax like this:
 ```js
-        {
-            ...
-            fieldsetClose: true,
-            ...
-        },
+    {
+        ...
+        fieldsetClose: true,
+        ...
+    },
 ```

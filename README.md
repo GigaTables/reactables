@@ -580,3 +580,11 @@ to open fieldset tag and set legend, to close previous fieldset in any further o
         ...
     },
 ```
+
+### Contribution gratitude
+
+**@tanz-sullamora** (without this guy project would not be completed at all)
+
+**@AndreiEnache** (solved problem with Exceptions)
+
+**Valentin Kognar** (helped with styling and robust functionality)

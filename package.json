@@ -60,7 +60,11 @@
     "react",
     "javascript",
     "row-edit",
-    "table-view"
+    "table-view",
+    "fixed-header",
+    "sortable",
+    "pagination",
+    "search"
   ],
   "jest": {
     "moduleNameMapper": {

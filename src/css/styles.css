@@ -303,8 +303,17 @@ td {
     transform: translateZ(0);
 }
 
-:global .progress_bar {
+:global @keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
 
+:global .progress_bar {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
 :global .progress_bar_percent {

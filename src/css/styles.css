@@ -303,7 +303,9 @@ td {
     transform: translateZ(0);
 }
 
-:global @keyframes slideInFromLeft {
+:global
+
+@keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);
     }
@@ -352,9 +354,11 @@ td {
 
 :global .progress_bar_color_green {
     background-color: #5c7943;
+    color: #fff;
 }
+
 :global .footer {
     background-color: #eee;
     border-radius: 5px;
-    border:1px solid #333;
+    border: 1px solid #333;
 }

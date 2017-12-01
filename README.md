@@ -581,6 +581,13 @@ to open fieldset tag and set legend, to close previous fieldset in any further o
     },
 ```
 
+**How would GT behave if there will be > 1 000 000 rows data?**
+
+GT will perform good, but you should consider to turn off all the extra settings, 
+for instance with aggregate footer set - the data will be counted through those 1M rows. 
+Sure it will aggregate values only once and then get the results from state, 
+but the 1st page load will be longer than usual.
+
 ### Contribution gratitude
 
 **@tanz-sullamora** (without this guy project would not be completed at all)

@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 class Footer extends Component {
+    shouldComponentUpdate() {
+        return false;
+    }
+
     render() {
         const {
             children,

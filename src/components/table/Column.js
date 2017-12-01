@@ -83,6 +83,7 @@ class Column extends Component {
             maxRow,
             children,
             isProgressBar,
+            footer,
         } = this.props;
         const {
             cellValue,
@@ -125,6 +126,9 @@ class Column extends Component {
                 height={20}
             />
         }
+        let tdClasses = classNames({
+            td_footer_cell: footer
+        });
         return (
             <td
                 key={gteRowId}
@@ -133,7 +137,9 @@ class Column extends Component {
                 data-selectedrows={selectedRows}
                 data-index={dataIndex}
                 data-cell={cell}
-                onClick={editCell}>
+                onClick={editCell}
+                className={tdClasses}
+            >
                 {(editableCells === true && editedCell === this.cell) ?
                     <input
                         ref={(input) => {
@@ -169,6 +175,10 @@ Column.propTypes = {
     dataIndex: PropTypes.string,
     editor: PropTypes.object,
     editorUpdate: PropTypes.func,
+};
+
+Column.defaultProps = {
+    footer: false,
 };
 
 export default Column

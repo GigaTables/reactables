@@ -358,7 +358,10 @@ td {
 }
 
 :global .footer {
-    background-color: #eee;
+    background-color: #fff;
     border-radius: 5px;
     border: 1px solid #333;
+}
+:global .td_footer_cell {
+    border-right: 1px dotted #333 !important;
 }

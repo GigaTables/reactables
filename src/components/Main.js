@@ -90,20 +90,22 @@ class Main extends Component {
 
         let nJson = [], str = '', i = 0, json = this.jsonData;
         for (let key in json) {
-            for (let k in json[key]) {
-                if (k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
-                    str = json[key][k] + '';
-                    if (this.searchableCase[k] === false) {// case insensitive
-                        if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
-                            nJson[i] = json[key];
-                            ++i;
-                            break;
-                        }
-                    } else {
-                        if (str.indexOf(val) !== -1) {
-                            nJson[i] = json[key];
-                            ++i;
-                            break;
+            if (json.hasOwnProperty(key)) {
+                for (let k in json[key]) {
+                    if (json[key].hasOwnProperty(k) && k !== CommonConstants.GT_ROW_ID && this.searchableCols[k] === true) { // do not search unsearchable
+                        str = json[key][k] + '';
+                        if (this.searchableCase[k] === false) {// case insensitive
+                            if (str.toLowerCase().indexOf(val.toLowerCase()) !== -1) {
+                                nJson[i] = json[key];
+                                ++i;
+                                break;
+                            }
+                        } else {
+                            if (str.indexOf(val) !== -1) {
+                                nJson[i] = json[key];
+                                ++i;
+                                break;
+                            }
                         }
                     }
                 }
@@ -231,52 +233,69 @@ class Main extends Component {
 
     setFooter(jsonDataPerPage, rows) {
         const {columns} = this.settings;
+        const {
+            footerCounted,
+            footerSum,
+            footerAvg,
+            footerMinLength,
+            footerMaxLength,
+            footerFrequency,
+        } = this.state;
+
         let sum = 0,
             avg = 0,
             minLength = 0,
             maxLength = 0,
-            frequency = [];
-        // process rows
-        this.jsonData.forEach((object) => {
-            // process cols
-            this.props.children.forEach((th) => {
-                const {data} = th.props;
-                columns.forEach((cObject) => {
-                    if (cObject[CommonConstants.DATA] === data
-                        && cObject[CommonConstants.FOOTER] !== CommonConstants.UNDEFINED) {
-                        let content = object[data];
-                        switch (cObject[CommonConstants.FOOTER]) {
-                            case CommonConstants.FOOTER_SUM:
-                                sum += parseFloat(content);
-                                break;
-                            case CommonConstants.FOOTER_AVG:
-                                avg += parseFloat(content);
-                                break;
-                            case CommonConstants.FOOTER_MIN_LENGTH:
-                                const len = content.length;
-                                if (minLength > len || minLength === 0) {
-                                    minLength = len;
-                                }
-                                break;
-                            case CommonConstants.FOOTER_MAX_LENGTH:
-                                const maxLen = content.length;
-                                if (maxLength < maxLen || maxLength === 0) {
-                                    maxLength = maxLen;
-                                }
-                                break;
-                            case CommonConstants.FOOTER_FREQUENCY:
-                                if (typeof frequency[content] === CommonConstants.UNDEFINED) {
-                                    frequency[content] = 1; // 1st occurrence
-                                } else {
-                                    frequency[content]++;
-                                }
-                                break;
+            frequency = [],
+            mostFrequent = '';
+        if (footerCounted === true) {
+            sum = footerSum;
+            avg = footerAvg;
+            minLength = footerMinLength;
+            maxLength = footerMaxLength;
+            frequency = footerFrequency;
+        } else { // prevent recounting aggregation funcs on each page reload
+            // process rows
+            this.jsonData.forEach((object) => {
+                // process cols
+                this.props.children.forEach((th) => {
+                    const {data} = th.props;
+                    columns.forEach((cObject) => {
+                        if (cObject[CommonConstants.DATA] === data
+                            && cObject[CommonConstants.FOOTER] !== CommonConstants.UNDEFINED) {
+                            let content = object[data];
+                            switch (cObject[CommonConstants.FOOTER]) {
+                                case CommonConstants.FOOTER_SUM:
+                                    sum += parseFloat(content);
+                                    break;
+                                case CommonConstants.FOOTER_AVG:
+                                    avg += parseFloat(content);
+                                    break;
+                                case CommonConstants.FOOTER_MIN_LENGTH:
+                                    const len = content.length;
+                                    if (minLength > len || minLength === 0) {
+                                        minLength = len;
+                                    }
+                                    break;
+                                case CommonConstants.FOOTER_MAX_LENGTH:
+                                    const maxLen = content.length;
+                                    if (maxLength < maxLen || maxLength === 0) {
+                                        maxLength = maxLen;
+                                    }
+                                    break;
+                                case CommonConstants.FOOTER_FREQUENCY:
+                                    if (typeof frequency[content] === CommonConstants.UNDEFINED) {
+                                        frequency[content] = 1; // 1st occurrence
+                                    } else {
+                                        frequency[content]++;
+                                    }
+                                    break;
+                            }
                         }
-                    }
+                    });
                 });
             });
-        });
-
+        }
         let cols = [];
         let editableCells = this.settings.struct.editableCells;
         if (editableCells === true) { // set empty column on editable cells
@@ -301,6 +320,7 @@ class Main extends Component {
                         case CommonConstants.FOOTER_SUM:
                             cols.push(
                                 <Column
+                                    footer={true}
                                     key={idx}
                                     selectedRows={[]}
                                     count={-1}
@@ -311,6 +331,7 @@ class Main extends Component {
                         case CommonConstants.FOOTER_AVG:
                             cols.push(
                                 <Column
+                                    footer={true}
                                     key={idx}
                                     selectedRows={[]}
                                     count={-1}
@@ -321,6 +342,7 @@ class Main extends Component {
                         case CommonConstants.FOOTER_MIN_LENGTH:
                             cols.push(
                                 <Column
+                                    footer={true}
                                     key={idx}
                                     selectedRows={[]}
                                     count={-1}
@@ -331,6 +353,7 @@ class Main extends Component {
                         case CommonConstants.FOOTER_MAX_LENGTH:
                             cols.push(
                                 <Column
+                                    footer={true}
                                     key={idx}
                                     selectedRows={[]}
                                     count={-1}
@@ -339,7 +362,7 @@ class Main extends Component {
                             );
                             break;
                         case CommonConstants.FOOTER_FREQUENCY:
-                            let mostFrequent = '', i = 0;
+                            let i = 0;
                             for (let word in frequency) {
                                 if (i === 0) {
                                     mostFrequent = word;
@@ -351,6 +374,7 @@ class Main extends Component {
                             }
                             cols.push(
                                 <Column
+                                    footer={true}
                                     key={idx}
                                     selectedRows={[]}
                                     count={-1}
@@ -361,6 +385,7 @@ class Main extends Component {
                         default: // add an empty column
                             cols.push(
                                 <Column
+                                    footer={true}
                                     key={idx}
                                     selectedRows={[]}
                                     count={-1}
@@ -372,6 +397,17 @@ class Main extends Component {
                 }
             });
         });
+
+        if (footerCounted === false) { // prevent resetting state
+            this.setState({
+                footerCounted: true,
+                footerSum: sum,
+                footerAvg: avg,
+                footerMinLength: minLength,
+                footerMaxLength: maxLength,
+                footerFrequency: mostFrequent,
+            });
+        }
         // set footer
         rows.push(
             <Footer

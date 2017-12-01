@@ -66,6 +66,12 @@ class Reactables extends Main {
             discreteFocus: false,
             scrolledDown: false,
             editedCell: '',
+            footerCounted: false,
+            footerSum: 0,
+            footerAvg: 0,
+            footerMinLength: 0,
+            footerMaxLength: 0,
+            footerFrequency: '',
         };
         // cols opts
         this.searchableCols = [];

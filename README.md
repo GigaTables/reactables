@@ -594,4 +594,4 @@ but the 1st page load will be longer than usual.
 
 **@AndreiEnache** (solved problem with Exceptions)
 
-**Valentin Kognar** (helped with styling and robust functionality)
+**@GreenbBro** (helped with robust functionality and ES6 code-style)

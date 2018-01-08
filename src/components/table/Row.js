@@ -3,24 +3,25 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 class Row extends Component {
-    shouldComponentUpdate(nextProps) {
-        const {
-            gteRowId,
-            count,
-            selectedRows,
-            minRow,
-            maxRow,
-            editableCells,
-        } = this.props;
-        return editableCells === true
-            || gteRowId !== nextProps.gteRowId
-            || count !== nextProps.count
-            || selectedRows.length !== nextProps.selectedRows.length
-            || selectedRows.indexOf(count) !== nextProps.selectedRows.indexOf(count) // on multiple merged rows selection Shift+Clk
-            || selectedRows.indexOf(count) !== -1 // on multiple splited rows selection Ctrl+Clk
-            || minRow !== nextProps.minRow
-            || maxRow !== nextProps.maxRow;
-    }
+    // todo: solve shouldComponentUpdate problem with rows selection/deselection
+    // shouldComponentUpdate(nextProps) {
+    //     const {
+    //         gteRowId,
+    //         count,
+    //         selectedRows,
+    //         minRow,
+    //         maxRow,
+    //         editableCells,
+    //     } = this.props;
+    //     return editableCells === true
+    //         || gteRowId !== nextProps.gteRowId
+    //         || count !== nextProps.count
+    //         || selectedRows.length !== nextProps.selectedRows.length
+    //         || selectedRows.indexOf(count) !== nextProps.selectedRows.indexOf(count) // on multiple merged rows selection Shift+Clk
+    //         || selectedRows.indexOf(count) !== -1 // on multiple splited rows selection Ctrl+Clk
+    //         || minRow !== nextProps.minRow
+    //         || maxRow !== nextProps.maxRow;
+    // }
 
     render() {
         const {

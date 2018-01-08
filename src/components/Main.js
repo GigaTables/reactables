@@ -448,12 +448,12 @@ class Main extends Component {
             rowId = parseInt(rowid),
             realId = parseInt(realid);
 
-        if (rows.length > 0 && rows.indexOf(rowId) !== -1
-            && ctrlDown === false) { // if row is active - remove it
-            rows = rows.splice(rowId, 1);
-            ids = ids.splice(realId, 1);
-            this.state.selectedRows = rows;
-            this.state.selectedIds = ids;
+        let rowKey = rows.indexOf(rowId);
+        if (rows.length > 0 && rowKey !== -1
+            && ctrlDown === true) { // if row is active - remove it
+            let idKey = ids.indexOf(realId);
+            rows.splice(rowKey, 1);
+            ids.splice(idKey, 1);
         } else {
             if (ctrlDown === true) {
                 rows.push(parseInt(rowid));
@@ -470,12 +470,11 @@ class Main extends Component {
                         max = rows[row];
                     }
                 }
-                rows = [], this.state.selectedRows = [];
+                rows = [];
                 // fill in the items
                 for (let i = min; i <= max; ++i) {
                     rows.push(i);
                 }
-                this.state.selectedRows = rows;
             } else { // if just a click override prev
                 rows = [parseInt(rowid)];
                 ids = [parseInt(realid)];

@@ -103,19 +103,9 @@ class Reactables extends Main {
             });
         }
 
-        fetch(this.settings.ajax).then((response) => {// set ajax loader fo BD
-            this.setLoader(columns.length);
-            return response.json();
-        })
-            .then((data) => {
-                let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
-                if (typeof jsonData === CommonConstants.UNDEFINED) {
-                    throw new DataException('JSON must contain "rows" field.');
-                }
-                this.jsonData = jsonData;
-                this.createTable(jsonData);
-                this.setTableSort();
-            });
+        let colsLen = columns.length;
+        let destination = this.settings.ajax;
+        this.resolvePromiseUrl(destination, colsLen);
         // only set interval if both properties set and period >= 5 sec
         if (typeof this.settings.ajaxAutoloadData !== CommonConstants.UNDEFINED
             && typeof this.settings.ajaxAutoloadPeriod !== CommonConstants.UNDEFINED
@@ -123,21 +113,34 @@ class Reactables extends Main {
             && parseInt(this.settings.ajaxAutoloadPeriod) >= CommonConstants.MIN_AUTOLOAD_PERIOD
             && parseInt(this.settings.ajaxAutoloadPeriod) <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
             setInterval(() => {
-                fetch(this.settings.ajax).then((response) => {// set ajax loader fo BD
-                    this.setLoader(columns.length);
-                    return response.json();
-                })
-                    .then((data) => {
-                        let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
-                        if (typeof jsonData === CommonConstants.UNDEFINED) {
-                            throw new DataException('JSON must contain "rows" field.');
-                        }
-                        this.jsonData = jsonData;
-                        this.createTable(jsonData);
-                        this.setTableSort();
-                    });
+                this.resolvePromiseUrl(destination, colsLen);
             }, parseInt(this.settings.ajaxAutoloadPeriod) * 1000);
         }
+    }
+
+    resolvePromiseUrl(destination, colsLen) {
+        if (typeof destination.then === CommonConstants.FUNCTION) {
+            destination.then((url) => {
+                this.setData(url, colsLen);
+            });
+        } else {
+            this.setData(destination, colsLen);
+        }
+    }
+
+    setData(url, colsLen) {
+        fetch(url).then((response) => {// set ajax loader fo BD
+            this.setLoader(colsLen);
+            return response.json();
+        }).then((data) => {
+            let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
+            if (typeof jsonData === CommonConstants.UNDEFINED) {
+                throw new DataException('JSON must contain "rows" field.');
+            }
+            this.jsonData = jsonData;
+            this.createTable(jsonData);
+            this.setTableSort();
+        });
     }
 
     componentDidMount() {

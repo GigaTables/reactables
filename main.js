@@ -93,6 +93,9 @@ let settings = {
     perPageRows: [25, 50, 100, 200],
     defaultPerPage: 100,
     ajax: 'http://gigatables.loc/gigatables.php',
+    // ajax: new Promise((resolve) => {
+    //     resolve('http://gigatables.loc/gigatables.php')
+    // }),
     // ajaxAutoloadData: true, // default false
     // ajaxAutoloadPeriod: 8, // sec
     requestType: 'GET',
@@ -165,20 +168,20 @@ let settings = {
             // },
             {
                 extended: "editor_create", editor: editor, triggerAfter: (function () {
-                console.log('after create');
-            }), triggerBefore: (function () {
-                console.log('before create');
-            })
+                    console.log('after create');
+                }), triggerBefore: (function () {
+                    console.log('before create');
+                })
             },
             {
                 extended: "editor_edit", editor: editor, triggerBefore: (function () {
-                console.log('before edit');
-            })
+                    console.log('before edit');
+                })
             },
             {
                 extended: "editor_remove", editor: editor, triggerAfter: (function () {
-                console.log('after del');
-            })
+                    console.log('after del');
+                })
             }
         ],
         buttonsPosition: ['top', 'bottom'],

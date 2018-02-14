@@ -322,7 +322,7 @@ class Reactables extends Main {
 
         let dataToPass = [];
         // prevent big data flow if it needless to pass to Tools for exports
-        if (struct.download.csv === true) {
+        if (typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
             dataToPass = this.jsonData;
         }
         return (<Tools

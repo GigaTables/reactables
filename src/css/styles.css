@@ -30,8 +30,8 @@ tbody tr {
     background-color: #25adf1 !important;
 }
 
-:global .active {
-    background-color: #25adf1 !important;
+.active {
+    background-color: #25adf1;
 }
 
 :global tbody tr.active:hover {

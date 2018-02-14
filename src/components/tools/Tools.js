@@ -70,7 +70,7 @@ class Tools extends Component {
             tableOpts.buttons.map((btn, i) => {
                 if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CSV
                     && jsonData !== CommonConstants.UNDEFINED
-                    && struct.download.csv === true) {
+                    && typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
                     buttons[i] = <CSVLink
                         active={false}
                         jsonData={jsonData}

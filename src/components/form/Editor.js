@@ -403,10 +403,13 @@ class Editor extends Component {
             if (typeof dataIndices[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
                 delete dataIndices[CommonConstants.GT_ROW_ID];
             }
-            fetch(ajaxUrl, {
-                method: settings.method,
-                body: JSON.stringify(dataIndices)
-            }).then(response => response.json()).then((data) => {
+            (settings.method == 'PROMISE'?
+                ajaxUrl(dataIndices) :
+				fetch(ajaxUrl, {
+					method: settings.method,
+					body: JSON.stringify(dataIndices)
+				}))
+             .then(response => response.json()).then((data) => {
                 dataResp['id'] = data['row']['id'];
                 dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
                 editorUpdate(e, dataResp);
@@ -421,19 +424,25 @@ class Editor extends Component {
                     payload[k] = loAssign({}, fieldsEdit[k], dataIndices);
                 }
             }
-            fetch(ajaxUrl, {
-                method: settings.method,
-                body: JSON.stringify(payload)
-            }).then(response => response.json()).then((data) => {
+            (settings.method == 'PROMISE'?
+                ajaxUrl(payload) :
+				fetch(ajaxUrl, {
+					method: settings.method,
+					body: JSON.stringify(payload)
+				}))
+				.then(response => response.json()).then((data) => {
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_EDIT);
             });
         } else if (action === EditorConstants.ACTION_DELETE) {
             this.triggerBefore(EditorConstants.EDITOR_REMOVE);
-            fetch(ajaxUrl, {
-                method: settings.method,
-                body: JSON.stringify(dataIndices) // prop ids are passed from Reactables
-            }).then(response => response.json()).then((data) => {
+            (settings.method == 'PROMISE'?
+                ajaxUrl(dataIndices) :
+				fetch(ajaxUrl, {
+					method: settings.method,
+					body: JSON.stringify(dataIndices)
+				}))
+				.then(response => response.json()).then((data) => {
                 // call editorUpdate method with passing all user-input values
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_REMOVE);

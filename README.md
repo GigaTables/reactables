@@ -98,26 +98,79 @@ The `<Reactables>` tag, it's `Headers` and all the stuff like pagination, per pa
 
 ### Minimal configuration
 
+Add js below to `main.js` file:
 ```JS
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Reactables, Header} from 'gigatables-react'
 
-        var settings = {
-          struct: {// all in
-            search: ['top', 'bottom'],
-            rowsSelector: ['asc', 'top', 'bottom'],
-            pagination: ['bottom']
-          },
-          ajax: 'http://example.com/your/tabledata',
-          columns: [
-            {data: "id"},
-            {data: "desc"},
-            {data: "title"},
-            {data: "date"},
-            {data: "types"},
-            {data: "info"}
-          ]
-        };   
+let settings = {
+    struct: {// all in
+        search: ['top', 'bottom'],
+        rowsSelector: ['asc', 'top', 'bottom'],
+        pagination: ['bottom']
+    },
+    ajax: 'http://example.com/your/tabledata',
+    columns: [
+        {data: "id"},
+        {data: "desc"},
+        {data: "title"},
+        {data: "date"},       
+        {data: "info"},
+        {data:"field1"},
+        {data:"field2"},
+        {data:"field3", visible: false}        
+    ]
+};
 
+ReactDOM.render(
+    <Reactables settings={settings}>
+        <Header data="id">ID</Header>
+        <Header data="title">Name</Header>
+        <Header data="desc">Description</Header>
+        <Header data="date">Date</Header>
+        <Header data="info">Info</Header>
+        <Header data="field2">Field123 but data from field2</Header>
+        <Header data="field1">Field1</Header>
+        <Header data="field3">Field3 invisible</Header>
+        <Header>Field3 invisible</Header>
+    </Reactables>,
+    document.getElementById('app'));
 ```
+
+If u run GT from scratch - don't forget to install dependencies, such as:
+```json
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-react": "^6.24.1",
+    "gigatables-react": "^2.3.6",   
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",    
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-server": "^3.1.3"
+  },
+``` 
+
+Also add `index.html` file to the root and put the following content in it:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id = "app"></div>
+    <script src = "index.js"></script>
+</body>
+</html>
+```
+
+Be sure to create a `webpack.config.js` file and copy content from the same file in this repo.
+That's it, you are up and running.
 
 ### Advanced configuration with opts and editor
 

@@ -1,8 +1,7 @@
-const package = require('./package.json');
-const webpack = require('webpack');
 const path = require('path');
 
 const config = {
+    mode: 'development',
     entry: './main.js',
     output: {
         path: path.normalize(__dirname + '/build'),
@@ -16,7 +15,7 @@ const config = {
         port: 8888
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,

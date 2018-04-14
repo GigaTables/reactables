@@ -1,8 +1,8 @@
 const package = require('./package.json');
-const webpack = require('webpack');
 const path = require('path');
 
 const config = {
+    mode: 'production',
     entry: './main.prod.js',
     output: {
         path: path.normalize(__dirname + '/build'),
@@ -18,7 +18,7 @@ const config = {
         port: 8888
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
@@ -41,12 +41,9 @@ const config = {
             bundleDescription: package.description,
             bundleAuthor: package.author,
             isPlatform: false,
-        }))
-        .concat(require('./helpers/plugins/css'))
-        .concat(require('./helpers/plugins/uglify'))
-        .concat(require('./helpers/plugins/html')),
+        })),
     externals: {
         'react/addons': true
     }
-}
+};
 module.exports = config;

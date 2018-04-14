@@ -584,7 +584,7 @@ class Main extends Component {
     }
 
     showPopup(e) {
-        const {selectedRows} = this.state;
+        const {selectedRows, dataSearch} = this.state;
         this.lang = Lang[this.settings.lang];
         let action = e.target.dataset.action,
             popup_title = this.lang.gte_editor_popupheader_create,
@@ -596,7 +596,12 @@ class Main extends Component {
             popup_button = this.lang.gte_editor_sendbtn_update;
             // collect data for fields filling in Editor
             for (let k in selectedRows) {
-                fieldsEdit[k] = this.jsonData[selectedRows[k]];
+                // tested with sorted rows - should work properly
+                if (dataSearch !== null) { // edit field(s) after search
+                    fieldsEdit[k] = dataSearch[selectedRows[k]];
+                } else { // std behavior
+                    fieldsEdit[k] = this.jsonData[selectedRows[k]];
+                }
             }
         } else if (action === EditorConstants.ACTION_DELETE) {
             popup_title = this.lang.gte_editor_popupheader_delete;

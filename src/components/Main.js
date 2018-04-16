@@ -992,7 +992,7 @@ class Main extends Component {
         }
     }
 
-    handleScroll(that) {
+    handleScroll() {
         const {
             fromRow,
             perPage,

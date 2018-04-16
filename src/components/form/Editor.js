@@ -394,6 +394,8 @@ class Editor extends Component {
         let settings = this.getAjaxSettings(action);
         let ajaxUrl = settings.url;
         let dataResp = dataIndices;
+        let headers = new Headers();
+        headers.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON);
         if (action === EditorConstants.ACTION_CREATE) {
             this.triggerBefore(EditorConstants.EDITOR_CREATE);
             this.fileUpload();
@@ -405,7 +407,8 @@ class Editor extends Component {
             }
             fetch(ajaxUrl, {
                 method: settings.method,
-                body: JSON.stringify(dataIndices)
+                body: JSON.stringify(dataIndices),
+                headers: headers,
             }).then(response => response.json()).then((data) => {
                 dataResp['id'] = data['row']['id'];
                 dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
@@ -423,7 +426,8 @@ class Editor extends Component {
             }
             fetch(ajaxUrl, {
                 method: settings.method,
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                headers: headers,
             }).then(response => response.json()).then((data) => {
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_EDIT);
@@ -432,7 +436,8 @@ class Editor extends Component {
             this.triggerBefore(EditorConstants.EDITOR_REMOVE);
             fetch(ajaxUrl, {
                 method: settings.method,
-                body: JSON.stringify(dataIndices) // prop ids are passed from Reactables
+                body: JSON.stringify(dataIndices), // prop ids are passed from Reactables
+                headers: headers,
             }).then(response => response.json()).then((data) => {
                 // call editorUpdate method with passing all user-input values
                 editorUpdate(e, dataResp);

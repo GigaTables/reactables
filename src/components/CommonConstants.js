@@ -64,4 +64,8 @@ module.exports = {
     FOOTER_FREQUENCY: 'frequency',
     CSV_HEADER: 'data:text/csv;charset=utf-8,',
     NEW_LINE: '\r\n',
+    // headers
+    HEADER_CONTENT_TYPE: 'Content-Type',
+    CONTENT_APP_JSON: 'application/json',
+    // === headers end ===
 };

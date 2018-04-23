@@ -3,7 +3,7 @@
 [![Code Coverage](https://img.shields.io/badge/coverage-%2083%25%20-green.svg)](https://img.shields.io/badge/coverage-%2083%25%20-green.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# GigaTables ReactJS plug-in
+# GigaTables ReactJS plug-in [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20over%2030%20free%20table%20functions%20based%20on%20ReactJS%204&url=https://github.com/GigaTables/reactables&hashtags=tables,grids,plugins,editor,developers)
 GigaTables supports the following capabilities:
 
 -- ajax data processing/editing (CRUD),

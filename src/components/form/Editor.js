@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {EditorException} from '../Exceptions';
+import {DataException, EditorException} from '../Exceptions';
 import editorStyles from '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
@@ -139,11 +139,11 @@ class Editor extends Component {
             document.querySelectorAll('input').value = '';
         }
         if ((typeof e.target.dataset.textarea !== CommonConstants.UNDEFINED
-            && e.target.dataset.textarea === CommonConstants.STR_TRUE)
+                && e.target.dataset.textarea === CommonConstants.STR_TRUE)
             // for RTE focus check
             || (typeof e.target.children[0] !== CommonConstants.UNDEFINED
-            && typeof e.target.children[0].getAttribute('data-contents') !== CommonConstants.UNDEFINED
-            && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
+                && typeof e.target.children[0].getAttribute('data-contents') !== CommonConstants.UNDEFINED
+                && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
             isTextArea = true;
         }
         this.setState({
@@ -410,8 +410,16 @@ class Editor extends Component {
                 body: JSON.stringify(dataIndices),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
-                dataResp['id'] = data['row']['id'];
-                dataResp[CommonConstants.GT_ROW_ID] = data['row']['id'];
+                // leaving UI fields, prioritizing ones from server
+                if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
+                    throw DataException('The `id` field is required to return in response from server/back-end.');
+                }
+                for (let k in data[CommonConstants.GT_ROW]) {
+                    if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {
+                        dataResp[k] = data[CommonConstants.GT_ROW][k];
+                    }
+                }
+                dataResp[CommonConstants.GT_ROW_ID] = data[CommonConstants.GT_ROW]['id'];
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_CREATE);
             });

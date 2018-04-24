@@ -34,6 +34,7 @@ module.exports = {
     // symbol keys
     A_KEY: 65,
     // table
+    GT_ROW: 'row',
     GT_ROW_ID: 'GT_RowId',
     SORTABLE: 'sortable',
     SEARCHABLE: 'searchable',

@@ -412,7 +412,7 @@ class Editor extends Component {
             }).then(response => response.json()).then((data) => {
                 // leaving UI fields, prioritizing ones from server
                 if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
-                    throw DataException('The `id` field is required to return in response from server/back-end.');
+                    throw new DataException('The `id` field is required to return in response from server/back-end.');
                 }
                 for (let k in data[CommonConstants.GT_ROW]) {
                     if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {

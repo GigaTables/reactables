@@ -530,6 +530,9 @@ class Main extends Component {
             rowId = 0,
             selectedRows = this.state.selectedRows;
         if (action === EditorConstants.ACTION_DELETE) {
+            const {
+                dataSearch,
+            } = this.state;
             for (let dataKey in dataIndices) {
                 for (let key in this.jsonData) {
                     if (typeof this.jsonData[key][CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
@@ -539,7 +542,14 @@ class Main extends Component {
                     }
                     if (dataIndices[dataKey] === rowId) {
                         selectedRows.splice(selectedRows.indexOf(key), 1);
-                        this.jsonData.splice(key, 1);
+                        delete this.jsonData[key];
+                        if (dataSearch !== null) { // if searched previously - delete from dataSearch rows either
+                            dataSearch.forEach((object, k) => {
+                                if (parseInt(object[CommonConstants.GT_ROW_ID]) === parseInt(dataIndices[dataKey])) {
+                                    delete dataSearch[k];
+                                }
+                            });
+                        }
                     }
                 }
             }
@@ -641,7 +651,7 @@ class Main extends Component {
                     columns.forEach((column, colIdx) => {
                         if (column[CommonConstants.DATA] === data
                             && (typeof column[CommonConstants.SORTABLE] === CommonConstants.UNDEFINED
-                            || column[CommonConstants.SORTABLE] === true)) {
+                                || column[CommonConstants.SORTABLE] === true)) {
                             sortedButtons[data] = 0; // 0 - none, 1 - asc, -1 - desc
                         }
                     });

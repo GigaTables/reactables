@@ -126,7 +126,10 @@ class Main extends Component {
             this.c++;
         }
         this.setState({
-            dataSearch: nJson
+            dataSearch: nJson,
+            // remove selected rows on any user action
+            selectedIds: [],
+            selectedRows: [],
         });
 
         this.lastTimeKeyup = this.nowMillis;

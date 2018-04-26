@@ -88,6 +88,7 @@ let settings = {
         download: {
             csv: false,
         },
+        width: '900px',
     },
     lang: 'en', // english default
     perPageRows: [25, 50, 100, 200],

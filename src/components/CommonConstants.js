@@ -69,4 +69,5 @@ module.exports = {
     HEADER_CONTENT_TYPE: 'Content-Type',
     CONTENT_APP_JSON: 'application/json',
     // === headers end ===
+    DEFAULT_WIDTH: '1280px',
 };

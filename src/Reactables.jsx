@@ -455,7 +455,7 @@ class Reactables extends Main {
             struct,
         } = this.settings;
         return (
-            <div className={styles.gt_container} style={{width: "1128px"}}>
+            <div className={styles.gt_container} style={{width: (typeof struct.width !== CommonConstants.UNDEFINED) ? struct.width : CommonConstants.DEFAULT_WIDTH}}>
                 <div className={styles.gt_head_tools}>
                     {this.getTools(CommonConstants.DISPLAY_TOP)}
                 </div>

@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {DataException, EditorException} from '../Exceptions';
+import {t} from "../Helpers";
 import editorStyles from '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
@@ -126,8 +127,8 @@ class Editor extends Component {
             fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>;
             lastId = index;
         });
-        fields.push(<div key={++lastId} className="gte_msg">Are You sure You wish to delete {items.length}&nbsp;
-            row(s)?</div>);
+        let delMsg = t(this.lang.gte_editor_sendbtn_create, {rows: items.length});
+        fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>);
         return fields;
     }
 

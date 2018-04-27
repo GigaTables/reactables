@@ -93,7 +93,8 @@ let settings = {
     lang: 'en', // english default
     perPageRows: [25, 50, 100, 200],
     defaultPerPage: 100,
-    ajax: 'http://gigatables.loc/gigatables.php',
+    // ajax: 'http://gigatables.loc/gigatables.php',
+    ajax: 'http://localhost/gigatables.php',
     // ajax: new Promise((resolve) => {
     //     resolve('http://gigatables.loc/gigatables.php')
     // }),

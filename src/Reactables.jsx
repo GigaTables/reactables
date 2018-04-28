@@ -11,7 +11,7 @@ import TFoot from "./components/table/TFoot";
 import THead from "./components/table/THead";
 
 const CommonConstants = require('./components/CommonConstants');
-const loAssign = require('lodash/assign');
+const Hoek = require('hoek');
 
 class Reactables extends Main {
     constructor(props) {
@@ -27,6 +27,7 @@ class Reactables extends Main {
                 download: {
                     csv: false,
                 },
+                width: CommonConstants.DEFAULT_WIDTH,
             },
             lang: 'en',
             perPageRows: [25, 50, 100, 200, 500],
@@ -87,7 +88,7 @@ class Reactables extends Main {
     }
 
     build() {
-        this.settings = loAssign({}, this.defaultSettings, this.props.settings);
+        this.settings = Hoek.applyToDefaults(this.defaultSettings, this.props.settings);
         const {columns, columnOpts} = this.settings;
         columns.forEach((object, index) => {
             this.setSearchableCols(object);
@@ -455,7 +456,7 @@ class Reactables extends Main {
             struct,
         } = this.settings;
         return (
-            <div className={styles.gt_container} style={{width: (typeof struct.width !== CommonConstants.UNDEFINED) ? struct.width : CommonConstants.DEFAULT_WIDTH}}>
+            <div className={styles.gt_container} style={{width: struct.width}}>
                 <div className={styles.gt_head_tools}>
                     {this.getTools(CommonConstants.DISPLAY_TOP)}
                 </div>

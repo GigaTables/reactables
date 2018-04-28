@@ -37,7 +37,7 @@ module.exports = {
       'editor_create': 'Neu',
       'editor_edit': 'Bearbeiten',
       'editor_remove': 'Löschen',
-      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_delete_popup': 'Sind Sie sicher, dass Sie {{rows}} Zeile(n) löschen möchten?',
   },
   'ru': {
       'gte_editor_popupheader_delete': 'Удалить',
@@ -57,7 +57,7 @@ module.exports = {
       'editor_create': 'Создать',
       'editor_edit': 'Редактировать',
       'editor_remove': 'Удалить',
-      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_delete_popup': 'Вы уверены, что хотите удалить {{rows}} строк(и)?',
   },
   'fr': {
       'gte_editor_popupheader_delete': 'Effacer',
@@ -77,7 +77,7 @@ module.exports = {
       'editor_create': 'Créer',
       'editor_edit': 'éditer',
       'editor_remove': 'Effacer',
-      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_delete_popup': 'Êtes-vous sûr de vouloir supprimer {{rows}} ligne(s)?',
   },
   'es': {
       'gte_editor_popupheader_delete': 'Borrar',
@@ -97,7 +97,7 @@ module.exports = {
       'editor_create': 'Crear',
       'editor_edit': 'Editar',
       'editor_remove': 'Borrar',
-      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_delete_popup': 'Estás seguro de que deseas eliminar {{rows}} fila(s)?',
   },
   'ch': {
       'gte_editor_popupheader_delete': '删除',
@@ -117,7 +117,7 @@ module.exports = {
       'editor_create': '新增',
       'editor_edit': '修改',
       'editor_remove': '删除',
-      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_delete_popup': '您确定要删除{{rows}}行吗？',
   },
   'hi': {
       'gte_editor_popupheader_delete': 'हटाना',
@@ -137,6 +137,6 @@ module.exports = {
       'editor_create': 'बनाना',
       'editor_edit': 'संपादन करना',
       'editor_remove': 'हटाना',
-      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_delete_popup': 'क्या आप वाकई {{rows}} पंक्तियां हटाना चाहते हैं?',
   }
 };

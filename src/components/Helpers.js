@@ -1,6 +1,8 @@
 export function t(text, arr) {
-    arr.forEach((val, key) => {
-        text.replace('{{' + key + '}}', val);
-    });
+    for (let k in arr) {
+        if (arr.hasOwnProperty(k)) {
+            text = text.split('{{' + k + '}}').join(arr[k]);
+        }
+    }
     return text;
 }

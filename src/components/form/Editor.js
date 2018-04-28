@@ -127,7 +127,7 @@ class Editor extends Component {
             fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>;
             lastId = index;
         });
-        let delMsg = t(this.lang.gte_editor_sendbtn_create, {rows: items.length});
+        let delMsg = t(this.lang.gte_editor_delete_popup, {"rows": items.length});
         fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>);
         return fields;
     }

@@ -16,7 +16,8 @@ module.exports = {
       'search': 'Search',
       'editor_create': 'New',
       'editor_edit': 'Edit',
-      'editor_remove': 'Delete'
+      'editor_remove': 'Delete',
+      'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
   },
   'gr': {
       'gte_editor_popupheader_delete': 'Löschen',
@@ -35,7 +36,8 @@ module.exports = {
       'search': 'Suche',
       'editor_create': 'Neu',
       'editor_edit': 'Bearbeiten',
-      'editor_remove': 'Löschen'
+      'editor_remove': 'Löschen',
+      'gte_editor_delete_popup': 'Sind Sie sicher, dass Sie {{rows}} Zeile(n) löschen möchten?',
   },
   'ru': {
       'gte_editor_popupheader_delete': 'Удалить',
@@ -54,7 +56,8 @@ module.exports = {
       'search': 'Поиск',
       'editor_create': 'Создать',
       'editor_edit': 'Редактировать',
-      'editor_remove': 'Удалить'
+      'editor_remove': 'Удалить',
+      'gte_editor_delete_popup': 'Вы уверены, что хотите удалить {{rows}} строк(и)?',
   },
   'fr': {
       'gte_editor_popupheader_delete': 'Effacer',
@@ -73,7 +76,8 @@ module.exports = {
       'search': 'Recherche',
       'editor_create': 'Créer',
       'editor_edit': 'éditer',
-      'editor_remove': 'Effacer'
+      'editor_remove': 'Effacer',
+      'gte_editor_delete_popup': 'Êtes-vous sûr de vouloir supprimer {{rows}} ligne(s)?',
   },
   'es': {
       'gte_editor_popupheader_delete': 'Borrar',
@@ -92,7 +96,8 @@ module.exports = {
       'search': 'Buscar',
       'editor_create': 'Crear',
       'editor_edit': 'Editar',
-      'editor_remove': 'Borrar'
+      'editor_remove': 'Borrar',
+      'gte_editor_delete_popup': 'Estás seguro de que deseas eliminar {{rows}} fila(s)?',
   },
   'ch': {
       'gte_editor_popupheader_delete': '删除',
@@ -111,7 +116,8 @@ module.exports = {
       'search': '查找',
       'editor_create': '新增',
       'editor_edit': '修改',
-      'editor_remove': '删除'
+      'editor_remove': '删除',
+      'gte_editor_delete_popup': '您确定要删除{{rows}}行吗？',
   },
   'hi': {
       'gte_editor_popupheader_delete': 'हटाना',
@@ -130,6 +136,7 @@ module.exports = {
       'search': 'खोज',
       'editor_create': 'बनाना',
       'editor_edit': 'संपादन करना',
-      'editor_remove': 'हटाना'
+      'editor_remove': 'हटाना',
+      'gte_editor_delete_popup': 'क्या आप वाकई {{rows}} पंक्तियां हटाना चाहते हैं?',
   }
 };

@@ -37,7 +37,9 @@ class Reactables extends Main {
             tableOpts: {
                 buttons: [],
                 theme: 'std'
-            }
+            },
+            ajaxAutoloadData: false,
+            ajaxAutoloadPeriod: CommonConstants.MIN_AUTOLOAD_PERIOD,
         };
 
         this.state = {
@@ -90,7 +92,7 @@ class Reactables extends Main {
     build() {
         this.settings = Hoek.applyToDefaults(this.defaultSettings, this.props.settings);
         const {columns, columnOpts} = this.settings;
-        columns.forEach((object, index) => {
+        columns.forEach((object) => {
             this.setSearchableCols(object);
             this.setSearchableCase(object);
             this.setSortableCols(object);
@@ -98,24 +100,21 @@ class Reactables extends Main {
             this.setVisibleCols(object);
             this.setProgressBars(object);
         });
-        if (typeof columnOpts !== CommonConstants.UNDEFINED) {
-            columnOpts.forEach((object, index) => {
-                this.setCustomColumns(object);
-            });
-        }
+        columnOpts.forEach((object) => {
+            this.setCustomColumns(object);
+        });
 
         let colsLen = columns.length;
         let destination = this.settings.ajax;
         this.resolvePromiseUrl(destination, colsLen);
-        // only set interval if both properties set and period >= 5 sec
-        if (typeof this.settings.ajaxAutoloadData !== CommonConstants.UNDEFINED
-            && typeof this.settings.ajaxAutoloadPeriod !== CommonConstants.UNDEFINED
-            && this.settings.ajaxAutoloadData === true
-            && parseInt(this.settings.ajaxAutoloadPeriod) >= CommonConstants.MIN_AUTOLOAD_PERIOD
-            && parseInt(this.settings.ajaxAutoloadPeriod) <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
+        
+        let autoloadPeriod = parseInt(this.settings.ajaxAutoloadPeriod);
+        if (this.settings.ajaxAutoloadData === true
+            && autoloadPeriod >= CommonConstants.MIN_AUTOLOAD_PERIOD
+            && autoloadPeriod <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
             setInterval(() => {
                 this.resolvePromiseUrl(destination, colsLen);
-            }, parseInt(this.settings.ajaxAutoloadPeriod) * 1000);
+            }, autoloadPeriod * 1000);
         }
     }
 
@@ -323,7 +322,7 @@ class Reactables extends Main {
 
         let dataToPass = [];
         // prevent big data flow if it needless to pass to Tools for exports
-        if (typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
+        if (struct.download.csv === true) {
             dataToPass = this.jsonData;
         }
         return (<Tools

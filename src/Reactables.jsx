@@ -11,7 +11,7 @@ import TFoot from "./components/table/TFoot";
 import THead from "./components/table/THead";
 
 const CommonConstants = require('./components/CommonConstants');
-const loAssign = require('lodash/assign');
+const Hoek = require('hoek');
 
 class Reactables extends Main {
     constructor(props) {
@@ -27,6 +27,7 @@ class Reactables extends Main {
                 download: {
                     csv: false,
                 },
+                width: CommonConstants.DEFAULT_WIDTH,
             },
             lang: 'en',
             perPageRows: [25, 50, 100, 200, 500],
@@ -36,7 +37,9 @@ class Reactables extends Main {
             tableOpts: {
                 buttons: [],
                 theme: 'std'
-            }
+            },
+            ajaxAutoloadData: false,
+            ajaxAutoloadPeriod: CommonConstants.MIN_AUTOLOAD_PERIOD,
         };
 
         this.state = {
@@ -87,9 +90,9 @@ class Reactables extends Main {
     }
 
     build() {
-        this.settings = loAssign({}, this.defaultSettings, this.props.settings);
+        this.settings = Hoek.applyToDefaults(this.defaultSettings, this.props.settings);
         const {columns, columnOpts} = this.settings;
-        columns.forEach((object, index) => {
+        columns.forEach((object) => {
             this.setSearchableCols(object);
             this.setSearchableCase(object);
             this.setSortableCols(object);
@@ -97,24 +100,21 @@ class Reactables extends Main {
             this.setVisibleCols(object);
             this.setProgressBars(object);
         });
-        if (typeof columnOpts !== CommonConstants.UNDEFINED) {
-            columnOpts.forEach((object, index) => {
-                this.setCustomColumns(object);
-            });
-        }
+        columnOpts.forEach((object) => {
+            this.setCustomColumns(object);
+        });
 
         let colsLen = columns.length;
         let destination = this.settings.ajax;
         this.resolvePromiseUrl(destination, colsLen);
-        // only set interval if both properties set and period >= 5 sec
-        if (typeof this.settings.ajaxAutoloadData !== CommonConstants.UNDEFINED
-            && typeof this.settings.ajaxAutoloadPeriod !== CommonConstants.UNDEFINED
-            && this.settings.ajaxAutoloadData === true
-            && parseInt(this.settings.ajaxAutoloadPeriod) >= CommonConstants.MIN_AUTOLOAD_PERIOD
-            && parseInt(this.settings.ajaxAutoloadPeriod) <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
+        
+        let autoloadPeriod = parseInt(this.settings.ajaxAutoloadPeriod);
+        if (this.settings.ajaxAutoloadData === true
+            && autoloadPeriod >= CommonConstants.MIN_AUTOLOAD_PERIOD
+            && autoloadPeriod <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
             setInterval(() => {
                 this.resolvePromiseUrl(destination, colsLen);
-            }, parseInt(this.settings.ajaxAutoloadPeriod) * 1000);
+            }, autoloadPeriod * 1000);
         }
     }
 
@@ -322,7 +322,7 @@ class Reactables extends Main {
 
         let dataToPass = [];
         // prevent big data flow if it needless to pass to Tools for exports
-        if (typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
+        if (struct.download.csv === true) {
             dataToPass = this.jsonData;
         }
         return (<Tools
@@ -455,7 +455,7 @@ class Reactables extends Main {
             struct,
         } = this.settings;
         return (
-            <div className={styles.gt_container} style={{width: (typeof struct.width !== CommonConstants.UNDEFINED) ? struct.width : CommonConstants.DEFAULT_WIDTH}}>
+            <div className={styles.gt_container} style={{width: struct.width}}>
                 <div className={styles.gt_head_tools}>
                     {this.getTools(CommonConstants.DISPLAY_TOP)}
                 </div>

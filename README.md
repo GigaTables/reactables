@@ -65,7 +65,7 @@ import { Reactables, Header } from 'gigatables-react'
 
 see how to create table with JSX bellow.
 ## Demo
-![alt tag](https://raw.githubusercontent.com/GigaTables/reactables/master/screens/GT.gif)
+![alt tag](https://github.com/GigaTables/reactables/blob/develop/screens/GT.gif)
 ## Few screen-shots
 
 ### Multiple select with Ctrl and Shift

@@ -40,6 +40,7 @@ class Reactables extends Main {
             },
             ajaxAutoloadData: false,
             ajaxAutoloadPeriod: CommonConstants.MIN_AUTOLOAD_PERIOD,
+            headers: {},
         };
 
         this.state = {
@@ -129,7 +130,17 @@ class Reactables extends Main {
     }
 
     setData(url, colsLen) {
-        fetch(url).then((response) => {// set ajax loader fo BD
+        const {headers} = this.settings;
+        let hrs = new Headers();
+        hrs.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON);
+        for (let k in headers) {
+            if (headers.hasOwnProperty(k)) {
+                hrs.append(k, headers[k]);
+            }
+        }
+        fetch(url, {
+            headers: hrs,
+        }).then((response) => {// set ajax loader fo BD
             this.setLoader(colsLen);
             return response.json();
         }).then((data) => {

@@ -11,88 +11,103 @@ let editor = {
     //     create: {
     //         url: 'http://gigatables.loc/editor.php',
     //         type: 'POST',
+    //         headers: {
+    //             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049'
+    //         }
     //     },
     //     edit: {
     //         url: 'http://gigatables.loc/editor.php',
     //         type: 'PUT',
+    //         headers: {
+    //             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+    //             'X-Header-Key': 'foo-bar'
+    //         }
     //     },
     //     delete: {
     //         url: 'http://gigatables.loc/editor.php',
     //         type: 'DELETE',
-    //     },
+    //         headers: {
+    //             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+    //             'X-Header-Key': 'foo-bar-baz'
+    //         }
+    //     }
     // },
     ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
     struct: {
-        buttons: ['top', 'bottom'] // buttons
+        buttons: [ 'top', 'bottom' ] // buttons
     },
     fields: [
         {
-            label: "ID",
-            name: "id",
+            label: 'ID',
+            name: 'id',
             type: 'hidden'
         },
         {// an example of using select - automatically selected if matches with data in table column
-            label: "Types:",
-            name: "types[]",
+            label: 'Types:',
+            name: 'types[]',
             values: [// if select,checkbox,radio etc types - need this pre-set structure of values
-                {'key1': 'val1'},
-                {'key2': 'val2'}
+                { 'key1': 'val1' },
+                { 'key2': 'val2' }
             ],
-            type: 'checkbox', // select,checkbox,radio
+            type: 'checkbox' // select,checkbox,radio
 //              attrs: [
 //                {'multiple':true}
 //              ]
         },
         {
-            label: "Article title:",
-            name: "title",
+            label: 'Article title:',
+            name: 'title',
             type: 'text', // default, other: password, file, select, multiselect etc
             fieldsetOpen: true,
             legend: 'Required fields',
             attrs: [
-                {'pattern': '^[A-Za-z0-9_]+$'},
-                {'className': 'titleField'}
+                { 'pattern': '^[A-Za-z0-9_]+$' },
+                { 'className': 'titleField' }
             ]
         },
         {
-            label: "Description:",
-            name: "desc",
+            label: 'Description:',
+            name: 'desc',
             type: 'textarea',
             plugins: 'rte',
             attrs: [
-                {'className': 'descriptionField'}
+                { 'className': 'descriptionField' }
             ],
-            fieldsetClose: true,
+            fieldsetClose: true
         },
         {
-            label: "Date Time:",
-            name: "date",
+            label: 'Date Time:',
+            name: 'date',
             type: 'date'
         },
         {
-            label: "Image:",
-            name: "image",
+            label: 'Image:',
+            name: 'image',
             type: 'file'
-        },
+        }
     ]
-};
+}
 
 let settings = {
     struct: {
-        search: ['top', 'bottom'],
-        rowsSelector: ['desc', 'top', 'bottom'],
-        pagination: ['bottom'],
+        search: [ 'top', 'bottom' ],
+        rowsSelector: [ 'desc', 'top', 'bottom' ],
+        pagination: [ 'bottom' ],
         fixedHeader: false, // default false
         editableCells: true, // default false
         aggregateFooter: true, // default false
         download: {
-            csv: false,
+            csv: false
         },
-        width: '950px',
+        width: '950px'
     },
     lang: 'en', // english default
-    perPageRows: [25, 50, 100, 200],
-    defaultPerPage: 100,
+    perPageRows: [ 25, 50, 100, 200 ],
+    defaultPerPage: 50,
+    headers: {
+        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+        'X-Header-Key': 'foo-bar'
+    },
     ajax: 'http://gigatables.loc/gigatables.php',
     // ajax: new Promise((resolve) => {
     //     resolve('http://gigatables.loc/gigatables.php')
@@ -102,42 +117,42 @@ let settings = {
     requestType: 'GET',
     columns: [
         {// include all defaults
-            data: "id",
+            data: 'id',
             sortable: true, // true by defualt
             visible: true, // true by defualt
             searchable: true, // true by defualt
             discreteSearch: true, // false by default
             discreteSearchValue: function (title) {
-                return 'Search by field - ' + title;
+                return 'Search by field - ' + title
             }
         },
         {
-            data: "title",
+            data: 'title',
             cISearch: true, // default false
-            footer: 'frequency',
+            footer: 'frequency'
         },
         {
-            data: "desc",
+            data: 'desc',
             sortable: false,
             discreteSearch: true,
             discreteCISearch: true // default false
         },
         {
-            data: "date",
+            data: 'date',
             searchable: false
         },
         {
-            data: "info",
+            data: 'info'
         },
         {
-            data: "field1",
-            plugins: "progressbar",
+            data: 'field1',
+            plugins: 'progressbar'
         },
         {
-            data: "field2",
-            footer: "avg",
+            data: 'field2',
+            footer: 'avg'
         },
-        {data: "field3", visible: false}
+        { data: 'field3', visible: false }
     ],
     columnOpts: [
         {
@@ -168,27 +183,27 @@ let settings = {
             //     editor: editor,
             // },
             {
-                extended: "editor_create", editor: editor, triggerAfter: (function () {
-                    console.log('after create');
+                extended: 'editor_create', editor: editor, triggerAfter: (function () {
+                    console.log('after create')
                 }), triggerBefore: (function () {
-                    console.log('before create');
+                    console.log('before create')
                 })
             },
             {
-                extended: "editor_edit", editor: editor, triggerBefore: (function () {
-                    console.log('before edit');
+                extended: 'editor_edit', editor: editor, triggerBefore: (function () {
+                    console.log('before edit')
                 })
             },
             {
-                extended: "editor_remove", editor: editor, triggerAfter: (function () {
-                    console.log('after del');
+                extended: 'editor_remove', editor: editor, triggerAfter: (function () {
+                    console.log('after del')
                 })
             }
         ],
-        buttonsPosition: ['top', 'bottom'],
+        buttonsPosition: [ 'top', 'bottom' ],
         theme: 'std'
     }
-};
+}
 
 ReactDOM.render(
     <Reactables editor={editor} settings={settings}>
@@ -202,4 +217,4 @@ ReactDOM.render(
         <Header data="field3">Field3 invisible</Header>
         <Header>Field3 invisible</Header>
     </Reactables>,
-    document.getElementById('app'));
+    document.getElementById('app'))

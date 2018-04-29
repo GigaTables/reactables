@@ -406,6 +406,8 @@ class Editor extends Component {
             if (typeof dataIndices[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
                 delete dataIndices[CommonConstants.GT_ROW_ID];
             }
+            headers = this.setHeaders(settings, headers);
+            console.log(settings, headers);
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(dataIndices),
@@ -433,6 +435,7 @@ class Editor extends Component {
                     payload[k] = loAssign({}, fieldsEdit[k], dataIndices);
                 }
             }
+            headers = this.setHeaders(settings, headers);
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(payload),
@@ -443,6 +446,7 @@ class Editor extends Component {
             });
         } else if (action === EditorConstants.ACTION_DELETE) {
             this.triggerBefore(EditorConstants.EDITOR_REMOVE);
+            headers = this.setHeaders(settings, headers);
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(dataIndices), // prop ids are passed from Reactables
@@ -453,6 +457,15 @@ class Editor extends Component {
                 this.triggerAfter(EditorConstants.EDITOR_REMOVE);
             });
         }
+    }
+    
+    setHeaders(settings, headers) {
+        for (let hKey in settings.headers) {
+            if (settings.headers.hasOwnProperty(hKey)) {
+                headers.append(hKey, settings.headers[hKey]);
+            }
+        }
+        return headers;
     }
 
     getAjaxSettings(action) {
@@ -477,6 +490,7 @@ class Editor extends Component {
             return {
                 url: editor.ajax[action].url,
                 method: editor.ajax[action].type,
+                headers: editor.ajax[action].headers,
             };
         } else { // setting error
             throw new EditorException('"ajax" property must be set either as string url ' +

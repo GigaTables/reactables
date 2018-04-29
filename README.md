@@ -67,7 +67,7 @@ see how to create table with JSX bellow.
 ## Demo
 ![Demo](https://github.com/GigaTables/reactables/blob/develop/screens/GT.gif)
 
-![More screen-shots](https://github.com/GigaTables/reactables/wiki)
+[More screen-shots](https://github.com/GigaTables/reactables/wiki)
 
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML

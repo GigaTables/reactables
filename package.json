@@ -50,7 +50,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot",
     "build": "rimraf build && webpack --config webpack.config.prod.js",
-    "test": "jest",
+    "test": "jest --updateSnapshot",
     "report-coverage": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {

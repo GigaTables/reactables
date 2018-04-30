@@ -14,14 +14,18 @@ it('renders Row correctly', () => {
     gteRowId={71}
     minRow={0}
     maxRow={0}
-    selectedRows={[]} >
+    selectedRows={[]}
+    editableCells={false}>
     <Column
     count={0}
     dataIndex="desc"
     gteRowId={71}
     minRow={0}
     maxRow={0}
-    selectedRows={[]}>Lorem Ipsum is simply dummy Bar 725 text of the printing and typesetting</Column>
+    selectedRows={[]}
+    cell={'01'}
+    editCell={() => {}}
+    >Lorem Ipsum is simply dummy Bar 725 text of the printing and typesetting</Column>
     </Row>
   ).toJSON();
   expect(tree).toMatchSnapshot();
@@ -33,14 +37,16 @@ it('renders Row correctly', () => {
     gteRowId={71}
     minRow={1}
     maxRow={1}
-    selectedRows={[]} >
+    selectedRows={[]}
+    editableCells={false}>
     <Column
     count={1}
     dataIndex="desc"
     gteRowId={71}
     minRow={0}
     maxRow={0}
-    selectedRows={[]}>Lorem Ipsum is simply dummy Bar 725 text of the printing and typesetting</Column>
+    selectedRows={[]}
+    cell={'01'}>Lorem Ipsum is simply dummy Bar 725 text of the printing and typesetting</Column>
     </Row>
   );
 

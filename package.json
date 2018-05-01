@@ -51,7 +51,7 @@
     "start": "webpack-dev-server --hot",
     "build": "rimraf build && webpack --config webpack.config.prod.js",
     "test": "jest --updateSnapshot",
-    "report-coverage": "bash <(curl -s https://codecov.io/bash) -t"
+    "codecov": "bash <(curl -s https://codecov.io/bash)"
   },
   "repository": {
     "type": "git",

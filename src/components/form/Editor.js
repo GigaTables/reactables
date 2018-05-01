@@ -407,7 +407,6 @@ class Editor extends Component {
                 delete dataIndices[CommonConstants.GT_ROW_ID];
             }
             headers = this.setHeaders(settings, headers);
-            console.log(settings, headers);
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(dataIndices),

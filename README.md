@@ -49,6 +49,7 @@ and more...
 * [Ajax autoload period](#user-content-ajax-autoload-period)
 * [Hot keys](#user-content-hot-keys)
 * [Plugins](#user-content-plugins)
+* [Headers](#user-content-headers)
 * [Aggregate Footer](#user-content-aggregate-footer)
 * [Data export](#user-content-data-export)
 * [FAQ](#user-content-faq)
@@ -439,6 +440,32 @@ Progress bar plugin:
 ```
 this will build 5 colored (left-to-right) progress bar for every row in the column, with percent number.
 Protected from `null` and `negative` numbers as well as `more then 100`.
+
+## Headers
+In some work-flows u may need to send several useful headers, ex. with secret key for api, 
+additional info for back-end to recognize anything etc
+In GT u can place those either in settings or editor this way:
+in settings: 
+```js
+    headers: {
+        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+        'X-Header-Key': 'foo-bar'
+    },
+```
+
+in editor: 
+```js
+... 
+     edit: {
+         url: 'http://example.com/editor.php',
+         type: 'PUT',
+         headers: {
+             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+             'X-Header-Key': 'foo-bar'
+         }
+     },
+...
+```
 
 ## Aggregate Footer
 

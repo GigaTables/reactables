@@ -12,7 +12,6 @@ class TextEditor extends Component {
 
     onChange = (value) => {
         this.setState({value});
-        // console.log(value.toString('html'));
         if (this.props.onChangeHtml) {
             // Send the changes up to the parent component as an HTML string.
             // This is here to demonstrate using `.toString()` but in a real app it

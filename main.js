@@ -49,7 +49,7 @@ let editor = {
                 { 'key1': 'val1' },
                 { 'key2': 'val2' }
             ],
-            type: 'checkbox' // select,checkbox,radio
+            type: 'select' // select,checkbox,radio
 //              attrs: [
 //                {'multiple':true}
 //              ]

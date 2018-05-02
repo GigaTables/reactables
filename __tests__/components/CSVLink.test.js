@@ -54,22 +54,24 @@ const obj = shallow(
     />
 );
 
-obj.instance().onClick(
-    {
-        'rows': [
-            {
-                'GT_RowId': 1059,
-                'title': 'Test 1059st row',
-                'id': 1059,
-                'desc': 'Lorem Ipsum is simply dummy 1447 text of the printing and typesetting',
-                'info': 'some info some info some info some info',
-                'date': '15:28:06 01:05:2018',
-                'field1': 29,
-                'field2': 2293,
-                'field3': 13404
-            } ]
+global.URL = {
+    createObjectURL: (url) => {
     }
-);
+};
+
+obj.instance().onClick([
+    {
+        'GT_RowId': 1059,
+        'title': 'Test 1059st row',
+        'id': 1059,
+        'desc': 'Lorem Ipsum is simply dummy 1447 text of the printing and typesetting',
+        'info': 'some info some info some info some info',
+        'date': '15:28:06 01:05:2018',
+        'field1': 29,
+        'field2': 2293,
+        'field3': 13404
+    }
+]);
 
 obj.instance().objectToCSVRow(
     {

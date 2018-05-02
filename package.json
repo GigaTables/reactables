@@ -50,7 +50,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot",
     "build": "rimraf build && webpack --config webpack.config.prod.js",
-    "test": "jest --updateSnapshot",
+    "test": "jest --updateSnapshot --verbose",
     "codecov": "bash <(curl -s https://codecov.io/bash)"
   },
   "repository": {

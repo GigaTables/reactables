@@ -178,6 +178,10 @@ let settings = {
     ],
     tableOpts: {
         buttons: [
+            // {
+            //     extended: 'editor_reload',
+            //     editor: editor
+            // },
             // {// to set CSV Download button
             //     extended: "editor_csv",
             //     editor: editor,

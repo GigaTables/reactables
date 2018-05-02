@@ -17,6 +17,8 @@ module.exports = {
       'editor_create': 'New',
       'editor_edit': 'Edit',
       'editor_remove': 'Delete',
+      'editor_csv': 'CSV Export',
+      'editor_reload': 'Reload',
       'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
   },
   'gr': {
@@ -37,6 +39,8 @@ module.exports = {
       'editor_create': 'Neu',
       'editor_edit': 'Bearbeiten',
       'editor_remove': 'Löschen',
+      'editor_csv': 'CSV Export',
+      'editor_reload': 'Neu laden',
       'gte_editor_delete_popup': 'Sind Sie sicher, dass Sie {{rows}} Zeile(n) löschen möchten?',
   },
   'ru': {
@@ -57,6 +61,8 @@ module.exports = {
       'editor_create': 'Создать',
       'editor_edit': 'Редактировать',
       'editor_remove': 'Удалить',
+      'editor_csv': 'CSV выгрузка',
+      'editor_reload': 'Перезагрузить',
       'gte_editor_delete_popup': 'Вы уверены, что хотите удалить {{rows}} строк(и)?',
   },
   'fr': {
@@ -77,6 +83,8 @@ module.exports = {
       'editor_create': 'Créer',
       'editor_edit': 'éditer',
       'editor_remove': 'Effacer',
+      'editor_csv': 'CSV Export',
+      'editor_reload': 'Recharger',
       'gte_editor_delete_popup': 'Êtes-vous sûr de vouloir supprimer {{rows}} ligne(s)?',
   },
   'es': {
@@ -97,6 +105,8 @@ module.exports = {
       'editor_create': 'Crear',
       'editor_edit': 'Editar',
       'editor_remove': 'Borrar',
+      'editor_csv': 'CSV Export',
+      'editor_reload': 'Recargar',
       'gte_editor_delete_popup': 'Estás seguro de que deseas eliminar {{rows}} fila(s)?',
   },
   'ch': {
@@ -117,6 +127,8 @@ module.exports = {
       'editor_create': '新增',
       'editor_edit': '修改',
       'editor_remove': '删除',
+      'editor_csv': 'CSV Export',
+      'editor_reload': '刷新',
       'gte_editor_delete_popup': '您确定要删除{{rows}}行吗？',
   },
   'hi': {
@@ -137,6 +149,8 @@ module.exports = {
       'editor_create': 'बनाना',
       'editor_edit': 'संपादन करना',
       'editor_remove': 'हटाना',
+      'editor_csv': 'CSV Export',
+      'editor_reload': 'सीमा से अधिक लादना',
       'gte_editor_delete_popup': 'क्या आप वाकई {{rows}} पंक्तियां हटाना चाहते हैं?',
   }
 };

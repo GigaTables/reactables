@@ -68,37 +68,79 @@ class Tools extends Component {
             && tableOpts.buttons.length > 0
             && tableOpts.buttonsPosition.indexOf(display) !== -1) {
             tableOpts.buttons.map((btn, i) => {
-                if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CSV
-                    && jsonData !== CommonConstants.UNDEFINED
-                    && typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
-                    buttons[i] = <CSVLink
-                        active={false}
-                        jsonData={jsonData}
-                        key={i}>CSV Export</CSVLink>;
+                switch (btn[EditorConstants.EXTENDED]) {
+                    case EditorConstants.EDITOR_CSV:
+                       if (jsonData !== CommonConstants.UNDEFINED
+                           && typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
+                           buttons[ i ] = <CSVLink
+                               active={false}
+                               jsonData={jsonData}
+                               key={i}>{language.editor_csv}</CSVLink>;
+                       }
+                        break;
+                    case EditorConstants.EDITOR_RELOAD:
+                        buttons[i] = <Button
+                            active={false}
+                            action={EditorConstants.ACTION_RELOAD}
+                            showPopup={showPopup}
+                            isReload={true}
+                            key={i}>{language.editor_reload}</Button>;
+                        break;
+                    case EditorConstants.EDITOR_CREATE:
+                        buttons[i] = <Button
+                            active={false}
+                            action={EditorConstants.ACTION_CREATE}
+                            showPopup={showPopup}
+                            key={i}>{language.editor_create}</Button>;
+                        break;
+                    case EditorConstants.EDITOR_EDIT:
+                        buttons[i] = <Button
+                            active={!(selectedRows.length >= 1)}
+                            selectedRows={selectedRows}
+                            action={EditorConstants.ACTION_EDIT}
+                            showPopup={showPopup}
+                            key={i}>{language.editor_edit}</Button>;
+                        break;
+                    case EditorConstants.EDITOR_REMOVE:
+                        buttons[i] = <Button
+                            active={(selectedRows.length === 0)}
+                            selectedRows={selectedRows}
+                            action={EditorConstants.ACTION_DELETE}
+                            showPopup={showPopup}
+                            key={i}>{language.editor_remove}</Button>;
+                        break;
                 }
-                if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
-                    buttons[i] = <Button
-                        active={false}
-                        action={EditorConstants.ACTION_CREATE}
-                        showPopup={showPopup}
-                        key={i}>{language.editor_create}</Button>;
-                }
-                if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
-                    buttons[i] = <Button
-                        active={!(selectedRows.length >= 1)}
-                        selectedRows={selectedRows}
-                        action={EditorConstants.ACTION_EDIT}
-                        showPopup={showPopup}
-                        key={i}>{language.editor_edit}</Button>;
-                }
-                if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
-                    buttons[i] = <Button
-                        active={(selectedRows.length === 0)}
-                        selectedRows={selectedRows}
-                        action={EditorConstants.ACTION_DELETE}
-                        showPopup={showPopup}
-                        key={i}>{language.editor_remove}</Button>;
-                }
+                // if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CSV
+                //     && jsonData !== CommonConstants.UNDEFINED
+                //     && typeof struct.download !== CommonConstants.UNDEFINED && struct.download.csv === true) {
+                //     buttons[i] = <CSVLink
+                //         active={false}
+                //         jsonData={jsonData}
+                //         key={i}>CSV Export</CSVLink>;
+                // }
+                // if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_CREATE) {
+                //     buttons[i] = <Button
+                //         active={false}
+                //         action={EditorConstants.ACTION_CREATE}
+                //         showPopup={showPopup}
+                //         key={i}>{language.editor_create}</Button>;
+                // }
+                // if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_EDIT) {
+                //     buttons[i] = <Button
+                //         active={!(selectedRows.length >= 1)}
+                //         selectedRows={selectedRows}
+                //         action={EditorConstants.ACTION_EDIT}
+                //         showPopup={showPopup}
+                //         key={i}>{language.editor_edit}</Button>;
+                // }
+                // if (btn[EditorConstants.EXTENDED] === EditorConstants.EDITOR_REMOVE) {
+                //     buttons[i] = <Button
+                //         active={(selectedRows.length === 0)}
+                //         selectedRows={selectedRows}
+                //         action={EditorConstants.ACTION_DELETE}
+                //         showPopup={showPopup}
+                //         key={i}>{language.editor_remove}</Button>;
+                // }
             });
         }
         return buttons;

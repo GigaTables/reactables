@@ -604,34 +604,45 @@ class Main extends Component {
             popup_button = this.lang.gte_editor_sendbtn_create;
         let fieldsEdit = {};
 
-        if (action === EditorConstants.ACTION_EDIT) {
-            popup_title = this.lang.gte_editor_popupheader_edit;
-            popup_button = this.lang.gte_editor_sendbtn_update;
-            // collect data for fields filling in Editor
-            for (let k in selectedRows) {
-                // tested with sorted rows - should work properly
-                if (dataSearch !== null) { // edit field(s) after search
-                    fieldsEdit[k] = dataSearch[selectedRows[k]];
-                } else { // std behavior
-                    fieldsEdit[k] = this.jsonData[selectedRows[k]];
+        switch (action) {
+            case EditorConstants.ACTION_RELOAD:
+                const {ajax, columns} = this.settings;
+                let colsLen = columns.length;
+                this.resolvePromiseUrl(ajax, colsLen);
+                break;
+            case EditorConstants.ACTION_EDIT:
+                popup_title = this.lang.gte_editor_popupheader_edit;
+                popup_button = this.lang.gte_editor_sendbtn_update;
+                // collect data for fields filling in Editor
+                for (let k in selectedRows) {
+                    // tested with sorted rows - should work properly
+                    if (dataSearch !== null) { // edit field(s) after search
+                        fieldsEdit[k] = dataSearch[selectedRows[k]];
+                    } else { // std behavior
+                        fieldsEdit[k] = this.jsonData[selectedRows[k]];
+                    }
                 }
-            }
-        } else if (action === EditorConstants.ACTION_DELETE) {
-            popup_title = this.lang.gte_editor_popupheader_delete;
-            popup_button = this.lang.gte_editor_sendbtn_delete;
+                break;
+            case EditorConstants.ACTION_DELETE:
+                popup_title = this.lang.gte_editor_popupheader_delete;
+                popup_button = this.lang.gte_editor_sendbtn_delete;
+                break;
         }
+        
         e.preventDefault();
-        this.setState({
-            action: action,
-            active: true,
-            popup_title: popup_title,
-            popup_button: popup_button,
-            opacity: 1,
-            fieldsEdit: fieldsEdit,
-            // turn off key selection
-            shiftDown: false,
-            ctrlDown: false,
-        });
+        if (action !== EditorConstants.ACTION_RELOAD) {
+            this.setState({
+                action: action,
+                active: true,
+                popup_title: popup_title,
+                popup_button: popup_button,
+                opacity: 1,
+                fieldsEdit: fieldsEdit,
+                // turn off key selection
+                shiftDown: false,
+                ctrlDown: false,
+            });
+        }
     }
 
     hidePopup() {

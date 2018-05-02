@@ -1,6 +1,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/?branch=master)
+[![Build Status](https://travis-ci.org/GigaTables/reactables.svg?branch=master)](https://travis-ci.org/GigaTables/reactables)
 [![Build Status](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/build-status/master)
-[![Code Coverage](https://img.shields.io/badge/coverage-%2083%25%20-green.svg)](https://img.shields.io/badge/coverage-%2083%25%20-green.svg)
+[![Code Coverage](https://codecov.io/gh/GigaTables/reactables/branch/master/graph/badge.svg)](https://codecov.io/gh/GigaTables/reactables)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # GigaTables ReactJS plug-in [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20over%2030%20free%20table%20functions%20and%20plugins%20based%20on%20ReactJS%20&url=https://github.com/GigaTables/reactables&hashtags=tables,grids,plugins,editor,developers)

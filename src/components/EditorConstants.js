@@ -24,11 +24,13 @@ module.exports = {
     ACTION_CREATE: 'create',
     ACTION_EDIT: 'edit',
     ACTION_DELETE: 'delete',
+    ACTION_RELOAD: 'reload',
     // buttons
     EDITOR_CREATE: 'editor_create',
     EDITOR_EDIT: 'editor_edit',
     EDITOR_REMOVE: 'editor_remove',
     EDITOR_CSV: 'editor_csv',
+    EDITOR_RELOAD: 'editor_reload',
     // different opts
     EXTENDED: 'extended',
     // http methods

@@ -1,6 +1,5 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/?branch=master)
 [![Build Status](https://travis-ci.org/GigaTables/reactables.svg?branch=master)](https://travis-ci.org/GigaTables/reactables)
-[![Build Status](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/build.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/build-status/master)
 [![Code Coverage](https://codecov.io/gh/GigaTables/reactables/branch/master/graph/badge.svg)](https://codecov.io/gh/GigaTables/reactables)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

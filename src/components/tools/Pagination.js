@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import styles from '../../css/styles.css';
 
 const CommonConstants = require('../CommonConstants');
-const EditorConstants = require('../EditorConstants');
 const Lang = require('../Lang');
 
 class Pagination extends Component {

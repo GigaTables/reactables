@@ -25,7 +25,17 @@ it('renders Pagination correctly', () => {
             perPage={50}/>
     ).toJSON();
     expect(treeMore).toMatchSnapshot();
-
+    // test MORE_PAGES === pages
+    const noPagesContent = renderer.create(
+        <Pagination
+            lang="en"
+            countRows={249}
+            fromRow={200}
+            page={5}
+            perPage={50}/>
+    ).toJSON();
+    expect(noPagesContent).toMatchSnapshot();
+    
     const obj = shallow(
         <Pagination
             lang="en"
@@ -34,7 +44,6 @@ it('renders Pagination correctly', () => {
             page={1}
             perPage={50}/>
     );
-
     obj.instance().shouldComponentUpdate({
         lang: 'en',
         countRows: 230,

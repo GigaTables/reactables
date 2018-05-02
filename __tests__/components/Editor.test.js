@@ -5,6 +5,9 @@ import {shallow, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({adapter: new Adapter()});
 
+const CommonConstants = require('../../src/components/CommonConstants');
+const EditorConstants = require('../../src/components/EditorConstants');
+
 const editor = {
     ajax: 'http://gigatables.loc/editor.php',
     ajaxFiles: 'uploadFiles.php',
@@ -267,7 +270,60 @@ describe("Editor", () => {
             stopPropagation: () => {
             }
         });
+        obj.instance().btnClickedEnter({
+            keyCode: CommonConstants.ENTER_KEY
+        });
+        obj.instance().getAjaxSettings(EditorConstants.ACTION_EDIT);
+        
+        it('renders Editor with ajax object', () => {
+            editor.ajax = {
+                create: {
+                    url: 'http://gigatables.loc/editor.php',
+                    type: 'POST',
+                    headers: {
+                        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049'
+                    }
+                },
+                edit: {
+                    url: 'http://gigatables.loc/editor.php',
+                    type: 'PUT',
+                    headers: {
+                        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+                        'X-Header-Key': 'foo-bar'
+                    }
+                },
+                delete: {
+                    url: 'http://gigatables.loc/editor.php',
+                    type: 'DELETE',
+                    headers: {
+                        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+                        'X-Header-Key': 'foo-bar-baz'
+                    }
+                }
+            }
+            const ajaxObject = shallow(
+                <Editor
+                    lang="en"
+                    countRows="229"
+                    fromRow="0"
+                    page="1"
+                    perPage="50"
+                    action="delete"
+                    active={true}
+                    editor={editor}
+                    columns={editor.fields}
+                    struct={settings.struct}
+                    tableOpts={settings.tableOpts}
+                    selectedRows={[ 1 ]}
+                    selectedIds={[ 187 ]}
+                    fieldsEdit={[
+                        { 'id': 1 }
+                    ]}/>
+            );
+            ajaxObject.instance().getAjaxSettings('edit');
+        });
         // todo: resolve error: Headers is not defined
+        // global.Headers = () => {}
         // obj.instance().btnClicked({
         //     persist: () => {
         //     }

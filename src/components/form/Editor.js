@@ -412,10 +412,8 @@ class Editor extends Component {
                 body: JSON.stringify(dataIndices),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
-                // leaving UI fields, prioritizing ones from server
-                if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
-                    throw new DataException('The `id` field is required to return in response from server/back-end.');
-                }
+                this.checkId(data);
+                // leaving UI fields, prioritizing those from server
                 for (let k in data[CommonConstants.GT_ROW]) {
                     if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {
                         dataResp[k] = data[CommonConstants.GT_ROW][k];
@@ -440,6 +438,7 @@ class Editor extends Component {
                 body: JSON.stringify(payload),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
+                this.checkId(data);
                 for (let k in data[CommonConstants.GT_ROWS]) {
                     if (data[CommonConstants.GT_ROWS].hasOwnProperty(k)) {
                         for (let colKey in data[CommonConstants.GT_ROWS][k]) {
@@ -449,6 +448,7 @@ class Editor extends Component {
                         }
                     }
                 }
+                // leaving UI fields, prioritizing those from server
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_EDIT);
             });
@@ -459,11 +459,17 @@ class Editor extends Component {
                 method: settings.method,
                 body: JSON.stringify(dataIndices), // prop ids are passed from Reactables
                 headers: headers,
-            }).then(response => response.json()).then((data) => {
+            }).then(response => response.json()).then(() => {
                 // call editorUpdate method with passing all user-input values
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_REMOVE);
             });
+        }
+    }
+    
+    checkId(data) {
+        if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
+            throw new DataException('The `id` field is required to return in response from server/back-end.');
         }
     }
     

@@ -35,6 +35,7 @@ module.exports = {
     A_KEY: 65,
     // table
     GT_ROW: 'row',
+    GT_ROWS: 'rows',
     GT_ROW_ID: 'GT_RowId',
     SORTABLE: 'sortable',
     SEARCHABLE: 'searchable',

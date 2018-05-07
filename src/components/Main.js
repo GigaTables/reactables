@@ -562,6 +562,7 @@ class Main extends Component {
             if (selectedRows.length === 0) {
                 selectedRows[0] = e.target.dataset.rowid;
             }
+            console.log(dataIndices);
             for (let key in dataIndices) {
                 for (let sKey in selectedRows) {
                     this.jsonData[selectedRows[sKey]][key] = dataIndices[key];

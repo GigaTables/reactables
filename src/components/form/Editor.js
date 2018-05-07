@@ -440,6 +440,15 @@ class Editor extends Component {
                 body: JSON.stringify(payload),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
+                for (let k in data[CommonConstants.GT_ROWS]) {
+                    if (data[CommonConstants.GT_ROWS].hasOwnProperty(k)) {
+                        for (let colKey in data[CommonConstants.GT_ROWS][k]) {
+                            if (data[CommonConstants.GT_ROWS][k].hasOwnProperty(colKey)) {
+                                dataResp[k][colKey] = data[CommonConstants.GT_ROWS][k][colKey];
+                            }
+                        }
+                    }
+                }
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_EDIT);
             });

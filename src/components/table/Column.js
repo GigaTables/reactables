@@ -14,12 +14,14 @@ class Column extends Component {
             selectedRows,
             dataIndex,
             editableCells,
+            children,
         } = this.props;
         return editableCells === true
             || gteRowId !== nextProps.gteRowId
             || count !== nextProps.count
             || selectedRows.length !== nextProps.selectedRows.length
-            || dataIndex !== nextProps.dataIndex;
+            || dataIndex !== nextProps.dataIndex
+            || children !== nextProps.children; // iff content of a column has been changed - re-render
     }
 
     constructor(props) {

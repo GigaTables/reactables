@@ -569,9 +569,10 @@ class Main extends Component {
                 }
             }
         }
-        this.createTable(this.jsonData, this.state.sortedButtons);
         this.setState({
             selectedRows: selectedRows
+        }, () => {
+            this.createTable(this.jsonData, this.state.sortedButtons);
         });
         this.hidePopup();
     }

@@ -412,7 +412,9 @@ class Editor extends Component {
                 body: JSON.stringify(dataIndices),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
-                this.checkId(data);
+                if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
+                    throw new DataException('The `id` field is required to return in response from server/back-end.');
+                }
                 // leaving UI fields, prioritizing those from server
                 for (let k in data[CommonConstants.GT_ROW]) {
                     if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {
@@ -438,12 +440,14 @@ class Editor extends Component {
                 body: JSON.stringify(payload),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
-                this.checkId(data);
+                if (typeof data[CommonConstants.GT_ROWS][0]['id'] === CommonConstants.UNDEFINED) {
+                    throw new DataException('The `id` field is required to return in response from server/back-end.');
+                }
                 for (let k in data[CommonConstants.GT_ROWS]) {
                     if (data[CommonConstants.GT_ROWS].hasOwnProperty(k)) {
                         for (let colKey in data[CommonConstants.GT_ROWS][k]) {
                             if (data[CommonConstants.GT_ROWS][k].hasOwnProperty(colKey)) {
-                                dataResp[k][colKey] = data[CommonConstants.GT_ROWS][k][colKey];
+                                dataResp[colKey] = data[CommonConstants.GT_ROWS][k][colKey];
                             }
                         }
                     }

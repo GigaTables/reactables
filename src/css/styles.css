@@ -254,11 +254,11 @@ td {
 }
 
 :global .sorting_asc {
-    background: url('../images/sort_asc.png') right top no-repeat;
+    background: url('../images/sort_asc.png') right 16px no-repeat;
 }
 
 :global .sorting_desc {
-    background: url('../images/sort_desc.png') right top no-repeat;
+    background: url('../images/sort_desc.png') right 16px no-repeat;
 }
 
 :global .unselectable {

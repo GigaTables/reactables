@@ -41,6 +41,8 @@ class Reactables extends Main {
             ajaxAutoloadData: false,
             ajaxAutoloadPeriod: CommonConstants.MIN_AUTOLOAD_PERIOD,
             headers: {},
+            ajax: null,
+            data: null
         };
 
         this.state = {
@@ -106,30 +108,47 @@ class Reactables extends Main {
         });
 
         let colsLen = columns.length;
-        let destination = this.settings.ajax;
-        this.resolvePromiseUrl(destination, colsLen);
+        const {ajax, data} = this.settings;
+        this.resolveData(ajax, data, colsLen);
         
         let autoloadPeriod = parseInt(this.settings.ajaxAutoloadPeriod);
         if (this.settings.ajaxAutoloadData === true
             && autoloadPeriod >= CommonConstants.MIN_AUTOLOAD_PERIOD
             && autoloadPeriod <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
             setInterval(() => {
-                this.resolvePromiseUrl(destination, colsLen);
+                this.resolveData(ajax, data, colsLen);
             }, autoloadPeriod * 1000);
         }
     }
 
-    resolvePromiseUrl(destination, colsLen) {
-        if (typeof destination.then === CommonConstants.FUNCTION) {
-            destination.then((url) => {
-                this.setData(url, colsLen);
-            });
-        } else {
-            this.setData(destination, colsLen);
+    resolveData(destination, data, colsLen) {
+        if (data !== null && typeof data === CommonConstants.OBJECT) { // process data from JS object
+            this.setObjectData(data, colsLen);
+        } else { // ajax url data processing
+            if (typeof destination.then === CommonConstants.FUNCTION) {
+                destination.then((url) => {
+                    this.setAjaxData(url, colsLen);
+                });
+            } else {
+                this.setAjaxData(destination, colsLen);
+            }
         }
     }
-
-    setData(url, colsLen) {
+    
+    setObjectData(data, colsLen)
+    {
+        this.setLoader(colsLen);
+        let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
+        if (typeof jsonData === CommonConstants.UNDEFINED) {
+            throw new DataException('JSON must contain "rows" field.');
+        }
+        this.jsonData = jsonData;
+        this.createTable(jsonData);
+        this.setTableSort();
+    }
+    
+    setAjaxData(url, colsLen)
+    {
         const {headers} = this.settings;
         let hrs = new Headers();
         hrs.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON);
@@ -140,7 +159,7 @@ class Reactables extends Main {
         }
         fetch(url, {
             headers: hrs,
-        }).then((response) => {// set ajax loader fo BD
+        }).then((response) => {// set ajax loader
             this.setLoader(colsLen);
             return response.json();
         }).then((data) => {

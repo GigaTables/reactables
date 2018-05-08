@@ -608,9 +608,9 @@ class Main extends Component {
 
         switch (action) {
             case EditorConstants.ACTION_RELOAD:
-                const {ajax, columns} = this.settings;
+                const {ajax, data, columns} = this.settings;
                 let colsLen = columns.length;
-                this.resolvePromiseUrl(ajax, colsLen);
+                this.resolveData(ajax, data, colsLen);
                 break;
             case EditorConstants.ACTION_EDIT:
                 popup_title = this.lang.gte_editor_popupheader_edit;

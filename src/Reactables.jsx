@@ -121,7 +121,9 @@ class Reactables extends Main {
 
     resolvePromiseUrl(destination, colsLen) {
         if (typeof destination.then === CommonConstants.FUNCTION) {
-            destination.then((url) => {
+            // todo: analyze - somehow Promise is broken by Hoek.applyToDefaults(this.defaultSettings, this.props.settings);
+            const {ajax} = this.props.settings;
+            ajax.then((url) => {
                 this.setData(url, colsLen);
             });
         } else {

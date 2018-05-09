@@ -122,6 +122,7 @@ class Reactables extends Main {
     }
 
     resolveData(destination, data, colsLen) {
+        // local data prioritized (as usual)
         if (data !== null && typeof data === CommonConstants.OBJECT) { // process data from JS object
             this.setObjectData(data, colsLen);
         } else { // ajax url data processing
@@ -137,14 +138,29 @@ class Reactables extends Main {
     
     setObjectData(data, colsLen)
     {
-        this.setLoader(colsLen);
-        let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
-        if (typeof jsonData === CommonConstants.UNDEFINED) {
-            throw new DataException('JSON must contain "rows" field.');
+        new Promise((data) = {
+            this.setLoader(colsLen);
+            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ]; // one row or several
+            return jsonData;
+        }).then((jsonData) => {
+        
+        });
+        
+        console.log(1);
+        console.log(data['rows'].length);
+        if (this.refs.tableLoaded) {
+            this.setLoader(colsLen);
+            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ]; // one row or several
+            console.log(jsonData.length);
+            if (typeof jsonData === CommonConstants.UNDEFINED) {
+                throw new DataException('JSON must contain "rows" field.');
+            }
+            console.log(2);
+            this.jsonData = jsonData;
+            this.createTable(jsonData);
+            console.log(3);
+            this.setTableSort();
         }
-        this.jsonData = jsonData;
-        this.createTable(jsonData);
-        this.setTableSort();
     }
     
     setAjaxData(url, colsLen)
@@ -485,7 +501,7 @@ class Reactables extends Main {
             struct,
         } = this.settings;
         return (
-            <div className={styles.gt_container} style={{width: struct.width}}>
+            <div ref="tableLoaded" className={styles.gt_container} style={{width: struct.width}}>
                 <div className={styles.gt_head_tools}>
                     {this.getTools(CommonConstants.DISPLAY_TOP)}
                 </div>

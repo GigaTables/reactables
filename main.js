@@ -112,6 +112,24 @@ let settings = {
     // ajax: new Promise((resolve) => {
     //     resolve('http://gigatables.loc/gigatables.php')
     // }),
+    data: {
+      "rows": [
+          {
+              "GT_RowId": 1,
+              "id": 1,
+              "title": "Lorem Ipsum",
+              "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting",
+              "date": "2018-05-09 11:12:12"
+          },
+          {
+              "GT_RowId": 2,
+              "id": 2,
+              "title": "Lorem Ipsum",
+              "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting",
+              "date": "2018-05-10 13:12:12"
+          }
+      ]
+    },
     // ajaxAutoloadData: true, // default false
     // ajaxAutoloadPeriod: 8, // sec
     requestType: 'GET',

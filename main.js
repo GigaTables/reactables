@@ -108,10 +108,10 @@ let settings = {
         'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
         'X-Header-Key': 'foo-bar'
     },
-    // ajax: 'http://gigatables.loc/gigatables.php',
-    ajax: new Promise((resolve) => {
-        resolve('http://localhost/gigatables.php')
-    }),
+    ajax: 'http://gigatables.loc/gigatables.php',
+    // ajax: new Promise((resolve) => {
+    //     resolve('http://gigatables.loc/gigatables.php')
+    // }),
     // ajaxAutoloadData: true, // default false
     // ajaxAutoloadPeriod: 8, // sec
     requestType: 'GET',
@@ -178,9 +178,14 @@ let settings = {
     ],
     tableOpts: {
         buttons: [
-            // {
+            // { // reload button to fetch content manually
             //     extended: 'editor_reload',
-            //     editor: editor
+            //     editor: editor,
+            //     triggerAfter: (() => {
+            //         console.log('after reload')
+            //     }), triggerBefore: (() => {
+            //         console.log('before reload')
+            //     })
             // },
             // {// to set CSV Download button
             //     extended: "editor_csv",

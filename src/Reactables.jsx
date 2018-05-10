@@ -1,36 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Main from './components/Main.js';
-import Tools from './components/tools/Tools.js';
-import Editor from './components/form/Editor.js';
-import Pagination from './components/tools/Pagination.js';
-import styles from './css/styles.css';
-import {DataException} from './components/Exceptions';
-import TBody from "./components/table/TBody";
-import TFoot from "./components/table/TFoot";
-import THead from "./components/table/THead";
+import React from 'react'
+import PropTypes from 'prop-types'
+import Main from './components/Main.js'
+import Tools from './components/tools/Tools.js'
+import Editor from './components/form/Editor.js'
+import Pagination from './components/tools/Pagination.js'
+import styles from './css/styles.css'
+import { DataException } from './components/Exceptions'
+import TBody from './components/table/TBody'
+import TFoot from './components/table/TFoot'
+import THead from './components/table/THead'
 
-const CommonConstants = require('./components/CommonConstants');
-const Hoek = require('hoek');
+const CommonConstants = require('./components/CommonConstants')
+const Hoek = require('hoek')
 
 class Reactables extends Main {
-    constructor(props) {
-        super(props);
+    constructor (props) {
+        super(props)
         this.defaultSettings = {
             struct: {
-                search: ['top', 'bottom'],
-                rowsSelector: ['asc', 'top', 'bottom'],
-                pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
+                search: [ 'top', 'bottom' ],
+                rowsSelector: [ 'asc', 'top', 'bottom' ],
+                pagination: [ 'bottom' ], // pagination and infiniteScroll are mutually exclusive
                 infiniteScroll: false,
                 editableCells: false,
                 aggregateFooter: false,
                 download: {
-                    csv: false,
+                    csv: false
                 },
-                width: CommonConstants.DEFAULT_WIDTH,
+                width: CommonConstants.DEFAULT_WIDTH
             },
             lang: 'en',
-            perPageRows: [25, 50, 100, 200, 500],
+            perPageRows: [ 25, 50, 100, 200, 500 ],
             defaultPerPage: 50,
             columns: [],
             columnOpts: [],
@@ -43,12 +43,14 @@ class Reactables extends Main {
             headers: {},
             ajax: null,
             data: null
-        };
-
+        }
+        
         this.state = {
             dataRows: null,
             countRows: 0,
-            perPage: (typeof props.settings.defaultPerPage !== CommonConstants.UNDEFINED) ? props.settings.defaultPerPage : this.defaultSettings.defaultPerPage,
+            perPage: (typeof props.settings.defaultPerPage !== CommonConstants.UNDEFINED)
+                ? props.settings.defaultPerPage
+                : this.defaultSettings.defaultPerPage,
             page: 1,
             fromRow: 0,
             dataSearch: null,
@@ -77,99 +79,98 @@ class Reactables extends Main {
             footerAvg: 0,
             footerMinLength: 0,
             footerMaxLength: 0,
-            footerFrequency: '',
-        };
+            footerFrequency: ''
+        }
         // cols opts
-        this.searchableCols = [];
-        this.searchableCase = [];
-        this.discreteSearchableCase = [];
-        this.visibleCols = [];
-        this.sortableCols = [];
-        this.customColumns = [];
-        this.progressBars = [];
-        this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0;
+        this.searchableCols = []
+        this.searchableCase = []
+        this.discreteSearchableCase = []
+        this.visibleCols = []
+        this.sortableCols = []
+        this.customColumns = []
+        this.progressBars = []
+        this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0
         // these default sets will merge with users sets
-        this.build();
+        this.build()
     }
-
-    build() {
-        this.settings = Hoek.applyToDefaults(this.defaultSettings, this.props.settings);
-        const {columns, columnOpts} = this.settings;
+    
+    build () {
+        this.settings = Hoek.applyToDefaults(this.defaultSettings, this.props.settings)
+        const { columns, columnOpts } = this.settings
         columns.forEach((object) => {
-            this.setSearchableCols(object);
-            this.setSearchableCase(object);
-            this.setSortableCols(object);
+            this.setSearchableCols(object)
+            this.setSearchableCase(object)
+            this.setSortableCols(object)
             // visibility must be the last - it unsets search & sort if false
-            this.setVisibleCols(object);
-            this.setProgressBars(object);
-        });
+            this.setVisibleCols(object)
+            this.setProgressBars(object)
+        })
         columnOpts.forEach((object) => {
-            this.setCustomColumns(object);
-        });
-
-        let colsLen = columns.length;
-        const {ajax, data} = this.settings;
-        this.resolveData(ajax, data, colsLen);
+            this.setCustomColumns(object)
+        })
         
-        let autoloadPeriod = parseInt(this.settings.ajaxAutoloadPeriod);
+        let colsLen = columns.length
+        const { ajax, data } = this.settings
+        this.resolveData(ajax, data, colsLen)
+        
+        let autoloadPeriod = parseInt(this.settings.ajaxAutoloadPeriod)
         if (this.settings.ajaxAutoloadData === true
             && autoloadPeriod >= CommonConstants.MIN_AUTOLOAD_PERIOD
             && autoloadPeriod <= CommonConstants.MAX_AUTOLOAD_PERIOD) {
             setInterval(() => {
-                this.resolveData(ajax, data, colsLen);
-            }, autoloadPeriod * 1000);
+                this.resolveData(ajax, data, colsLen)
+            }, autoloadPeriod * 1000)
         }
     }
-
-    resolveData(destination, data, colsLen) {
+    
+    resolveData (destination, data, colsLen) {
         if (data === null) {  // ajax url data processing
             if (typeof destination.then === CommonConstants.FUNCTION) {
                 destination.then((url) => {
-                    this.setAjaxData(url, colsLen);
-                });
+                    this.setAjaxData(url, colsLen)
+                })
             } else {
-                this.setAjaxData(destination, colsLen);
+                this.setAjaxData(destination, colsLen)
             }
         }
     }
     
-    setAjaxData(url, colsLen)
-    {
-        const {headers} = this.settings;
-        let hrs = new Headers();
-        hrs.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON);
+    setAjaxData (url, colsLen) {
+        const { headers } = this.settings
+        let hrs = new Headers()
+        hrs.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON)
         for (let k in headers) {
             if (headers.hasOwnProperty(k)) {
-                hrs.append(k, headers[k]);
+                hrs.append(k, headers[ k ])
             }
         }
         fetch(url, {
-            headers: hrs,
+            headers: hrs
         }).then((response) => {// set ajax loader
-            this.setLoader(colsLen);
-            return response.json();
+            this.setLoader(colsLen)
+            return response.json()
         }).then((data) => {
-            let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
+            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ] // one row or several
             if (typeof jsonData === CommonConstants.UNDEFINED) {
-                throw new DataException('JSON must contain "rows" field.');
+                throw new DataException('JSON must contain "rows" field.')
             }
-            this.jsonData = jsonData;
-            this.createTable(jsonData);
-            this.setTableSort();
-        });
+            this.jsonData = jsonData
+            this.createTable(jsonData)
+            this.setTableSort()
+        })
     }
-
-    componentDidMount() {
-        let that = this;
+    
+    componentDidMount () {
+        let that = this
         // turn on infinite scroll
         if (this.settings.struct.infiniteScroll === true) {
             window.addEventListener('scroll', (e) => {
-                this.handleScroll();
-            });
+                this.handleScroll()
+            })
         }
         // turn on fixed headers
         if (this.settings.struct.fixedHeader === true) {
-            this.fixHeaders();
+            this.fixHeaders()
         }
         // enabling keys
         document.addEventListener('keydown', (e) => {
@@ -178,181 +179,181 @@ class Reactables extends Main {
                 case CommonConstants.CTRL_KEY:
                     that.setState({
                         ctrlDown: true
-                    });
-                    break;
+                    })
+                    break
                 case CommonConstants.CTRL_KEY_MAC_CHROME:
                     that.setState({
                         ctrlDown: true
-                    });
-                    break;
+                    })
+                    break
                 case CommonConstants.CTRL_KEY_MAC_FF:
                     that.setState({
                         ctrlDown: true
-                    });
-                    break;
+                    })
+                    break
             }
             if (this.state.active === false) {// turn off events with active pop-up
                 switch (e.which) {
                     case CommonConstants.CTRL_KEY:
                         that.setState({
                             ctrlDown: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.CTRL_KEY_MAC_CHROME:
                         that.setState({
                             ctrlDown: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.CTRL_KEY_MAC_FF:
                         that.setState({
                             ctrlDown: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.SHIFT_KEY:
                         that.setState({
                             shiftDown: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ESCAPE_KEY:
-                        that.hidePopup();
-                        break;
+                        that.hidePopup()
+                        break
                     case CommonConstants.ARROW_UP:
                         that.setState({
                             arrowUp: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_DOWN:
                         that.setState({
                             arrowDown: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_LEFT:
                         that.setState({
                             arrowLeft: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_RIGHT:
                         that.setState({
                             arrowRight: true
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.A_KEY:
                         that.setState({
                             aDown: true
-                        });
-                        break;
+                        })
+                        break
                 }
-                that.addSelectedRows();
-                that.setPagination();
+                that.addSelectedRows()
+                that.setPagination()
             }
-        });
-
+        })
+        
         // disabling keys
         document.addEventListener('keyup', (e) => {
             switch (e.which) {
                 case CommonConstants.CTRL_KEY:
                     that.setState({
                         ctrlDown: false
-                    });
-                    break;
+                    })
+                    break
                 case CommonConstants.CTRL_KEY_MAC_CHROME:
                     that.setState({
                         ctrlDown: false
-                    });
-                    break;
+                    })
+                    break
                 case CommonConstants.CTRL_KEY_MAC_FF:
                     that.setState({
                         ctrlDown: false
-                    });
-                    break;
+                    })
+                    break
                 case CommonConstants.ESCAPE_KEY:
-                    that.hidePopup();
-                    break;
+                    that.hidePopup()
+                    break
             }
             if (this.state.active === false) {// turn off events with active pop-up
                 switch (e.which) {
                     case CommonConstants.CTRL_KEY:
                         that.setState({
                             ctrlDown: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.CTRL_KEY_MAC_CHROME:
                         that.setState({
                             ctrlDown: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.CTRL_KEY_MAC_FF:
                         that.setState({
                             ctrlDown: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.SHIFT_KEY:
                         that.setState({
                             shiftDown: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_UP:
                         that.setState({
                             arrowUp: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_DOWN:
                         that.setState({
                             arrowDown: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_LEFT:
                         that.setState({
                             arrowLeft: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.ARROW_RIGHT:
                         that.setState({
                             arrowRight: false
-                        });
-                        break;
+                        })
+                        break
                     case CommonConstants.A_KEY:
                         that.setState({
                             aDown: false
-                        });
-                        break;
+                        })
+                        break
                 }
             }
-        });
-    
+        })
+        
         // local data is in priority load it if it's properly filled
-        const {data} = this.settings;
+        const { data } = this.settings
         if (data !== null && typeof data === CommonConstants.OBJECT) {
-            let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
-            this.setLoader(this.settings.columns.length);
+            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ] // one row or several
+            this.setLoader(this.settings.columns.length)
             if (typeof jsonData === CommonConstants.UNDEFINED) {
-                throw new DataException('JSON must contain "rows" field.');
+                throw new DataException('JSON must contain "rows" field.')
             }
-            this.jsonData = jsonData;
-            this.createTable(jsonData);
-            this.setTableSort();
+            this.jsonData = jsonData
+            this.createTable(jsonData)
+            this.setTableSort()
         }
     }
-
-    getTools(display) {
-        const {
-            selectedRows,
-            search,
-            perPage,
-        } = this.state;
-
+    
+    getTools (display) {
         const {
             tableOpts,
             perPageRows,
             defaultPerPage,
             lang,
             struct,
-        } = this.settings;
-
-        let dataToPass = [];
+            data
+        } = this.settings
+        const {
+            selectedRows,
+            search,
+            perPage
+        } = this.state
+        
+        let dataToPass = []
         // prevent big data flow if it needless to pass to Tools for exports
         if (struct.download.csv === true) {
-            dataToPass = this.jsonData;
+            dataToPass = this.jsonData
         }
         return (<Tools
             updatePerPage={this.updatePerPage.bind(this)}
@@ -368,11 +369,12 @@ class Reactables extends Main {
             struct={struct}
             display={display}
             jsonData={dataToPass}
+            isData={data !== null}
         />)
     }
-
-    getEditor(display) {
-        const {editor} = this.props;
+    
+    getEditor (display) {
+        const { editor } = this.props
         if (typeof editor !== CommonConstants.UNDEFINED) {
             const {
                 active,
@@ -382,14 +384,14 @@ class Reactables extends Main {
                 opacity,
                 popup_button,
                 popup_title,
-                fieldsEdit,
-            } = this.state;
+                fieldsEdit
+            } = this.state
             const {
                 tableOpts,
                 lang,
-                struct,
-            } = this.settings;
-
+                struct
+            } = this.settings
+            
             return (
                 <Editor
                     active={active}
@@ -411,24 +413,24 @@ class Reactables extends Main {
             )
         }
     }
-
-    getPagination(display) {
+    
+    getPagination (display) {
         const {
             lang,
             struct
-        } = this.settings;
-
+        } = this.settings
+        
         if (struct.pagination.indexOf(display) === -1 || struct.infiniteScroll === true) {
-            return '';
+            return ''
         }
-
+        
         const {
             countRows,
             page,
             perPage,
             fromRow
-        } = this.state;
-
+        } = this.state
+        
         return (<Pagination
             updatePagination={this.handlePagination.bind(this)}
             countRows={countRows}
@@ -437,54 +439,55 @@ class Reactables extends Main {
             fromRow={fromRow}
             lang={lang}/>)
     }
-
-    fixHeaders() {
-        let h = document.getElementsByTagName("thead")[0], readout = document.getElementsByTagName("tbody")[0];
-        let stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth;
+    
+    fixHeaders () {
+        let h = document.getElementsByTagName('thead')[ 0 ], readout = document.getElementsByTagName('tbody')[ 0 ]
+        let stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth
         window.onscroll = function (e) {
-            let ths = document.getElementsByTagName("tbody")[0].children[0].children;
-            let offset = window.pageYOffset;
-            let distance = h.offsetTop - offset;
-
+            let ths = document.getElementsByTagName('tbody')[ 0 ].children[ 0 ].children
+            let offset = window.pageYOffset
+            let distance = h.offsetTop - offset
+            
             if ((distance <= 0) && stuck === false) {
-                h.style.position = 'fixed';
-                h.style.top = '0px';
-                h.style.backgroundColor = '#f9f9f9';
-                stuck = true;
-                let fixedThs = document.getElementsByTagName("thead")[0].childNodes[0].childNodes;
-
+                h.style.position = 'fixed'
+                h.style.top = '0px'
+                h.style.backgroundColor = '#f9f9f9'
+                stuck = true
+                let fixedThs = document.getElementsByTagName('thead')[ 0 ].childNodes[ 0 ].childNodes
+                
                 for (let k in ths) {
-                    if (typeof fixedThs[k] !== CommonConstants.UNDEFINED
-                        && typeof fixedThs[k].style !== CommonConstants.UNDEFINED) {
-                        fixedThs[k].style.width = ths[k].offsetWidth;
+                    if (typeof fixedThs[ k ] !== CommonConstants.UNDEFINED
+                        && typeof fixedThs[ k ].style !== CommonConstants.UNDEFINED) {
+                        fixedThs[ k ].style.width = ths[ k ].offsetWidth
                     }
                 }
             } else if (stuck === true && (offset <= stickPoint)) {
-                h.style.position = 'static';
-                h.style.backgroundColor = '#fff';
-                stuck = false;
+                h.style.position = 'static'
+                h.style.backgroundColor = '#fff'
+                stuck = false
             }
         }
     }
-
-    rerenderTable() {
+    
+    rerenderTable () {
         this.setState({
-            editedCell: '',
+            editedCell: ''
         }, () => {
-            this.createTable(this.jsonData, this.state.sortButtons, this.state.selectedRows);
-        });
+            this.createTable(this.jsonData, this.state.sortButtons, this.state.selectedRows)
+        })
     }
-
-    render() {
-        let sortedCols = this.setHeads();
+    
+    render () {
+        let sortedCols = this.setHeads()
         const {
-            dataRows,
-        } = this.state;
+            dataRows
+        } = this.state
         const {
             struct,
-        } = this.settings;
+            data
+        } = this.settings
         return (
-            <div ref="tableLoaded" className={styles.gt_container} style={{width: struct.width}}>
+            <div ref="tableLoaded" className={styles.gt_container} style={{ width: struct.width }}>
                 <div className={styles.gt_head_tools}>
                     {this.getTools(CommonConstants.DISPLAY_TOP)}
                 </div>
@@ -510,7 +513,7 @@ class Reactables extends Main {
                 <div className={styles.gt_foot_tools}>
                     {this.getTools(CommonConstants.DISPLAY_BOTTOM)}
                 </div>
-                {this.getEditor()}
+                {(data === null) ? this.getEditor() : ''}
             </div>
         )
     }
@@ -519,6 +522,6 @@ class Reactables extends Main {
 Reactables.propTypes = {
     editor: PropTypes.object,
     settings: PropTypes.object.isRequired
-};
+}
 
 export default Reactables

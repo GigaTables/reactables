@@ -34,5 +34,11 @@ const config = {
     externals: {
         'react/addons': true
     },
+    node: {
+        console: false,
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+    }
 };
 module.exports = config;

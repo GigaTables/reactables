@@ -121,6 +121,7 @@ class Tools extends Component {
             showPopup,
             lang,
             tableOpts,
+            isData,
         } = this.props;
 
         let language = Lang[lang];
@@ -154,7 +155,7 @@ class Tools extends Component {
         }
         return (
             <div className="gt_head_tools">
-                {this.getButtons()}
+                {(isData) ? '' : this.getButtons()}
                 {this.getPagesSelection()}
                 {this.getSearch()}
                 <div className={styles.clear}></div>

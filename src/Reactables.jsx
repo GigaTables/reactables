@@ -122,10 +122,7 @@ class Reactables extends Main {
     }
 
     resolveData(destination, data, colsLen) {
-        // local data prioritized (as usual)
-        if (data !== null && typeof data === CommonConstants.OBJECT) { // process data from JS object
-            this.setObjectData(data, colsLen);
-        } else { // ajax url data processing
+        if (data === null) {  // ajax url data processing
             if (typeof destination.then === CommonConstants.FUNCTION) {
                 destination.then((url) => {
                     this.setAjaxData(url, colsLen);
@@ -133,33 +130,6 @@ class Reactables extends Main {
             } else {
                 this.setAjaxData(destination, colsLen);
             }
-        }
-    }
-    
-    setObjectData(data, colsLen)
-    {
-        new Promise((data) = {
-            this.setLoader(colsLen);
-            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ]; // one row or several
-            return jsonData;
-        }).then((jsonData) => {
-        
-        });
-        
-        console.log(1);
-        console.log(data['rows'].length);
-        if (this.refs.tableLoaded) {
-            this.setLoader(colsLen);
-            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ]; // one row or several
-            console.log(jsonData.length);
-            if (typeof jsonData === CommonConstants.UNDEFINED) {
-                throw new DataException('JSON must contain "rows" field.');
-            }
-            console.log(2);
-            this.jsonData = jsonData;
-            this.createTable(jsonData);
-            console.log(3);
-            this.setTableSort();
         }
     }
     
@@ -349,6 +319,19 @@ class Reactables extends Main {
                 }
             }
         });
+    
+        // local data is in priority load it if it's properly filled
+        const {data} = this.settings;
+        if (data !== null && typeof data === CommonConstants.OBJECT) {
+            let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
+            this.setLoader(this.settings.columns.length);
+            if (typeof jsonData === CommonConstants.UNDEFINED) {
+                throw new DataException('JSON must contain "rows" field.');
+            }
+            this.jsonData = jsonData;
+            this.createTable(jsonData);
+            this.setTableSort();
+        }
     }
 
     getTools(display) {

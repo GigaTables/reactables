@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Row from './table/Row.js';
 import Column from './table/Column.js';
-import Footer from "./table/Footer";
+import Footer from './table/Footer';
+import Editor from './form/Editor';
 
 const CommonConstants = require('./CommonConstants');
 const EditorConstants = require('./EditorConstants');
@@ -608,9 +609,23 @@ class Main extends Component {
 
         switch (action) {
             case EditorConstants.ACTION_RELOAD:
-                const {ajax, data, columns} = this.settings;
+                const {ajax, columns, tableOpts} = this.settings;
+                tableOpts.buttons.map((obj) => {
+                    let canTrigger = obj.extended === EditorConstants.EDITOR_RELOAD && typeof obj.triggerBefore !== CommonConstants.UNDEFINED
+                        && typeof obj.triggerBefore === CommonConstants.FUNCTION;
+                    if (canTrigger) {
+                        obj.triggerBefore();
+                    }
+                });
                 let colsLen = columns.length;
-                this.resolveData(ajax, data, colsLen);
+                this.resolveData(ajax, colsLen);
+                tableOpts.buttons.map((obj) => {
+                    let canTrigger = obj.extended === EditorConstants.EDITOR_RELOAD && typeof obj.triggerAfter !== CommonConstants.UNDEFINED
+                        && typeof obj.triggerAfter === CommonConstants.FUNCTION;
+                    if (canTrigger) {
+                        obj.triggerAfter();
+                    }
+                });
                 break;
             case EditorConstants.ACTION_EDIT:
                 popup_title = this.lang.gte_editor_popupheader_edit;

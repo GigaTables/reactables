@@ -196,9 +196,14 @@ let settings = {
     ],
     tableOpts: {
         buttons: [
-            // {
+            // { // reload button to fetch content manually
             //     extended: 'editor_reload',
-            //     editor: editor
+            //     editor: editor,
+            //     triggerAfter: (() => {
+            //         console.log('after reload')
+            //     }), triggerBefore: (() => {
+            //         console.log('before reload')
+            //     })
             // },
             // {// to set CSV Download button
             //     extended: "editor_csv",

@@ -20,6 +20,7 @@ module.exports = {
       'editor_csv': 'CSV Export',
       'editor_reload': 'Reload',
       'gte_editor_delete_popup': 'Are You sure You wish to delete {{rows}} row(s)?',
+      'gte_editor_multiple_rows': 'note: multiple rows mode - changed fields will be sent for selected rows'
   },
   'gr': {
       'gte_editor_popupheader_delete': 'Löschen',
@@ -42,6 +43,7 @@ module.exports = {
       'editor_csv': 'CSV Export',
       'editor_reload': 'Neu laden',
       'gte_editor_delete_popup': 'Sind Sie sicher, dass Sie {{rows}} Zeile(n) löschen möchten?',
+      'gte_editor_multiple_rows': 'Hinweis: Modus für mehrere Zeilen - geänderte Felder werden für ausgewählte Zeilen gesendet'
   },
   'ru': {
       'gte_editor_popupheader_delete': 'Удалить',
@@ -64,6 +66,7 @@ module.exports = {
       'editor_csv': 'CSV выгрузка',
       'editor_reload': 'Перезагрузить',
       'gte_editor_delete_popup': 'Вы уверены, что хотите удалить {{rows}} строк(и)?',
+      'gte_editor_multiple_rows': 'внимание: режим редактирования нескольких строк - измененные поля будут отправлены для выбранных строк'
   },
   'fr': {
       'gte_editor_popupheader_delete': 'Effacer',
@@ -86,6 +89,7 @@ module.exports = {
       'editor_csv': 'CSV Export',
       'editor_reload': 'Recharger',
       'gte_editor_delete_popup': 'Êtes-vous sûr de vouloir supprimer {{rows}} ligne(s)?',
+      'gte_editor_multiple_rows': 'Remarque: Mode multi-lignes - les champs modifiés sont envoyés pour les lignes sélectionnées'
   },
   'es': {
       'gte_editor_popupheader_delete': 'Borrar',
@@ -108,6 +112,7 @@ module.exports = {
       'editor_csv': 'CSV Export',
       'editor_reload': 'Recargar',
       'gte_editor_delete_popup': 'Estás seguro de que deseas eliminar {{rows}} fila(s)?',
+      'gte_editor_multiple_rows': 'Nota: modo de múltiples filas - los campos modificados se envían para las filas seleccionadas'
   },
   'ch': {
       'gte_editor_popupheader_delete': '删除',
@@ -130,6 +135,7 @@ module.exports = {
       'editor_csv': 'CSV Export',
       'editor_reload': '刷新',
       'gte_editor_delete_popup': '您确定要删除{{rows}}行吗？',
+      'gte_editor_multiple_rows': '提示：多行模式-修改后的字段将应用于所有已选数据'
   },
   'hi': {
       'gte_editor_popupheader_delete': 'हटाना',
@@ -152,5 +158,6 @@ module.exports = {
       'editor_csv': 'CSV Export',
       'editor_reload': 'सीमा से अधिक लादना',
       'gte_editor_delete_popup': 'क्या आप वाकई {{rows}} पंक्तियां हटाना चाहते हैं?',
+      'gte_editor_multiple_rows': 'नोट: मल्टी-पंक्ति मोड - चयनित पंक्तियों के लिए संशोधित फ़ील्ड भेजे जाते हैं'
   }
 };

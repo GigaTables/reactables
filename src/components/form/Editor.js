@@ -212,7 +212,7 @@ class Editor extends Component {
             fieldLabel = object.label,
             fieldValue = '';
         if (true === isMultiple && setMultipleText === 0) {
-            fieldValue = 'note: multiple rows mode - changed fields will be sent for selected rows';
+            fieldValue = this.lang.gte_editor_multiple_rows;
         } else {
             if (action === EditorConstants.ACTION_EDIT) {
                 if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {

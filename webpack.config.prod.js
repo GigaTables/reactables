@@ -43,7 +43,19 @@ const config = {
             isPlatform: false,
         })),
     externals: {
-        'react/addons': true
+        'react': 'umd react',
+        'react-dom': 'umd react-dom',
+        'prop-types': 'umd prop-types',
+        'classnames': 'umd classnames',
+        'css-loader': 'umd css-loader',
+        'file-loader': 'umd file-loader',
+        'style-loader': 'umd style-loader',
+        'url-loader': 'umd url-loader',
+        'resolve-url': 'umd resolve-url',
+        'expect': 'umd expect',
+        'react-rte': 'umd react-rte',
+        'lodash': 'umd lodash',
+        'hoek': 'umd hoek'
     }
 };
 module.exports = config;

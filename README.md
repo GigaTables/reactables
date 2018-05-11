@@ -46,6 +46,7 @@ and more...
   * [Advanced configuration with opts and editor](#user-content-advanced-configuration-with-opts-and-editor)  
 * [An example of using GigaTables with Editor tool](#user-content-an-example-of-using-gigatables-with-editor-tool)
 * [Pagination or Infinite scroll](#user-content-pagination-or-infinite-scroll)
+* [Ajax or local data](#user-content-ajax-or-local-data)
 * [Ajax autoload period](#user-content-ajax-autoload-period)
 * [Hot keys](#user-content-hot-keys)
 * [Plugins](#user-content-plugins)
@@ -97,6 +98,8 @@ let settings = {
         pagination: ['bottom']
     },
     ajax: 'http://example.com/your/tabledata',
+    // or u can set local json data
+    // data: localData, 
     columns: [
         {data: "id"},
         {data: "desc"},
@@ -389,6 +392,18 @@ struct: {
 },
 ```
 even if You leave `pagination` option there - infinite scroll will take precedence.
+
+## Ajax or local data
+
+While it is clear that GT was primarily developed with data processing via ajax, u can use either ajax or local data.
+To let GT accept local data the only thing u need to do is to set `settings.data` property to any json object that will be 
+satisfy defined structure.
+
+It can be variable, object itself or json from local file (loaded by require on nodejs for example).
+
+The difference between data and ajax processing is that:
+- local data is always prioritized over ajax data, so if they both set - only the local data will be loaded
+- with local data u can't mutate rows/cols with editor create/edit/delete options
 
 ## Ajax autoload period
 

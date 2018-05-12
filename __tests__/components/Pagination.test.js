@@ -35,6 +35,37 @@ it('renders Pagination correctly', () => {
             perPage={50}/>
     ).toJSON();
     expect(noPagesContent).toMatchSnapshot();
+
+    // test selectedPage >= CommonConstants.MORE_PAGES && selectedPage <= pages - CommonConstants.MORE_PAGES
+    const treeMoreAndLess = renderer.create(
+        <Pagination
+            lang="en"
+            countRows={1055}
+            fromRow={450}
+            page={9}
+            perPage={25}/>
+    ).toJSON();
+    expect(treeMoreAndLess).toMatchSnapshot();
+    // test selected page less than more
+    const lessThanMore = renderer.create(
+        <Pagination
+            lang="en"
+            countRows={1055}
+            fromRow={150}
+            page={3}
+            perPage={50}/>
+    ).toJSON();
+    expect(lessThanMore).toMatchSnapshot();
+    // test selected page less than more
+    const tail = renderer.create(
+        <Pagination
+            lang="en"
+            countRows={1055}
+            fromRow={900}
+            page={18}
+            perPage={50}/>
+    ).toJSON();
+    expect(tail).toMatchSnapshot();
     
     const obj = shallow(
         <Pagination

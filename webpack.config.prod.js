@@ -55,7 +55,8 @@ const config = {
         'expect': 'umd expect',
         'react-rte': 'umd react-rte',
         'lodash': 'umd lodash',
-        'hoek': 'umd hoek'
+        'hoek': 'umd hoek',
+        'superagent': 'umd superagent'
     }
 };
 module.exports = config;

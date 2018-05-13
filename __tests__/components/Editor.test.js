@@ -224,7 +224,7 @@ describe("Editor", () => {
                 fieldsEdit={[
                     {'id': 1}
                 ]}/>
-        );
+        )
         obj.instance().setDataIndices({
             columns: settings.columns
         });
@@ -274,54 +274,7 @@ describe("Editor", () => {
             keyCode: CommonConstants.ENTER_KEY
         });
         obj.instance().getAjaxSettings(EditorConstants.ACTION_EDIT);
-        
-        it('renders Editor with ajax object', () => {
-            editor.ajax = {
-                create: {
-                    url: 'http://gigatables.loc/editor.php',
-                    type: 'POST',
-                    headers: {
-                        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049'
-                    }
-                },
-                edit: {
-                    url: 'http://gigatables.loc/editor.php',
-                    type: 'PUT',
-                    headers: {
-                        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
-                        'X-Header-Key': 'foo-bar'
-                    }
-                },
-                delete: {
-                    url: 'http://gigatables.loc/editor.php',
-                    type: 'DELETE',
-                    headers: {
-                        'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
-                        'X-Header-Key': 'foo-bar-baz'
-                    }
-                }
-            }
-            const ajaxObject = shallow(
-                <Editor
-                    lang="en"
-                    countRows="229"
-                    fromRow="0"
-                    page="1"
-                    perPage="50"
-                    action="delete"
-                    active={true}
-                    editor={editor}
-                    columns={editor.fields}
-                    struct={settings.struct}
-                    tableOpts={settings.tableOpts}
-                    selectedRows={[ 1 ]}
-                    selectedIds={[ 187 ]}
-                    fieldsEdit={[
-                        { 'id': 1 }
-                    ]}/>
-            );
-            ajaxObject.instance().getAjaxSettings('edit');
-        });
+        obj.instance().getAjaxSettings(EditorConstants.ACTION_DELETE);
         // todo: resolve error: Headers is not defined
         // global.Headers = () => {}
         // obj.instance().btnClicked({
@@ -351,5 +304,60 @@ describe("Editor", () => {
         //     persist: () => {
         //     }
         // });
+    });
+    it('renders Editor with ajax object', () => {
+        editor.ajax = {
+            create: {
+                url: 'http://gigatables.loc/editor.php',
+                type: 'POST',
+                headers: {
+                    'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049'
+                }
+            },
+            edit: {
+                url: 'http://gigatables.loc/editor.php',
+                type: 'PUT',
+                headers: {
+                    'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+                    'X-Header-Key': 'foo-bar'
+                }
+            },
+            delete: {
+                url: 'http://gigatables.loc/editor.php',
+                type: 'DELETE',
+                headers: {
+                    'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+                    'X-Header-Key': 'foo-bar-baz'
+                }
+            }
+        }
+        const ajaxObject = shallow(
+            <Editor
+                lang="en"
+                countRows="229"
+                fromRow="0"
+                page="1"
+                perPage="50"
+                action="delete"
+                active={true}
+                editor={editor}
+                columns={editor.fields}
+                struct={settings.struct}
+                tableOpts={settings.tableOpts}
+                selectedRows={[ 1 ]}
+                selectedIds={[ 187 ]}
+                fieldsEdit={[
+                    { 'id': 1 }
+                ]}/>
+        );
+        ajaxObject.instance().getAjaxSettings('edit');
+        expect(() => {ajaxObject.instance().getAjaxSettings('dummy')}).toThrow();
+        ajaxObject.instance().setHeaders(
+            {
+                headers: {
+                    'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+                    'X-Header-Key': 'foo-bar'
+                }
+            }, {append:(key, val) => {}});
     });
 });

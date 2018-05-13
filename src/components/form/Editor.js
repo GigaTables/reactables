@@ -471,12 +471,6 @@ class Editor extends Component {
         }
     }
     
-    checkId(data) {
-        if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
-            throw new DataException('The `id` field is required to return in response from server/back-end.');
-        }
-    }
-    
     setHeaders(settings, headers) {
         for (let hKey in settings.headers) {
             if (settings.headers.hasOwnProperty(hKey)) {

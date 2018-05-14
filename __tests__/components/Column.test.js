@@ -111,7 +111,7 @@ it('renders Column correctly', () => {
         <Column
             count={0}
             dataIndex="editable-cells"
-            editableCells={true}
+            editableCells={false}
             gteRowId={71}
             minRow="0"
             maxRow="0"
@@ -122,6 +122,22 @@ it('renders Column correctly', () => {
             isProgressBar={true}>12</Column>
     ).toJSON()
     expect(progressBar).toMatchSnapshot()
+    
+    const progressBarCells = renderer.create(
+        <Column
+            count={0}
+            dataIndex="editable-cells"
+            editableCells={true}
+            gteRowId={71}
+            minRow="0"
+            maxRow="0"
+            cell={1}
+            editCell={() => {}}
+            editRow={() => {}}
+            selectedRows={[]}
+            isProgressBar={true}>12</Column>
+    ).toJSON()
+    expect(progressBarCells).toMatchSnapshot()
     
     const obj = shallow(
         <Column

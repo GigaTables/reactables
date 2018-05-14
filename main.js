@@ -113,7 +113,7 @@ let settings = {
     // ajax: new Promise((resolve) => {
     //     resolve('http://gigatables.loc/gigatables.php')
     // }),
-    data: localData.data,
+    // data: localData.data,
     // ajaxAutoloadData: true, // default false
     // ajaxAutoloadPeriod: 8, // sec
     requestType: 'GET',

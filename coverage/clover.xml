@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1526329439166" clover="3.2.0">
-  <project timestamp="1526329439167" name="All files">
+<coverage generated="1526329666479" clover="3.2.0">
+  <project timestamp="1526329666479" name="All files">
     <metrics statements="486" coveredstatements="382" conditionals="313" coveredconditionals="188" methods="87" coveredmethods="74" elements="886" coveredelements="644" complexity="0" loc="486" ncloc="486" packages="5" files="22" classes="22">
       <package name="components">
         <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
@@ -23,10 +23,10 @@
         </file>
         <file name="Helpers.js" path="/Users/arthur/www/gigatables_react/src/components/Helpers.js">
           <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-          <line num="2" count="7" type="stmt"/>
-          <line num="3" count="7" type="cond" truecount="1" falsecount="1"/>
-          <line num="4" count="7" type="stmt"/>
-          <line num="7" count="7" type="stmt"/>
+          <line num="2" count="8" type="stmt"/>
+          <line num="3" count="8" type="cond" truecount="1" falsecount="1"/>
+          <line num="4" count="8" type="stmt"/>
+          <line num="7" count="8" type="stmt"/>
         </file>
         <file name="Lang.js" path="/Users/arthur/www/gigatables_react/src/components/Lang.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

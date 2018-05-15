@@ -395,8 +395,8 @@ class Editor extends Component {
         let settings = this.getAjaxSettings(action);
         let ajaxUrl = settings.url;
         let dataResp = dataIndices;
-        let headers = new Headers();
-        headers.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON);
+        let headers = {};
+        headers[CommonConstants.HEADER_CONTENT_TYPE] = CommonConstants.CONTENT_APP_JSON;
         if (action === EditorConstants.ACTION_CREATE) {
             this.triggerBefore(EditorConstants.EDITOR_CREATE);
             this.fileUpload();
@@ -474,7 +474,7 @@ class Editor extends Component {
     setHeaders(settings, headers) {
         for (let hKey in settings.headers) {
             if (settings.headers.hasOwnProperty(hKey)) {
-                headers.append(hKey, settings.headers[hKey]);
+                headers[hKey] = settings.headers[hKey];
             }
         }
         return headers;

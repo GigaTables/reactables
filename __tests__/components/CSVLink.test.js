@@ -1,9 +1,10 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 import CSVLink from '../../src/components/form/CSVLink.js'
-import {shallow, configure} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-configure({adapter: new Adapter()});
+import { shallow, configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+
+configure({ adapter: new Adapter() })
 
 it('renders CSVLink correctly', () => {
     const tree = renderer.create(
@@ -52,12 +53,27 @@ const obj = shallow(
         }
         key={1}
     />
-);
+)
 
 global.URL = {
     createObjectURL: (url) => {
     }
-};
+}
+// todo: this mock is not working
+// global.navigator = {
+//     msSaveBlob: true
+// }
+// Object.defineProperty(window.navigator, 'msSaveBlob', {value: (k, v) => {}});
+// Object.defineProperty(window.navigator, "msSaveBlob", (function(_value){
+//     return {
+//         get: function _get() {
+//             return _value;
+//         },
+//         set: function _set(v) {
+//             _value = v;
+//         }
+//     };
+// })(window.navigator.msSaveBlob));
 
 obj.instance().onClick([
     {
@@ -71,8 +87,8 @@ obj.instance().onClick([
         'field2': 2293,
         'field3': 13404
     }
-]);
-
+])
+obj.instance().onClick({})
 obj.instance().objectToCSVRow(
     {
         'GT_RowId': 1059,
@@ -85,4 +101,4 @@ obj.instance().objectToCSVRow(
         'field2': 2293,
         'field3': 13404
     }
-);
+)

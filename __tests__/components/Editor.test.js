@@ -460,6 +460,9 @@ describe('Editor create with AJAX row object returned', () => {
                 ]}
                 editorUpdate={(e, resp) => {}}/>
         )
+        ajaxObjectCreate.instance().setDataIndices({
+            columns: settings.columns
+        })
         ajaxObjectCreate.instance().btnClicked({
             persist: () => {
             }
@@ -494,7 +497,7 @@ describe('Editor throws exceptions on', () => {
                         }
                     }
                 })
-            })
+            });
             return p
         })
     })
@@ -520,10 +523,10 @@ describe('Editor throws exceptions on', () => {
                 ]}
                 editorUpdate={(e, resp) => {}}/>
         )
-        ajaxObjectCreate.instance().btnClicked({
+        expect(ajaxObjectCreate.instance().btnClicked({
             persist: () => {
             }
-        })
+        })).toThrow();
     })
     
     it('edit  without rows', () => {
@@ -547,9 +550,9 @@ describe('Editor throws exceptions on', () => {
                 ]}
                 editorUpdate={(e, resp) => {}}/>
         )
-        ajaxObjectCreate.instance().btnClicked({
+        expect(ajaxObjectCreate.instance().btnClicked({
             persist: () => {
             }
-        })
+        })).toThrow();
     })
 })

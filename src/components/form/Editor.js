@@ -424,6 +424,8 @@ class Editor extends Component {
                 dataResp[CommonConstants.GT_ROW_ID] = data[CommonConstants.GT_ROW]['id'];
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_CREATE);
+            }).catch((e) => {
+                console.error(e.message);
             });
         } else if (action === EditorConstants.ACTION_EDIT) {
             this.triggerBefore(EditorConstants.EDITOR_EDIT);
@@ -457,6 +459,8 @@ class Editor extends Component {
                 // leaving UI fields, prioritizing those from server
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_EDIT);
+            }).catch((e) => {
+                console.error(e.message);
             });
         } else if (action === EditorConstants.ACTION_DELETE) {
             this.triggerBefore(EditorConstants.EDITOR_REMOVE);

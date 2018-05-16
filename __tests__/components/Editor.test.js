@@ -59,6 +59,16 @@ const editor = {
             type: 'textarea'
         },
         {
+            label: 'Description:',
+            name: 'desc',
+            type: 'textarea',
+            plugins: 'rte',
+            attrs: [
+                { 'className': 'descriptionField' }
+            ],
+            fieldsetClose: true
+        },
+        {
             label: 'Date Time:',
             name: 'date',
             type: 'date'
@@ -575,7 +585,8 @@ describe('Editor throws exceptions on', () => {
                 selectedRows={[ 1 ]}
                 selectedIds={[ 187 ]}
                 fieldsEdit={[
-                    { 'id': 1 }
+                    { 'id': 1 },
+                    { 'id': 2 }
                 ]}
                 editorUpdate={(e, resp) => {}}/>
         )
@@ -583,5 +594,22 @@ describe('Editor throws exceptions on', () => {
             persist: () => {
             }
         })).toThrow()
+        ajaxObjectCreate.setState({
+            setMultipleText: 1
+        })
+        ajaxObjectCreate.instance().getFieldByType('desc', { name: 'title', type: 'text', label: '' })
+        ajaxObjectCreate.setState({
+            dataIndices: {
+                'GT_RowId': 123,
+                'id': 123,
+                'title': 'foo'
+            }
+        })
+        ajaxObjectCreate.instance().getFieldByType('desc', { name: 'title', type: 'text', label: '' })
+        ajaxObjectCreate.instance().onChangeHtml({
+            props: {
+                name: 'desc'
+            }
+        }, '<div>foo bar baz</div>')
     })
 })

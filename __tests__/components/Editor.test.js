@@ -284,29 +284,6 @@ describe('Editor', () => {
             persist: () => {
             }
         })
-        // const objEdit = shallow(
-        //     <Editor
-        //         lang="en"
-        //         countRows="229"
-        //         fromRow="0"
-        //         page="1"
-        //         perPage="50"
-        //         action="edit"
-        //         active={true}
-        //         editor={editor}
-        //         columns={editor.fields}
-        //         struct={settings.struct}
-        //         tableOpts={settings.tableOpts}
-        //         selectedRows={[1]}
-        //         selectedIds={[187]}
-        //         fieldsEdit={[
-        //             {'id': 1}
-        //         ]}/>
-        // );
-        // objEdit.instance().btnClicked({
-        //     persist: () => {
-        //     }
-        // });
     })
     it('renders Editor with ajax object', () => {
         editor.ajax = {
@@ -367,7 +344,42 @@ describe('Editor', () => {
             persist: () => {
             }
         })
+    })
+})
+
+describe('Editor create with AJAX row object returned', () => {
+    beforeEach(() => {
+        global.editorUpdate = jest.fn().mockImplementation((e, dataResp) => {
         
+        })
+        global.fetch = jest.fn().mockImplementation(() => {
+            var p = new Promise((resolve, reject) => {
+                resolve({
+                    ok: true,
+                    Id: '123',
+                    json: function () {
+                        return {
+                            'row':
+                                {
+                                    'GT_RowId': 123,
+                                    'title': 'Test Bar 123st row',
+                                    'id': 123,
+                                    'desc': 'Lorem Ipsum is simply dummy Bar 7196 text of the printing and typesetting',
+                                    'info': 'some info some info some info some info',
+                                    'date': '13:23:43 02:04:2017',
+                                    'field1': 123,
+                                    'field2': 1357,
+                                    'field3': 12468
+                                }
+                        }
+                    }
+                })
+            })
+            return p
+        })
+    })
+    
+    it('renders Editor with ajax object', () => {
         const ajaxObjectCreate = shallow(
             <Editor
                 lang="en"
@@ -376,6 +388,153 @@ describe('Editor', () => {
                 page="1"
                 perPage="50"
                 action="create"
+                active={true}
+                editor={editor}
+                columns={editor.fields}
+                struct={settings.struct}
+                tableOpts={settings.tableOpts}
+                selectedRows={[ 1 ]}
+                selectedIds={[ 187 ]}
+                fieldsEdit={[
+                    { 'id': 1 }
+                ]}
+                editorUpdate={(e, resp) => {}}/>
+        )
+        ajaxObjectCreate.instance().btnClicked({
+            persist: () => {
+            }
+        })
+    })
+})
+
+describe('Editor create with AJAX row object returned', () => {
+    beforeEach(() => {
+        global.editorUpdate = jest.fn().mockImplementation((e, dataResp) => {
+        
+        })
+        global.fetch = jest.fn().mockImplementation(() => {
+            var p = new Promise((resolve, reject) => {
+                resolve({
+                    ok: true,
+                    Id: '123',
+                    json: function () {
+                        return {
+                            'row':
+                                {
+                                    'GT_RowId': 123,
+                                    'title': 'Test Bar 123st row',
+                                    'id': 123,
+                                    'desc': 'Lorem Ipsum is simply dummy Bar 7196 text of the printing and typesetting',
+                                    'info': 'some info some info some info some info',
+                                    'date': '13:23:43 02:04:2017',
+                                    'field1': 123,
+                                    'field2': 1357,
+                                    'field3': 12468
+                                }
+                        }
+                    }
+                })
+            })
+            return p
+        })
+    })
+    
+    it('renders Editor with ajax object', () => {
+        const ajaxObjectCreate = shallow(
+            <Editor
+                lang="en"
+                countRows="229"
+                fromRow="0"
+                page="1"
+                perPage="50"
+                action="create"
+                active={true}
+                editor={editor}
+                columns={editor.fields}
+                struct={settings.struct}
+                tableOpts={settings.tableOpts}
+                selectedRows={[ 1 ]}
+                selectedIds={[ 187 ]}
+                fieldsEdit={[
+                    { 'id': 1 }
+                ]}
+                editorUpdate={(e, resp) => {}}/>
+        )
+        ajaxObjectCreate.instance().btnClicked({
+            persist: () => {
+            }
+        })
+    })
+})
+
+describe('Editor throws exceptions on', () => {
+    beforeEach(() => {
+        global.editorUpdate = jest.fn().mockImplementation((e, dataResp) => {
+        
+        })
+        global.fetch = jest.fn().mockImplementation(() => {
+            let p = new Promise((resolve, reject) => {
+                resolve({
+                    ok: true,
+                    Id: '123',
+                    json: function () {
+                        return {
+                            'row':
+                                {
+                                    // 'GT_RowId': 123,
+                                    'title': 'Test Bar 123st row',
+                                    // 'id': 123,
+                                    'desc': 'Lorem Ipsum is simply dummy Bar 7196 text of the printing and typesetting',
+                                    'info': 'some info some info some info some info',
+                                    'date': '13:23:43 02:04:2017',
+                                    'field1': 123,
+                                    'field2': 1357,
+                                    'field3': 12468
+                                }
+                        }
+                    }
+                })
+            })
+            return p
+        })
+    })
+    
+    it('create without row', () => {
+        const ajaxObjectCreate = shallow(
+            <Editor
+                lang="en"
+                countRows="229"
+                fromRow="0"
+                page="1"
+                perPage="50"
+                action="create"
+                active={true}
+                editor={editor}
+                columns={editor.fields}
+                struct={settings.struct}
+                tableOpts={settings.tableOpts}
+                selectedRows={[ 1 ]}
+                selectedIds={[ 187 ]}
+                fieldsEdit={[
+                    { 'id': 1 }
+                ]}
+                editorUpdate={(e, resp) => {}}/>
+        )
+        ajaxObjectCreate.instance().btnClicked({
+            persist: () => {
+            }
+        })
+    })
+    
+    it('edit  without rows', () => {
+        const ajaxObjectCreate = shallow(
+            <Editor
+                lang="en"
+                countRows="229"
+                fromRow="0"
+                page="1"
+                perPage="50"
+                action="edit"
                 active={true}
                 editor={editor}
                 columns={editor.fields}

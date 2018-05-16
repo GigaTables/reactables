@@ -440,7 +440,9 @@ class Editor extends Component {
                 body: JSON.stringify(payload),
                 headers: headers,
             }).then(response => response.json()).then((data) => {
-                if (typeof data[CommonConstants.GT_ROWS][0]['id'] === CommonConstants.UNDEFINED) {
+                if (typeof data[CommonConstants.GT_ROWS] === CommonConstants.UNDEFINED // check rows object data
+                    || typeof data[CommonConstants.GT_ROWS][0] === CommonConstants.UNDEFINED // check at least 1 row/element
+                    || typeof data[CommonConstants.GT_ROWS][0]['id'] === CommonConstants.UNDEFINED) {
                     throw new DataException('The `id` field is required to return in response from server/back-end.');
                 }
                 for (let k in data[CommonConstants.GT_ROWS]) {

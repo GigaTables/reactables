@@ -33,6 +33,18 @@ const editor = {
 //                {'multiple':true}
 //              ]
         },
+        {// an example of using select - automatically selected if matches with data in table column
+            label: 'Types:',
+            name: 'types[]',
+            values: [// if select,checkbox,radio etc types - need this pre-set structure of values
+                { 'key1': 'val1' },
+                { 'key2': 'val2' }
+            ],
+            type: 'select' // select,checkbox,radio
+//              attrs: [
+//                {'multiple':true}
+//              ]
+        },
         {
             label: 'Article title:',
             name: 'title',
@@ -130,20 +142,20 @@ const settings = {
         buttons: [
             {
                 extended: 'editor_create', editor: editor, triggerAfter: (function () {
-                    console.log('after create')
-                }), triggerBefore: (function () {
-                    console.log('before create')
-                })
+                console.log('after create')
+            }), triggerBefore: (function () {
+                console.log('before create')
+            })
             },
             {
                 extended: 'editor_edit', editor: editor, triggerBefore: (function () {
-                    console.log('before edit')
-                })
+                console.log('before edit')
+            })
             },
             {
                 extended: 'editor_remove', editor: editor, triggerAfter: (function () {
-                    console.log('after del')
-                })
+                console.log('after del')
+            })
             }
         ],
         buttonsPosition: [ 'top', 'bottom' ],
@@ -460,6 +472,23 @@ describe('Editor create with AJAX row object returned', () => {
                 ]}
                 editorUpdate={(e, resp) => {}}/>
         )
+        ajaxObjectCreate.instance().setState({
+            dataIndices: {
+                'GT_RowId': 123,
+                'id': 123,
+                'title': 'foo'
+            }
+        })
+        ajaxObjectCreate.instance().onChange({
+            target: {
+                name: 'title',
+                value: 'bar',
+                dataset: {
+                    multiple: false,
+                    textarea: 'true'
+                }
+            }
+        })
         ajaxObjectCreate.instance().setDataIndices({
             columns: settings.columns
         })
@@ -497,7 +526,7 @@ describe('Editor throws exceptions on', () => {
                         }
                     }
                 })
-            });
+            })
             return p
         })
     })
@@ -526,7 +555,7 @@ describe('Editor throws exceptions on', () => {
         expect(ajaxObjectCreate.instance().btnClicked({
             persist: () => {
             }
-        })).toThrow();
+        })).toThrow()
     })
     
     it('edit  without rows', () => {
@@ -553,6 +582,6 @@ describe('Editor throws exceptions on', () => {
         expect(ajaxObjectCreate.instance().btnClicked({
             persist: () => {
             }
-        })).toThrow();
+        })).toThrow()
     })
 })

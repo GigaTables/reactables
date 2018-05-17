@@ -88,7 +88,7 @@ class Reactables extends Main {
         this.visibleCols = []
         this.sortableCols = []
         this.customColumns = []
-        this.progressBars = []
+        this.plugins = []
         this.lastTimeKeyup = (new Date()).getTime(), this.nowMillis = 0
         // these default sets will merge with users sets
         this.build()
@@ -103,7 +103,7 @@ class Reactables extends Main {
             this.setSortableCols(object)
             // visibility must be the last - it unsets search & sort if false
             this.setVisibleCols(object)
-            this.setProgressBars(object)
+            this.setPlugins(object)
         })
         columnOpts.forEach((object) => {
             this.setCustomColumns(object)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
 import ProgressBar from '../plugins/ProgressBar'
+import Pie from '../plugins/Pie'
 
 const CommonConstants = require('../CommonConstants')
 const EditorConstants = require('../EditorConstants')
@@ -83,8 +84,6 @@ class Column extends Component {
             editRow, // function
             minRow,
             maxRow,
-            children,
-            isProgressBar,
             footer
         } = this.props
         const {
@@ -158,16 +157,20 @@ class Column extends Component {
     getCellContent () {
         const {
             children,
-            isProgressBar,
-            isPie
+            plugins
         } = this.props
-        if (isProgressBar === true) {
-            // todo: flexible settings
-            return <ProgressBar
-                classname="progress_bar"
-                percent={children}
-                height={20}
-            />
+        if (plugins !== false && typeof plugins !== CommonConstants.UNDEFINED) {
+            if (plugins[CommonConstants.PLUGINS] === CommonConstants.PLUGINS_PROGRESS_BAR) {
+                // todo: flexible settings
+                return <ProgressBar
+                    classname="progress_bar"
+                    percent={children}
+                    {...plugins.pluginProps}
+                />
+            }
+            if (plugins[CommonConstants.PLUGINS] === CommonConstants.PLUGINS_PIE) {
+                return <Pie data={children} {...plugins.pluginProps}/>
+            }
         }
         
         return children

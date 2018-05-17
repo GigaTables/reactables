@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Reactables from './src/Reactables.jsx'
 import Header from './src/components/table/Header.js'
 import './main.css'
+
 let localData = require('./local_data')
 
 let editor = {
@@ -87,7 +88,7 @@ let editor = {
             type: 'file'
         }
     ]
-};
+}
 
 let settings = {
     struct: {
@@ -148,13 +149,31 @@ let settings = {
         },
         {
             data: 'field1',
-            plugins: 'progressbar'
+            plugins: 'progressbar',
+            pluginProps: {
+                height: 20
+            }
         },
         {
             data: 'field2',
             footer: 'avg'
         },
-        { data: 'field3', visible: false }
+        { data: 'field3', visible: false },
+        {
+            data: 'consumers',
+            plugins: 'pie',
+            pluginProps: {
+                // todo: change to dynamic children
+                data: [
+                    { value: 10, color: '#E38627' },
+                    { value: 15, color: '#C13C37' },
+                    { value: 20, color: '#6A2135' }
+                ],
+                ratio: 2,
+                startAngle: 17,
+                lineWidth: 32
+            }
+        }
     ],
     columnOpts: [
         {
@@ -195,20 +214,20 @@ let settings = {
             // },
             {
                 extended: 'editor_create', editor: editor, triggerAfter: (function () {
-                    console.log('after create')
-                }), triggerBefore: (function () {
-                    console.log('before create')
-                })
+                console.log('after create')
+            }), triggerBefore: (function () {
+                console.log('before create')
+            })
             },
             {
                 extended: 'editor_edit', editor: editor, triggerBefore: (function () {
-                    console.log('before edit')
-                })
+                console.log('before edit')
+            })
             },
             {
                 extended: 'editor_remove', editor: editor, triggerAfter: (function () {
-                    console.log('after del')
-                })
+                console.log('after del')
+            })
             }
         ],
         buttonsPosition: [ 'top', 'bottom' ],

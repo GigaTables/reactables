@@ -48,11 +48,10 @@ class Main extends Component {
         }
     }
 
-    setProgressBars(object) {
-        this.progressBars[object[CommonConstants.DATA]] = false;
-        if (typeof object[CommonConstants.PLUGINS] !== CommonConstants.UNDEFINED
-            && object[CommonConstants.PLUGINS] === CommonConstants.PROGRESS_BAR) {
-            this.progressBars[object[CommonConstants.DATA]] = true;
+    setPlugins(object) {
+        this.plugins[object[CommonConstants.DATA]] = false;
+        if (typeof object[CommonConstants.PLUGINS] !== CommonConstants.UNDEFINED) {
+            this.plugins[object[CommonConstants.DATA]] = object;
         }
     }
 
@@ -207,7 +206,7 @@ class Main extends Component {
                         editCell={this.editCell.bind(this)}
                         editorUpdate={this.editorUpdate.bind(this)}
                         cell={'' + objectIndex + idx}
-                        isProgressBar={this.progressBars[data]}
+                        plugins={this.plugins[data]}
                     >{content}</Column>);
                 }
             });

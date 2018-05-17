@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import ProgressBar from '../../src/components/table/ProgressBar.js'
+import ProgressBar from '../../src/components/plugins/ProgressBar.js'
 
 it('renders Select correctly', () => {
     const tree = renderer.create(

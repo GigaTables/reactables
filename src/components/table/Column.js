@@ -1,76 +1,76 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
-import ProgressBar from './ProgressBar';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames/bind'
+import ProgressBar from '../plugins/ProgressBar'
 
-const CommonConstants = require('../CommonConstants');
-const EditorConstants = require('../EditorConstants');
+const CommonConstants = require('../CommonConstants')
+const EditorConstants = require('../EditorConstants')
 
 class Column extends Component {
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate (nextProps) {
         const {
             gteRowId,
             count,
             selectedRows,
             dataIndex,
             editableCells,
-            children,
-        } = this.props;
+            children
+        } = this.props
         return editableCells === true
             || gteRowId !== nextProps.gteRowId
             || count !== nextProps.count
             || selectedRows.length !== nextProps.selectedRows.length
             || dataIndex !== nextProps.dataIndex
-            || children !== nextProps.children; // iff content of a column has been changed - re-render
+            || children !== nextProps.children // iff content of a column has been changed - re-render
     }
-
-    constructor(props) {
-        super(props);
+    
+    constructor (props) {
+        super(props)
         this.state = {
             dataIndices: {},
-            cellValue: props.children,
-        };
-        this.cell = props.cell;
+            cellValue: props.children
+        }
+        this.cell = props.cell
     }
-
-    componentDidUpdate() {
+    
+    componentDidUpdate () {
         if (typeof this.dataIn !== CommonConstants.UNDEFINED && this.dataIn !== null) {
-            this.dataIn.focus();
+            this.dataIn.focus()
         }
     }
-
-    changeCell(e) {
+    
+    changeCell (e) {
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
                 [e.target.dataset.index]: e.target.value
             }),
-            cellValue: e.target.value,
+            cellValue: e.target.value
         })
     }
-
-    btnClickedEnter(e) {
-        e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
-        const {editorUpdate, editor} = this.props;
-        const {dataIndices} = this.state;
-        let ajaxUrl = editor.ajax;
-        let dataResp = dataIndices;
+    
+    btnClickedEnter (e) {
+        e.persist() // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
+        const { editorUpdate, editor } = this.props
+        const { dataIndices } = this.state
+        let ajaxUrl = editor.ajax
+        let dataResp = dataIndices
         if (e.keyCode === CommonConstants.ENTER_KEY) {
             // fill-in id
             let payload = Object.assign({}, dataIndices, {
                 ['id']: parseInt(e.target.dataset.realid)
-            });
+            })
             fetch(ajaxUrl, {
                 method: EditorConstants.HTTP_METHOD_PUT,
                 body: JSON.stringify(payload)
             }).then(response => response.json()).then((data) => {
-                editorUpdate(e, dataResp);
-            });
+                editorUpdate(e, dataResp)
+            })
             // close cell
-            this.cell = 0;
+            this.cell = 0
         }
     }
-
-    getColumn() {
+    
+    getColumn () {
         const {
             gteRowId,
             count,
@@ -85,17 +85,17 @@ class Column extends Component {
             maxRow,
             children,
             isProgressBar,
-            footer,
-        } = this.props;
+            footer
+        } = this.props
         const {
-            cellValue,
-        } = this.state;
-
+            cellValue
+        } = this.state
+        
         if (editableCells === true && dataIndex === EditorConstants.EDITABLE_CELLS_INDEX) {
             let cellClasses = classNames({
                 normal_checkbox: true,
                 select_checkbox: (selectedRows.indexOf(count) !== -1)
-            });
+            })
             return (
                 <td
                     key={gteRowId}
@@ -119,18 +119,10 @@ class Column extends Component {
                 </td>
             )
         }
-        let cellContent = children;
-        if (isProgressBar === true) {
-            // todo: flexible settings
-            cellContent = <ProgressBar
-                classname="progress_bar"
-                percent={children}
-                height={20}
-            />
-        }
+        let cellContent = this.getCellContent()
         let tdClasses = classNames({
             td_footer_cell: footer
-        });
+        })
         return (
             <td
                 key={gteRowId}
@@ -142,30 +134,47 @@ class Column extends Component {
                 onClick={editCell}
                 className={tdClasses}
             >
-                {(editableCells === true && editedCell === this.cell) ?
-                    <input
-                        ref={(input) => {
-                            this.dataIn = input;
-                        }}
-                        id="edit_cell"
-                        type={EditorConstants.TYPE_TEXT}
-                        value={cellValue}
-                        data-realid={gteRowId}
-                        data-index={dataIndex}
-                        data-cell={cell}
-                        data-action="edit"
-                        data-rowid={count}
-                        onClick={editCell}
-                        onKeyUp={this.btnClickedEnter.bind(this)}
-                        onChange={(e) => {
-                            this.changeCell(e)
-                        }}/> : cellContent}
+                {(editableCells === true && editedCell === this.cell) ? <input
+                    ref={(input) => {
+                        this.dataIn = input
+                    }}
+                    id="edit_cell"
+                    type={EditorConstants.TYPE_TEXT}
+                    value={cellValue}
+                    data-realid={gteRowId}
+                    data-index={dataIndex}
+                    data-cell={cell}
+                    data-action="edit"
+                    data-rowid={count}
+                    onClick={editCell}
+                    onKeyUp={this.btnClickedEnter.bind(this)}
+                    onChange={(e) => {
+                        this.changeCell(e)
+                    }}/> : cellContent}
             </td>
         )
     }
-
-    render() {
-        return this.getColumn();
+    
+    getCellContent () {
+        const {
+            children,
+            isProgressBar,
+            isPie
+        } = this.props
+        if (isProgressBar === true) {
+            // todo: flexible settings
+            return <ProgressBar
+                classname="progress_bar"
+                percent={children}
+                height={20}
+            />
+        }
+        
+        return children
+    }
+    
+    render () {
+        return this.getColumn()
     }
 }
 
@@ -176,11 +185,11 @@ Column.propTypes = {
     selectedRows: PropTypes.array,
     dataIndex: PropTypes.string,
     editor: PropTypes.object,
-    editorUpdate: PropTypes.func,
-};
+    editorUpdate: PropTypes.func
+}
 
 Column.defaultProps = {
-    footer: false,
-};
+    footer: false
+}
 
 export default Column

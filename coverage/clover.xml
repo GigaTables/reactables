@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1526482432752" clover="3.2.0">
-  <project timestamp="1526482432752" name="All files">
+<coverage generated="1526489540657" clover="3.2.0">
+  <project timestamp="1526489540657" name="All files">
     <metrics statements="488" coveredstatements="463" conditionals="316" coveredconditionals="230" methods="89" coveredmethods="87" elements="893" coveredelements="780" complexity="0" loc="488" ncloc="488" packages="5" files="22" classes="22">
       <package name="components">
         <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
-        <file name="CommonConstants.js" path="/Users/arthurkushman/www/gigatables-react/src/components/CommonConstants.js">
+        <file name="CommonConstants.js" path="/Users/arthur/www/gigatables_react/src/components/CommonConstants.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="1" count="8" type="stmt"/>
         </file>
-        <file name="EditorConstants.js" path="/Users/arthurkushman/www/gigatables-react/src/components/EditorConstants.js">
+        <file name="EditorConstants.js" path="/Users/arthur/www/gigatables_react/src/components/EditorConstants.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="1" count="4" type="stmt"/>
         </file>
-        <file name="Exceptions.js" path="/Users/arthurkushman/www/gigatables-react/src/components/Exceptions.js">
+        <file name="Exceptions.js" path="/Users/arthur/www/gigatables_react/src/components/Exceptions.js">
           <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
           <line num="1" count="2" type="stmt"/>
           <line num="3" count="3" type="stmt"/>
@@ -21,21 +21,21 @@
           <line num="8" count="2" type="stmt"/>
           <line num="9" count="2" type="stmt"/>
         </file>
-        <file name="Helpers.js" path="/Users/arthurkushman/www/gigatables-react/src/components/Helpers.js">
+        <file name="Helpers.js" path="/Users/arthur/www/gigatables_react/src/components/Helpers.js">
           <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
           <line num="2" count="6" type="stmt"/>
           <line num="3" count="6" type="cond" truecount="1" falsecount="1"/>
           <line num="4" count="6" type="stmt"/>
           <line num="7" count="6" type="stmt"/>
         </file>
-        <file name="Lang.js" path="/Users/arthurkushman/www/gigatables-react/src/components/Lang.js">
+        <file name="Lang.js" path="/Users/arthur/www/gigatables_react/src/components/Lang.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="1" count="5" type="stmt"/>
         </file>
       </package>
       <package name="components.form">
         <metrics statements="260" coveredstatements="240" conditionals="160" coveredconditionals="120" methods="46" coveredmethods="45"/>
-        <file name="Button.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/Button.js">
+        <file name="Button.js" path="/Users/arthur/www/gigatables_react/src/components/form/Button.js">
           <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
           <line num="8" count="6" type="stmt"/>
           <line num="9" count="6" type="stmt"/>
@@ -47,7 +47,7 @@
           <line num="29" count="6" type="stmt"/>
           <line num="43" count="2" type="stmt"/>
         </file>
-        <file name="CSVLink.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/CSVLink.js">
+        <file name="CSVLink.js" path="/Users/arthur/www/gigatables_react/src/components/form/CSVLink.js">
           <metrics statements="29" coveredstatements="28" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="4"/>
           <line num="4" count="2" type="stmt"/>
           <line num="8" count="3" type="stmt"/>
@@ -79,7 +79,7 @@
           <line num="48" count="3" type="stmt"/>
           <line num="52" count="3" type="stmt"/>
         </file>
-        <file name="Editor.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/Editor.js">
+        <file name="Editor.js" path="/Users/arthur/www/gigatables_react/src/components/form/Editor.js">
           <metrics statements="222" coveredstatements="203" conditionals="144" coveredconditionals="108" methods="38" coveredmethods="37"/>
           <line num="17" count="1" type="stmt"/>
           <line num="18" count="1" type="stmt"/>
@@ -307,7 +307,7 @@
       </package>
       <package name="components.form.fields">
         <metrics statements="40" coveredstatements="40" conditionals="14" coveredconditionals="8" methods="8" coveredmethods="8"/>
-        <file name="CheckRadio.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/fields/CheckRadio.js">
+        <file name="CheckRadio.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/CheckRadio.js">
           <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
           <line num="15" count="1" type="stmt"/>
           <line num="17" count="1" type="stmt"/>
@@ -322,20 +322,20 @@
           <line num="39" count="1" type="stmt"/>
           <line num="48" count="1" type="stmt"/>
         </file>
-        <file name="HTML5Input.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/fields/HTML5Input.js">
+        <file name="HTML5Input.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/HTML5Input.js">
           <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
           <line num="14" count="1" type="stmt"/>
           <line num="15" count="1" type="stmt"/>
           <line num="37" count="1" type="stmt"/>
         </file>
-        <file name="Input.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/fields/Input.js">
+        <file name="Input.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/Input.js">
           <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
           <line num="4" count="1" type="stmt"/>
           <line num="18" count="2" type="stmt"/>
           <line num="19" count="2" type="stmt"/>
           <line num="39" count="1" type="stmt"/>
         </file>
-        <file name="Select.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/fields/Select.js">
+        <file name="Select.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/Select.js">
           <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
           <line num="15" count="2" type="stmt"/>
           <line num="17" count="2" type="stmt"/>
@@ -349,13 +349,13 @@
           <line num="29" count="2" type="stmt"/>
           <line num="48" count="2" type="stmt"/>
         </file>
-        <file name="TextArea.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/fields/TextArea.js">
+        <file name="TextArea.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/TextArea.js">
           <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
           <line num="16" count="2" type="stmt"/>
           <line num="17" count="2" type="stmt"/>
           <line num="39" count="2" type="stmt"/>
         </file>
-        <file name="TextEditor.js" path="/Users/arthurkushman/www/gigatables-react/src/components/form/fields/TextEditor.js">
+        <file name="TextEditor.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/TextEditor.js">
           <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
           <line num="7" count="3" type="stmt"/>
           <line num="8" count="3" type="stmt"/>
@@ -368,7 +368,7 @@
       </package>
       <package name="components.table">
         <metrics statements="73" coveredstatements="70" conditionals="76" coveredconditionals="47" methods="19" coveredmethods="18"/>
-        <file name="Column.js" path="/Users/arthurkushman/www/gigatables-react/src/components/table/Column.js">
+        <file name="Column.js" path="/Users/arthur/www/gigatables_react/src/components/table/Column.js">
           <metrics statements="36" coveredstatements="34" conditionals="22" coveredconditionals="19" methods="11" coveredmethods="10"/>
           <line num="6" count="2" type="stmt"/>
           <line num="7" count="2" type="stmt"/>
@@ -407,7 +407,7 @@
           <line num="172" count="2" type="stmt"/>
           <line num="182" count="2" type="stmt"/>
         </file>
-        <file name="Header.js" path="/Users/arthurkushman/www/gigatables-react/src/components/table/Header.js">
+        <file name="Header.js" path="/Users/arthur/www/gigatables_react/src/components/table/Header.js">
           <metrics statements="23" coveredstatements="22" conditionals="24" coveredconditionals="13" methods="5" coveredmethods="5"/>
           <line num="6" count="1" type="stmt"/>
           <line num="10" count="2" type="stmt"/>
@@ -433,7 +433,7 @@
           <line num="93" count="2" type="stmt"/>
           <line num="97" count="1" type="stmt"/>
         </file>
-        <file name="ProgressBar.js" path="/Users/arthurkushman/www/gigatables-react/src/components/table/ProgressBar.js">
+        <file name="ProgressBar.js" path="/Users/arthur/www/gigatables_react/src/components/table/ProgressBar.js">
           <metrics statements="8" coveredstatements="8" conditionals="20" coveredconditionals="12" methods="1" coveredmethods="1"/>
           <line num="6" count="3" type="stmt"/>
           <line num="14" count="2" type="stmt"/>
@@ -444,7 +444,7 @@
           <line num="44" count="3" type="stmt"/>
           <line num="50" count="3" type="stmt"/>
         </file>
-        <file name="Row.js" path="/Users/arthurkushman/www/gigatables-react/src/components/table/Row.js">
+        <file name="Row.js" path="/Users/arthur/www/gigatables_react/src/components/table/Row.js">
           <metrics statements="6" coveredstatements="6" conditionals="10" coveredconditionals="3" methods="2" coveredmethods="2"/>
           <line num="14" count="1" type="stmt"/>
           <line num="15" count="1" type="cond" truecount="2" falsecount="6"/>
@@ -456,7 +456,7 @@
       </package>
       <package name="components.tools">
         <metrics statements="102" coveredstatements="100" conditionals="64" coveredconditionals="54" methods="13" coveredmethods="13"/>
-        <file name="PagesSelector.js" path="/Users/arthurkushman/www/gigatables-react/src/components/tools/PagesSelector.js">
+        <file name="PagesSelector.js" path="/Users/arthur/www/gigatables_react/src/components/tools/PagesSelector.js">
           <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="4"/>
           <line num="5" count="2" type="stmt"/>
           <line num="9" count="1" type="cond" truecount="1" falsecount="1"/>
@@ -467,7 +467,7 @@
           <line num="30" count="12" type="stmt"/>
           <line num="41" count="2" type="stmt"/>
         </file>
-        <file name="Pagination.js" path="/Users/arthurkushman/www/gigatables-react/src/components/tools/Pagination.js">
+        <file name="Pagination.js" path="/Users/arthur/www/gigatables_react/src/components/tools/Pagination.js">
           <metrics statements="56" coveredstatements="54" conditionals="41" coveredconditionals="34" methods="2" coveredmethods="2"/>
           <line num="6" count="1" type="stmt"/>
           <line num="7" count="1" type="stmt"/>
@@ -526,7 +526,7 @@
           <line num="122" count="7" type="stmt"/>
           <line num="138" count="1" type="stmt"/>
         </file>
-        <file name="Search.js" path="/Users/arthurkushman/www/gigatables-react/src/components/tools/Search.js">
+        <file name="Search.js" path="/Users/arthur/www/gigatables_react/src/components/tools/Search.js">
           <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
           <line num="5" count="2" type="stmt"/>
           <line num="9" count="1" type="stmt"/>
@@ -535,7 +535,7 @@
           <line num="21" count="3" type="stmt"/>
           <line num="38" count="2" type="stmt"/>
         </file>
-        <file name="Tools.js" path="/Users/arthurkushman/www/gigatables-react/src/components/tools/Tools.js">
+        <file name="Tools.js" path="/Users/arthur/www/gigatables_react/src/components/tools/Tools.js">
           <metrics statements="32" coveredstatements="32" conditionals="21" coveredconditionals="19" methods="5" coveredmethods="5"/>
           <line num="9" count="1" type="stmt"/>
           <line num="10" count="1" type="stmt"/>

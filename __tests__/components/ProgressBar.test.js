@@ -2,7 +2,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import ProgressBar from '../../src/components/plugins/ProgressBar.js'
 
-it('renders Select correctly', () => {
+it('renders ProgressBar correctly', () => {
     const tree = renderer.create(
         <ProgressBar
             classname="progress_bar"
@@ -11,4 +11,4 @@ it('renders Select correctly', () => {
         />
     ).toJSON()
     expect(tree).toMatchSnapshot()
-});
+})

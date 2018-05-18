@@ -130,16 +130,34 @@ ReactDOM.render(
 If u run GT from scratch - don't forget to install dependencies, such as:
 ```json
   "dependencies": {
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",  
+    "classnames": "^2.2.5",
+    "css-loader": "^0.26.1",
+    "expect": "^1.20.2",
+    "file-loader": "^0.10.0",
+    "hoek": "^5.0.3",
+    "lodash": "4.17.4",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",   
+    "react-onclickoutside": "^6.6.2",   
+    "resolve-url": "^0.2.1",
+    "style-loader": "^0.13.1",
+    "superagent": "^3.5.2",
+    "url-loader": "^0.5.7",
+    // for plugins
+    "react-minimal-pie-chart": "^3.0.2",
+    "react-rte": "^0.15.0",
+    // dev deps  
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-react": "^6.24.1",
-    "gigatables-react": "^2.3.6",   
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",    
+    "gigatables-react": "^2.3.6",       
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14",
-    "webpack-dev-server": "^3.1.3"
+    "webpack-dev-server": "^3.1.3"       
   },
 ``` 
 
@@ -448,13 +466,59 @@ For instance - to edit text with HTML tags (aka WYSIWYG) and then save it in DB 
 Progress bar plugin:
 
 ```js
-    ...
-    data: "statistics",
-    plugins: "progressbar",
-    ...
+{
+    data: 'field1',
+    plugins: 'progressbar',
+    pluginProps: {
+        height: 20
+    }
+}
 ```
 this will build 5 colored (left-to-right) progress bar for every row in the column, with percent number.
 Protected from `null` and `negative` numbers as well as `more then 100`.
+
+PieChart plugin:
+
+```js
+{
+    data: 'consumers',
+    plugins: 'pie',
+    pluginProps: {
+        ratio: 2,
+        startAngle: 3,
+        rounded: true,
+        animate: true,
+        radius: 33,
+    }
+}
+```
+and the data, as in progress bar plugin, comes in via `children` prop intuitively, 
+thus the only thing you need is to pass them through json: 
+```js
+{
+    "rows": [
+        {
+            ...
+            "statistics": 89 // for progress bar
+            ...
+            "consumers": [ // for pie chart
+                {
+                    "value": 32,
+                    "color": "#E38627"
+                },
+                {
+                    "value": 19,
+                    "color": "#C13C37"
+                },
+                {
+                    "value": 68,
+                    "color": "#6A2135"
+                }
+            ]
+        } 
+    ]
+}
+```
 
 ## Headers
 In some work-flows u may need to send several useful headers, ex. with secret key for api, 

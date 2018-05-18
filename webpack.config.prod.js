@@ -56,7 +56,8 @@ const config = {
         'react-rte': 'umd react-rte',
         'lodash': 'umd lodash',
         'hoek': 'umd hoek',
-        'superagent': 'umd superagent'
+        'superagent': 'umd superagent',
+        'react-minimal-pie-chart': 'umd react-minimal-pie-chart'
     }
 };
 module.exports = config;

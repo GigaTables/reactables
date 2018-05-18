@@ -169,7 +169,7 @@ class Column extends Component {
                 />
             }
             if (plugins[CommonConstants.PLUGINS] === CommonConstants.PLUGINS_PIE) {
-                return <Pie data={children} {...plugins.pluginProps}/>
+                return <Pie data={children} pluginProps={plugins.pluginProps}/>
             }
         }
         

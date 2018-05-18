@@ -163,15 +163,11 @@ let settings = {
             data: 'consumers',
             plugins: 'pie',
             pluginProps: {
-                // todo: change to dynamic children
-                data: [
-                    { value: 10, color: '#E38627' },
-                    { value: 15, color: '#C13C37' },
-                    { value: 20, color: '#6A2135' }
-                ],
-                ratio: 2,
-                startAngle: 17,
-                lineWidth: 32
+                // ratio: 2,
+                // startAngle: 3,
+                // rounded: true,
+                animate: true,
+                // radius: 33,
             }
         }
     ],
@@ -245,6 +241,7 @@ ReactDOM.render(
         <Header data="field2">Field123 but data from field2</Header>
         <Header data="field1">Field1</Header>
         <Header data="field3">Field3 invisible</Header>
-        <Header>Field3 invisible</Header>
+        <Header data="consumers">Consumers</Header>
+        <Header>Field4 invisible</Header>
     </Reactables>,
     document.getElementById('app'))

@@ -140,8 +140,7 @@ If u run GT from scratch - don't forget to install dependencies, such as:
     "lodash": "4.17.4",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1",   
-    "react-onclickoutside": "^6.6.2",   
+    "react-dom": "^16.1.1",      
     "resolve-url": "^0.2.1",
     "style-loader": "^0.13.1",
     "superagent": "^3.5.2",
@@ -149,6 +148,7 @@ If u run GT from scratch - don't forget to install dependencies, such as:
     // for plugins
     "react-minimal-pie-chart": "^3.0.2",
     "react-rte": "^0.15.0",
+    "react-trend": "^1.2.4",
     // dev deps  
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
@@ -492,6 +492,22 @@ PieChart plugin:
     }
 }
 ```
+
+Trend plugin:
+```js
+{
+    data: 'consumers_trend',
+    plugins: 'trend',
+    pluginProps: {
+        autoDraw: true,
+        autoDrawDuration: 2000,
+        autoDrawEasing: 'ease-in',
+        strokeWidth: 15,
+        padding: 18
+    }
+}
+```
+
 and the data, as in progress bar plugin, comes in via `children` prop intuitively, 
 thus the only thing you need is to pass them through json: 
 ```js
@@ -499,7 +515,7 @@ thus the only thing you need is to pass them through json:
     "rows": [
         {
             ...
-            "statistics": 89 // for progress bar
+            "statistics": 89, // for progress bar
             ...
             "consumers": [ // for pie chart
                 {
@@ -514,11 +530,30 @@ thus the only thing you need is to pass them through json:
                     "value": 68,
                     "color": "#6A2135"
                 }
-            ]
-        } 
+            ],
+            ... 
+            "consumers_trend": [0, 10, 5, 22, 3.6, 11]           
+        }
     ]
 }
 ```
+
+Plugins integration in GT is flexible in terms of versatility with which providers/vendors may supply props, e.g. 
+some plugin have prop structure like:
+```js
+strokeWidth: 123,
+strokeOpacity: 0.75,
+strokeLinejoin: true
+```
+then developers team may change it to e.g:  
+```js
+stroke: {
+    width: 123,
+    opacity: 0.75,
+    linejoin: true
+}
+```
+you can just place a new structure to `pluginProps`, update the plugin and proceed using new features of updated plugins.
 
 ## Headers
 In some work-flows u may need to send several useful headers, ex. with secret key for api, 

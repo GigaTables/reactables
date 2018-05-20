@@ -59,6 +59,7 @@ module.exports = {
     PLUGINS: 'plugins',
     PLUGINS_PROGRESS_BAR: 'progressbar',
     PLUGINS_PIE: 'pie',
+    PLUGINS_TRENDY: 'trend',
     // footer settings
     FOOTER: 'footer',
     FOOTER_AVG: 'avg',

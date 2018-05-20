@@ -1,0 +1,43 @@
+exports[`test renders PieChart correctly 1`] = `
+<div
+  className={undefined}
+  style={undefined}>
+  <svg
+    height="100%"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+    viewBox="0 0 100 100"
+    width="100%">
+    <path
+      d="M 95.75 50 A 45.75 45.75 0 0 1 72.875 89.62066222313807"
+      fill="none"
+      stroke="#E38627"
+      strokeDasharray={undefined}
+      strokeDashoffset={undefined}
+      strokeLinecap={undefined}
+      strokeWidth={8.5}
+      style={undefined} />
+    <path
+      d="M 72.875 89.62066222313807 A 45.75 45.75 0 0 1 4.25 50.00000000000001"
+      fill="none"
+      stroke="#C13C37"
+      strokeDasharray={undefined}
+      strokeDashoffset={undefined}
+      strokeLinecap={undefined}
+      strokeWidth={8.5}
+      style={undefined} />
+    <path
+      d="M 4.25 50.00000000000001 A 45.75 45.75 0 0 1 95.75 49.999999999999986"
+      fill="none"
+      stroke="#6A2135"
+      strokeDasharray={undefined}
+      strokeDashoffset={undefined}
+      strokeLinecap={undefined}
+      strokeWidth={8.5}
+      style={undefined} />
+  </svg>
+</div>
+`;

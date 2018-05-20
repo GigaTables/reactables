@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Pie from '../../src/components/plugins/Pie.js'
+import Pie from '../../../src/components/plugins/Pie.js'
 
 it('renders PieChart correctly', () => {
     const tree = renderer.create(

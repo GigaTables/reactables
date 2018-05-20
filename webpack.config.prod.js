@@ -57,7 +57,8 @@ const config = {
         'lodash': 'umd lodash',
         'hoek': 'umd hoek',
         'superagent': 'umd superagent',
-        'react-minimal-pie-chart': 'umd react-minimal-pie-chart'
+        'react-minimal-pie-chart': 'umd react-minimal-pie-chart',
+        'react-trend': 'umd react-trend'
     }
 };
 module.exports = config;

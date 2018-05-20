@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
 import ProgressBar from '../plugins/ProgressBar'
 import Pie from '../plugins/Pie'
+import Trendy from '../plugins/Trendy'
 
 const CommonConstants = require('../CommonConstants')
 const EditorConstants = require('../EditorConstants')
@@ -160,16 +161,17 @@ class Column extends Component {
             plugins
         } = this.props
         if (plugins !== false && typeof plugins !== CommonConstants.UNDEFINED) {
-            if (plugins[CommonConstants.PLUGINS] === CommonConstants.PLUGINS_PROGRESS_BAR) {
-                // todo: flexible settings
-                return <ProgressBar
-                    classname="progress_bar"
-                    percent={children}
-                    {...plugins.pluginProps}
-                />
-            }
-            if (plugins[CommonConstants.PLUGINS] === CommonConstants.PLUGINS_PIE) {
-                return <Pie data={children} pluginProps={plugins.pluginProps}/>
+            switch (plugins[CommonConstants.PLUGINS]) {
+                case CommonConstants.PLUGINS_PROGRESS_BAR:
+                    return <ProgressBar
+                        classname="progress_bar"
+                        percent={children}
+                        {...plugins.pluginProps}
+                    />
+                case CommonConstants.PLUGINS_PIE:
+                    return <Pie data={children} pluginProps={plugins.pluginProps}/>
+                case CommonConstants.PLUGINS_TRENDY:
+                    return <Trendy data={children} pluginProps={plugins.pluginProps}/>
             }
         }
         

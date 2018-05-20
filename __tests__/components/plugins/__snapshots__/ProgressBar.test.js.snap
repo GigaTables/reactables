@@ -1,0 +1,22 @@
+exports[`test renders ProgressBar correctly 1`] = `
+<div
+  className="progress_bar_container">
+  <div
+    className="progress_bar progress_bar_color_red"
+    data-percent={12}
+    style={
+      Object {
+        "height": 20,
+        "width": "12%",
+      }
+    }>
+    <div
+      className="progress_bar_percent">
+      <div
+        className="progress_bar_percent_child">
+        12%
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,20 @@
+exports[`test renders Trendy correctly 1`] = `
+<svg
+  height="25%"
+  stroke="black"
+  strokeWidth={1}
+  viewBox="0 0 300 75"
+  width="100%">
+  <path
+    d="M 8,67
+  L 64.8,40.18181818181819
+  L 121.6,53.59090909090909
+  L 178.4,8
+  L 235.2,57.345454545454544
+  L 292,37.5
+  "
+    fill="none"
+    id="react-trend-3354997398145623"
+    stroke={undefined} />
+</svg>
+`;

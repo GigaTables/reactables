@@ -166,8 +166,19 @@ let settings = {
                 // ratio: 2,
                 // startAngle: 3,
                 // rounded: true,
-                animate: true,
+                animate: true
                 // radius: 33,
+            }
+        },
+        {
+            data: 'consumers_trend',
+            plugins: 'trend',
+            pluginProps: {
+                autoDraw: true,
+                autoDrawDuration: 2000,
+                autoDrawEasing: 'ease-in',
+                strokeWidth: 15,
+                padding: 18
             }
         }
     ],
@@ -210,20 +221,20 @@ let settings = {
             // },
             {
                 extended: 'editor_create', editor: editor, triggerAfter: (function () {
-                console.log('after create')
-            }), triggerBefore: (function () {
-                console.log('before create')
-            })
+                    console.log('after create')
+                }), triggerBefore: (function () {
+                    console.log('before create')
+                })
             },
             {
                 extended: 'editor_edit', editor: editor, triggerBefore: (function () {
-                console.log('before edit')
-            })
+                    console.log('before edit')
+                })
             },
             {
                 extended: 'editor_remove', editor: editor, triggerAfter: (function () {
-                console.log('after del')
-            })
+                    console.log('after del')
+                })
             }
         ],
         buttonsPosition: [ 'top', 'bottom' ],
@@ -242,6 +253,7 @@ ReactDOM.render(
         <Header data="field1">Field1</Header>
         <Header data="field3">Field3 invisible</Header>
         <Header data="consumers">Consumers</Header>
+        <Header data="consumers_trend">Consumers trend</Header>
         <Header>Field4 invisible</Header>
     </Reactables>,
     document.getElementById('app'))

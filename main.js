@@ -78,6 +78,26 @@ let editor = {
             fieldsetClose: true
         },
         {
+            label: 'Customers',
+            name: 'consumers_trend',
+            type: 'slider',
+            plugins: 'rc-slider',
+            pluginProps: {
+                min: 0,
+                max: 20
+            }
+        },
+        {
+            label: 'Customers range',
+            name: 'field2',
+            type: 'range',
+            plugins: 'rc-range',
+            pluginProps: {
+                min: 0,
+                max: 20
+            }
+        },
+        {
             label: 'Date Time:',
             name: 'date',
             type: 'date'
@@ -221,20 +241,20 @@ let settings = {
             // },
             {
                 extended: 'editor_create', editor: editor, triggerAfter: (function () {
-                    console.log('after create')
-                }), triggerBefore: (function () {
-                    console.log('before create')
-                })
+                console.log('after create')
+            }), triggerBefore: (function () {
+                console.log('before create')
+            })
             },
             {
                 extended: 'editor_edit', editor: editor, triggerBefore: (function () {
-                    console.log('before edit')
-                })
+                console.log('before edit')
+            })
             },
             {
                 extended: 'editor_remove', editor: editor, triggerAfter: (function () {
-                    console.log('after del')
-                })
+                console.log('after del')
+            })
             }
         ],
         buttonsPosition: [ 'top', 'bottom' ],

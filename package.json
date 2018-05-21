@@ -20,7 +20,9 @@
     "resolve-url": "^0.2.1",
     "style-loader": "^0.13.1",
     "superagent": "^3.5.2",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "rc-slider": "^8.6.1",
+    "rc-tooltip": "latest"
   },
   "devDependencies": {
     "babel": "^6.23.0",

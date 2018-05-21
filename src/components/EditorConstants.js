@@ -20,6 +20,7 @@ module.exports = {
     TYPE_URL: 'url',
     TYPE_MONTH: 'month',
     TYPE_WEEK: 'week',
+    TYPE_SLIDER: 'slider',
     // actions
     ACTION_CREATE: 'create',
     ACTION_EDIT: 'edit',
@@ -40,4 +41,6 @@ module.exports = {
 
     EDITABLE_CELLS_INDEX: 'editable-cells',
     PLUGINS_RTE: 'rte',
+    PLUGINS_RC_SLIDER: 'rc-slider',
+    PLUGINS_RC_RANGE: 'rc-slider',
 };

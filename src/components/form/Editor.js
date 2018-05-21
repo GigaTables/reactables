@@ -13,6 +13,8 @@ import TextArea from "./fields/TextArea";
 import Select from "./fields/Select";
 import CheckRadio from "./fields/CheckRadio";
 import TextEditor from "./fields/TextEditor";
+import RcSlider from '../plugins/RcSlider'
+import RcRange from '../plugins/RcRange'
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -203,7 +205,11 @@ class Editor extends Component {
     }
 
     getFieldByType(index, object) {
-        const {dataIndices, setMultipleText} = this.state;
+        const {
+            dataIndices,
+            setMultipleText,
+            pluginProps
+        } = this.state;
         const {action, fieldsEdit} = this.props;
         const isMultiple = (Object.keys(fieldsEdit).length > 1);
 
@@ -267,7 +273,8 @@ class Editor extends Component {
             case EditorConstants.TYPE_DATE:
             case EditorConstants.TYPE_DATETIME:
             case EditorConstants.TYPE_NUMBER:
-            case EditorConstants.TYPE_RANGE:
+                // todo: combine std range with rc-range plugin
+            // case EditorConstants.TYPE_RANGE:
             case EditorConstants.TYPE_SEARCH:
             case EditorConstants.TYPE_TIME:
             case EditorConstants.TYPE_TEL:
@@ -357,6 +364,30 @@ class Editor extends Component {
                     label={fieldLabel}
                     value={fieldValue}
                     objectValues={object.values}
+                />;
+                break;
+            case EditorConstants.TYPE_SLIDER:
+                htmlFields[i] = <RcSlider
+                    key={i}
+                    onChange={this.onChange.bind(this)}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    value={fieldValue}
+                    pluginProps={pluginProps}
+                />;
+                break;
+            case EditorConstants.TYPE_RANGE:
+                htmlFields[i] = <RcRange
+                    key={i}
+                    onChange={this.onChange.bind(this)}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}
+                    label={fieldLabel}
+                    value={fieldValue}
+                    pluginProps={pluginProps}
                 />;
                 break;
         }
@@ -608,6 +639,10 @@ Editor.propTYpes = {
     popupButton: PropTypes.string.isRequired,
     editorUpdate: PropTypes.func.isRequired,
     selectedIds: PropTypes.array.isRequired,
+};
+
+Editor.defaultProps = {
+    pluginProps: {}
 };
 
 export default Editor

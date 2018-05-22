@@ -11,6 +11,8 @@
     "hoek": "^5.0.3",
     "lodash": "4.17.4",
     "prop-types": "^15.6.0",
+    "rc-slider": "^8.6.1",
+    "rc-tooltip": "^3.7.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-minimal-pie-chart": "^3.0.2",
@@ -20,9 +22,7 @@
     "resolve-url": "^0.2.1",
     "style-loader": "^0.13.1",
     "superagent": "^3.5.2",
-    "url-loader": "^0.5.7",
-    "rc-slider": "^8.6.1",
-    "rc-tooltip": "latest"
+    "url-loader": "^0.5.7"
   },
   "devDependencies": {
     "babel": "^6.23.0",

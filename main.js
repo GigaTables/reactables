@@ -78,25 +78,25 @@ let editor = {
             fieldsetClose: true
         },
         {
-            label: 'Customers',
-            name: 'consumers_trend',
+            label: 'Progress',
+            name: 'field1',
             type: 'slider',
             plugins: 'rc-slider',
             pluginProps: {
                 min: 0,
-                max: 20
+                max: 100
             }
         },
-        {
-            label: 'Customers range',
-            name: 'field2',
-            type: 'range',
-            plugins: 'rc-range',
-            pluginProps: {
-                min: 0,
-                max: 20
-            }
-        },
+        // {
+        //     label: 'Customers range',
+        //     name: 'field2',
+        //     type: 'range',
+        //     plugins: 'rc-range',
+        //     pluginProps: {
+        //         min: 0,
+        //         max: 20
+        //     }
+        // },
         {
             label: 'Date Time:',
             name: 'date',

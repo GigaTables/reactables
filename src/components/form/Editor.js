@@ -1,279 +1,277 @@
-"use strict";
+'use strict'
 
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {DataException, EditorException} from '../Exceptions';
-import {t} from "../Helpers";
-import editorStyles from '../../css/editor.css';
-import classNames from 'classnames/bind';
-import superagent from 'superagent';
-import Input from "./fields/Input";
-import HTML5Input from "./fields/HTML5Input";
-import TextArea from "./fields/TextArea";
-import Select from "./fields/Select";
-import CheckRadio from "./fields/CheckRadio";
-import TextEditor from "./fields/TextEditor";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { DataException, EditorException } from '../Exceptions'
+import { t, formElement } from '../Helpers'
+import editorStyles from '../../css/editor.css'
+import classNames from 'classnames/bind'
+import superagent from 'superagent'
+import Input from './fields/Input'
+import HTML5Input from './fields/HTML5Input'
+import TextArea from './fields/TextArea'
+import Select from './fields/Select'
+import CheckRadio from './fields/CheckRadio'
+import TextEditor from './fields/TextEditor'
 import RcSlider from '../plugins/RcSlider'
 import RcRange from '../plugins/RcRange'
+import FormField from './FormField'
 
-const CommonConstants = require('../CommonConstants');
-const EditorConstants = require('../EditorConstants');
-const Lang = require('../Lang');
-const loAssign = require('lodash/assign');
+const CommonConstants = require('../CommonConstants')
+const EditorConstants = require('../EditorConstants')
+const Lang = require('../Lang')
+const loAssign = require('lodash/assign')
 
 class Editor extends Component {
-    constructor(props) {
-        super(props);
+    constructor (props) {
+        super(props)
         if (typeof props.editor.fields === CommonConstants.UNDEFINED) {
-            throw new EditorException('You should define "fields" option.');
+            throw new EditorException('You should define "fields" option.')
         }
         if (props.editor.fields.length === 0) {
-            throw new EditorException('You should define at least one field in "fields" option.');
+            throw new EditorException('You should define at least one field in "fields" option.')
         }
-        this.lang = Lang[props.lang];
+        this.lang = Lang[ props.lang ]
         this.state = {
             dataIndices: {},
             popup_title: this.lang.gte_editor_popupheader_create,
             popup_button: this.lang.gte_editor_sendbtn_create,
             setMultipleText: 0,
-            isTextArea: false,
-        };
-        this.setFields(props);
-        this.setDataIndices(props);
-        this.fieldsetOpen = 0;
-        this.fieldsetClose = 0;
-        this.fieldsetLegend = '';
-        this.filesInput = {};
+            isTextArea: false
+        }
+        this.setFields(props)
+        this.setDataIndices(props)
+        this.fieldsetOpen = 0
+        this.fieldsetClose = 0
+        this.fieldsetLegend = ''
+        this.filesInput = {}
     }
-
-    setDataIndices(props) {
-        let cols = props.columns;
-        this.dataIndices = [];
+    
+    setDataIndices (props) {
+        let cols = props.columns
+        this.dataIndices = []
         cols.forEach((column, index) => {
-            this.dataIndices[column.name] = '';
-        });
+            this.dataIndices[ column.name ] = ''
+        })
     }
-
-    setFields(props) {
-        let fields = [];
+    
+    setFields (props) {
+        let fields = []
         if (props.action === EditorConstants.ACTION_CREATE) {
-            fields = this.setCreateFields(props.editor.fields);
+            fields = this.setCreateFields(props.editor.fields)
         } else if (props.action === EditorConstants.ACTION_EDIT) {
-            fields = this.setEditFields(props.editor.fields);
+            fields = this.setEditFields(props.editor.fields)
         } else if (props.action === EditorConstants.ACTION_DELETE) {
-            fields = this.setDeleteFields(props.selectedRows);
+            fields = this.setDeleteFields(props.selectedRows)
         }
-        this.fields = fields;
+        this.fields = fields
     }
-
-    setCreateFields(editorFields) {
-        let fields = [];
+    
+    setCreateFields (editorFields) {
+        let fields = []
         editorFields.forEach((object, index) => {
-            this.setFieldsets(index, object);
-            fields[index] = this.getFieldByType(index, object);
-        });
+            this.setFieldsets(index, object)
+            fields[ index ] = this.getFieldByType(index, object)
+        })
         if (this.fieldsetClose > 0) {
-            fields = this.setFieldsetFields(fields);
+            fields = this.setFieldsetFields(fields)
         }
-        return fields;
+        return fields
     }
-
-    setEditFields(editorFields) {
-        let fields = [];
+    
+    setEditFields (editorFields) {
+        let fields = []
         editorFields.forEach((object, index) => {
-            this.setFieldsets(index, object);
-            fields[index] = this.getFieldByType(index, object);
-        });
+            this.setFieldsets(index, object)
+            fields[ index ] = this.getFieldByType(index, object)
+        })
         if (this.fieldsetClose > 0) {
-            fields = this.setFieldsetFields(fields);
+            fields = this.setFieldsetFields(fields)
         }
-        return fields;
+        return fields
     }
-
-    setFieldsets(index, object) {
+    
+    setFieldsets (index, object) {
         if (typeof object.fieldsetOpen !== CommonConstants.UNDEFINED) {
             if (typeof object.legend === CommonConstants.UNDEFINED) {
-                throw new EditorException('the "legend" property must be specified within fieldsetOpen');
+                throw new EditorException('the "legend" property must be specified within fieldsetOpen')
             }
-            this.fieldsetOpen = index;
-            this.fieldsetLegend = object.legend;
+            this.fieldsetOpen = index
+            this.fieldsetLegend = object.legend
         }
         if (typeof object.fieldsetClose !== CommonConstants.UNDEFINED) {
-            this.fieldsetClose = index;
+            this.fieldsetClose = index
         }
     }
-
-    setFieldsetFields(fields) {
-        let fieldsInSets = [];
+    
+    setFieldsetFields (fields) {
+        let fieldsInSets = []
         fields.forEach((object, index) => {
             if (index >= this.fieldsetOpen && index <= this.fieldsetClose) {
-                fieldsInSets[index] = object;
+                fieldsInSets[ index ] = object
             }
-        });
-        let reFields = [];
-        reFields.push(fields.slice(0, this.fieldsetOpen));
+        })
+        let reFields = []
+        reFields.push(fields.slice(0, this.fieldsetOpen))
         reFields.push(<div key={0} className="gte_editor_fields">
             <fieldset>
                 <legend>{this.fieldsetLegend}</legend>
                 {fieldsInSets}
             </fieldset>
-        </div>);
-        reFields.push(fields.slice(this.fieldsetClose + 1));
-        return reFields;
+        </div>)
+        reFields.push(fields.slice(this.fieldsetClose + 1))
+        return reFields
     }
-
-    setDeleteFields(items) {
-        let fields = [], lastId = 0;
-        this.state.dataIndices = this.props.selectedIds;
+    
+    setDeleteFields (items) {
+        let fields = [], lastId = 0
+        this.state.dataIndices = this.props.selectedIds
         this.props.selectedIds.forEach((object, index) => {
-            fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>;
-            lastId = index;
-        });
-        let delMsg = t(this.lang.gte_editor_delete_popup, {"rows": items.length});
-        fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>);
-        return fields;
+            fields[ index ] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>
+            lastId = index
+        })
+        let delMsg = t(this.lang.gte_editor_delete_popup, { 'rows': items.length })
+        fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>)
+        return fields
     }
-
-    onFocus(e) {
-        const {setMultipleText} = this.state;
-        let isTextArea = false;
+    
+    onFocus (e) {
+        const { setMultipleText } = this.state
+        let isTextArea = false
         if (typeof e.target.dataset.multiple !== CommonConstants.UNDEFINED
             && true === e.target.dataset.multiple && setMultipleText === 0) {
-            document.querySelectorAll('input').value = '';
+            document.querySelectorAll('input').value = ''
         }
         if ((typeof e.target.dataset.textarea !== CommonConstants.UNDEFINED
                 && e.target.dataset.textarea === CommonConstants.STR_TRUE)
             // for RTE focus check
-            || (typeof e.target.children[0] !== CommonConstants.UNDEFINED
-                && typeof e.target.children[0].getAttribute('data-contents') !== CommonConstants.UNDEFINED
-                && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
-            isTextArea = true;
+            || (typeof e.target.children[ 0 ] !== CommonConstants.UNDEFINED
+                && typeof e.target.children[ 0 ].getAttribute('data-contents') !== CommonConstants.UNDEFINED
+                && e.target.children[ 0 ].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
+            isTextArea = true
         }
         this.setState({
             setMultipleText: 1,
-            isTextArea: isTextArea,
-        });
+            isTextArea: isTextArea
+        })
     }
-
-    onChange(e) {
-        const {setMultipleText} = this.state;
-        let isMultiple = e.target.dataset.multiple;
-        let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value;
-
+    
+    onChange (e) {
+        const { setMultipleText } = this.state
+        let isMultiple = e.target.dataset.multiple
+        let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value
+        
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
-                [e.target.name]: val
+                [ e.target.name ]: val
             }),
-            setMultipleText: 1,
-        });
+            setMultipleText: 1
+        })
     }
-
+    
     /**
      * Uploads files via AJAX with FormData object
      */
-    fileUpload() {
+    fileUpload () {
         if (typeof this.filesInput.files !== CommonConstants.UNDEFINED) {
-            const {ajaxFiles} = this.props.editor;
-            let formData = new FormData();
-            const files = this.filesInput.files;
+            const { ajaxFiles } = this.props.editor
+            let formData = new FormData()
+            const files = this.filesInput.files
             for (let key in files) {
                 // check if this is a file:
-                if (files.hasOwnProperty(key) && files[key] instanceof File) {
-                    formData.append(key, files[key]);
+                if (files.hasOwnProperty(key) && files[ key ] instanceof File) {
+                    formData.append(key, files[ key ])
                 }
             }
-
-            superagent.post(ajaxFiles)
-                .send(formData)
-                .end((err, response) => {
-                    if (err) {
-                        console.log('Error has occurred while uploading files: ');
-                        console.log(err);
-                    } else if (response.ok) {
-                        //this was successful, handle it here
-                    }
-                });
+            
+            superagent.post(ajaxFiles).send(formData).end((err, response) => {
+                if (err) {
+                    console.log('Error has occurred while uploading files: ')
+                    console.log(err)
+                } else if (response.ok) {
+                    //this was successful, handle it here
+                }
+            })
         }
     }
-
-    onChangeHtml(el, html) {
+    
+    onChangeHtml (el, html) {
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
-                [el.props.name]: html
+                [ el.props.name ]: html
             })
-        });
+        })
     }
-
-    getFieldByType(index, object) {
+    
+    getFieldByType (index, object) {
         const {
             dataIndices,
-            setMultipleText,
-            pluginProps
-        } = this.state;
-        const {action, fieldsEdit} = this.props;
-        const isMultiple = (Object.keys(fieldsEdit).length > 1);
-
+            setMultipleText
+        } = this.state
+        const { action, fieldsEdit } = this.props
+        const isMultiple = (Object.keys(fieldsEdit).length > 1)
+        
         let fieldType = object.type,
             fieldName = object.name,
             fieldLabel = object.label,
-            fieldValue = '';
+            fieldValue = ''
         if (true === isMultiple && setMultipleText === 0) {
-            fieldValue = this.lang.gte_editor_multiple_rows;
+            fieldValue = this.lang.gte_editor_multiple_rows
         } else {
             if (action === EditorConstants.ACTION_EDIT) {
-                if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
-                    fieldValue = dataIndices[fieldName];
+                if (typeof dataIndices[ fieldName ] !== CommonConstants.UNDEFINED) {
+                    fieldValue = dataIndices[ fieldName ]
                 } else {
                     if (true === isMultiple) {
-                        fieldValue = '';
+                        fieldValue = ''
                     } else {
-                        fieldValue = fieldsEdit[0][fieldName];
+                        fieldValue = fieldsEdit[ 0 ][ fieldName ]
                     }
                 }
             } else if (action === EditorConstants.ACTION_CREATE
-                && typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
-                fieldValue = dataIndices[fieldName];
+                && typeof dataIndices[ fieldName ] !== CommonConstants.UNDEFINED) {
+                fieldValue = dataIndices[ fieldName ]
             }
         }
         // settting attrs
-        let attributes = [];
+        let attributes = []
         if (typeof object.attrs !== CommonConstants.UNDEFINED) {
-            let fieldOpts = object.attrs;
+            let fieldOpts = object.attrs
             for (let opt in fieldOpts) {
                 if (fieldOpts.hasOwnProperty(opt)) {
-                    for (let attr in fieldOpts[opt]) {
-                        if (fieldOpts[opt].hasOwnProperty(attr)) {
-                            attributes[attr] = fieldOpts[opt][attr];
+                    for (let attr in fieldOpts[ opt ]) {
+                        if (fieldOpts[ opt ].hasOwnProperty(attr)) {
+                            attributes[ attr ] = fieldOpts[ opt ][ attr ]
                         }
                     }
                 }
             }
         }
-
+        
         let i = 0,
-            htmlFields = [];
+            htmlFields = []
         switch (fieldType) {
             // uncontrolled input element, so we can put value here
             case EditorConstants.TYPE_TEXT:
             case EditorConstants.TYPE_HIDDEN:
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
-                htmlFields[i] = <Input key={i}
-                                       onFocus={this.onFocus.bind(this)}
-                                       onChange={this.onChange.bind(this)}
-                                       attributes={attributes}
-                                       id={fieldName}
-                                       type={fieldType}
-                                       name={fieldName}
-                                       label={fieldLabel}
-                                       value={fieldValue}
-                                       isMultiple={isMultiple}/>;
-                break;
+                htmlFields[ i ] = <Input key={i}
+                                         onFocus={this.onFocus.bind(this)}
+                                         onChange={this.onChange.bind(this)}
+                                         attributes={attributes}
+                                         id={fieldName}
+                                         type={fieldType}
+                                         name={fieldName}
+                                         label={fieldLabel}
+                                         value={fieldValue}
+                                         isMultiple={isMultiple}/>
+                break
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:
             case EditorConstants.TYPE_DATETIME:
             case EditorConstants.TYPE_NUMBER:
-                // todo: combine std range with rc-range plugin
+            // todo: combine std range with rc-range plugin
             // case EditorConstants.TYPE_RANGE:
             case EditorConstants.TYPE_SEARCH:
             case EditorConstants.TYPE_TIME:
@@ -281,7 +279,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_URL:
             case EditorConstants.TYPE_MONTH:
             case EditorConstants.TYPE_WEEK:
-                htmlFields[i] = <HTML5Input
+                htmlFields[ i ] = <HTML5Input
                     key={i}
                     onFocus={this.onFocus.bind(this)}
                     onChange={this.onChange.bind(this)}
@@ -290,16 +288,16 @@ class Editor extends Component {
                     type={fieldType}
                     name={fieldName}
                     label={fieldLabel}
-                />;
-                break;
+                />
+                break
             case EditorConstants.TYPE_FILE:
                 // todo: it can't be passed through rfc from File component
-                htmlFields[i] = <div key={i} className="gte_editor_fields">
+                htmlFields[ i ] = <div key={i} className="gte_editor_fields">
                     <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
                     <div className={editorStyles.gte_field}>
                         <input
                             ref={(input) => {
-                                this.filesInput = input;
+                                this.filesInput = input
                             }}
                             {...attributes}
                             id={fieldName}
@@ -307,12 +305,12 @@ class Editor extends Component {
                             name={fieldName}/>
                     </div>
                     <div className="clear"></div>
-                </div>;
-                break;
+                </div>
+                break
             case EditorConstants.TYPE_TEXTAREA:
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_RTE) !== -1) {
-                    htmlFields[i] = <TextEditor
+                    htmlFields[ i ] = <TextEditor
                         key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChangeHtml={this.onChangeHtml.bind(this)}
@@ -324,9 +322,9 @@ class Editor extends Component {
                         attributes={attributes}
                         isMultiple={isMultiple}
                         data-textarea={true}
-                    />;
+                    />
                 } else {
-                    htmlFields[i] = <TextArea
+                    htmlFields[ i ] = <TextArea
                         key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChange={this.onChange.bind(this)}
@@ -338,24 +336,35 @@ class Editor extends Component {
                         attributes={attributes}
                         isMultiple={isMultiple}
                         data-textarea={true}
-                    />;
+                    />
                 }
-                break;
+                break
             case EditorConstants.TYPE_SELECT:
-                htmlFields[i] = <Select
-                    key={i}
-                    onChange={this.onChange.bind(this)}
-                    id={fieldName}
-                    type={fieldType}
-                    name={fieldName}
-                    label={fieldLabel}
-                    value={fieldValue}
-                    objectValues={object.values}
-                />;
-                break;
+                // htmlFields[i] = <Select
+                //     key={i}
+                //     onChange={this.onChange.bind(this)}
+                //     id={fieldName}
+                //     type={fieldType}
+                //     name={fieldName}
+                //     label={fieldLabel}
+                //     value={fieldValue}
+                //     objectValues={object.values}
+                // />;
+                htmlFields[ i ] = <FormField key={i} id={fieldName} label={fieldLabel}>
+                    <Select
+                        key={i}
+                        onChange={this.onChange.bind(this)}
+                        id={fieldName}
+                        type={fieldType}
+                        name={fieldName}
+                        label={fieldLabel}
+                        value={fieldValue}
+                        objectValues={object.values}
+                    /></FormField>
+                break
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:
-                htmlFields[i] = <CheckRadio
+                htmlFields[ i ] = <CheckRadio
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -364,10 +373,10 @@ class Editor extends Component {
                     label={fieldLabel}
                     value={fieldValue}
                     objectValues={object.values}
-                />;
-                break;
+                />
+                break
             case EditorConstants.TYPE_SLIDER:
-                htmlFields[i] = <RcSlider
+                htmlFields[ i ] = <RcSlider
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -375,11 +384,11 @@ class Editor extends Component {
                     name={fieldName}
                     label={fieldLabel}
                     value={fieldValue}
-                    pluginProps={pluginProps}
-                />;
-                break;
+                    pluginProps={object.pluginProps}
+                />
+                break
             case EditorConstants.TYPE_RANGE:
-                htmlFields[i] = <RcRange
+                htmlFields[ i ] = <RcRange
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -387,185 +396,185 @@ class Editor extends Component {
                     name={fieldName}
                     label={fieldLabel}
                     value={fieldValue}
-                    pluginProps={pluginProps}
-                />;
-                break;
+                    pluginProps={object.pluginProps}
+                />
+                break
         }
-        return htmlFields;
+        return htmlFields
     }
-
-    triggerBefore(type) {
-        const {tableOpts} = this.props;
+    
+    triggerBefore (type) {
+        const { tableOpts } = this.props
         // call triggerBefore if it has been set
         tableOpts.buttons.map((obj) => {
             if (obj.extended === type && typeof obj.triggerBefore !== CommonConstants.UNDEFINED) {
-                obj.triggerBefore();
+                obj.triggerBefore()
             }
-        });
+        })
     }
-
-    triggerAfter(type) {
-        const {tableOpts} = this.props;
+    
+    triggerAfter (type) {
+        const { tableOpts } = this.props
         // call triggerAfter if it has been set
         tableOpts.buttons.map((obj) => {
             if (obj.extended === type && typeof obj.triggerAfter !== CommonConstants.UNDEFINED) {
-                obj.triggerAfter();
+                obj.triggerAfter()
             }
-        });
+        })
     }
-
-    btnClicked(e) {
-        e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
+    
+    btnClicked (e) {
+        e.persist() // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
         const {
             action,
             editorUpdate,
-            fieldsEdit,
-        } = this.props;
-        const {dataIndices} = this.state;
-
-        let settings = this.getAjaxSettings(action);
-        let ajaxUrl = settings.url;
-        let dataResp = dataIndices;
-        let headers = {};
-        headers[CommonConstants.HEADER_CONTENT_TYPE] = CommonConstants.CONTENT_APP_JSON;
+            fieldsEdit
+        } = this.props
+        const { dataIndices } = this.state
+        
+        let settings = this.getAjaxSettings(action)
+        let ajaxUrl = settings.url
+        let dataResp = dataIndices
+        let headers = {}
+        headers[ CommonConstants.HEADER_CONTENT_TYPE ] = CommonConstants.CONTENT_APP_JSON
         if (action === EditorConstants.ACTION_CREATE) {
-            this.triggerBefore(EditorConstants.EDITOR_CREATE);
-            this.fileUpload();
-            if (typeof dataIndices['id'] !== CommonConstants.UNDEFINED) { // clear the id
-                delete dataIndices['id'];
+            this.triggerBefore(EditorConstants.EDITOR_CREATE)
+            this.fileUpload()
+            if (typeof dataIndices[ 'id' ] !== CommonConstants.UNDEFINED) { // clear the id
+                delete dataIndices[ 'id' ]
             }
-            if (typeof dataIndices[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
-                delete dataIndices[CommonConstants.GT_ROW_ID];
+            if (typeof dataIndices[ CommonConstants.GT_ROW_ID ] !== CommonConstants.UNDEFINED) {
+                delete dataIndices[ CommonConstants.GT_ROW_ID ]
             }
-            headers = this.setHeaders(settings, headers);
+            headers = this.setHeaders(settings, headers)
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(dataIndices),
-                headers: headers,
+                headers: headers
             }).then(response => response.json()).then((data) => {
-                if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
-                    throw new DataException('The `id` field is required to return in response from server/back-end.');
+                if (typeof data[ CommonConstants.GT_ROW ][ 'id' ] === CommonConstants.UNDEFINED) {
+                    throw new DataException('The `id` field is required to return in response from server/back-end.')
                 }
                 // leaving UI fields, prioritizing those from server
-                for (let k in data[CommonConstants.GT_ROW]) {
-                    if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {
-                        dataResp[k] = data[CommonConstants.GT_ROW][k];
+                for (let k in data[ CommonConstants.GT_ROW ]) {
+                    if (data[ CommonConstants.GT_ROW ].hasOwnProperty(k)) {
+                        dataResp[ k ] = data[ CommonConstants.GT_ROW ][ k ]
                     }
                 }
-                dataResp[CommonConstants.GT_ROW_ID] = data[CommonConstants.GT_ROW]['id'];
-                editorUpdate(e, dataResp);
-                this.triggerAfter(EditorConstants.EDITOR_CREATE);
+                dataResp[ CommonConstants.GT_ROW_ID ] = data[ CommonConstants.GT_ROW ][ 'id' ]
+                editorUpdate(e, dataResp)
+                this.triggerAfter(EditorConstants.EDITOR_CREATE)
             }).catch((e) => {
-                console.error(e.message);
-            });
+                console.error(e.message)
+            })
         } else if (action === EditorConstants.ACTION_EDIT) {
-            this.triggerBefore(EditorConstants.EDITOR_EDIT);
-            this.fileUpload();
-            let payload = [];
+            this.triggerBefore(EditorConstants.EDITOR_EDIT)
+            this.fileUpload()
+            let payload = []
             for (let k in fieldsEdit) {
                 if (fieldsEdit.hasOwnProperty(k)) {
-                    payload[k] = loAssign({}, fieldsEdit[k], dataIndices);
+                    payload[ k ] = loAssign({}, fieldsEdit[ k ], dataIndices)
                 }
             }
-            headers = this.setHeaders(settings, headers);
+            headers = this.setHeaders(settings, headers)
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(payload),
-                headers: headers,
+                headers: headers
             }).then(response => response.json()).then((data) => {
-                if (typeof data[CommonConstants.GT_ROWS] === CommonConstants.UNDEFINED // check rows object data
-                    || typeof data[CommonConstants.GT_ROWS][0] === CommonConstants.UNDEFINED // check at least 1 row/element
-                    || typeof data[CommonConstants.GT_ROWS][0]['id'] === CommonConstants.UNDEFINED) {
-                    throw new DataException('The `id` field is required to return in response from server/back-end.');
+                if (typeof data[ CommonConstants.GT_ROWS ] === CommonConstants.UNDEFINED // check rows object data
+                    || typeof data[ CommonConstants.GT_ROWS ][ 0 ] === CommonConstants.UNDEFINED // check at least 1 row/element
+                    || typeof data[ CommonConstants.GT_ROWS ][ 0 ][ 'id' ] === CommonConstants.UNDEFINED) {
+                    throw new DataException('The `id` field is required to return in response from server/back-end.')
                 }
-                for (let k in data[CommonConstants.GT_ROWS]) {
-                    if (data[CommonConstants.GT_ROWS].hasOwnProperty(k)) {
-                        for (let colKey in data[CommonConstants.GT_ROWS][k]) {
-                            if (data[CommonConstants.GT_ROWS][k].hasOwnProperty(colKey)) {
-                                dataResp[colKey] = data[CommonConstants.GT_ROWS][k][colKey];
+                for (let k in data[ CommonConstants.GT_ROWS ]) {
+                    if (data[ CommonConstants.GT_ROWS ].hasOwnProperty(k)) {
+                        for (let colKey in data[ CommonConstants.GT_ROWS ][ k ]) {
+                            if (data[ CommonConstants.GT_ROWS ][ k ].hasOwnProperty(colKey)) {
+                                dataResp[ colKey ] = data[ CommonConstants.GT_ROWS ][ k ][ colKey ]
                             }
                         }
                     }
                 }
                 // leaving UI fields, prioritizing those from server
-                editorUpdate(e, dataResp);
-                this.triggerAfter(EditorConstants.EDITOR_EDIT);
+                editorUpdate(e, dataResp)
+                this.triggerAfter(EditorConstants.EDITOR_EDIT)
             }).catch((e) => {
-                console.error(e.message);
-            });
+                console.error(e.message)
+            })
         } else if (action === EditorConstants.ACTION_DELETE) {
-            this.triggerBefore(EditorConstants.EDITOR_REMOVE);
-            headers = this.setHeaders(settings, headers);
+            this.triggerBefore(EditorConstants.EDITOR_REMOVE)
+            headers = this.setHeaders(settings, headers)
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(dataIndices), // prop ids are passed from Reactables
-                headers: headers,
+                headers: headers
             }).then(response => response.json()).then(() => {
                 // call editorUpdate method with passing all user-input values
-                editorUpdate(e, dataResp);
-                this.triggerAfter(EditorConstants.EDITOR_REMOVE);
-            });
+                editorUpdate(e, dataResp)
+                this.triggerAfter(EditorConstants.EDITOR_REMOVE)
+            })
         }
     }
     
-    setHeaders(settings, headers) {
+    setHeaders (settings, headers) {
         for (let hKey in settings.headers) {
             if (settings.headers.hasOwnProperty(hKey)) {
-                headers[hKey] = settings.headers[hKey];
+                headers[ hKey ] = settings.headers[ hKey ]
             }
         }
-        return headers;
+        return headers
     }
-
-    getAjaxSettings(action) {
+    
+    getAjaxSettings (action) {
         const {
-            editor,
-        } = this.props;
+            editor
+        } = this.props
         if (typeof editor.ajax === CommonConstants.STRING) {
-            let httpMethod = EditorConstants.HTTP_METHOD_POST; // action - create
+            let httpMethod = EditorConstants.HTTP_METHOD_POST // action - create
             if (action === EditorConstants.ACTION_EDIT) {
-                httpMethod = EditorConstants.HTTP_METHOD_PUT;
+                httpMethod = EditorConstants.HTTP_METHOD_PUT
             } else if (action === EditorConstants.ACTION_DELETE) {
-                httpMethod = EditorConstants.HTTP_METHOD_DELETE;
+                httpMethod = EditorConstants.HTTP_METHOD_DELETE
             }
             return {
                 url: editor.ajax,
-                method: httpMethod,
-            };
+                method: httpMethod
+            }
         }
         if (typeof editor.ajax === CommonConstants.OBJECT
-            && typeof editor.ajax[action] !== CommonConstants.UNDEFINED
-            && typeof editor.ajax[action].url !== CommonConstants.UNDEFINED) {
+            && typeof editor.ajax[ action ] !== CommonConstants.UNDEFINED
+            && typeof editor.ajax[ action ].url !== CommonConstants.UNDEFINED) {
             return {
-                url: editor.ajax[action].url,
-                method: editor.ajax[action].type,
-                headers: editor.ajax[action].headers,
-            };
+                url: editor.ajax[ action ].url,
+                method: editor.ajax[ action ].type,
+                headers: editor.ajax[ action ].headers
+            }
         } else { // setting error
             throw new EditorException('"ajax" property must be set either as string url ' +
-                'or object with "' + action + '" and "url", "type" properties set-up respectively.');
+                'or object with "' + action + '" and "url", "type" properties set-up respectively.')
         }
     }
-
-    stopPropagation(e) {
-        e.stopPropagation();
+    
+    stopPropagation (e) {
+        e.stopPropagation()
     }
-
-    btnClickedEnter(e) {
+    
+    btnClickedEnter (e) {
         if (e.keyCode === CommonConstants.ENTER_KEY && this.state.isTextArea === false) {
-            document.getElementById('gte_sent_btn').click();
+            document.getElementById('gte_sent_btn').click()
         }
     }
-
-    render() {
+    
+    render () {
         const {
             hidePopup,
             popupTitle,
             action,
             popupButton,
-            active,
-        } = this.props;
-        this.setFields(this.props);
+            active
+        } = this.props
+        this.setFields(this.props)
         let editorClasses = classNames({
                 gte_editor_popup: true,
                 fade_in: active,
@@ -578,8 +587,8 @@ class Editor extends Component {
             }),
             formFieldsClasses = classNames({
                 gte_form_fields: true,
-                gte_form_fields_delete: (action === EditorConstants.ACTION_DELETE),
-            });
+                gte_form_fields_delete: (action === EditorConstants.ACTION_DELETE)
+            })
         return (
             <div>
                 <div onClick={hidePopup} className={editorClasses}>
@@ -638,11 +647,11 @@ Editor.propTYpes = {
     popupTitle: PropTypes.string.isRequired,
     popupButton: PropTypes.string.isRequired,
     editorUpdate: PropTypes.func.isRequired,
-    selectedIds: PropTypes.array.isRequired,
-};
+    selectedIds: PropTypes.array.isRequired
+}
 
 Editor.defaultProps = {
     pluginProps: {}
-};
+}
 
 export default Editor

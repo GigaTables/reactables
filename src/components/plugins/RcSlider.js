@@ -48,7 +48,6 @@ class RcSlider extends Component {
         return (
             <div>
                 <div style={wrapperStyle}>
-                    <p>Slider with custom handle</p>
                     <Slider {...pluginProps}
                             defaultValue={(value === '' || value === CommonConstants.UNDEFINED) ? 0 : value}
                             handle={handle} onChange={this.onChange.bind(this)}/>

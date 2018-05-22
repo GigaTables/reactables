@@ -376,7 +376,11 @@ class Editor extends Component {
                 />
                 break
             case EditorConstants.TYPE_SLIDER:
-                htmlFields[i] = <RcSlider
+                fieldValue = Math.floor(object.pluginProps.max);
+                if (typeof object.pluginProps.defaultValue !== CommonConstants.UNDEFINED) {
+                    fieldValue = object.pluginProps.defaultValue;
+                }
+                htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}><RcSlider
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -386,10 +390,16 @@ class Editor extends Component {
                     value={fieldValue}
                     pluginProps={object.pluginProps}
                     isMultiple={isMultiple}
-                />
+                /></FormField>
                 break
             case EditorConstants.TYPE_RANGE:
-                htmlFields[i] = <RcRange
+                if (fieldValue === '') {
+                    fieldValue = [object.pluginProps.min + 1, object.pluginProps.max - 1];
+                    if (typeof object.pluginProps.defaultValue !== CommonConstants.UNDEFINED) {
+                        fieldValue = object.pluginProps.defaultValue;
+                    }
+                }
+                htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}><RcRange
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -399,7 +409,7 @@ class Editor extends Component {
                     value={fieldValue}
                     pluginProps={object.pluginProps}
                     isMultiple={isMultiple}
-                />
+                /></FormField>
                 break
         }
         return htmlFields

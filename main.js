@@ -44,17 +44,27 @@ let editor = {
             name: 'id',
             type: 'hidden'
         },
-        {// an example of using select - automatically selected if matches with data in table column
-            label: 'Types:',
-            name: 'types[]',
-            values: [// if select,checkbox,radio etc types - need this pre-set structure of values
-                { 'key1': 'val1' },
-                { 'key2': 'val2' }
-            ],
-            type: 'select' // select,checkbox,radio
-//              attrs: [
-//                {'multiple':true}
-//              ]
+        {
+            label: 'Progress',
+            name: 'field1',
+            type: 'slider',
+            plugins: 'rc-slider',
+            pluginProps: {
+                min: 0,
+                max: 100,
+                defaultValue: 55 // this value can be used e.g. for create
+            }
+        },
+        {
+            label: 'Customers range',
+            name: 'field2',
+            type: 'range',
+            plugins: 'rc-range',
+            pluginProps: {
+                min: 0,
+                max: 200,
+                defaultValue: [10, 100] // this value can be used e.g. for create
+            }
         },
         {
             label: 'Article title:',
@@ -78,26 +88,6 @@ let editor = {
             fieldsetClose: true
         },
         {
-            label: 'Progress',
-            name: 'field1',
-            type: 'slider',
-            plugins: 'rc-slider',
-            pluginProps: {
-                min: 0,
-                max: 100
-            }
-        },
-        // {
-        //     label: 'Customers range',
-        //     name: 'field2',
-        //     type: 'range',
-        //     plugins: 'rc-range',
-        //     pluginProps: {
-        //         min: 0,
-        //         max: 20
-        //     }
-        // },
-        {
             label: 'Date Time:',
             name: 'date',
             type: 'date'
@@ -106,7 +96,19 @@ let editor = {
             label: 'Image:',
             name: 'image',
             type: 'file'
-        }
+        },
+        {// an example of using select - automatically selected if matches with data in table column
+            label: 'Types:',
+            name: 'types[]',
+            values: [// if select,checkbox,radio etc types - need this pre-set structure of values
+                { 'key1': 'val1' },
+                { 'key2': 'val2' }
+            ],
+            type: 'select' // select,checkbox,radio
+//              attrs: [
+//                {'multiple':true}
+//              ]
+        },
     ]
 }
 
@@ -130,8 +132,7 @@ let settings = {
         'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
         'X-Header-Key': 'foo-bar'
     },
-    ajax: 'http://localhost/gigatables.php',
-    // ajax: 'http://gigatables.loc/gigatables.php',
+    ajax: 'http://gigatables.loc/gigatables.php',
     // ajax: new Promise((resolve) => {
     //     resolve('http://gigatables.loc/gigatables.php')
     // }),

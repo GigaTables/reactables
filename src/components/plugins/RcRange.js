@@ -5,6 +5,23 @@ import PropTypes from 'prop-types'
 import Range from 'rc-slider/es/Range'
 
 class RcRange extends Component {
+    onChange (value) {
+        const {
+            isMultiple,
+            onChange,
+            name
+        } = this.props
+        onChange({
+            target: {
+                dataset: {
+                    multiple: isMultiple
+                },
+                value: value,
+                name: name
+            }
+        })
+    }
+    
     render() {
         const {
             value,
@@ -14,8 +31,8 @@ class RcRange extends Component {
         return (
             <div>
                 <div style={wrapperStyle}>
-                    <p>Range with custom handle</p>
-                    <Range {...pluginProps} defaultValue={value} tipFormatter={value => `${value}%`}/>
+                    <Range {...pluginProps} defaultValue={value} tipFormatter={value => `${value}%`}
+                           onChange={this.onChange.bind(this)}/>
                 </div>
             </div>
         )

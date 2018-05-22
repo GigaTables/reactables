@@ -8,14 +8,30 @@ import Handle from 'rc-slider/es/Handle'
 import * as CommonConstants from '../CommonConstants'
 
 class RcSlider extends Component {
-    render() {
+    onChange (value) {
+        const {
+            isMultiple,
+            onChange,
+            name
+        } = this.props
+        onChange({
+            target: {
+                dataset: {
+                    multiple: isMultiple
+                },
+                value: value,
+                name: name
+            }
+        })
+    }
+    
+    render () {
         const {
             value,
             pluginProps
         } = this.props
-        
         const handle = (props) => {
-            const {value, dragging, index, ...restProps} = props
+            const { value, dragging, index, ...restProps } = props
             return (
                 <Tooltip
                     prefixCls="rc-slider-tooltip"
@@ -28,14 +44,14 @@ class RcSlider extends Component {
                 </Tooltip>
             )
         }
-        const wrapperStyle = {width: 400, margin: 50}
+        const wrapperStyle = { width: 400, margin: 50 }
         return (
             <div>
                 <div style={wrapperStyle}>
                     <p>Slider with custom handle</p>
                     <Slider {...pluginProps}
                             defaultValue={(value === '' || value === CommonConstants.UNDEFINED) ? 0 : value}
-                            handle={handle}/>
+                            handle={handle} onChange={this.onChange.bind(this)}/>
                 </div>
             </div>
         )
@@ -43,8 +59,7 @@ class RcSlider extends Component {
 }
 
 RcSlider.propTypes = {
-    // value: PropTypes.number.isRequired,
-    // pluginProps: PropTypes.object
+    pluginProps: PropTypes.object
 }
 
 export default RcSlider

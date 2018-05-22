@@ -385,6 +385,7 @@ class Editor extends Component {
                     label={fieldLabel}
                     value={fieldValue}
                     pluginProps={object.pluginProps}
+                    isMultiple={isMultiple}
                 />
                 break
             case EditorConstants.TYPE_RANGE:
@@ -397,6 +398,7 @@ class Editor extends Component {
                     label={fieldLabel}
                     value={fieldValue}
                     pluginProps={object.pluginProps}
+                    isMultiple={isMultiple}
                 />
                 break
         }

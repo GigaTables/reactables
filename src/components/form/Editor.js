@@ -23,7 +23,7 @@ const Lang = require('../Lang')
 const loAssign = require('lodash/assign')
 
 class Editor extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         if (typeof props.editor.fields === CommonConstants.UNDEFINED) {
             throw new EditorException('You should define "fields" option.')
@@ -31,7 +31,7 @@ class Editor extends Component {
         if (props.editor.fields.length === 0) {
             throw new EditorException('You should define at least one field in "fields" option.')
         }
-        this.lang = Lang[ props.lang ]
+        this.lang = Lang[props.lang]
         this.state = {
             dataIndices: {},
             popup_title: this.lang.gte_editor_popupheader_create,
@@ -47,15 +47,15 @@ class Editor extends Component {
         this.filesInput = {}
     }
     
-    setDataIndices (props) {
+    setDataIndices(props) {
         let cols = props.columns
         this.dataIndices = []
         cols.forEach((column, index) => {
-            this.dataIndices[ column.name ] = ''
+            this.dataIndices[column.name] = ''
         })
     }
     
-    setFields (props) {
+    setFields(props) {
         let fields = []
         if (props.action === EditorConstants.ACTION_CREATE) {
             fields = this.setCreateFields(props.editor.fields)
@@ -67,11 +67,11 @@ class Editor extends Component {
         this.fields = fields
     }
     
-    setCreateFields (editorFields) {
+    setCreateFields(editorFields) {
         let fields = []
         editorFields.forEach((object, index) => {
             this.setFieldsets(index, object)
-            fields[ index ] = this.getFieldByType(index, object)
+            fields[index] = this.getFieldByType(index, object)
         })
         if (this.fieldsetClose > 0) {
             fields = this.setFieldsetFields(fields)
@@ -79,11 +79,11 @@ class Editor extends Component {
         return fields
     }
     
-    setEditFields (editorFields) {
+    setEditFields(editorFields) {
         let fields = []
         editorFields.forEach((object, index) => {
             this.setFieldsets(index, object)
-            fields[ index ] = this.getFieldByType(index, object)
+            fields[index] = this.getFieldByType(index, object)
         })
         if (this.fieldsetClose > 0) {
             fields = this.setFieldsetFields(fields)
@@ -91,7 +91,7 @@ class Editor extends Component {
         return fields
     }
     
-    setFieldsets (index, object) {
+    setFieldsets(index, object) {
         if (typeof object.fieldsetOpen !== CommonConstants.UNDEFINED) {
             if (typeof object.legend === CommonConstants.UNDEFINED) {
                 throw new EditorException('the "legend" property must be specified within fieldsetOpen')
@@ -104,11 +104,11 @@ class Editor extends Component {
         }
     }
     
-    setFieldsetFields (fields) {
+    setFieldsetFields(fields) {
         let fieldsInSets = []
         fields.forEach((object, index) => {
             if (index >= this.fieldsetOpen && index <= this.fieldsetClose) {
-                fieldsInSets[ index ] = object
+                fieldsInSets[index] = object
             }
         })
         let reFields = []
@@ -123,20 +123,20 @@ class Editor extends Component {
         return reFields
     }
     
-    setDeleteFields (items) {
+    setDeleteFields(items) {
         let fields = [], lastId = 0
         this.state.dataIndices = this.props.selectedIds
         this.props.selectedIds.forEach((object, index) => {
-            fields[ index ] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>
+            fields[index] = <input key={index} type="hidden" data-value={object} name="ids[]" value={object}/>
             lastId = index
         })
-        let delMsg = t(this.lang.gte_editor_delete_popup, { 'rows': items.length })
+        let delMsg = t(this.lang.gte_editor_delete_popup, {'rows': items.length})
         fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>)
         return fields
     }
     
-    onFocus (e) {
-        const { setMultipleText } = this.state
+    onFocus(e) {
+        const {setMultipleText} = this.state
         let isTextArea = false
         if (typeof e.target.dataset.multiple !== CommonConstants.UNDEFINED
             && true === e.target.dataset.multiple && setMultipleText === 0) {
@@ -145,9 +145,9 @@ class Editor extends Component {
         if ((typeof e.target.dataset.textarea !== CommonConstants.UNDEFINED
                 && e.target.dataset.textarea === CommonConstants.STR_TRUE)
             // for RTE focus check
-            || (typeof e.target.children[ 0 ] !== CommonConstants.UNDEFINED
-                && typeof e.target.children[ 0 ].getAttribute('data-contents') !== CommonConstants.UNDEFINED
-                && e.target.children[ 0 ].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
+            || (typeof e.target.children[0] !== CommonConstants.UNDEFINED
+                && typeof e.target.children[0].getAttribute('data-contents') !== CommonConstants.UNDEFINED
+                && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
             isTextArea = true
         }
         this.setState({
@@ -156,14 +156,14 @@ class Editor extends Component {
         })
     }
     
-    onChange (e) {
-        const { setMultipleText } = this.state
+    onChange(e) {
+        const {setMultipleText} = this.state
         let isMultiple = e.target.dataset.multiple
         let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value
         
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
-                [ e.target.name ]: val
+                [e.target.name]: val
             }),
             setMultipleText: 1
         })
@@ -172,15 +172,15 @@ class Editor extends Component {
     /**
      * Uploads files via AJAX with FormData object
      */
-    fileUpload () {
+    fileUpload() {
         if (typeof this.filesInput.files !== CommonConstants.UNDEFINED) {
-            const { ajaxFiles } = this.props.editor
+            const {ajaxFiles} = this.props.editor
             let formData = new FormData()
             const files = this.filesInput.files
             for (let key in files) {
                 // check if this is a file:
-                if (files.hasOwnProperty(key) && files[ key ] instanceof File) {
-                    formData.append(key, files[ key ])
+                if (files.hasOwnProperty(key) && files[key] instanceof File) {
+                    formData.append(key, files[key])
                 }
             }
             
@@ -195,20 +195,20 @@ class Editor extends Component {
         }
     }
     
-    onChangeHtml (el, html) {
+    onChangeHtml(el, html) {
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
-                [ el.props.name ]: html
+                [el.props.name]: html
             })
         })
     }
     
-    getFieldByType (index, object) {
+    getFieldByType(index, object) {
         const {
             dataIndices,
             setMultipleText
         } = this.state
-        const { action, fieldsEdit } = this.props
+        const {action, fieldsEdit} = this.props
         const isMultiple = (Object.keys(fieldsEdit).length > 1)
         
         let fieldType = object.type,
@@ -219,18 +219,18 @@ class Editor extends Component {
             fieldValue = this.lang.gte_editor_multiple_rows
         } else {
             if (action === EditorConstants.ACTION_EDIT) {
-                if (typeof dataIndices[ fieldName ] !== CommonConstants.UNDEFINED) {
-                    fieldValue = dataIndices[ fieldName ]
+                if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+                    fieldValue = dataIndices[fieldName]
                 } else {
                     if (true === isMultiple) {
                         fieldValue = ''
                     } else {
-                        fieldValue = fieldsEdit[ 0 ][ fieldName ]
+                        fieldValue = fieldsEdit[0][fieldName]
                     }
                 }
             } else if (action === EditorConstants.ACTION_CREATE
-                && typeof dataIndices[ fieldName ] !== CommonConstants.UNDEFINED) {
-                fieldValue = dataIndices[ fieldName ]
+                && typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+                fieldValue = dataIndices[fieldName]
             }
         }
         // settting attrs
@@ -239,9 +239,9 @@ class Editor extends Component {
             let fieldOpts = object.attrs
             for (let opt in fieldOpts) {
                 if (fieldOpts.hasOwnProperty(opt)) {
-                    for (let attr in fieldOpts[ opt ]) {
-                        if (fieldOpts[ opt ].hasOwnProperty(attr)) {
-                            attributes[ attr ] = fieldOpts[ opt ][ attr ]
+                    for (let attr in fieldOpts[opt]) {
+                        if (fieldOpts[opt].hasOwnProperty(attr)) {
+                            attributes[attr] = fieldOpts[opt][attr]
                         }
                     }
                 }
@@ -256,16 +256,16 @@ class Editor extends Component {
             case EditorConstants.TYPE_HIDDEN:
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
-                htmlFields[ i ] = <Input key={i}
-                                         onFocus={this.onFocus.bind(this)}
-                                         onChange={this.onChange.bind(this)}
-                                         attributes={attributes}
-                                         id={fieldName}
-                                         type={fieldType}
-                                         name={fieldName}
-                                         label={fieldLabel}
-                                         value={fieldValue}
-                                         isMultiple={isMultiple}/>
+                htmlFields[i] = <Input key={i}
+                                       onFocus={this.onFocus.bind(this)}
+                                       onChange={this.onChange.bind(this)}
+                                       attributes={attributes}
+                                       id={fieldName}
+                                       type={fieldType}
+                                       name={fieldName}
+                                       label={fieldLabel}
+                                       value={fieldValue}
+                                       isMultiple={isMultiple}/>
                 break
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:
@@ -279,7 +279,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_URL:
             case EditorConstants.TYPE_MONTH:
             case EditorConstants.TYPE_WEEK:
-                htmlFields[ i ] = <HTML5Input
+                htmlFields[i] = <HTML5Input
                     key={i}
                     onFocus={this.onFocus.bind(this)}
                     onChange={this.onChange.bind(this)}
@@ -292,7 +292,7 @@ class Editor extends Component {
                 break
             case EditorConstants.TYPE_FILE:
                 // todo: it can't be passed through rfc from File component
-                htmlFields[ i ] = <div key={i} className="gte_editor_fields">
+                htmlFields[i] = <div key={i} className="gte_editor_fields">
                     <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
                     <div className={editorStyles.gte_field}>
                         <input
@@ -310,7 +310,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_TEXTAREA:
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_RTE) !== -1) {
-                    htmlFields[ i ] = <TextEditor
+                    htmlFields[i] = <TextEditor
                         key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChangeHtml={this.onChangeHtml.bind(this)}
@@ -324,7 +324,7 @@ class Editor extends Component {
                         data-textarea={true}
                     />
                 } else {
-                    htmlFields[ i ] = <TextArea
+                    htmlFields[i] = <TextArea
                         key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChange={this.onChange.bind(this)}
@@ -350,7 +350,7 @@ class Editor extends Component {
                 //     value={fieldValue}
                 //     objectValues={object.values}
                 // />;
-                htmlFields[ i ] = <FormField key={i} id={fieldName} label={fieldLabel}>
+                htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}>
                     <Select
                         key={i}
                         onChange={this.onChange.bind(this)}
@@ -364,7 +364,7 @@ class Editor extends Component {
                 break
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:
-                htmlFields[ i ] = <CheckRadio
+                htmlFields[i] = <CheckRadio
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -376,7 +376,7 @@ class Editor extends Component {
                 />
                 break
             case EditorConstants.TYPE_SLIDER:
-                htmlFields[ i ] = <RcSlider
+                htmlFields[i] = <RcSlider
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -388,7 +388,7 @@ class Editor extends Component {
                 />
                 break
             case EditorConstants.TYPE_RANGE:
-                htmlFields[ i ] = <RcRange
+                htmlFields[i] = <RcRange
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -403,8 +403,8 @@ class Editor extends Component {
         return htmlFields
     }
     
-    triggerBefore (type) {
-        const { tableOpts } = this.props
+    triggerBefore(type) {
+        const {tableOpts} = this.props
         // call triggerBefore if it has been set
         tableOpts.buttons.map((obj) => {
             if (obj.extended === type && typeof obj.triggerBefore !== CommonConstants.UNDEFINED) {
@@ -413,8 +413,8 @@ class Editor extends Component {
         })
     }
     
-    triggerAfter (type) {
-        const { tableOpts } = this.props
+    triggerAfter(type) {
+        const {tableOpts} = this.props
         // call triggerAfter if it has been set
         tableOpts.buttons.map((obj) => {
             if (obj.extended === type && typeof obj.triggerAfter !== CommonConstants.UNDEFINED) {
@@ -423,28 +423,28 @@ class Editor extends Component {
         })
     }
     
-    btnClicked (e) {
+    btnClicked(e) {
         e.persist() // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
         const {
             action,
             editorUpdate,
             fieldsEdit
         } = this.props
-        const { dataIndices } = this.state
+        const {dataIndices} = this.state
         
         let settings = this.getAjaxSettings(action)
         let ajaxUrl = settings.url
         let dataResp = dataIndices
         let headers = {}
-        headers[ CommonConstants.HEADER_CONTENT_TYPE ] = CommonConstants.CONTENT_APP_JSON
+        headers[CommonConstants.HEADER_CONTENT_TYPE] = CommonConstants.CONTENT_APP_JSON
         if (action === EditorConstants.ACTION_CREATE) {
             this.triggerBefore(EditorConstants.EDITOR_CREATE)
             this.fileUpload()
-            if (typeof dataIndices[ 'id' ] !== CommonConstants.UNDEFINED) { // clear the id
-                delete dataIndices[ 'id' ]
+            if (typeof dataIndices['id'] !== CommonConstants.UNDEFINED) { // clear the id
+                delete dataIndices['id']
             }
-            if (typeof dataIndices[ CommonConstants.GT_ROW_ID ] !== CommonConstants.UNDEFINED) {
-                delete dataIndices[ CommonConstants.GT_ROW_ID ]
+            if (typeof dataIndices[CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
+                delete dataIndices[CommonConstants.GT_ROW_ID]
             }
             headers = this.setHeaders(settings, headers)
             fetch(ajaxUrl, {
@@ -452,16 +452,16 @@ class Editor extends Component {
                 body: JSON.stringify(dataIndices),
                 headers: headers
             }).then(response => response.json()).then((data) => {
-                if (typeof data[ CommonConstants.GT_ROW ][ 'id' ] === CommonConstants.UNDEFINED) {
+                if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
                     throw new DataException('The `id` field is required to return in response from server/back-end.')
                 }
                 // leaving UI fields, prioritizing those from server
-                for (let k in data[ CommonConstants.GT_ROW ]) {
-                    if (data[ CommonConstants.GT_ROW ].hasOwnProperty(k)) {
-                        dataResp[ k ] = data[ CommonConstants.GT_ROW ][ k ]
+                for (let k in data[CommonConstants.GT_ROW]) {
+                    if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {
+                        dataResp[k] = data[CommonConstants.GT_ROW][k]
                     }
                 }
-                dataResp[ CommonConstants.GT_ROW_ID ] = data[ CommonConstants.GT_ROW ][ 'id' ]
+                dataResp[CommonConstants.GT_ROW_ID] = data[CommonConstants.GT_ROW]['id']
                 editorUpdate(e, dataResp)
                 this.triggerAfter(EditorConstants.EDITOR_CREATE)
             }).catch((e) => {
@@ -473,7 +473,7 @@ class Editor extends Component {
             let payload = []
             for (let k in fieldsEdit) {
                 if (fieldsEdit.hasOwnProperty(k)) {
-                    payload[ k ] = loAssign({}, fieldsEdit[ k ], dataIndices)
+                    payload[k] = loAssign({}, fieldsEdit[k], dataIndices)
                 }
             }
             headers = this.setHeaders(settings, headers)
@@ -482,16 +482,16 @@ class Editor extends Component {
                 body: JSON.stringify(payload),
                 headers: headers
             }).then(response => response.json()).then((data) => {
-                if (typeof data[ CommonConstants.GT_ROWS ] === CommonConstants.UNDEFINED // check rows object data
-                    || typeof data[ CommonConstants.GT_ROWS ][ 0 ] === CommonConstants.UNDEFINED // check at least 1 row/element
-                    || typeof data[ CommonConstants.GT_ROWS ][ 0 ][ 'id' ] === CommonConstants.UNDEFINED) {
+                if (typeof data[CommonConstants.GT_ROWS] === CommonConstants.UNDEFINED // check rows object data
+                    || typeof data[CommonConstants.GT_ROWS][0] === CommonConstants.UNDEFINED // check at least 1 row/element
+                    || typeof data[CommonConstants.GT_ROWS][0]['id'] === CommonConstants.UNDEFINED) {
                     throw new DataException('The `id` field is required to return in response from server/back-end.')
                 }
-                for (let k in data[ CommonConstants.GT_ROWS ]) {
-                    if (data[ CommonConstants.GT_ROWS ].hasOwnProperty(k)) {
-                        for (let colKey in data[ CommonConstants.GT_ROWS ][ k ]) {
-                            if (data[ CommonConstants.GT_ROWS ][ k ].hasOwnProperty(colKey)) {
-                                dataResp[ colKey ] = data[ CommonConstants.GT_ROWS ][ k ][ colKey ]
+                for (let k in data[CommonConstants.GT_ROWS]) {
+                    if (data[CommonConstants.GT_ROWS].hasOwnProperty(k)) {
+                        for (let colKey in data[CommonConstants.GT_ROWS][k]) {
+                            if (data[CommonConstants.GT_ROWS][k].hasOwnProperty(colKey)) {
+                                dataResp[colKey] = data[CommonConstants.GT_ROWS][k][colKey]
                             }
                         }
                     }
@@ -517,16 +517,16 @@ class Editor extends Component {
         }
     }
     
-    setHeaders (settings, headers) {
+    setHeaders(settings, headers) {
         for (let hKey in settings.headers) {
             if (settings.headers.hasOwnProperty(hKey)) {
-                headers[ hKey ] = settings.headers[ hKey ]
+                headers[hKey] = settings.headers[hKey]
             }
         }
         return headers
     }
     
-    getAjaxSettings (action) {
+    getAjaxSettings(action) {
         const {
             editor
         } = this.props
@@ -543,12 +543,12 @@ class Editor extends Component {
             }
         }
         if (typeof editor.ajax === CommonConstants.OBJECT
-            && typeof editor.ajax[ action ] !== CommonConstants.UNDEFINED
-            && typeof editor.ajax[ action ].url !== CommonConstants.UNDEFINED) {
+            && typeof editor.ajax[action] !== CommonConstants.UNDEFINED
+            && typeof editor.ajax[action].url !== CommonConstants.UNDEFINED) {
             return {
-                url: editor.ajax[ action ].url,
-                method: editor.ajax[ action ].type,
-                headers: editor.ajax[ action ].headers
+                url: editor.ajax[action].url,
+                method: editor.ajax[action].type,
+                headers: editor.ajax[action].headers
             }
         } else { // setting error
             throw new EditorException('"ajax" property must be set either as string url ' +
@@ -556,17 +556,17 @@ class Editor extends Component {
         }
     }
     
-    stopPropagation (e) {
+    stopPropagation(e) {
         e.stopPropagation()
     }
     
-    btnClickedEnter (e) {
+    btnClickedEnter(e) {
         if (e.keyCode === CommonConstants.ENTER_KEY && this.state.isTextArea === false) {
             document.getElementById('gte_sent_btn').click()
         }
     }
     
-    render () {
+    render() {
         const {
             hidePopup,
             popupTitle,

@@ -8,14 +8,14 @@ import Handle from 'rc-slider/es/Handle'
 import * as CommonConstants from '../CommonConstants'
 
 class RcSlider extends Component {
-    render () {
+    render() {
         const {
             value,
             pluginProps
         } = this.props
         
         const handle = (props) => {
-            const { value, dragging, index, ...restProps } = props
+            const {value, dragging, index, ...restProps} = props
             return (
                 <Tooltip
                     prefixCls="rc-slider-tooltip"
@@ -28,7 +28,7 @@ class RcSlider extends Component {
                 </Tooltip>
             )
         }
-        const wrapperStyle = { width: 400, margin: 50 }
+        const wrapperStyle = {width: 400, margin: 50}
         return (
             <div>
                 <div style={wrapperStyle}>

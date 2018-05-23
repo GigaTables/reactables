@@ -453,6 +453,7 @@ PS In some OS like Macintosh can be default conflicting hot keys, ex.: Cmd+Arrow
 ## Plugins
 Plugins can be helpful to build convenient features around form elements and table rows/columns. 
 For instance - to edit text with HTML tags (aka WYSIWYG) and then save it in DB you can set the `rte` (Rich Text Editor):
+![Reach Text Editor plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_rte_plugin.png)
 
 ```js
 {
@@ -463,7 +464,8 @@ For instance - to edit text with HTML tags (aka WYSIWYG) and then save it in DB 
 }
 ``` 
 
-Progress bar plugin:
+Progress bar plugin (table):
+![Progress bar plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_progress_bar_plugin.png)
 
 ```js
 {
@@ -477,7 +479,8 @@ Progress bar plugin:
 this will build 5 colored (left-to-right) progress bar for every row in the column, with percent number.
 Protected from `null` and `negative` numbers as well as `more then 100`.
 
-PieChart plugin:
+PieChart plugin (table):
+![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_pie_plugin.png)
 
 ```js
 {
@@ -493,7 +496,9 @@ PieChart plugin:
 }
 ```
 
-Trend plugin:
+Trend plugin (table):
+![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_trend_plugin.png)
+
 ```js
 {
     data: 'consumers_trend',
@@ -506,6 +511,33 @@ Trend plugin:
         padding: 18
     }
 }
+```
+Slider and Range plugins (forms):
+![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_slider_range_plugins.png)
+
+```js
+{
+    label: 'Progress',
+    name: 'field1',
+    type: 'slider',
+    plugins: 'rc-slider',
+    pluginProps: {
+        min: 0,
+        max: 100,
+        defaultValue: 55 // this value can be used e.g. for create
+    }
+},
+{
+    label: 'Customers range',
+    name: 'field2',
+    type: 'range',
+    plugins: 'rc-range',
+    pluginProps: {
+        min: 0,
+        max: 200,
+        defaultValue: [10, 100] // this value can be used e.g. for create
+    }
+},
 ```
 
 and the data, as in progress bar plugin, comes in via `children` prop intuitively, 
@@ -553,7 +585,7 @@ stroke: {
     linejoin: true
 }
 ```
-you can just place a new structure to `pluginProps`, update the plugin and proceed using new features of updated plugins.
+you can just place a new structure to `pluginProps`, update the plugin and proceed using new features.
 
 ## Headers
 In some work-flows u may need to send several useful headers, ex. with secret key for api, 

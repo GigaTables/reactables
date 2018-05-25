@@ -465,6 +465,7 @@ For instance - to edit text with HTML tags (aka WYSIWYG) and then save it in DB 
 ``` 
 
 Progress bar plugin (table):
+
 ![Progress bar plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_progress_bar_plugin.png)
 
 ```js
@@ -480,6 +481,7 @@ this will build 5 colored (left-to-right) progress bar for every row in the colu
 Protected from `null` and `negative` numbers as well as `more then 100`.
 
 PieChart plugin (table):
+
 ![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_pie_plugin.png)
 
 ```js
@@ -497,6 +499,7 @@ PieChart plugin (table):
 ```
 
 Trend plugin (table):
+
 ![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_trend_plugin.png)
 
 ```js
@@ -512,7 +515,8 @@ Trend plugin (table):
     }
 }
 ```
-Slider and Range plugins (forms):
+<!--- Slider and Range plugins (forms):
+
 ![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_slider_range_plugins.png)
 
 ```js
@@ -539,7 +543,7 @@ Slider and Range plugins (forms):
     }
 },
 ```
-
+--->
 and the data, as in progress bar plugin, comes in via `children` prop intuitively, 
 thus the only thing you need is to pass them through json: 
 ```js

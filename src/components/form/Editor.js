@@ -13,8 +13,8 @@ import TextArea from './fields/TextArea'
 import Select from './fields/Select'
 import CheckRadio from './fields/CheckRadio'
 import TextEditor from './fields/TextEditor'
-import RcSlider from '../plugins/RcSlider'
-import RcRange from '../plugins/RcRange'
+// import RcSlider from '../plugins/RcSlider'
+// import RcRange from '../plugins/RcRange'
 import FormField from './FormField'
 
 const CommonConstants = require('../CommonConstants')
@@ -340,16 +340,6 @@ class Editor extends Component {
                 }
                 break
             case EditorConstants.TYPE_SELECT:
-                // htmlFields[i] = <Select
-                //     key={i}
-                //     onChange={this.onChange.bind(this)}
-                //     id={fieldName}
-                //     type={fieldType}
-                //     name={fieldName}
-                //     label={fieldLabel}
-                //     value={fieldValue}
-                //     objectValues={object.values}
-                // />;
                 htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}>
                     <Select
                         key={i}
@@ -375,6 +365,7 @@ class Editor extends Component {
                     objectValues={object.values}
                 />
                 break
+            /* todo: https://github.com/react-component/slider/issues/437
             case EditorConstants.TYPE_SLIDER:
                 fieldValue = Math.floor(object.pluginProps.max);
                 if (typeof object.pluginProps.defaultValue !== CommonConstants.UNDEFINED) {
@@ -410,7 +401,7 @@ class Editor extends Component {
                     pluginProps={object.pluginProps}
                     isMultiple={isMultiple}
                 /></FormField>
-                break
+                break*/
         }
         return htmlFields
     }

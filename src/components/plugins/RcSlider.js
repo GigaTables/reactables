@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Tooltip from 'rc-tooltip'
 import Slider from 'rc-slider'
 import Handle from 'rc-slider/es/Handle'
-import * as CommonConstants from '../CommonConstants'
+import CommonConstants from '../CommonConstants'
 
 class RcSlider extends Component {
     onChange (value) {

@@ -1,5 +1,5 @@
-import 'rc-slider/assets/index.css'
-import 'rc-tooltip/assets/bootstrap.css'
+import '../../css/rc-slider.css'
+import '../../css/rc-tooltip.css'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Range from 'rc-slider/es/Range'

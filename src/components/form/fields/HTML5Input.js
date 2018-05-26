@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import editorStyles from '../../../css/editor.css';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class HTML5Input extends Component {
     render() {
@@ -9,28 +8,17 @@ class HTML5Input extends Component {
             id,
             type,
             name,
-            label,
-            onChange,
-        } = this.props;
+            onChange
+        } = this.props
         return (
-            <div key={id} className="gte_editor_fields">
-                <label
-                    className="gte_label"
-                    htmlFor={id}>
-                    {label}
-                </label>
-                <div className={editorStyles.gte_field}>
-                    <input
-                        onChange={onChange}
-                        {...attributes}
-                        id={id}
-                        type={type}
-                        name={name}
-                    />
-                </div>
-                <div className="clear"></div>
-            </div>
-        );
+            <input
+                onChange={onChange}
+                {...attributes}
+                id={id}
+                type={type}
+                name={name}
+            />
+        )
     }
 }
 
@@ -39,8 +27,7 @@ HTML5Input.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    attributes: PropTypes.array,
-    label: PropTypes.string,
-};
+    attributes: PropTypes.object
+}
 
 export default HTML5Input

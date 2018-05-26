@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import editorStyles from '../../../css/editor.css'
 
 class Select extends Component {
     render () {
@@ -41,7 +40,7 @@ Select.propTypes = {
     onChange: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    attributes: PropTypes.array,
+    attributes: PropTypes.object,
     value: PropTypes.string
 }
 

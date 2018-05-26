@@ -39,7 +39,7 @@ GigaTables supports the following capabilities:
 and more...
 
 * [Installation](#user-content-installation)
-* [Few screen-shots](#user-content-few-screen-shots)
+* [Demo](#user-content-demo)
 * [Installation based on browser script implementation](#user-content-installation-based-on-browser-script-implementation-which-u-can-download-from-build-dir)
 * [Getting Started](#user-content-getting-started)
   * [Minimal configuration](#user-content-minimal-configuration)
@@ -154,7 +154,6 @@ If u run GT from scratch - don't forget to install dependencies, such as:
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-react": "^6.24.1",
-    "gigatables-react": "^2.3.6",       
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14",
     "webpack-dev-server": "^3.1.3"       
@@ -311,74 +310,95 @@ First of all You should define an object Editor like this:
 
 ```JS
 let editor = {
-    ajax: 'http://www.example.com/editor.php',
-    // it is possible to set discrete urls and http methods for any type of request
+    ajax: 'http://example.com/editor.php',
+    // it is possible to set discrete urls, http methods for any type of request
     // ajax: {
     //     create: {
-    //         url: 'http://www.example.com/create.php',
+    //         url: 'http://gigatables.loc/editor.php',
     //         type: 'POST',
+    //         headers: {
+    //             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049'
+    //         }
     //     },
     //     edit: {
-    //         url: 'http://www.example.com/edit.php',
+    //         url: 'http://gigatables.loc/editor.php',
     //         type: 'PUT',
+    //         headers: {
+    //             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+    //             'X-Header-Key': 'foo-bar'
+    //         }
     //     },
     //     delete: {
-    //         url: 'http://www.example.com/delete.php',
+    //         url: 'http://gigatables.loc/editor.php',
     //         type: 'DELETE',
-    //     },
+    //         headers: {
+    //             'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
+    //             'X-Header-Key': 'foo-bar-baz'
+    //         }
+    //     }
     // },
-    ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
+    ajaxFiles: 'http://example.com/uploadFiles.php',
     struct: {
         buttons: ['top', 'bottom'] // buttons
     },
     fields: [
         {
-            label: "ID",
-            name: "id",
+            label: 'ID',
+            name: 'id',
             type: 'hidden'
         },
+        {
+            label: 'Progress',
+            name: 'field1',
+            type: 'range',
+            attrs: {
+                min: 0,
+                max: 100,
+                defaultValue: 55
+            }
+        },
+        {
+            label: 'Article title:',
+            name: 'title',
+            type: 'text', // default, other: password, file, select, multiselect etc
+            fieldsetOpen: true,
+            legend: 'Required fields',
+            attrs: {
+                pattern: '^[A-Za-z0-9_]+$',
+                className: 'titleField'
+            }
+        },
+        {
+            label: 'Description:',
+            name: 'desc',
+            type: 'textarea',
+            plugins: 'rte',
+            attrs: {
+                className: 'descriptionField'
+            },
+            fieldsetClose: true
+        },
+        {
+            label: 'Date Time:',
+            name: 'date',
+            type: 'date'
+        },
+        {
+            label: 'Image:',
+            name: 'image',
+            type: 'file'
+        },
         {// an example of using select - automatically selected if matches with data in table column
-            label: "Types:",
-            name: "types[]",
+            label: 'Types:',
+            name: 'types[]',
             values: [// if select,checkbox,radio etc types - need this pre-set structure of values
                 {'key1': 'val1'},
                 {'key2': 'val2'}
             ],
-            type: 'checkbox', // select,checkbox,radio
-        },
-        {
-            label: "Article title:",
-            name: "title",
-            type: 'text', // default, other: password, file, select, multiselect etc
-            fieldsetOpen: true,
-            legend: 'Required fields',
-            attrs: [
-                {'pattern': '^[A-Za-z0-9_]+$'},
-                {'className': 'titleField'}
-            ]
-        },
-        {
-            label: "Description:",
-            name: "desc",
-            type: 'textarea',
-            plugins: 'rte',
-            attrs: [
-                {'className': 'descriptionField'}
-            ],
-            fieldsetClose: true,
-        },
-        {
-            label: "Date Time:",
-            name: "date",
-            type: 'date'
-        },
-        {
-            label: "Image:",
-            name: "image",
-            type: 'file'
-        },
+            type: 'select' // select,checkbox,radio
+        }
     ]
-};
+}
 ```        
 
 and then pass variable (in this case - editor) to GigaTables main options in tableOpts section like this:
@@ -515,35 +535,7 @@ Trend plugin (table):
     }
 }
 ```
-<!--- Slider and Range plugins (forms):
 
-![Pie chart plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_slider_range_plugins.png)
-
-```js
-{
-    label: 'Progress',
-    name: 'field1',
-    type: 'slider',
-    plugins: 'rc-slider',
-    pluginProps: {
-        min: 0,
-        max: 100,
-        defaultValue: 55 // this value can be used e.g. for create
-    }
-},
-{
-    label: 'Customers range',
-    name: 'field2',
-    type: 'range',
-    plugins: 'rc-range',
-    pluginProps: {
-        min: 0,
-        max: 200,
-        defaultValue: [10, 100] // this value can be used e.g. for create
-    }
-},
-```
---->
 and the data, as in progress bar plugin, comes in via `children` prop intuitively, 
 thus the only thing you need is to pass them through json: 
 ```js

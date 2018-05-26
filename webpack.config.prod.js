@@ -58,9 +58,7 @@ const config = {
         'hoek': 'umd hoek',
         'superagent': 'umd superagent',
         'react-minimal-pie-chart': 'umd react-minimal-pie-chart',
-        'react-trend': 'umd react-trend',
-        'rc-slider': 'umd rc-slider',
-        'rc-tooltip': 'umd rc-tooltip'
+        'react-trend': 'umd react-trend'
     }
 };
 module.exports = config;

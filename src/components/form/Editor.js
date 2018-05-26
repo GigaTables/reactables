@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DataException, EditorException } from '../Exceptions'
 import { t, formElement } from '../Helpers'
-import editorStyles from '../../css/editor.css'
+import '../../css/editor.css'
 import classNames from 'classnames/bind'
 import superagent from 'superagent'
 import Input from './fields/Input'
@@ -13,8 +13,6 @@ import TextArea from './fields/TextArea'
 import Select from './fields/Select'
 import CheckRadio from './fields/CheckRadio'
 import TextEditor from './fields/TextEditor'
-// import RcSlider from '../plugins/RcSlider'
-// import RcRange from '../plugins/RcRange'
 import FormField from './FormField'
 
 const CommonConstants = require('../CommonConstants')
@@ -233,37 +231,27 @@ class Editor extends Component {
                 fieldValue = dataIndices[fieldName]
             }
         }
-        // settting attrs
-        let attributes = []
+        // attributes for form tags
+        let attributes = {}
         if (typeof object.attrs !== CommonConstants.UNDEFINED) {
-            let fieldOpts = object.attrs
-            for (let opt in fieldOpts) {
-                if (fieldOpts.hasOwnProperty(opt)) {
-                    for (let attr in fieldOpts[opt]) {
-                        if (fieldOpts[opt].hasOwnProperty(attr)) {
-                            attributes[attr] = fieldOpts[opt][attr]
-                        }
-                    }
-                }
-            }
+            attributes = object.attrs;
         }
         
         let i = 0,
-            htmlFields = []
+            htmlFields = {}
         switch (fieldType) {
             // uncontrolled input element, so we can put value here
             case EditorConstants.TYPE_TEXT:
             case EditorConstants.TYPE_HIDDEN:
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
-                htmlFields[i] = <Input key={i}
+                htmlFields = <Input key={i}
                                        onFocus={this.onFocus.bind(this)}
                                        onChange={this.onChange.bind(this)}
                                        attributes={attributes}
                                        id={fieldName}
                                        type={fieldType}
                                        name={fieldName}
-                                       label={fieldLabel}
                                        value={fieldValue}
                                        isMultiple={isMultiple}/>
                 break
@@ -271,15 +259,14 @@ class Editor extends Component {
             case EditorConstants.TYPE_DATE:
             case EditorConstants.TYPE_DATETIME:
             case EditorConstants.TYPE_NUMBER:
-            // todo: combine std range with rc-range plugin
-            // case EditorConstants.TYPE_RANGE:
+            case EditorConstants.TYPE_RANGE:
             case EditorConstants.TYPE_SEARCH:
             case EditorConstants.TYPE_TIME:
             case EditorConstants.TYPE_TEL:
             case EditorConstants.TYPE_URL:
             case EditorConstants.TYPE_MONTH:
             case EditorConstants.TYPE_WEEK:
-                htmlFields[i] = <HTML5Input
+                htmlFields = <HTML5Input
                     key={i}
                     onFocus={this.onFocus.bind(this)}
                     onChange={this.onChange.bind(this)}
@@ -287,44 +274,38 @@ class Editor extends Component {
                     id={fieldName}
                     type={fieldType}
                     name={fieldName}
-                    label={fieldLabel}
                 />
                 break
             case EditorConstants.TYPE_FILE:
                 // todo: it can't be passed through rfc from File component
-                htmlFields[i] = <div key={i} className="gte_editor_fields">
-                    <label className="gte_label" htmlFor={fieldName}>{fieldLabel}</label>
-                    <div className={editorStyles.gte_field}>
-                        <input
-                            ref={(input) => {
-                                this.filesInput = input
-                            }}
-                            {...attributes}
-                            id={fieldName}
-                            type={fieldType}
-                            name={fieldName}/>
-                    </div>
-                    <div className="clear"></div>
-                </div>
+                htmlFields = <input
+                    ref={(input) => {
+                        this.filesInput = input
+                    }}
+                    {...attributes}
+                    id={fieldName}
+                    type={fieldType}
+                    name={fieldName}/>
                 break
             case EditorConstants.TYPE_TEXTAREA:
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_RTE) !== -1) {
-                    htmlFields[i] = <TextEditor
-                        key={i}
-                        onFocus={this.onFocus.bind(this)}
-                        onChangeHtml={this.onChangeHtml.bind(this)}
-                        id={fieldName}
-                        type={fieldType}
-                        name={fieldName}
-                        label={fieldLabel}
-                        value={fieldValue}
-                        attributes={attributes}
-                        isMultiple={isMultiple}
-                        data-textarea={true}
-                    />
+                    htmlFields =
+                        <TextEditor
+                            key={i}
+                            onFocus={this.onFocus.bind(this)}
+                            onChangeHtml={this.onChangeHtml.bind(this)}
+                            id={fieldName}
+                            type={fieldType}
+                            name={fieldName}
+                            label={fieldLabel}
+                            value={fieldValue}
+                            attributes={attributes}
+                            isMultiple={isMultiple}
+                            data-textarea={true}
+                        />
                 } else {
-                    htmlFields[i] = <TextArea
+                    htmlFields = <TextArea
                         key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChange={this.onChange.bind(this)}
@@ -340,21 +321,7 @@ class Editor extends Component {
                 }
                 break
             case EditorConstants.TYPE_SELECT:
-                htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}>
-                    <Select
-                        key={i}
-                        onChange={this.onChange.bind(this)}
-                        id={fieldName}
-                        type={fieldType}
-                        name={fieldName}
-                        label={fieldLabel}
-                        value={fieldValue}
-                        objectValues={object.values}
-                    /></FormField>
-                break
-            case EditorConstants.TYPE_CHECKBOX:
-            case EditorConstants.TYPE_RADIO:
-                htmlFields[i] = <CheckRadio
+                htmlFields = <Select
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -365,13 +332,9 @@ class Editor extends Component {
                     objectValues={object.values}
                 />
                 break
-            /* todo: https://github.com/react-component/slider/issues/437
-            case EditorConstants.TYPE_SLIDER:
-                fieldValue = Math.floor(object.pluginProps.max);
-                if (typeof object.pluginProps.defaultValue !== CommonConstants.UNDEFINED) {
-                    fieldValue = object.pluginProps.defaultValue;
-                }
-                htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}><RcSlider
+            case EditorConstants.TYPE_CHECKBOX:
+            case EditorConstants.TYPE_RADIO:
+                htmlFields = <CheckRadio
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -379,31 +342,11 @@ class Editor extends Component {
                     name={fieldName}
                     label={fieldLabel}
                     value={fieldValue}
-                    pluginProps={object.pluginProps}
-                    isMultiple={isMultiple}
-                /></FormField>
+                    objectValues={object.values}
+                />
                 break
-            case EditorConstants.TYPE_RANGE:
-                if (fieldValue === '') {
-                    fieldValue = [object.pluginProps.min + 1, object.pluginProps.max - 1];
-                    if (typeof object.pluginProps.defaultValue !== CommonConstants.UNDEFINED) {
-                        fieldValue = object.pluginProps.defaultValue;
-                    }
-                }
-                htmlFields[i] = <FormField key={i} id={fieldName} label={fieldLabel}><RcRange
-                    key={i}
-                    onChange={this.onChange.bind(this)}
-                    id={fieldName}
-                    type={fieldType}
-                    name={fieldName}
-                    label={fieldLabel}
-                    value={fieldValue}
-                    pluginProps={object.pluginProps}
-                    isMultiple={isMultiple}
-                /></FormField>
-                break*/
         }
-        return htmlFields
+        return [<FormField key={i} id={fieldName} label={fieldLabel} type={fieldType}>{htmlFields}</FormField>]
     }
     
     triggerBefore(type) {

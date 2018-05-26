@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import editorStyles from '../../../css/editor.css';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class TextArea extends Component {
     render() {
@@ -8,31 +7,23 @@ class TextArea extends Component {
             attributes,
             id,
             name,
-            label,
             value,
             onFocus,
             onChange,
-            isMultiple,
-        } = this.props;
+            isMultiple
+        } = this.props
         return (
-            <div key={id} className="gte_editor_fields">
-                <label className="gte_label"
-                       htmlFor={id}>{label}</label>
-                <div className={editorStyles.gte_field}>
-                <textarea
-                    onFocus={onFocus}
-                    onChange={onChange}
-                    {...attributes}
-                    id={id}
-                    name={name}
-                    value={value}
-                    data-multiple={isMultiple}
-                    data-textarea={true}
-                ></textarea>
-                </div>
-                <div className="clear"></div>
-            </div>
-        );
+            <textarea
+                onFocus={onFocus}
+                onChange={onChange}
+                {...attributes}
+                id={id}
+                name={name}
+                value={value}
+                data-multiple={isMultiple}
+                data-textarea={true}
+            ></textarea>
+        )
     }
 }
 
@@ -42,8 +33,7 @@ TextArea.propTypes = {
     name: PropTypes.string.isRequired,
     isMultiple: PropTypes.bool,
     onFocus: PropTypes.func,
-    attributes: PropTypes.array,
-    label: PropTypes.string,
-};
+    attributes: PropTypes.object
+}
 
 export default TextArea

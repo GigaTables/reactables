@@ -48,7 +48,7 @@ ProgressBar.defaultProps = {
 };
 
 ProgressBar.propTypes = {
-    percent: PropTypes.number,
+    percent: PropTypes.any,
     height: PropTypes.number,
 };
 

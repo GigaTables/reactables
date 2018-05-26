@@ -36,7 +36,7 @@ let editor = {
     // },
     ajaxFiles: 'http://gigatables.loc/uploadFiles.php',
     struct: {
-        buttons: [ 'top', 'bottom' ] // buttons
+        buttons: ['top', 'bottom'] // buttons
     },
     fields: [
         {
@@ -47,23 +47,11 @@ let editor = {
         {
             label: 'Progress',
             name: 'field1',
-            type: 'slider',
-            plugins: 'rc-slider',
-            pluginProps: {
+            type: 'range',
+            attrs: {
                 min: 0,
                 max: 100,
-                defaultValue: 55 // this value can be used e.g. for create
-            }
-        },
-        {
-            label: 'Customers range',
-            name: 'field2',
-            type: 'range',
-            plugins: 'rc-range',
-            pluginProps: {
-                min: 0,
-                max: 200,
-                defaultValue: [10, 100] // this value can be used e.g. for create
+                defaultValue: 55
             }
         },
         {
@@ -72,19 +60,19 @@ let editor = {
             type: 'text', // default, other: password, file, select, multiselect etc
             fieldsetOpen: true,
             legend: 'Required fields',
-            attrs: [
-                { 'pattern': '^[A-Za-z0-9_]+$' },
-                { 'className': 'titleField' }
-            ]
+            attrs: {
+                pattern: '^[A-Za-z0-9_]+$',
+                className: 'titleField'
+            }
         },
         {
             label: 'Description:',
             name: 'desc',
             type: 'textarea',
             plugins: 'rte',
-            attrs: [
-                { 'className': 'descriptionField' }
-            ],
+            attrs: {
+                className: 'descriptionField'
+            },
             fieldsetClose: true
         },
         {
@@ -101,22 +89,20 @@ let editor = {
             label: 'Types:',
             name: 'types[]',
             values: [// if select,checkbox,radio etc types - need this pre-set structure of values
-                { 'key1': 'val1' },
-                { 'key2': 'val2' }
+                {'key1': 'val1'},
+                {'key2': 'val2'}
             ],
             type: 'select' // select,checkbox,radio
-//              attrs: [
-//                {'multiple':true}
-//              ]
-        },
+//              attrs: {multiple:true}
+        }
     ]
 }
 
 let settings = {
     struct: {
-        search: [ 'top', 'bottom' ],
-        rowsSelector: [ 'desc', 'top', 'bottom' ],
-        pagination: [ 'bottom' ],
+        search: ['top', 'bottom'],
+        rowsSelector: ['desc', 'top', 'bottom'],
+        pagination: ['bottom'],
         fixedHeader: false, // default false
         editableCells: true, // default false
         aggregateFooter: true, // default false
@@ -126,7 +112,7 @@ let settings = {
         width: '950px'
     },
     lang: 'en', // english default
-    perPageRows: [ 25, 50, 100, 200 ],
+    perPageRows: [25, 50, 100, 200],
     defaultPerPage: 50,
     headers: {
         'X-Api-Key': '8013b37216a07f50027139d89ee9f822e3784049',
@@ -147,7 +133,7 @@ let settings = {
             visible: true, // true by defualt
             searchable: true, // true by defualt
             discreteSearch: true, // false by default
-            discreteSearchValue: function (title) {
+            discreteSearchValue: function(title) {
                 return 'Search by field - ' + title
             }
         },
@@ -180,7 +166,7 @@ let settings = {
             data: 'field2',
             footer: 'avg'
         },
-        { data: 'field3', visible: false },
+        {data: 'field3', visible: false},
         {
             data: 'consumers',
             plugins: 'pie',
@@ -242,24 +228,24 @@ let settings = {
             //     editor: editor,
             // },
             {
-                extended: 'editor_create', editor: editor, triggerAfter: (function () {
-                console.log('after create')
-            }), triggerBefore: (function () {
-                console.log('before create')
-            })
+                extended: 'editor_create', editor: editor, triggerAfter: (function() {
+                    console.log('after create')
+                }), triggerBefore: (function() {
+                    console.log('before create')
+                })
             },
             {
-                extended: 'editor_edit', editor: editor, triggerBefore: (function () {
-                console.log('before edit')
-            })
+                extended: 'editor_edit', editor: editor, triggerBefore: (function() {
+                    console.log('before edit')
+                })
             },
             {
-                extended: 'editor_remove', editor: editor, triggerAfter: (function () {
-                console.log('after del')
-            })
+                extended: 'editor_remove', editor: editor, triggerAfter: (function() {
+                    console.log('after del')
+                })
             }
         ],
-        buttonsPosition: [ 'top', 'bottom' ],
+        buttonsPosition: ['top', 'bottom'],
         theme: 'std'
     }
 }

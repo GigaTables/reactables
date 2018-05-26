@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import editorStyles from '../../css/editor.css'
+import EditorConstants from '../EditorConstants'
 
 class FormField extends Component {
-    render () {
+    render() {
         const {
             id,
             label,
-            children
+            children,
+            type
         } = this.props
         
         return (
             <div key={id} className="gte_editor_fields">
                 <label className="gte_label"
-                       htmlFor={id}>{label}</label>
+                       htmlFor={id}>{(type !== EditorConstants.TYPE_HIDDEN) ? label : null}</label>
                 <div className={editorStyles.gte_field}>
                     {children}
                 </div>
@@ -24,7 +26,8 @@ class FormField extends Component {
 
 FormField.propTypes = {
     id: PropTypes.string.isRequired,
-    label: PropTypes.string
+    label: PropTypes.string,
+    type: PropTypes.string
 }
 
 export default FormField

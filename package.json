@@ -11,8 +11,6 @@
     "hoek": "^5.0.3",
     "lodash": "4.17.4",
     "prop-types": "^15.6.0",
-    "rc-slider": "^8.6.1",
-    "rc-tooltip": "^3.7.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-minimal-pie-chart": "^3.0.2",

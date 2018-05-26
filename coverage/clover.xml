@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527321975046" clover="3.2.0">
-  <project timestamp="1527321975046" name="All files">
-    <metrics statements="497" coveredstatements="468" conditionals="317" coveredconditionals="229" methods="93" coveredmethods="91" elements="907" coveredelements="788" complexity="0" loc="497" ncloc="497" packages="6" files="25" classes="25">
+<coverage generated="1527324228537" clover="3.2.0">
+  <project timestamp="1527324228538" name="All files">
+    <metrics statements="497" coveredstatements="468" conditionals="317" coveredconditionals="235" methods="93" coveredmethods="91" elements="907" coveredelements="794" complexity="0" loc="497" ncloc="497" packages="6" files="25" classes="25">
       <package name="components">
-        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <file name="CommonConstants.js" path="/Users/arthur/www/gigatables_react/src/components/CommonConstants.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="1" count="8" type="stmt"/>
@@ -22,11 +22,11 @@
           <line num="9" count="2" type="stmt"/>
         </file>
         <file name="Helpers.js" path="/Users/arthur/www/gigatables_react/src/components/Helpers.js">
-          <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
-          <line num="2" count="6" type="stmt"/>
-          <line num="3" count="6" type="cond" truecount="1" falsecount="1"/>
+          <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+          <line num="2" count="7" type="stmt"/>
+          <line num="3" count="7" type="cond" truecount="2" falsecount="0"/>
           <line num="4" count="6" type="stmt"/>
-          <line num="7" count="6" type="stmt"/>
+          <line num="7" count="7" type="stmt"/>
         </file>
         <file name="Lang.js" path="/Users/arthur/www/gigatables_react/src/components/Lang.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -308,21 +308,21 @@
         </file>
       </package>
       <package name="components.form.fields">
-        <metrics statements="39" coveredstatements="39" conditionals="12" coveredconditionals="6" methods="8" coveredmethods="8"/>
+        <metrics statements="39" coveredstatements="39" conditionals="12" coveredconditionals="11" methods="8" coveredmethods="8"/>
         <file name="CheckRadio.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/CheckRadio.js">
-          <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="3" methods="1" coveredmethods="1"/>
-          <line num="13" count="1" type="stmt"/>
-          <line num="15" count="1" type="stmt"/>
-          <line num="16" count="1" type="stmt"/>
-          <line num="18" count="1" type="stmt"/>
-          <line num="19" count="1" type="stmt"/>
-          <line num="20" count="2" type="cond" truecount="1" falsecount="1"/>
-          <line num="21" count="2" type="stmt"/>
-          <line num="22" count="2" type="cond" truecount="1" falsecount="1"/>
-          <line num="23" count="2" type="stmt"/>
-          <line num="24" count="2" type="stmt"/>
-          <line num="37" count="1" type="stmt"/>
-          <line num="43" count="1" type="stmt"/>
+          <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+          <line num="13" count="4" type="stmt"/>
+          <line num="15" count="4" type="stmt"/>
+          <line num="16" count="4" type="stmt"/>
+          <line num="18" count="4" type="stmt"/>
+          <line num="19" count="4" type="stmt"/>
+          <line num="20" count="6" type="cond" truecount="2" falsecount="0"/>
+          <line num="21" count="5" type="stmt"/>
+          <line num="22" count="5" type="cond" truecount="2" falsecount="0"/>
+          <line num="23" count="4" type="stmt"/>
+          <line num="24" count="4" type="stmt"/>
+          <line num="37" count="4" type="stmt"/>
+          <line num="43" count="2" type="stmt"/>
         </file>
         <file name="HTML5Input.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/HTML5Input.js">
           <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -337,17 +337,17 @@
           <line num="29" count="1" type="stmt"/>
         </file>
         <file name="Select.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/Select.js">
-          <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
-          <line num="13" count="2" type="stmt"/>
-          <line num="15" count="2" type="stmt"/>
-          <line num="16" count="2" type="stmt"/>
-          <line num="17" count="2" type="stmt"/>
-          <line num="18" count="4" type="cond" truecount="1" falsecount="1"/>
-          <line num="19" count="4" type="stmt"/>
-          <line num="20" count="4" type="cond" truecount="1" falsecount="1"/>
+          <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+          <line num="13" count="4" type="stmt"/>
+          <line num="15" count="4" type="stmt"/>
+          <line num="16" count="4" type="stmt"/>
+          <line num="17" count="4" type="stmt"/>
+          <line num="18" count="6" type="cond" truecount="2" falsecount="0"/>
+          <line num="19" count="5" type="stmt"/>
+          <line num="20" count="5" type="cond" truecount="2" falsecount="0"/>
           <line num="21" count="4" type="stmt"/>
           <line num="22" count="4" type="stmt"/>
-          <line num="27" count="2" type="stmt"/>
+          <line num="27" count="4" type="stmt"/>
           <line num="39" count="2" type="stmt"/>
         </file>
         <file name="TextArea.js" path="/Users/arthur/www/gigatables_react/src/components/form/fields/TextArea.js">

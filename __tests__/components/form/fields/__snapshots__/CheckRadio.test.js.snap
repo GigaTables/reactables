@@ -1,0 +1,32 @@
+exports[`test renders Select correctly 1`] = `
+Array [
+  <label
+    className="gte_label_text">
+    <input
+        data-value="1"
+        defaultChecked={1}
+        id="title"
+        name="title"
+        onClick={[Function]}
+        type="select"
+        value="key1" />
+    1
+</label>,
+  <label
+    className="gte_label_text">
+    <input
+        data-value="val2"
+        defaultChecked={0}
+        id="title"
+        name="title"
+        onClick={[Function]}
+        type="select"
+        value="key2" />
+    val2
+</label>,
+]
+`;
+
+exports[`test renders Select correctly 2`] = `null`;
+
+exports[`test renders Select correctly 3`] = `null`;

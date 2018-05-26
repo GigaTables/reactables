@@ -1,0 +1,56 @@
+exports[`test renders Column correctly 1`] = `
+<td
+  className=""
+  data-cell={1}
+  data-index="desc"
+  data-realid={71}
+  data-rowid={0}
+  data-selectedrows={Array []}
+  onClick={[Function]}>
+  <input
+    data-action="edit"
+    data-cell={1}
+    data-index="desc"
+    data-realid={71}
+    data-rowid={0}
+    id="edit_cell"
+    onChange={[Function]}
+    onClick={[Function]}
+    onKeyUp={[Function]}
+    type="text"
+    value="Lorem Ipsum is simply dummy Bar 725 text of the printing and typesetting" />
+</td>
+`;
+
+exports[`test renders Column correctly 2`] = `
+<td
+  className=""
+  data-cell={1}
+  data-index="editable-cells"
+  data-realid={71}
+  data-rowid={0}
+  data-selectedrows={Array []}
+  onClick={[Function]}>
+  12
+</td>
+`;
+
+exports[`test renders Column correctly 3`] = `
+<td
+  data-index="editable-cells"
+  data-maxrow="0"
+  data-minrow="0"
+  data-realid={71}
+  data-rowid={0}
+  data-selectedrows={Array []}>
+  <div
+    className="normal_checkbox"
+    data-index="editable-cells"
+    data-maxrow="0"
+    data-minrow="0"
+    data-realid={71}
+    data-rowid={0}
+    data-selectedrows={Array []}
+    onClick={[Function]} />
+</td>
+`;

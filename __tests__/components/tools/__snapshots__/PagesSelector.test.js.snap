@@ -1,0 +1,32 @@
+exports[`test renders PagesSelector correctly 1`] = `
+<div
+  className={undefined}>
+  <span>
+    Show
+     
+  </span>
+  <span>
+    <select
+      className={undefined}
+      onChange={[Function]}
+      value={50}>
+      <option>
+        25
+      </option>
+      <option>
+        50
+      </option>
+      <option>
+        100
+      </option>
+      <option>
+        200
+      </option>
+    </select>
+  </span>
+  <span>
+     
+    entries
+  </span>
+</div>
+`;

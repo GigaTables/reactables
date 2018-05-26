@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Tools from '../../src/components/tools/Tools.js'
+import Tools from '../../../src/components/tools/Tools.js'
 
 const editor = {
     ajax: 'http://gigatables.loc/editor.php',

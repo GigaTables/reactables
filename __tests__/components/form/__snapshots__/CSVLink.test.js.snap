@@ -1,0 +1,12 @@
+exports[`test renders CSVLink correctly 1`] = `
+<div
+  className="gte_buttons_container"
+  onClick={[Function]}>
+  <div
+    className="gte_button">
+    <span />
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;

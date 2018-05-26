@@ -1,0 +1,21 @@
+exports[`test renders Row correctly 1`] = `
+<tr
+  className="even"
+  data-maxrow={0}
+  data-minrow={0}
+  data-realid={71}
+  data-rowid={0}
+  data-selectedrows={Array []}
+  onClick={[Function]}>
+  <td
+    className=""
+    data-cell="01"
+    data-index="desc"
+    data-realid={71}
+    data-rowid={0}
+    data-selectedrows={Array []}
+    onClick={[Function]}>
+    Lorem Ipsum is simply dummy Bar 725 text of the printing and typesetting
+  </td>
+</tr>
+`;

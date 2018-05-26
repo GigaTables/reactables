@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import PagesSelector from '../../src/components/tools/PagesSelector.js'
+import PagesSelector from '../../../src/components/tools/PagesSelector.js'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 

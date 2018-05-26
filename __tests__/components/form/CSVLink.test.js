@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import CSVLink from '../../src/components/form/CSVLink.js'
+import CSVLink from '../../../src/components/form/CSVLink.js'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 

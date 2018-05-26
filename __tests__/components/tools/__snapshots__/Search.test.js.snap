@@ -1,0 +1,16 @@
+exports[`test renders Search correctly 1`] = `
+<div
+  className={undefined}>
+  <input
+    className={undefined}
+    name="search"
+    onChange={[Function]}
+    onKeyUp={[Function]}
+    placeholder="Search"
+    tabIndex="1"
+    type="text"
+    value="" />
+  <div
+    className={undefined} />
+</div>
+`;

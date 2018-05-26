@@ -1,13 +1,13 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Editor from '../../src/components/form/Editor.js'
+import Editor from '../../../src/components/form/Editor.js'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 configure({ adapter: new Adapter() })
 
-const CommonConstants = require('../../src/components/CommonConstants')
-const EditorConstants = require('../../src/components/EditorConstants')
+const CommonConstants = require('../../../src/components/CommonConstants')
+const EditorConstants = require('../../../src/components/EditorConstants')
 
 const editor = {
     ajax: 'http://gigatables.loc/editor.php',

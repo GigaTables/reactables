@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import TextEditor from '../../src/components/form/fields/TextEditor.js'
+import TextEditor from '../../../../src/components/form/fields/TextEditor.js'
 import {shallow, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({adapter: new Adapter()});

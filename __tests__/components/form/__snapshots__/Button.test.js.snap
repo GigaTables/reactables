@@ -1,0 +1,17 @@
+exports[`test renders Button correctly 1`] = `
+<div
+  className="gte_buttons_container"
+  data-action="create"
+  onClick={undefined}>
+  <div
+    className="gte_button gte_btn_disabled"
+    data-action="create">
+    <span
+      data-action="create">
+      New
+    </span>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;

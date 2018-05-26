@@ -1,0 +1,12 @@
+exports[`test renders TextArea correctly 1`] = `
+<textarea
+  cols={50}
+  data-multiple={false}
+  data-textarea={true}
+  id="desc"
+  name="desc"
+  onChange={[Function]}
+  onFocus={[Function]}
+  rows={20}
+  value="foo bar baz" />
+`;

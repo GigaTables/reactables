@@ -1,0 +1,423 @@
+exports[`test renders Pagination correctly 1`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    Showing 1 to 50 of 249 entries.
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="gt_page prev"
+        data-from={200}
+        onClick={undefined}>
+        Previous
+      </div>
+      <div
+        className="gt_page selected"
+        data-from={0}
+        onClick={undefined}>
+        1
+      </div>
+      <div
+        className="gt_page"
+        data-from={50}
+        onClick={undefined}>
+        2
+      </div>
+      <div
+        className="gt_page"
+        data-from={100}
+        onClick={undefined}>
+        3
+      </div>
+      <div
+        className="gt_page"
+        data-from={150}
+        onClick={undefined}>
+        4
+      </div>
+      <div
+        className="gt_page"
+        data-from={200}
+        onClick={undefined}>
+        5
+      </div>
+      <div
+        className="gt_page next"
+        data-from={50}
+        onClick={undefined}>
+        Next
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;
+
+exports[`test renders Pagination correctly 2`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    Showing 451 to 450 of 555 entries.
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="gt_page prev"
+        data-from={350}
+        onClick={undefined}>
+        Previous
+      </div>
+      <span>
+        <div
+          className="gt_page"
+          data-from="0"
+          onClick={undefined}>
+          1
+        </div>
+        <div
+          className="gt_page_dots">
+          ...
+        </div>
+        <div
+          className="gt_page"
+          data-from={300}
+          onClick={undefined}>
+          7
+        </div>
+        <div
+          className="gt_page"
+          data-from={350}
+          onClick={undefined}>
+          8
+        </div>
+        <div
+          className="gt_page selected"
+          data-from={400}
+          onClick={undefined}>
+          9
+        </div>
+        <div
+          className="gt_page"
+          data-from={450}
+          onClick={undefined}>
+          10
+        </div>
+        <div
+          className="gt_page"
+          data-from={500}
+          onClick={undefined}>
+          11
+        </div>
+        <div
+          className="gt_page"
+          data-from={550}
+          onClick={undefined}>
+          12
+        </div>
+      </span>
+      <div
+        className="gt_page next"
+        data-from={450}
+        onClick={undefined}>
+        Next
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;
+
+exports[`test renders Pagination correctly 3`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    Showing 201 to 250 of 249 entries.
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="gt_page prev"
+        data-from={150}
+        onClick={undefined}>
+        Previous
+      </div>
+      <div
+        className="gt_page"
+        data-from={0}
+        onClick={undefined}>
+        1
+      </div>
+      <div
+        className="gt_page"
+        data-from={50}
+        onClick={undefined}>
+        2
+      </div>
+      <div
+        className="gt_page"
+        data-from={100}
+        onClick={undefined}>
+        3
+      </div>
+      <div
+        className="gt_page"
+        data-from={150}
+        onClick={undefined}>
+        4
+      </div>
+      <div
+        className="gt_page selected"
+        data-from={200}
+        onClick={undefined}>
+        5
+      </div>
+      <div
+        className="gt_page next"
+        data-from={0}
+        onClick={undefined}>
+        Next
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;
+
+exports[`test renders Pagination correctly 4`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    Showing 451 to 225 of 1055 entries.
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="gt_page prev"
+        data-from={175}
+        onClick={undefined}>
+        Previous
+      </div>
+      <span>
+        <div
+          className="gt_page"
+          data-from="0"
+          onClick={undefined}>
+          1
+        </div>
+        <div
+          className="gt_page_dots">
+          ...
+        </div>
+        <div
+          className="gt_page"
+          data-from={425}
+          onClick={undefined}>
+          18
+        </div>
+        <div
+          className="gt_page"
+          data-from={450}
+          onClick={undefined}>
+          19
+        </div>
+        <div
+          className="gt_page"
+          data-from={475}
+          onClick={undefined}>
+          20
+        </div>
+        <div
+          className="gt_page_dots">
+          ...
+        </div>
+        <div
+          className="gt_page"
+          data-from={1050}
+          onClick={undefined}>
+          43
+        </div>
+      </span>
+      <div
+        className="gt_page next"
+        data-from={225}
+        onClick={undefined}>
+        Next
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;
+
+exports[`test renders Pagination correctly 5`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    Showing 151 to 150 of 1055 entries.
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="gt_page prev"
+        data-from={50}
+        onClick={undefined}>
+        Previous
+      </div>
+      <div
+        className="gt_page"
+        data-from={0}
+        onClick={undefined}>
+        1
+      </div>
+      <div
+        className="gt_page"
+        data-from={50}
+        onClick={undefined}>
+        2
+      </div>
+      <div
+        className="gt_page selected"
+        data-from={100}
+        onClick={undefined}>
+        3
+      </div>
+      <div
+        className="gt_page"
+        data-from={150}
+        onClick={undefined}>
+        4
+      </div>
+      <div
+        className="gt_page"
+        data-from={200}
+        onClick={undefined}>
+        5
+      </div>
+      <div
+        className="gt_page"
+        data-from={250}
+        onClick={undefined}>
+        6
+      </div>
+      <span>
+        <div
+          className="gt_page_dots">
+          ...
+        </div>
+        <div
+          className="gt_page"
+          data-from={1050}
+          onClick={undefined}>
+          22
+        </div>
+      </span>
+      <div
+        className="gt_page next"
+        data-from={150}
+        onClick={undefined}>
+        Next
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;
+
+exports[`test renders Pagination correctly 6`] = `
+<div
+  className={undefined}>
+  <div
+    className={undefined}>
+    Showing 901 to 900 of 1055 entries.
+  </div>
+  <div
+    className={undefined}>
+    <div
+      className={undefined}>
+      <div
+        className="gt_page prev"
+        data-from={800}
+        onClick={undefined}>
+        Previous
+      </div>
+      <span>
+        <div
+          className="gt_page"
+          data-from="0"
+          onClick={undefined}>
+          1
+        </div>
+        <div
+          className="gt_page_dots">
+          ...
+        </div>
+        <div
+          className="gt_page"
+          data-from={800}
+          onClick={undefined}>
+          17
+        </div>
+        <div
+          className="gt_page selected"
+          data-from={850}
+          onClick={undefined}>
+          18
+        </div>
+        <div
+          className="gt_page"
+          data-from={900}
+          onClick={undefined}>
+          19
+        </div>
+        <div
+          className="gt_page"
+          data-from={950}
+          onClick={undefined}>
+          20
+        </div>
+        <div
+          className="gt_page"
+          data-from={1000}
+          onClick={undefined}>
+          21
+        </div>
+        <div
+          className="gt_page"
+          data-from={1050}
+          onClick={undefined}>
+          22
+        </div>
+      </span>
+      <div
+        className="gt_page next"
+        data-from={900}
+        onClick={undefined}>
+        Next
+      </div>
+    </div>
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;

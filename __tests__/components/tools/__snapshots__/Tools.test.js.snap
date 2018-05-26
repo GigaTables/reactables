@@ -1,0 +1,133 @@
+exports[`test renders Tools correctly 1`] = `
+<div
+  className="gt_head_tools">
+  <div
+    className="gte_buttons_container"
+    data-action="reload"
+    onClick={[Function]}>
+    <div
+      className="gte_button"
+      data-action="reload">
+      <span
+        data-action="reload">
+        Reload
+      </span>
+    </div>
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className="gte_buttons_container"
+    onClick={[Function]}>
+    <div
+      className="gte_button">
+      <span>
+        CSV Export
+      </span>
+    </div>
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className="gte_buttons_container"
+    data-action="create"
+    onClick={[Function]}>
+    <div
+      className="gte_button"
+      data-action="create">
+      <span
+        data-action="create">
+        New
+      </span>
+    </div>
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className="gte_buttons_container"
+    data-action="edit"
+    onClick={undefined}>
+    <div
+      className="gte_button gte_btn_disabled"
+      data-action="edit">
+      <span
+        data-action="edit">
+        Edit
+      </span>
+    </div>
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className="gte_buttons_container"
+    data-action="delete"
+    onClick={undefined}>
+    <div
+      className="gte_button gte_btn_disabled"
+      data-action="delete">
+      <span
+        data-action="delete">
+        Delete
+      </span>
+    </div>
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className={undefined}>
+    <span>
+      Show
+       
+    </span>
+    <span>
+      <select
+        className={undefined}
+        onChange={[Function]}
+        value={50}>
+        <option>
+          25
+        </option>
+        <option>
+          50
+        </option>
+        <option>
+          100
+        </option>
+        <option>
+          200
+        </option>
+      </select>
+    </span>
+    <span>
+       
+      entries
+    </span>
+  </div>
+  <div
+    className={undefined}>
+    <input
+      className={undefined}
+      name="search"
+      onChange={[Function]}
+      onKeyUp={[Function]}
+      placeholder="Search"
+      tabIndex="1"
+      type="text"
+      value="" />
+    <div
+      className={undefined} />
+  </div>
+  <div
+    className={undefined} />
+</div>
+`;
+
+exports[`test renders Tools with empty Search/PagesSelector 1`] = `
+<div
+  className="gt_head_tools">
+  
+  
+  <div
+    className={undefined} />
+</div>
+`;

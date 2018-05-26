@@ -1,0 +1,25 @@
+exports[`test renders Header title correctly 1`] = `
+<th
+  className="sorting"
+  data-direction={0}
+  data-sortindex="1"
+  onClick={undefined}
+  style={
+    Object {
+      "cursor": "pointer",
+    }
+  }>
+  <div
+    className={undefined}>
+    <input
+      data-index="title"
+      name="title"
+      onBlur={undefined}
+      onChange={undefined}
+      onFocus={undefined}
+      onKeyUp={undefined}
+      placeholder="Search by field - title"
+      value="foo" />
+  </div>
+</th>
+`;

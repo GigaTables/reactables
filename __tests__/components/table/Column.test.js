@@ -1,12 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Column from '../../src/components/table/Column.js'
+import Column from '../../../src/components/table/Column.js'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 configure({ adapter: new Adapter() })
 
-const CommonConstants = require('../../src/components/CommonConstants');
+const CommonConstants = require('../../../src/components/CommonConstants');
 
 const editor = {
     ajax: 'http://gigatables.loc/editor.php',

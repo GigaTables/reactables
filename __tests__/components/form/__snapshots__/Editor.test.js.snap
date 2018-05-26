@@ -1,0 +1,565 @@
+exports[`Editor renders Editor correctly 1`] = `
+<div>
+  <div
+    className="gte_editor_popup fade_in"
+    onClick={undefined}>
+    <div
+      className="gte_popup_container">
+      <div
+        className="gte_popup_container_wrapper">
+        <div
+          className="gte_form_border_box"
+          onClick={[Function]}
+          onKeyUp={[Function]}>
+          <div
+            className="close_btn"
+            onClick={undefined} />
+          <div
+            className="gte_form_fields">
+            <div
+              className="gte_header">
+              <div
+                className="gte_editor_title" />
+            </div>
+            <div
+              className="gte_form_body">
+              <div
+                className="gte_form_body_content">
+                <form
+                  action=""
+                  id="gte_form"
+                  method="post">
+                  <div
+                    className="gte_form_content">
+                    <div>
+                      <input
+                        name="action"
+                        type="hidden"
+                        value="create" />
+                    </div>
+                    <div>
+                      <div
+                        className="gte_editor_fields">
+                        <fieldset>
+                          <legend>
+                            
+                          </legend>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="id" />
+                            <div
+                              className={undefined}>
+                              <input
+                                data-multiple={false}
+                                id="id"
+                                name="id"
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                type="hidden"
+                                value="" />
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="types[]">
+                              Types:
+                            </label>
+                            <div
+                              className={undefined}>
+                              <label
+                                className="gte_label_text">
+                                <input
+                                  data-value="val1"
+                                  defaultChecked={0}
+                                  id="types"
+                                  name="types[]"
+                                  onClick={[Function]}
+                                  type="checkbox"
+                                  value="key1" />
+                                val1
+                              </label>
+                              <label
+                                className="gte_label_text">
+                                <input
+                                  data-value="val2"
+                                  defaultChecked={0}
+                                  id="types"
+                                  name="types[]"
+                                  onClick={[Function]}
+                                  type="checkbox"
+                                  value="key2" />
+                                val2
+                              </label>
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="types[]">
+                              Types:
+                            </label>
+                            <div
+                              className={undefined}>
+                              <select
+                                id="types[]"
+                                name="types[]"
+                                onChange={[Function]}
+                                value="">
+                                <option
+                                  data-value="val1"
+                                  value="key1">
+                                  val1
+                                </option>
+                                <option
+                                  data-value="val2"
+                                  value="key2">
+                                  val2
+                                </option>
+                              </select>
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="title">
+                              Article title:
+                            </label>
+                            <div
+                              className={undefined}>
+                              <input
+                                0={
+                                  Object {
+                                    "pattern": "^[A-Za-z0-9_]+$",
+                                  }
+                                }
+                                data-multiple={false}
+                                id="title"
+                                name="title"
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                type="text"
+                                value="" />
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="desc">
+                              Description:
+                            </label>
+                            <div
+                              className={undefined}>
+                              <textarea
+                                data-multiple={false}
+                                data-textarea={true}
+                                id="desc"
+                                name="desc"
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                value="" />
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="desc">
+                              Description:
+                            </label>
+                            <div
+                              className={undefined}>
+                              <div
+                                className="RichTextEditor__root___2QXK-"
+                                style={undefined}>
+                                <div
+                                  className="EditorToolbar__root___3_Aqz"
+                                  style={undefined}>
+                                  <div
+                                    className="ButtonGroup__root___3lEAn">
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Bold"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-bold___2zl9t IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Italic"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-italic___2hHzc IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Strikethrough"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-strikethrough___QtE2X IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Monospace"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-code___3F1pe IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Underline"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-underline___2EmZJ IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div
+                                    className="ButtonGroup__root___3lEAn">
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="UL"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-unordered-list-item___Pvkrr IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="OL"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-ordered-list-item___2rzD0 IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Blockquote"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-blockquote___17VSX IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div
+                                    className="ButtonGroup__root___3lEAn">
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={true}
+                                        onClick={[Function]}
+                                        onMouseDown={undefined}
+                                        onSubmit={[Function]}
+                                        title="Link"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-link___2umEl IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={true}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Remove Link"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-remove-link___j61pw IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div
+                                    className="ButtonGroup__root___3lEAn">
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={undefined}
+                                        onClick={[Function]}
+                                        onMouseDown={undefined}
+                                        onSubmit={[Function]}
+                                        title="Image"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-image___1gW7U IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div
+                                    className="ButtonGroup__root___3lEAn">
+                                    <span
+                                      className="Dropdown__root___3ALmx"
+                                      title="Normal">
+                                      <select
+                                        onChange={[Function]}
+                                        value="unstyled">
+                                        <option
+                                          className={undefined}
+                                          value="unstyled">
+                                          Normal
+                                        </option>
+                                        <option
+                                          className={undefined}
+                                          value="header-one">
+                                          Heading Large
+                                        </option>
+                                        <option
+                                          className={undefined}
+                                          value="header-two">
+                                          Heading Medium
+                                        </option>
+                                        <option
+                                          className={undefined}
+                                          value="header-three">
+                                          Heading Small
+                                        </option>
+                                        <option
+                                          className={undefined}
+                                          value="code-block">
+                                          Code Block
+                                        </option>
+                                      </select>
+                                      <span
+                                        className="Dropdown__value___34Py9">
+                                        Normal
+                                      </span>
+                                    </span>
+                                  </div>
+                                  <div
+                                    className="ButtonGroup__root___3lEAn">
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={true}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Undo"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-undo___EQSRP IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                    <div
+                                      className="ButtonWrap__root___1EO_R">
+                                      <button
+                                        className="IconButton__root___3tqZW Button__root___1gz0c"
+                                        disabled={true}
+                                        onClick={[Function]}
+                                        onMouseDown={[Function]}
+                                        title="Redo"
+                                        type="button">
+                                        <span
+                                          className="IconButton__icon-redo___30MVz IconButton__icon___3YgOS" />
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  className="RichTextEditor__editor___1QqIU"
+                                  style={undefined}>
+                                  <div
+                                    className="DraftEditor-root">
+                                    <div
+                                      className="DraftEditor-editorContainer">
+                                      <div
+                                        aria-activedescendant={undefined}
+                                        aria-autocomplete={undefined}
+                                        aria-describedby={null}
+                                        aria-expanded={undefined}
+                                        aria-haspopup={undefined}
+                                        aria-label={undefined}
+                                        aria-owns={undefined}
+                                        autoCapitalize={undefined}
+                                        autoComplete={undefined}
+                                        autoCorrect={undefined}
+                                        className="notranslate public-DraftEditor-content"
+                                        contentEditable={true}
+                                        data-testid={undefined}
+                                        onBeforeInput={[Function]}
+                                        onBlur={[Function]}
+                                        onCompositionEnd={[Function]}
+                                        onCompositionStart={[Function]}
+                                        onCopy={[Function]}
+                                        onCut={[Function]}
+                                        onDragEnd={[Function]}
+                                        onDragEnter={[Function]}
+                                        onDragLeave={[Function]}
+                                        onDragOver={[Function]}
+                                        onDragStart={[Function]}
+                                        onDrop={[Function]}
+                                        onFocus={[Function]}
+                                        onInput={[Function]}
+                                        onKeyDown={[Function]}
+                                        onKeyPress={[Function]}
+                                        onKeyUp={[Function]}
+                                        onMouseUp={[Function]}
+                                        onPaste={[Function]}
+                                        onSelect={[Function]}
+                                        role="textbox"
+                                        spellCheck={true}
+                                        style={
+                                          Object {
+                                            "outline": "none",
+                                            "whiteSpace": "pre-wrap",
+                                            "wordWrap": "break-word",
+                                          }
+                                        }
+                                        suppressContentEditableWarning={true}
+                                        tabIndex={undefined}>
+                                        <div
+                                          data-contents="true">
+                                          <div
+                                            className="RichTextEditor__block___2Vs_D RichTextEditor__paragraph___3NTf9"
+                                            data-block={true}
+                                            data-editor="4rgai"
+                                            data-offset-key="qnq5-0-0">
+                                            <div
+                                              className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
+                                              data-offset-key="qnq5-0-0">
+                                              <span
+                                                data-offset-key="qnq5-0-0"
+                                                style={Object {}}>
+                                                <br
+                                                  data-text="true" />
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div
+                        className="gte_editor_fields">
+                        <label
+                          className="gte_label"
+                          htmlFor="date">
+                          Date Time:
+                        </label>
+                        <div
+                          className={undefined}>
+                          <input
+                            id="date"
+                            name="date"
+                            onChange={[Function]}
+                            type="date" />
+                        </div>
+                        <div
+                          className="clear" />
+                      </div>
+                      <div
+                        className="gte_editor_fields">
+                        <label
+                          className="gte_label"
+                          htmlFor="image">
+                          Image:
+                        </label>
+                        <div
+                          className={undefined}>
+                          <input
+                            id="image"
+                            name="image"
+                            type="file" />
+                        </div>
+                        <div
+                          className="clear" />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div
+              className="gte_footer">
+              <div
+                className="gte_form_err" />
+              <div
+                className="gte_form_buttons">
+                <button
+                  className="btn"
+                  data-action="create"
+                  id="gte_sent_btn"
+                  onClick={[Function]} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="gte_popup_background fade_in"
+    onClick={undefined} />
+</div>
+`;

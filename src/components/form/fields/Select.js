@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Select extends Component {
-    render () {
+    render() {
         const {
             attributes,
             id,
@@ -16,10 +16,10 @@ class Select extends Component {
         let options = [], val = ''
         for (let k in values) {
             if (values.hasOwnProperty(k)) {
-                for (let key in values[ k ]) {
-                    if (values[ k ].hasOwnProperty(key)) {
-                        val = values[ k ][ key ].trim()
-                        options[ k ] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>
+                for (let key in values[k]) {
+                    if (values[k].hasOwnProperty(key)) {
+                        val = values[k][key].trim()
+                        options[k] = <option key={key} value={key} data-value={val.toLowerCase()}>{val}</option>
                     }
                 }
             }

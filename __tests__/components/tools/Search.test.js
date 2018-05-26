@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Search from '../../src/components/tools/Search.js'
+import Search from '../../../src/components/tools/Search.js'
 import {shallow, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16/build/index'
 

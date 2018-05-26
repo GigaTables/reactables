@@ -14,7 +14,7 @@ exports[`test renders Trendy correctly 1`] = `
   L 292,37.5
   "
     fill="none"
-    id="react-trend-3115006031965901"
+    id="react-trend-5480033827064481"
     stroke={undefined} />
 </svg>
 `;

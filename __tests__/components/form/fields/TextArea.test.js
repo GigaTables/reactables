@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import TextArea from '../../src/components/form/fields/TextArea.js'
+import TextArea from '../../../../src/components/form/fields/TextArea.js'
 
 it('renders TextArea correctly', () => {
     const tree = renderer.create(

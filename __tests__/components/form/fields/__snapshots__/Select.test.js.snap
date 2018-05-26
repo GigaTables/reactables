@@ -1,0 +1,34 @@
+exports[`test renders Select correctly 1`] = `
+<select
+  id="title"
+  name="title"
+  onChange={[Function]}
+  value={1}>
+  <option
+    data-value="val1"
+    value="key1">
+    val1
+  </option>
+  <option
+    data-value="val2"
+    value="key2">
+    val2
+  </option>
+</select>
+`;
+
+exports[`test renders Select correctly 2`] = `
+<select
+  id="title"
+  name="title"
+  onChange={[Function]}
+  value={1} />
+`;
+
+exports[`test renders Select correctly 3`] = `
+<select
+  id="title"
+  name="title"
+  onChange={[Function]}
+  value={1} />
+`;

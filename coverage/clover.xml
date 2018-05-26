@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527324228537" clover="3.2.0">
-  <project timestamp="1527324228538" name="All files">
-    <metrics statements="497" coveredstatements="468" conditionals="317" coveredconditionals="235" methods="93" coveredmethods="91" elements="907" coveredelements="794" complexity="0" loc="497" ncloc="497" packages="6" files="25" classes="25">
+<coverage generated="1527330904892" clover="3.2.0">
+  <project timestamp="1527330904892" name="All files">
+    <metrics statements="497" coveredstatements="472" conditionals="317" coveredconditionals="239" methods="93" coveredmethods="91" elements="907" coveredelements="802" complexity="0" loc="497" ncloc="497" packages="6" files="25" classes="25">
       <package name="components">
         <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <file name="CommonConstants.js" path="/Users/arthur/www/gigatables_react/src/components/CommonConstants.js">
@@ -371,39 +371,39 @@
         <metrics statements="14" coveredstatements="14" conditionals="20" coveredconditionals="12" methods="3" coveredmethods="3"/>
         <file name="Pie.js" path="/Users/arthur/www/gigatables_react/src/components/plugins/Pie.js">
           <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-          <line num="10" count="1" type="stmt"/>
-          <line num="11" count="1" type="stmt"/>
+          <line num="10" count="2" type="stmt"/>
+          <line num="11" count="2" type="stmt"/>
           <line num="17" count="3" type="stmt"/>
         </file>
         <file name="ProgressBar.js" path="/Users/arthur/www/gigatables_react/src/components/plugins/ProgressBar.js">
           <metrics statements="8" coveredstatements="8" conditionals="20" coveredconditionals="12" methods="1" coveredmethods="1"/>
           <line num="6" count="3" type="stmt"/>
-          <line num="14" count="1" type="stmt"/>
-          <line num="16" count="1" type="stmt"/>
-          <line num="25" count="1" type="stmt"/>
-          <line num="29" count="1" type="cond" truecount="2" falsecount="2"/>
-          <line num="30" count="1" type="stmt"/>
+          <line num="14" count="2" type="stmt"/>
+          <line num="16" count="2" type="stmt"/>
+          <line num="25" count="2" type="stmt"/>
+          <line num="29" count="2" type="cond" truecount="2" falsecount="2"/>
+          <line num="30" count="2" type="stmt"/>
           <line num="44" count="3" type="stmt"/>
           <line num="50" count="3" type="stmt"/>
         </file>
         <file name="Trendy.js" path="/Users/arthur/www/gigatables_react/src/components/plugins/Trendy.js">
           <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-          <line num="10" count="1" type="stmt"/>
-          <line num="11" count="1" type="stmt"/>
+          <line num="10" count="2" type="stmt"/>
+          <line num="11" count="2" type="stmt"/>
           <line num="17" count="3" type="stmt"/>
         </file>
       </package>
       <package name="components.table">
-        <metrics statements="70" coveredstatements="63" conditionals="61" coveredconditionals="36" methods="19" coveredmethods="18"/>
+        <metrics statements="70" coveredstatements="67" conditionals="61" coveredconditionals="40" methods="19" coveredmethods="18"/>
         <file name="Column.js" path="/Users/arthur/www/gigatables_react/src/components/table/Column.js">
-          <metrics statements="41" coveredstatements="35" conditionals="27" coveredconditionals="20" methods="12" coveredmethods="11"/>
+          <metrics statements="41" coveredstatements="39" conditionals="27" coveredconditionals="24" methods="12" coveredmethods="11"/>
           <line num="8" count="2" type="stmt"/>
           <line num="9" count="2" type="stmt"/>
           <line num="20" count="2" type="stmt"/>
           <line num="21" count="2" type="cond" truecount="6" falsecount="0"/>
-          <line num="30" count="5" type="stmt"/>
-          <line num="31" count="5" type="stmt"/>
-          <line num="35" count="5" type="stmt"/>
+          <line num="30" count="7" type="stmt"/>
+          <line num="31" count="7" type="stmt"/>
+          <line num="35" count="7" type="stmt"/>
           <line num="39" count="1" type="cond" truecount="2" falsecount="2"/>
           <line num="40" count="0" type="stmt"/>
           <line num="45" count="1" type="stmt"/>
@@ -418,24 +418,24 @@
           <line num="67" count="1" type="stmt"/>
           <line num="68" count="1" type="stmt"/>
           <line num="71" count="1" type="stmt"/>
-          <line num="89" count="5" type="stmt"/>
-          <line num="92" count="5" type="stmt"/>
-          <line num="94" count="5" type="cond" truecount="4" falsecount="0"/>
+          <line num="89" count="7" type="stmt"/>
+          <line num="92" count="7" type="stmt"/>
+          <line num="94" count="7" type="cond" truecount="4" falsecount="0"/>
           <line num="95" count="1" type="stmt"/>
           <line num="99" count="1" type="stmt"/>
-          <line num="122" count="4" type="stmt"/>
-          <line num="123" count="4" type="stmt"/>
-          <line num="126" count="4" type="stmt"/>
+          <line num="122" count="6" type="stmt"/>
+          <line num="123" count="6" type="stmt"/>
+          <line num="126" count="6" type="stmt"/>
           <line num="139" count="1" type="stmt"/>
           <line num="152" count="0" type="stmt"/>
-          <line num="162" count="4" type="stmt"/>
-          <line num="163" count="4" type="cond" truecount="3" falsecount="1"/>
-          <line num="164" count="0" type="cond" truecount="0" falsecount="3"/>
-          <line num="166" count="0" type="stmt"/>
-          <line num="172" count="0" type="stmt"/>
-          <line num="174" count="0" type="stmt"/>
-          <line num="178" count="4" type="stmt"/>
-          <line num="182" count="5" type="stmt"/>
+          <line num="162" count="6" type="stmt"/>
+          <line num="163" count="6" type="cond" truecount="4" falsecount="0"/>
+          <line num="164" count="3" type="cond" truecount="3" falsecount="0"/>
+          <line num="166" count="1" type="stmt"/>
+          <line num="172" count="1" type="stmt"/>
+          <line num="174" count="1" type="stmt"/>
+          <line num="178" count="3" type="stmt"/>
+          <line num="182" count="7" type="stmt"/>
           <line num="186" count="2" type="stmt"/>
           <line num="196" count="2" type="stmt"/>
         </file>

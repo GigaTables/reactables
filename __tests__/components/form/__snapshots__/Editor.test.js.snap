@@ -475,13 +475,13 @@ exports[`Editor renders Editor correctly 1`] = `
                                           <div
                                             className="RichTextEditor__block___2Vs_D RichTextEditor__paragraph___3NTf9"
                                             data-block={true}
-                                            data-editor="4rgai"
-                                            data-offset-key="qnq5-0-0">
+                                            data-editor="a4ru2"
+                                            data-offset-key="1d49j-0-0">
                                             <div
                                               className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
-                                              data-offset-key="qnq5-0-0">
+                                              data-offset-key="1d49j-0-0">
                                               <span
-                                                data-offset-key="qnq5-0-0"
+                                                data-offset-key="1d49j-0-0"
                                                 style={Object {}}>
                                                 <br
                                                   data-text="true" />

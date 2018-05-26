@@ -31,11 +31,124 @@ exports[`test renders Column correctly 2`] = `
   data-rowid={0}
   data-selectedrows={Array []}
   onClick={[Function]}>
-  12
+  <div
+    className="progress_bar_container">
+    <div
+      className="progress_bar progress_bar_color_red"
+      data-percent="12"
+      style={
+        Object {
+          "height": 20,
+          "width": "12%",
+        }
+      }>
+      <div
+        className="progress_bar_percent">
+        <div
+          className="progress_bar_percent_child">
+          12%
+        </div>
+      </div>
+    </div>
+  </div>
 </td>
 `;
 
 exports[`test renders Column correctly 3`] = `
+<td
+  className=""
+  data-cell={1}
+  data-index="editable-cells"
+  data-realid={71}
+  data-rowid={0}
+  data-selectedrows={Array []}
+  onClick={[Function]}>
+  <div
+    className={undefined}
+    style={undefined}>
+    <svg
+      height="100%"
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+      viewBox="0 0 100 100"
+      width="100%">
+      <path
+        d="M 75 50 A 25 25 0 1 1 25.020275045710758 48.99335149726463"
+        fill="none"
+        stroke="#E38627"
+        strokeDasharray={79.54673706204925}
+        strokeDashoffset={79.54673706204925}
+        strokeLinecap={undefined}
+        strokeWidth={50}
+        style={
+          Object {
+            "transition": "stroke-dashoffset 500ms ease-out",
+          }
+        } />
+      <path
+        d="M 25.020275045710758 48.99335149726463 A 25 25 0 0 1 57.91669984503682 26.286588951321363"
+        fill="none"
+        stroke="#C13C37"
+        strokeDasharray={46.31835322600336}
+        strokeDashoffset={46.31835322600336}
+        strokeLinecap={undefined}
+        strokeWidth={50}
+        style={
+          Object {
+            "transition": "stroke-dashoffset 500ms ease-out",
+          }
+        } />
+      <path
+        d="M 57.91669984503682 26.286588951321363 A 25 25 0 0 1 75 49.99999999999999"
+        fill="none"
+        stroke="#6A2135"
+        strokeDasharray={31.214542391437046}
+        strokeDashoffset={31.214542391437046}
+        strokeLinecap={undefined}
+        strokeWidth={50}
+        style={
+          Object {
+            "transition": "stroke-dashoffset 500ms ease-out",
+          }
+        } />
+    </svg>
+  </div>
+</td>
+`;
+
+exports[`test renders Column correctly 4`] = `
+<td
+  className=""
+  data-cell={1}
+  data-index="editable-cells"
+  data-realid={71}
+  data-rowid={0}
+  data-selectedrows={Array []}
+  onClick={[Function]}>
+  <svg
+    height="25%"
+    stroke="black"
+    strokeWidth={1}
+    viewBox="0 0 300 75"
+    width="100%">
+    <path
+      d="M 8,67
+    L 79,21.111111111111114
+    L 150,38.592592592592595
+    L 221,17.833333333333336
+    L 292,8
+    "
+      fill="none"
+      id="react-trend-570426485911610"
+      stroke={undefined} />
+  </svg>
+</td>
+`;
+
+exports[`test renders Column correctly 5`] = `
 <td
   data-index="editable-cells"
   data-maxrow="0"

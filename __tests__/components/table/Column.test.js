@@ -4,9 +4,9 @@ import Column from '../../../src/components/table/Column.js'
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-configure({ adapter: new Adapter() })
+configure({adapter: new Adapter()})
 
-const CommonConstants = require('../../../src/components/CommonConstants');
+const CommonConstants = require('../../../src/components/CommonConstants')
 
 const editor = {
     ajax: 'http://gigatables.loc/editor.php',
@@ -16,79 +16,91 @@ const editor = {
     },
     fields: [
         {
-            label: "ID",
-            name: "id",
+            label: 'ID',
+            name: 'id',
             type: 'hidden'
         },
         {// an example of using select - automatically selected if matches with data in table column
-            label: "Types:",
-            name: "types[]",
+            label: 'Types:',
+            name: 'types[]',
             values: [// if select,checkbox,radio etc types - need this pre-set structure of values
                 {'key1': 'val1'},
                 {'key2': 'val2'}
             ],
-            type: 'checkbox', // select,checkbox,radio
+            type: 'checkbox' // select,checkbox,radio
 //              attrs: [
 //                {'multiple':true}
 //              ]
         },
         {
-            label: "Article title:",
-            name: "title",
+            label: 'Article title:',
+            name: 'title',
             type: 'text', // default, other: password, file, select, multiselect etc
-            attrs: [
-                {'pattern': '^[A-Za-z0-9_]+$'}
-            ]
+            attrs: {pattern: '^[A-Za-z0-9_]+$'}
         },
         {
-            label: "Description:",
-            name: "desc",
+            label: 'Description:',
+            name: 'desc',
             type: 'textarea'
         },
         {
-            label: "Date Time:",
-            name: "date",
+            label: 'Date Time:',
+            name: 'date',
             type: 'date'
         },
         {
-            label: "Image:",
-            name: "image",
+            label: 'Image:',
+            name: 'image',
             type: 'file'
-        },
+        }
     ]
-};
+}
 
 beforeEach(() => {
     global.editorUpdate = jest.fn().mockImplementation((e, dataResp) => {
     
-    });
+    })
     global.fetch = jest.fn().mockImplementation(() => {
         var p = new Promise((resolve, reject) => {
             resolve({
                 ok: true,
                 Id: '123',
-                json: function () {
+                json: function() {
                     return {
-                        "rows": [
+                        'rows': [
                             {
-                                "GT_RowId": 123,
-                                "title": "Test Bar 123st row",
-                                "id": 123,
-                                "desc": "Lorem Ipsum is simply dummy Bar 7196 text of the printing and typesetting",
-                                "info": "some info some info some info some info",
-                                "date": "13:23:43 02:04:2017",
-                                "field1": 123,
-                                "field2": 1357,
-                                "field3": 12468
+                                'GT_RowId': 123,
+                                'title': 'Test Bar 123st row',
+                                'id': 123,
+                                'desc': 'Lorem Ipsum is simply dummy Bar 7196 text of the printing and typesetting',
+                                'info': 'some info some info some info some info',
+                                'date': '13:23:43 02:04:2017',
+                                'field1': 123,
+                                'field2': 1357,
+                                'field3': 12468,
+                                'consumers': [
+                                    {
+                                        'value': 79,
+                                        'color': '#E38627'
+                                    },
+                                    {
+                                        'value': 46,
+                                        'color': '#C13C37'
+                                    },
+                                    {
+                                        'value': 31,
+                                        'color': '#6A2135'
+                                    }
+                                ]
                             }
                         ]
-                    };
+                    }
                 }
-            });
-        });
-        return p;
-    });
-});
+            })
+        })
+        return p
+    })
+})
 
 it('renders Column correctly', () => {
     const tree = renderer.create(
@@ -119,11 +131,83 @@ it('renders Column correctly', () => {
             editCell={() => {}}
             editRow={() => {}}
             selectedRows={[]}
-            isProgressBar={true}>12</Column>
+            plugins={{
+                data: 'field1',
+                plugins: 'progressbar',
+                pluginProps: {
+                    height: 20
+                }
+            }}>12</Column>
     ).toJSON()
     expect(progressBar).toMatchSnapshot()
+    // preventing polyfill errors
+    window.requestAnimationFrame = setImmediate
+    const pie = renderer.create(
+        <Column
+            count={0}
+            dataIndex="editable-cells"
+            editableCells={false}
+            gteRowId={71}
+            minRow="0"
+            maxRow="0"
+            cell={1}
+            editCell={() => {}}
+            editRow={() => {}}
+            selectedRows={[]}
+            plugins={{
+                data: 'consumers',
+                plugins: 'pie',
+                pluginProps: {
+                    // ratio: 2,
+                    // startAngle: 3,
+                    // rounded: true,
+                    animate: true
+                    // radius: 33,
+                }
+            }}>{[
+            {
+                'value': 79,
+                'color': '#E38627'
+            },
+            {
+                'value': 46,
+                'color': '#C13C37'
+            },
+            {
+                'value': 31,
+                'color': '#6A2135'
+            }
+        ]}</Column>
+    ).toJSON()
+    expect(pie).toMatchSnapshot()
     
-    const progressBarCells = renderer.create(
+    const trendy = renderer.create(
+        <Column
+            count={0}
+            dataIndex="editable-cells"
+            editableCells={false}
+            gteRowId={71}
+            minRow="0"
+            maxRow="0"
+            cell={1}
+            editCell={() => {}}
+            editRow={() => {}}
+            selectedRows={[]}
+            plugins={{
+                data: 'consumers_trend',
+                plugins: 'trend',
+                pluginProps: {}
+            }}>{[
+            20,
+            62,
+            46,
+            65,
+            74
+        ]}</Column>
+    ).toJSON()
+    expect(trendy).toMatchSnapshot()
+    // editable cells
+    const editableCells = renderer.create(
         <Column
             count={0}
             dataIndex="editable-cells"
@@ -135,9 +219,9 @@ it('renders Column correctly', () => {
             editCell={() => {}}
             editRow={() => {}}
             selectedRows={[]}
-            isProgressBar={true}>12</Column>
+        >Foo Bar</Column>
     ).toJSON()
-    expect(progressBarCells).toMatchSnapshot()
+    expect(editableCells).toMatchSnapshot()
     
     const obj = shallow(
         <Column

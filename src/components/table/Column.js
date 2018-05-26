@@ -9,7 +9,7 @@ const CommonConstants = require('../CommonConstants')
 const EditorConstants = require('../EditorConstants')
 
 class Column extends Component {
-    shouldComponentUpdate (nextProps) {
+    shouldComponentUpdate(nextProps) {
         const {
             gteRowId,
             count,
@@ -26,7 +26,7 @@ class Column extends Component {
             || children !== nextProps.children // iff content of a column has been changed - re-render
     }
     
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
             dataIndices: {},
@@ -35,13 +35,13 @@ class Column extends Component {
         this.cell = props.cell
     }
     
-    componentDidUpdate () {
+    componentDidUpdate() {
         if (typeof this.dataIn !== CommonConstants.UNDEFINED && this.dataIn !== null) {
             this.dataIn.focus()
         }
     }
     
-    changeCell (e) {
+    changeCell(e) {
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
                 [e.target.dataset.index]: e.target.value
@@ -50,10 +50,10 @@ class Column extends Component {
         })
     }
     
-    btnClickedEnter (e) {
+    btnClickedEnter(e) {
         e.persist() // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
-        const { editorUpdate, editor } = this.props
-        const { dataIndices } = this.state
+        const {editorUpdate, editor} = this.props
+        const {dataIndices} = this.state
         let ajaxUrl = editor.ajax
         let dataResp = dataIndices
         if (e.keyCode === CommonConstants.ENTER_KEY) {
@@ -72,7 +72,7 @@ class Column extends Component {
         }
     }
     
-    getColumn () {
+    getColumn() {
         const {
             gteRowId,
             count,
@@ -155,12 +155,12 @@ class Column extends Component {
         )
     }
     
-    getCellContent () {
+    getCellContent() {
         const {
             children,
             plugins
         } = this.props
-        if (plugins !== false && typeof plugins !== CommonConstants.UNDEFINED) {
+        if (typeof plugins !== CommonConstants.UNDEFINED && plugins !== false) {
             switch (plugins[CommonConstants.PLUGINS]) {
                 case CommonConstants.PLUGINS_PROGRESS_BAR:
                     return <ProgressBar
@@ -178,7 +178,7 @@ class Column extends Component {
         return children
     }
     
-    render () {
+    render() {
         return this.getColumn()
     }
 }

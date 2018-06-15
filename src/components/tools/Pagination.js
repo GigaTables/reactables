@@ -117,8 +117,9 @@ class Pagination extends Component {
     let prev = (page === 1) ? perPage * (pages - 1) : perPage * (page - 2),
     next = (page === pages) ? 0 : perPage * (page);
 
+    let showTo = page * perPage;
     let description = lang.showing + ' ' + (from + 1) + ' '
-    + lang.to + ' ' + (page * perPage) + ' ' + lang.of  + ' ' + countRows + ' ' + lang.entries + '.';
+    + lang.to + ' ' + (showTo > countRows ? countRows : showTo) + ' ' + lang.of  + ' ' + countRows + ' ' + lang.entries + '.';
     return (
       <div className={styles.gt_pagination}>
         <div className={styles.gt_pgn_ttl}>{description}</div>

@@ -804,3 +804,6 @@ but the 1st page load will be longer than usual.
 **@GreenbBro** (helped with robust functionality and ES6 code-style)
 
 **@wangfrombupt** (found critical bugs + translation issues)
+
+### Used by
+![Demo](https://github.com/GigaTables/reactables/blob/master/screens/paypal.png)

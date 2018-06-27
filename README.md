@@ -724,7 +724,7 @@ Specify any column U wanted to search by setting these options in *columns* part
 
 **Is there languages support?**
 
-You can pick one of 7 languages: English, German, Russian, French, Spanish, Chinese, Hindi - en, gr, ru, fr, es, ch, hi respectively.   
+You can pick one of 10 languages: English, German, Russian, French, Spanish, Chinese, Hindi, Portuguese, Arabic and Japanese - en, gr, ru, fr, es, ch, hi, ar, pt and ja respectively.   
 
 **Does GT have any event-triggered functions, ex.: to run something before/after pop-up?**
 

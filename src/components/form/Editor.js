@@ -15,10 +15,10 @@ import CheckRadio from './fields/CheckRadio'
 import TextEditor from './fields/TextEditor'
 import FormField from './FormField'
 
-const CommonConstants = require('../CommonConstants')
-const EditorConstants = require('../EditorConstants')
-const Lang = require('../Lang')
-const loAssign = require('lodash/assign')
+const CommonConstants = require('../CommonConstants');
+const EditorConstants = require('../EditorConstants');
+const Lang = require('../Lang');
+const loAssign = require('lodash/assign');
 
 class Editor extends Component {
     constructor(props) {
@@ -329,6 +329,7 @@ class Editor extends Component {
                     name={fieldName}
                     label={fieldLabel}
                     value={fieldValue}
+                    attributes={attributes}
                     objectValues={object.values}
                 />
                 break

@@ -43,4 +43,5 @@ module.exports = {
     PLUGINS_RTE: 'rte',
     PLUGINS_RC_SLIDER: 'rc-slider',
     PLUGINS_RC_RANGE: 'rc-slider',
+    ATTRIBUTES: 'attrs'
 };

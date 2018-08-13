@@ -10,12 +10,12 @@ class CheckRadio extends Component {
             onChange,
             value, // fieldValue
             objectValues
-        } = this.props
+        } = this.props;
         
-        let values = objectValues
+        let values = objectValues;
         let options = [], val = '',
             //@fixme regexp to remove ex: [3] etc
-            id = name.replace('[]', '')
+            id = name.replace('[]', '');
         for (let k in values) {
             if (values.hasOwnProperty(k)) {
                 for (let key in values[k]) {
@@ -47,6 +47,6 @@ CheckRadio.propTypes = {
     type: PropTypes.string.isRequired,
     attributes: PropTypes.object,
     value: PropTypes.string
-}
+};
 
 export default CheckRadio

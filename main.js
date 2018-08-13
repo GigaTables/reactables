@@ -4,7 +4,7 @@ import Reactables from './src/Reactables.jsx'
 import Header from './src/components/table/Header.js'
 import './main.css'
 
-let localData = require('./local_data')
+let localData = require('./local_data');
 
 let editor = {
     ajax: 'http://gigatables.loc/editor.php',
@@ -89,14 +89,15 @@ let editor = {
             label: 'Types:',
             name: 'types[]',
             values: [// if select,checkbox,radio etc types - need this pre-set structure of values
+                {'default': '===========', attrs: {hidden: true, disabled: true}},
                 {'key1': 'val1'},
                 {'key2': 'val2'}
             ],
-            type: 'select' // select,checkbox,radio
-//              attrs: {multiple:true}
+            type: 'select', // select,checkbox,radio
+            attrs: {required: true}
         }
     ]
-}
+};
 
 let settings = {
     struct: {
@@ -133,7 +134,7 @@ let settings = {
             visible: true, // true by defualt
             searchable: true, // true by defualt
             discreteSearch: true, // false by default
-            discreteSearchValue: function(title) {
+            discreteSearchValue: function (title) {
                 return 'Search by field - ' + title
             }
         },
@@ -228,19 +229,19 @@ let settings = {
             //     editor: editor,
             // },
             {
-                extended: 'editor_create', editor: editor, triggerAfter: (function() {
+                extended: 'editor_create', editor: editor, triggerAfter: (function () {
                     console.log('after create')
-                }), triggerBefore: (function() {
+                }), triggerBefore: (function () {
                     console.log('before create')
                 })
             },
             {
-                extended: 'editor_edit', editor: editor, triggerBefore: (function() {
+                extended: 'editor_edit', editor: editor, triggerBefore: (function () {
                     console.log('before edit')
                 })
             },
             {
-                extended: 'editor_remove', editor: editor, triggerAfter: (function() {
+                extended: 'editor_remove', editor: editor, triggerAfter: (function () {
                     console.log('after del')
                 })
             }
@@ -248,7 +249,7 @@ let settings = {
         buttonsPosition: ['top', 'bottom'],
         theme: 'std'
     }
-}
+};
 
 ReactDOM.render(
     <Reactables editor={editor} settings={settings}>

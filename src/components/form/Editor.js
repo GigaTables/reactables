@@ -1,19 +1,19 @@
-'use strict'
+'use strict';
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { DataException, EditorException } from '../Exceptions'
-import { t, formElement } from '../Helpers'
-import '../../css/editor.css'
-import classNames from 'classnames/bind'
-import superagent from 'superagent'
-import Input from './fields/Input'
-import HTML5Input from './fields/HTML5Input'
-import TextArea from './fields/TextArea'
-import Select from './fields/Select'
-import CheckRadio from './fields/CheckRadio'
-import TextEditor from './fields/TextEditor'
-import FormField from './FormField'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { DataException, EditorException } from '../Exceptions';
+import { t, formElement } from '../Helpers';
+import '../../css/editor.css';
+import classNames from 'classnames/bind';
+import superagent from 'superagent';
+import Input from './fields/Input';
+import HTML5Input from './fields/HTML5Input';
+import TextArea from './fields/TextArea';
+import Select from './fields/Select';
+import CheckRadio from './fields/CheckRadio';
+import TextEditor from './fields/TextEditor';
+import FormField from './FormField';
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -21,14 +21,17 @@ const Lang = require('../Lang');
 const loAssign = require('lodash/assign');
 
 class Editor extends Component {
+
     constructor(props) {
         super(props);
+
         if (typeof props.editor.fields === CommonConstants.UNDEFINED) {
             throw new EditorException('You should define "fields" option.')
         }
         if (props.editor.fields.length === 0) {
             throw new EditorException('You should define at least one field in "fields" option.')
         }
+
         this.lang = Lang[props.lang];
         this.state = {
             dataIndices: {},
@@ -40,10 +43,12 @@ class Editor extends Component {
 
         this.setFields(props);
         this.setDataIndices(props);
+
         this.fieldsetOpen = 0;
         this.fieldsetClose = 0;
         this.fieldsetLegend = '';
         this.filesInput = {};
+        this.defaultValue = '';
     }
     
     setDataIndices(props) {
@@ -52,7 +57,7 @@ class Editor extends Component {
 
         cols.forEach((column, index) => {
             this.dataIndices[column.name] = '';
-        })
+        });
     }
     
     setFields(props) {
@@ -73,39 +78,39 @@ class Editor extends Component {
         let fields = [];
         editorFields.forEach((object, index) => {
             this.setFieldsets(index, object);
-            fields[index] = this.getFieldByType(index, object)
+            fields[index] = this.getFieldByType(index, object);
         });
 
         if (this.fieldsetClose > 0) {
-            fields = this.setFieldsetFields(fields)
+            fields = this.setFieldsetFields(fields);
         }
-        return fields
+        return fields;
     }
     
     setEditFields(editorFields) {
         let fields = [];
         editorFields.forEach((object, index) => {
             this.setFieldsets(index, object);
-            fields[index] = this.getFieldByType(index, object)
+            fields[index] = this.getFieldByType(index, object);
         });
 
         if (this.fieldsetClose > 0) {
             fields = this.setFieldsetFields(fields);
         }
-        return fields
+        return fields;
     }
     
     setFieldsets(index, object) {
         if (typeof object.fieldsetOpen !== CommonConstants.UNDEFINED) {
             if (typeof object.legend === CommonConstants.UNDEFINED) {
-                throw new EditorException('the "legend" property must be specified within fieldsetOpen')
+                throw new EditorException('the "legend" property must be specified within fieldsetOpen');
             }
             this.fieldsetOpen = index;
             this.fieldsetLegend = object.legend;
         }
 
         if (typeof object.fieldsetClose !== CommonConstants.UNDEFINED) {
-            this.fieldsetClose = index
+            this.fieldsetClose = index;
         }
     }
     
@@ -113,7 +118,7 @@ class Editor extends Component {
         let fieldsInSets = [];
         fields.forEach((object, index) => {
             if (index >= this.fieldsetOpen && index <= this.fieldsetClose) {
-                fieldsInSets[index] = object
+                fieldsInSets[index] = object;
             }
         });
 
@@ -127,7 +132,7 @@ class Editor extends Component {
         </div>);
 
         reFields.push(fields.slice(this.fieldsetClose + 1));
-        return reFields
+        return reFields;
     }
     
     setDeleteFields(items) {
@@ -140,12 +145,13 @@ class Editor extends Component {
 
         let delMsg = t(this.lang.gte_editor_delete_popup, {'rows': items.length});
         fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>);
-        return fields
+        return fields;
     }
     
     onFocus(e) {
         const {setMultipleText} = this.state;
         let isTextArea = false;
+
         if (typeof e.target.dataset.multiple !== CommonConstants.UNDEFINED
             && true === e.target.dataset.multiple && setMultipleText === 0) {
             document.querySelectorAll('input').value = '';
@@ -159,6 +165,7 @@ class Editor extends Component {
                 && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
             isTextArea = true;
         }
+
         this.setState({
             setMultipleText: 1,
             isTextArea: isTextArea
@@ -218,35 +225,42 @@ class Editor extends Component {
             dataIndices,
             setMultipleText
         } = this.state;
+
         const {action, fieldsEdit} = this.props;
         const isMultiple = (Object.keys(fieldsEdit).length > 1);
         
         let fieldType = object.type,
             fieldName = object.name,
             fieldLabel = object.label,
+            fieldDefaultValue = object.defaultValue,
             fieldValue = '';
-        if (true === isMultiple && setMultipleText === 0) {
-            fieldValue = this.lang.gte_editor_multiple_rows
-        } else {
-            if (action === EditorConstants.ACTION_EDIT) {
-                if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
-                    fieldValue = dataIndices[fieldName]
-                } else {
-                    if (true === isMultiple) {
-                        fieldValue = ''
-                    } else {
-                        fieldValue = fieldsEdit[0][fieldName]
-                    }
-                }
-            } else if (action === EditorConstants.ACTION_CREATE
-                && typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
-                fieldValue = dataIndices[fieldName]
-            }
-        }
+
         // attributes for form tags
         let attributes = {};
         if (typeof object.attrs !== CommonConstants.UNDEFINED) {
             attributes = object.attrs;
+        }
+
+        if (true === isMultiple && setMultipleText === 0) {
+            fieldValue = this.lang.gte_editor_multiple_rows;
+        } else {
+            if (action === EditorConstants.ACTION_EDIT) {
+                if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+                    fieldValue = dataIndices[fieldName];
+                } else {
+                    if (true === isMultiple) {
+                        fieldValue = '';
+                    } else {
+                        fieldValue = fieldsEdit[0][fieldName];
+                    }
+                }
+            } else if (action === EditorConstants.ACTION_CREATE) {
+                if (typeof dataIndices[fieldName] !== CommonConstants.UNDEFINED) {
+                    fieldValue = dataIndices[fieldName];
+                } else if (typeof  fieldDefaultValue !== CommonConstants.UNDEFINED) {
+                    fieldValue = fieldDefaultValue;
+                }
+            }
         }
         
         let i = 0,
@@ -286,6 +300,7 @@ class Editor extends Component {
                     id={fieldName}
                     type={fieldType}
                     name={fieldName}
+                    value={fieldValue}
                 />;
                 break;
             case EditorConstants.TYPE_FILE:
@@ -297,7 +312,8 @@ class Editor extends Component {
                     {...attributes}
                     id={fieldName}
                     type={fieldType}
-                    name={fieldName}/>;
+                    name={fieldName}
+                    value={undefined}/>; // fixed React input field value warning
                 break;
             case EditorConstants.TYPE_TEXTAREA:
                 if (typeof object.plugins !== CommonConstants.UNDEFINED

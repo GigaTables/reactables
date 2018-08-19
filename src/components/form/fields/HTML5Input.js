@@ -8,8 +8,10 @@ class HTML5Input extends Component {
             id,
             type,
             name,
-            onChange
-        } = this.props
+            onChange,
+            value
+        } = this.props;
+
         return (
             <input
                 onChange={onChange}
@@ -17,6 +19,7 @@ class HTML5Input extends Component {
                 id={id}
                 type={type}
                 name={name}
+                value={value}
             />
         )
     }
@@ -28,6 +31,6 @@ HTML5Input.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     attributes: PropTypes.object
-}
+};
 
 export default HTML5Input

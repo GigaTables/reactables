@@ -743,7 +743,7 @@ Just add:
 ```
 to `struct` section of `settings` variable as in example above.
 
-**Is there a way to edit cells in a real-time?**
+**Is there a way to edit cells in real-time?**
 
 `editableCells` option will transform table to per-cell edit bases:
 ```js
@@ -787,6 +787,9 @@ to open fieldset tag and set legend, to close previous fieldset in any further o
         ...
     },
 ```
+
+**I need to set the default value for a field, how can I achieve that?**
+Sure, just add the `defaultValue` property to the particular fields object. It works for all types of fields input, select, html5 inputs etc. 
 
 **How would GT behave if there will be > 1 000 000 rows data?**
 

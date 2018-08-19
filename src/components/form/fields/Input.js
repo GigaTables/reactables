@@ -12,7 +12,8 @@ class Input extends Component {
             isMultiple,
             onFocus,
             onChange
-        } = this.props
+        } = this.props;
+
         return (
             <input onFocus={onFocus}
                    onChange={onChange}
@@ -34,6 +35,6 @@ Input.propTypes = {
     isMultiple: PropTypes.bool,
     onFocus: PropTypes.func,
     attributes: PropTypes.object
-}
+};
 
 export default Input

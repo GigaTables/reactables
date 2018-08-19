@@ -50,9 +50,10 @@ let editor = {
             type: 'range',
             attrs: {
                 min: 0,
-                max: 100,
-                defaultValue: 55
-            }
+                max: 100
+            },
+            // here is the defaultValue passed through attrs because of HTML5 tags
+            defaultValue: 55
         },
         {
             label: 'Article title:',
@@ -62,8 +63,11 @@ let editor = {
             legend: 'Required fields',
             attrs: {
                 pattern: '^[A-Za-z0-9_]+$',
-                className: 'titleField'
-            }
+                className: 'titleField',
+                placeholder: 'Place holder'
+            },
+            // in regular tags defaultValue passed separately
+            defaultValue: 'default value'
         },
         {
             label: 'Description:',
@@ -78,7 +82,8 @@ let editor = {
         {
             label: 'Date Time:',
             name: 'date',
-            type: 'date'
+            type: 'date',
+            defaultValue: '2018-08-19'
         },
         {
             label: 'Image:',
@@ -94,7 +99,8 @@ let editor = {
                 {'key2': 'val2'}
             ],
             type: 'select', // select,checkbox,radio
-            attrs: {required: true}
+            attrs: {required: true},
+            defaultValue: 'key2'
         }
     ]
 };

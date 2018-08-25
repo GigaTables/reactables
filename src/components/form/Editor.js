@@ -48,7 +48,6 @@ class Editor extends Component {
         this.fieldsetClose = 0;
         this.fieldsetLegend = '';
         this.filesInput = {};
-        this.defaultValue = '';
     }
     
     setDataIndices(props) {
@@ -279,7 +278,7 @@ class Editor extends Component {
                                        type={fieldType}
                                        name={fieldName}
                                        value={fieldValue}
-                                       isMultiple={isMultiple}/>
+                                       isMultiple={isMultiple}/>;
                 break;
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:
@@ -401,10 +400,12 @@ class Editor extends Component {
     
     btnClicked(e) {
         e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
+
         const {
             action,
             editorUpdate,
-            fieldsEdit
+            fieldsEdit,
+            editor
         } = this.props;
         const {dataIndices} = this.state;
         
@@ -412,10 +413,12 @@ class Editor extends Component {
         let ajaxUrl = settings.url;
         let dataResp = dataIndices;
         let headers = {};
+
         headers[CommonConstants.HEADER_CONTENT_TYPE] = CommonConstants.CONTENT_APP_JSON;
         if (action === EditorConstants.ACTION_CREATE) {
             this.triggerBefore(EditorConstants.EDITOR_CREATE);
             this.fileUpload();
+
             if (typeof dataIndices['id'] !== CommonConstants.UNDEFINED) { // clear the id
                 delete dataIndices['id']
             }
@@ -423,30 +426,44 @@ class Editor extends Component {
                 delete dataIndices[CommonConstants.GT_ROW_ID]
             }
 
+            // combine fields with default values + user edited
+            let fields = editor.fields, payload = [];
+            fields.forEach((object) => {
+                if (typeof object.defaultValue !== CommonConstants.UNDEFINED && typeof dataIndices[object.name] === CommonConstants.UNDEFINED) {
+                    payload[object.name] = object.defaultValue;
+                } else {
+                    payload[object.name] = dataIndices[object.name];
+                }
+            });
+            console.log(payload);
+
             headers = this.setHeaders(settings, headers);
             fetch(ajaxUrl, {
                 method: settings.method,
-                body: JSON.stringify(dataIndices),
+                body: JSON.stringify(payload),
                 headers: headers
             }).then(response => response.json()).then((data) => {
                 if (typeof data[CommonConstants.GT_ROW]['id'] === CommonConstants.UNDEFINED) {
                     throw new DataException('The `id` field is required to return in response from server/back-end.')
                 }
+
                 // leaving UI fields, prioritizing those from server
                 for (let k in data[CommonConstants.GT_ROW]) {
                     if (data[CommonConstants.GT_ROW].hasOwnProperty(k)) {
                         dataResp[k] = data[CommonConstants.GT_ROW][k]
                     }
                 }
+
                 dataResp[CommonConstants.GT_ROW_ID] = data[CommonConstants.GT_ROW]['id'];
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_CREATE)
             }).catch((e) => {
                 console.error(e.message)
-            })
+            });
         } else if (action === EditorConstants.ACTION_EDIT) {
             this.triggerBefore(EditorConstants.EDITOR_EDIT);
             this.fileUpload();
+
             let payload = [];
             for (let k in fieldsEdit) {
                 if (fieldsEdit.hasOwnProperty(k)) {
@@ -479,10 +496,11 @@ class Editor extends Component {
                 this.triggerAfter(EditorConstants.EDITOR_EDIT)
             }).catch((e) => {
                 console.error(e.message)
-            })
+            });
         } else if (action === EditorConstants.ACTION_DELETE) {
             this.triggerBefore(EditorConstants.EDITOR_REMOVE);
             headers = this.setHeaders(settings, headers);
+
             fetch(ajaxUrl, {
                 method: settings.method,
                 body: JSON.stringify(dataIndices), // prop ids are passed from Reactables
@@ -491,7 +509,7 @@ class Editor extends Component {
                 // call editorUpdate method with passing all user-input values
                 editorUpdate(e, dataResp);
                 this.triggerAfter(EditorConstants.EDITOR_REMOVE)
-            })
+            });
         }
     }
     

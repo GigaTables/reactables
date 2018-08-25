@@ -7,7 +7,8 @@ class Pie extends Component {
         const {
             data,
             pluginProps
-        } = this.props
+        } = this.props;
+
         return (
             <PieChart data={data} {...pluginProps}/>
         )
@@ -16,6 +17,6 @@ class Pie extends Component {
 
 Pie.propTypes = {
     data: PropTypes.array.isRequired
-}
+};
 
 export default Pie

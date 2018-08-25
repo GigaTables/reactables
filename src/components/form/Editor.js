@@ -1,9 +1,9 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { DataException, EditorException } from '../Exceptions';
-import { t, formElement } from '../Helpers';
+import {DataException, EditorException} from '../Exceptions';
+import {t, formElement} from '../Helpers';
 import '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
@@ -49,7 +49,7 @@ class Editor extends Component {
         this.fieldsetLegend = '';
         this.filesInput = {};
     }
-    
+
     setDataIndices(props) {
         let cols = props.columns;
         this.dataIndices = [];
@@ -58,7 +58,7 @@ class Editor extends Component {
             this.dataIndices[column.name] = '';
         });
     }
-    
+
     setFields(props) {
         let fields = [];
 
@@ -72,7 +72,7 @@ class Editor extends Component {
 
         this.fields = fields;
     }
-    
+
     setCreateFields(editorFields) {
         let fields = [];
         editorFields.forEach((object, index) => {
@@ -85,7 +85,7 @@ class Editor extends Component {
         }
         return fields;
     }
-    
+
     setEditFields(editorFields) {
         let fields = [];
         editorFields.forEach((object, index) => {
@@ -98,7 +98,7 @@ class Editor extends Component {
         }
         return fields;
     }
-    
+
     setFieldsets(index, object) {
         if (typeof object.fieldsetOpen !== CommonConstants.UNDEFINED) {
             if (typeof object.legend === CommonConstants.UNDEFINED) {
@@ -112,7 +112,7 @@ class Editor extends Component {
             this.fieldsetClose = index;
         }
     }
-    
+
     setFieldsetFields(fields) {
         let fieldsInSets = [];
         fields.forEach((object, index) => {
@@ -133,7 +133,7 @@ class Editor extends Component {
         reFields.push(fields.slice(this.fieldsetClose + 1));
         return reFields;
     }
-    
+
     setDeleteFields(items) {
         let fields = [], lastId = 0;
         this.state.dataIndices = this.props.selectedIds;
@@ -146,7 +146,7 @@ class Editor extends Component {
         fields.push(<div key={++lastId} className="gte_msg">{delMsg}</div>);
         return fields;
     }
-    
+
     onFocus(e) {
         const {setMultipleText} = this.state;
         let isTextArea = false;
@@ -170,12 +170,12 @@ class Editor extends Component {
             isTextArea: isTextArea
         });
     }
-    
+
     onChange(e) {
         const {setMultipleText} = this.state;
         let isMultiple = e.target.dataset.multiple;
         let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value;
-        
+
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
                 [e.target.name]: val
@@ -183,7 +183,7 @@ class Editor extends Component {
             setMultipleText: 1
         });
     }
-    
+
     /**
      * Uploads files via AJAX with FormData object
      */
@@ -199,7 +199,7 @@ class Editor extends Component {
                     formData.append(key, files[key])
                 }
             }
-            
+
             superagent.post(ajaxFiles).send(formData).end((err, response) => {
                 if (err) {
                     console.log('Error has occurred while uploading files: ');
@@ -210,7 +210,7 @@ class Editor extends Component {
             })
         }
     }
-    
+
     onChangeHtml(el, html) {
         this.setState({
             dataIndices: Object.assign({}, this.state.dataIndices, {
@@ -218,7 +218,7 @@ class Editor extends Component {
             })
         })
     }
-    
+
     getFieldByType(index, object) {
         const {
             dataIndices,
@@ -227,7 +227,7 @@ class Editor extends Component {
 
         const {action, fieldsEdit} = this.props;
         const isMultiple = (Object.keys(fieldsEdit).length > 1);
-        
+
         let fieldType = object.type,
             fieldName = object.name,
             fieldLabel = object.label,
@@ -261,7 +261,7 @@ class Editor extends Component {
                 }
             }
         }
-        
+
         let i = 0,
             htmlFields = {};
         switch (fieldType) {
@@ -271,14 +271,14 @@ class Editor extends Component {
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
                 htmlFields = <Input key={i}
-                                       onFocus={this.onFocus.bind(this)}
-                                       onChange={this.onChange.bind(this)}
-                                       attributes={attributes}
-                                       id={fieldName}
-                                       type={fieldType}
-                                       name={fieldName}
-                                       value={fieldValue}
-                                       isMultiple={isMultiple}/>;
+                                    onFocus={this.onFocus.bind(this)}
+                                    onChange={this.onChange.bind(this)}
+                                    attributes={attributes}
+                                    id={fieldName}
+                                    type={fieldType}
+                                    name={fieldName}
+                                    value={fieldValue}
+                                    isMultiple={isMultiple}/>;
                 break;
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:
@@ -377,7 +377,7 @@ class Editor extends Component {
         }
         return [<FormField key={i} id={fieldName} label={fieldLabel} type={fieldType}>{htmlFields}</FormField>]
     }
-    
+
     triggerBefore(type) {
         const {tableOpts} = this.props;
         // call triggerBefore if it has been set
@@ -387,7 +387,7 @@ class Editor extends Component {
             }
         })
     }
-    
+
     triggerAfter(type) {
         const {tableOpts} = this.props;
         // call triggerAfter if it has been set
@@ -397,7 +397,7 @@ class Editor extends Component {
             }
         })
     }
-    
+
     btnClicked(e) {
         e.persist(); // this is to avoid null values in this.props.editorUpdate(e, dataResp) call
 
@@ -408,7 +408,7 @@ class Editor extends Component {
             editor
         } = this.props;
         const {dataIndices} = this.state;
-        
+
         let settings = this.getAjaxSettings(action);
         let ajaxUrl = settings.url;
         let dataResp = dataIndices;
@@ -427,15 +427,16 @@ class Editor extends Component {
             }
 
             // combine fields with default values + user edited
-            let fields = editor.fields, payload = [];
+            let fields = editor.fields, payload = {};
             fields.forEach((object) => {
                 if (typeof object.defaultValue !== CommonConstants.UNDEFINED && typeof dataIndices[object.name] === CommonConstants.UNDEFINED) {
                     payload[object.name] = object.defaultValue;
                 } else {
-                    payload[object.name] = dataIndices[object.name];
+                    if (typeof dataIndices[object.name] !== CommonConstants.UNDEFINED) {
+                        payload[object.name] = dataIndices[object.name];
+                    }
                 }
             });
-            console.log(payload);
 
             headers = this.setHeaders(settings, headers);
             fetch(ajaxUrl, {
@@ -512,7 +513,7 @@ class Editor extends Component {
             });
         }
     }
-    
+
     setHeaders(settings, headers) {
         for (let hKey in settings.headers) {
             if (settings.headers.hasOwnProperty(hKey)) {
@@ -521,7 +522,7 @@ class Editor extends Component {
         }
         return headers
     }
-    
+
     getAjaxSettings(action) {
         const {
             editor
@@ -554,17 +555,17 @@ class Editor extends Component {
                 'or object with "' + action + '" and "url", "type" properties set-up respectively.')
         }
     }
-    
+
     stopPropagation(e) {
         e.stopPropagation()
     }
-    
+
     btnClickedEnter(e) {
         if (e.keyCode === CommonConstants.ENTER_KEY && this.state.isTextArea === false) {
             document.getElementById('gte_sent_btn').click()
         }
     }
-    
+
     render() {
         const {
             hidePopup,

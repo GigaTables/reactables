@@ -374,7 +374,7 @@ class Reactables extends Main {
     }
     
     getEditor (display) {
-        const { editor } = this.props
+        const { editor } = this.props;
         if (typeof editor !== CommonConstants.UNDEFINED) {
             const {
                 active,
@@ -385,12 +385,12 @@ class Reactables extends Main {
                 popup_button,
                 popup_title,
                 fieldsEdit
-            } = this.state
+            } = this.state;
             const {
                 tableOpts,
                 lang,
                 struct
-            } = this.settings
+            } = this.settings;
             
             return (
                 <Editor

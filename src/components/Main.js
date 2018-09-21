@@ -598,7 +598,7 @@ class Main extends Component {
     }
 
     showPopup(e) {
-        const {selectedRows, dataSearch} = this.state;
+        const {selectedRows, dataSearch, selectedIds} = this.state;
         this.lang = Lang[this.settings.lang];
         let action = e.target.dataset.action,
             popup_title = this.lang.gte_editor_popupheader_create,
@@ -628,13 +628,24 @@ class Main extends Component {
             case EditorConstants.ACTION_EDIT:
                 popup_title = this.lang.gte_editor_popupheader_edit;
                 popup_button = this.lang.gte_editor_sendbtn_update;
+
                 // collect data for fields filling in Editor
-                for (let k in selectedRows) {
-                    // tested with sorted rows - should work properly
-                    if (dataSearch !== null) { // edit field(s) after search
-                        fieldsEdit[k] = dataSearch[selectedRows[k]];
-                    } else { // std behavior
-                        fieldsEdit[k] = this.jsonData[selectedRows[k]];
+                if (dataSearch !== null) { // edit field(s) after search todo: test - seems like a bug if there are > 1 page results
+                    for (let k in selectedRows) {
+                        if (selectedRows.hasOwnProperty(k)) {
+                            fieldsEdit[k] = dataSearch[selectedRows[k]];
+                        }
+                    }
+                } else {
+                    for (let sKey in selectedIds) {
+                        if (selectedIds.hasOwnProperty(sKey)) {
+                            for (let jsonKey in this.jsonData) {
+                                if (this.jsonData.hasOwnProperty(jsonKey)
+                                    && this.jsonData[jsonKey][CommonConstants.GT_ROW_ID] === selectedIds[sKey]) {
+                                    fieldsEdit[sKey] = this.jsonData[jsonKey];
+                                }
+                            }
+                        }
                     }
                 }
                 break;
@@ -643,7 +654,7 @@ class Main extends Component {
                 popup_button = this.lang.gte_editor_sendbtn_delete;
                 break;
         }
-        
+
         e.preventDefault();
         if (action !== EditorConstants.ACTION_RELOAD) {
             this.setState({

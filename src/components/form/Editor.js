@@ -262,6 +262,11 @@ class Editor extends Component {
             }
         }
 
+        // fix warning: value prop on input should not be null
+        if (fieldValue === null) {
+            fieldValue = '';
+        }
+
         let i = 0,
             htmlFields = {};
         switch (fieldType) {
@@ -483,17 +488,9 @@ class Editor extends Component {
                     || typeof data[CommonConstants.GT_ROWS][0]['id'] === CommonConstants.UNDEFINED) {
                     throw new DataException('The `id` field is required to return in response from server/back-end.')
                 }
-                for (let k in data[CommonConstants.GT_ROWS]) {
-                    if (data[CommonConstants.GT_ROWS].hasOwnProperty(k)) {
-                        for (let colKey in data[CommonConstants.GT_ROWS][k]) {
-                            if (data[CommonConstants.GT_ROWS][k].hasOwnProperty(colKey)) {
-                                dataResp[colKey] = data[CommonConstants.GT_ROWS][k][colKey]
-                            }
-                        }
-                    }
-                }
+
                 // leaving UI fields, prioritizing those from server
-                editorUpdate(e, dataResp);
+                editorUpdate(e, data);
                 this.triggerAfter(EditorConstants.EDITOR_EDIT)
             }).catch((e) => {
                 console.error(e.message)

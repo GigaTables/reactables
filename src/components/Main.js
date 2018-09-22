@@ -530,12 +530,15 @@ class Main extends Component {
 
     editorUpdate(e, dataIndices) {
         let action = e.target.dataset.action,
-            rowId = 0,
-            selectedRows = this.state.selectedRows;
+            rowId = 0;
+
+        const {selectedRows, sortedButtons} = this.state;
+
         if (action === EditorConstants.ACTION_DELETE) {
             const {
                 dataSearch,
             } = this.state;
+
             for (let dataKey in dataIndices) {
                 for (let key in this.jsonData) {
                     if (typeof this.jsonData[key][CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
@@ -543,6 +546,7 @@ class Main extends Component {
                     } else if (typeof this.jsonData[key]['id'] !== CommonConstants.UNDEFINED) {
                         rowId = this.jsonData[key]['id'];
                     }
+
                     if (dataIndices[dataKey] === rowId) {
                         selectedRows.splice(selectedRows.indexOf(key), 1);
                         delete this.jsonData[key];
@@ -562,16 +566,26 @@ class Main extends Component {
             if (selectedRows.length === 0) {
                 selectedRows[0] = e.target.dataset.rowid;
             }
-            for (let key in dataIndices) {
-                for (let sKey in selectedRows) {
-                    this.jsonData[selectedRows[sKey]][key] = dataIndices[key];
+
+            // we waiting reflexive data come from server/back-end
+            for (let dKey in dataIndices[CommonConstants.GT_ROWS]) {
+                for (let jKey in this.jsonData) {
+
+                    // find a row and update it with fields merged from server/client
+                    if (this.jsonData[jKey][CommonConstants.GT_ROW_ID] === dataIndices[CommonConstants.GT_ROWS][dKey][CommonConstants.GT_ROW_ID]) {
+
+                        for (let field in dataIndices[CommonConstants.GT_ROWS][dKey]) {
+                            this.jsonData[jKey][field] = dataIndices[CommonConstants.GT_ROWS][dKey][field];
+                        }
+                    }
                 }
             }
         }
+
         this.setState({
             selectedRows: selectedRows
         }, () => {
-            this.createTable(this.jsonData, this.state.sortedButtons);
+            this.createTable(this.jsonData, sortedButtons);
         });
         this.hidePopup();
     }

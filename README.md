@@ -28,7 +28,7 @@ GigaTables supports the following capabilities:
 
 -- dynamic column content functions,
 
--- 7 popular languages,
+-- 10 popular languages,
 
 -- data load for period interval,
 

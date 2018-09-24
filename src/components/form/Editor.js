@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {DataException, EditorException} from '../Exceptions';
-import {t, formElement} from '../Helpers';
+import {t} from '../Helpers';
 import '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
@@ -506,7 +506,7 @@ class Editor extends Component {
             }).then(response => response.json()).then(() => {
                 // call editorUpdate method with passing all user-input values
                 editorUpdate(e, dataResp);
-                this.triggerAfter(EditorConstants.EDITOR_REMOVE)
+                this.triggerAfter(EditorConstants.EDITOR_REMOVE);
             });
         }
     }
@@ -514,10 +514,11 @@ class Editor extends Component {
     setHeaders(settings, headers) {
         for (let hKey in settings.headers) {
             if (settings.headers.hasOwnProperty(hKey)) {
-                headers[hKey] = settings.headers[hKey]
+                headers[hKey] = settings.headers[hKey];
             }
         }
-        return headers
+
+        return headers;
     }
 
     getAjaxSettings(action) {
@@ -549,7 +550,7 @@ class Editor extends Component {
             }
         } else { // setting error
             throw new EditorException('"ajax" property must be set either as string url ' +
-                'or object with "' + action + '" and "url", "type" properties set-up respectively.')
+                'or object with "' + action + '" and "url", "type" properties set-up respectively.');
         }
     }
 
@@ -559,8 +560,13 @@ class Editor extends Component {
 
     btnClickedEnter(e) {
         if (e.keyCode === CommonConstants.ENTER_KEY && this.state.isTextArea === false) {
-            document.getElementById('gte_sent_btn').click()
+            document.getElementById('gte_sent_btn').click();
         }
+    }
+
+    resetFields() {
+        this.setState({dataIndices: {}});
+        this.setDataIndices(this.props);
     }
 
     render() {
@@ -599,7 +605,7 @@ class Editor extends Component {
                                 className="gte_form_border_box">
                                 <div
                                     className="close_btn"
-                                    onClick={hidePopup}></div>
+                                    onClick={() => {hidePopup();this.resetFields();}}></div>
                                 <div className={formFieldsClasses}>
                                     <div className="gte_header">
                                         <div className="gte_editor_title">{popupTitle}</div>

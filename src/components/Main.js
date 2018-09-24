@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Row from './table/Row.js';
 import Column from './table/Column.js';
 import Footer from './table/Footer';
-import Editor from './form/Editor';
 
 const CommonConstants = require('./CommonConstants');
 const EditorConstants = require('./EditorConstants');
@@ -152,6 +151,7 @@ class Main extends Component {
         if (dataSearch !== null) {
             jsonData = dataSearch;
         }
+
         let jsonDataPerPage = jsonData;
         if (jsonData.length > perPage) {
             let from = parseInt(fromRow),
@@ -163,6 +163,7 @@ class Main extends Component {
                 jsonDataPerPage = jsonData.slice(from, to);
             }
         }
+
         // process rows
         jsonDataPerPage.forEach((object, objectIndex) => {
             let cols = [], rowId = 0;
@@ -180,6 +181,7 @@ class Main extends Component {
                     key={-1}
                     editableCells={editableCells}></Column>);
             }
+
             // process cols
             this.props.children.forEach((th, idx) => {
                 const {data} = th.props;
@@ -210,6 +212,7 @@ class Main extends Component {
                     >{content}</Column>);
                 }
             });
+
             // count is used to shft key + click selection of rows, ex.: sorted
             rows.push(<Row
                 clickedRow={this.clickedRow.bind(this)}
@@ -221,16 +224,20 @@ class Main extends Component {
                 gteRowId={rowId}
                 editableCells={editableCells}>{cols}</Row>);
         });
+
         if (aggregateFooter === true) {
             this.setFooter(jsonDataPerPage, rows);
         }
+
         let state = {
             dataRows: rows,
             countRows: jsonData.length
         };
+
         if (typeof sortedButtons !== CommonConstants.UNDEFINED) {
             state['sortButtons'] = sortedButtons;
         }
+
         this.setState(state);
     }
 
@@ -587,12 +594,14 @@ class Main extends Component {
         }, () => {
             this.createTable(this.jsonData, sortedButtons);
         });
+
         this.hidePopup();
     }
 
     handlePagination(e) {
         const {from} = e.target.dataset;
         const {perPage, sortedButtons} = this.state;
+
         this.setState({
             fromRow: parseInt(from),
             page: parseInt(from / perPage + 1),
@@ -643,25 +652,8 @@ class Main extends Component {
                 popup_title = this.lang.gte_editor_popupheader_edit;
                 popup_button = this.lang.gte_editor_sendbtn_update;
 
-                // collect data for fields filling in Editor
-                if (dataSearch !== null) { // edit field(s) after search todo: test - seems like a bug if there are > 1 page results
-                    for (let k in selectedRows) {
-                        if (selectedRows.hasOwnProperty(k)) {
-                            fieldsEdit[k] = dataSearch[selectedRows[k]];
-                        }
-                    }
-                } else {
-                    for (let sKey in selectedIds) {
-                        if (selectedIds.hasOwnProperty(sKey)) {
-                            for (let jsonKey in this.jsonData) {
-                                if (this.jsonData.hasOwnProperty(jsonKey)
-                                    && this.jsonData[jsonKey][CommonConstants.GT_ROW_ID] === selectedIds[sKey]) {
-                                    fieldsEdit[sKey] = this.jsonData[jsonKey];
-                                }
-                            }
-                        }
-                    }
-                }
+                // collect data for fields filling in Editor, edit field(s) after search
+                fieldsEdit = this.setPopUpFields(dataSearch !== null ? dataSearch : this.jsonData);
                 break;
             case EditorConstants.ACTION_DELETE:
                 popup_title = this.lang.gte_editor_popupheader_delete;
@@ -683,6 +675,25 @@ class Main extends Component {
                 ctrlDown: false,
             });
         }
+    }
+
+    setPopUpFields(data) {
+        let fields = {};
+
+        const {selectedIds} = this.state;
+
+        for (let sKey in selectedIds) {
+            if (selectedIds.hasOwnProperty(sKey)) {
+                for (let jsonKey in data) {
+                    if (data.hasOwnProperty(jsonKey)
+                        && data[jsonKey][CommonConstants.GT_ROW_ID] === selectedIds[sKey]) {
+                        fields[sKey] = data[jsonKey];
+                    }
+                }
+            }
+        }
+
+        return fields;
     }
 
     hidePopup() {

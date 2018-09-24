@@ -21,15 +21,19 @@ class CSVLink extends Component {
         if (typeof jsonData === CommonConstants.UNDEFINED || !jsonData.length) {
             return;
         }
+
         let date = new Date();
         let dateFormat = date.getFullYear() + '_' + (date.getMonth() + 1) + '_' + date.getDate() + '_' + date.getHours() + '_' + date.getMinutes() + '_' + date.getSeconds();
         let csvContent = '';
+
         // headers
         csvContent += this.objectToCSVRow(Object.keys(jsonData[0]));
         jsonData.forEach((item) => {
             csvContent += this.objectToCSVRow(item);
         });
+
         let blob = new Blob([csvContent], {type: CommonConstants.CSV_HEADER});
+
         if (navigator.msSaveBlob) { // IE 10+
             navigator.msSaveBlob(blob, filename);
         } else {

@@ -386,6 +386,7 @@ class Reactables extends Main {
     getEditor(display) {
         const {editor} = this.props;
         if (typeof editor !== CommonConstants.UNDEFINED) {
+
             const {
                 active,
                 action,
@@ -396,6 +397,7 @@ class Reactables extends Main {
                 popup_title,
                 fieldsEdit
             } = this.state;
+
             const {
                 tableOpts,
                 lang,

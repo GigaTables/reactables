@@ -5,7 +5,7 @@ import Tools from './components/tools/Tools.js'
 import Editor from './components/form/Editor.js'
 import Pagination from './components/tools/Pagination.js'
 import styles from './css/styles.css'
-import { DataException } from './components/Exceptions'
+import {DataException} from './components/Exceptions'
 import TBody from './components/table/TBody'
 import TFoot from './components/table/TFoot'
 import THead from './components/table/THead'
@@ -14,13 +14,13 @@ const CommonConstants = require('./components/CommonConstants');
 const Hoek = require('hoek');
 
 class Reactables extends Main {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.defaultSettings = {
             struct: {
-                search: [ 'top', 'bottom' ],
-                rowsSelector: [ 'asc', 'top', 'bottom' ],
-                pagination: [ 'bottom' ], // pagination and infiniteScroll are mutually exclusive
+                search: ['top', 'bottom'],
+                rowsSelector: ['asc', 'top', 'bottom'],
+                pagination: ['bottom'], // pagination and infiniteScroll are mutually exclusive
                 infiniteScroll: false,
                 editableCells: false,
                 aggregateFooter: false,
@@ -30,7 +30,7 @@ class Reactables extends Main {
                 width: CommonConstants.DEFAULT_WIDTH
             },
             lang: 'en',
-            perPageRows: [ 25, 50, 100, 200, 500 ],
+            perPageRows: [25, 50, 100, 200, 500],
             defaultPerPage: 50,
             columns: [],
             columnOpts: [],
@@ -44,7 +44,7 @@ class Reactables extends Main {
             ajax: null,
             data: null
         };
-        
+
         this.state = {
             dataRows: null,
             countRows: 0,
@@ -59,6 +59,7 @@ class Reactables extends Main {
             active: false,
             selectedRows: [],
             selectedIds: [],
+            // key-board
             ctrlDown: false,
             shiftDown: false,
             arrowDown: false,
@@ -93,10 +94,10 @@ class Reactables extends Main {
         // these default sets will merge with users sets
         this.build()
     }
-    
-    build () {
+
+    build() {
         this.settings = Hoek.applyToDefaults(this.defaultSettings, this.props.settings);
-        const { columns, columnOpts } = this.settings;
+        const {columns, columnOpts} = this.settings;
         columns.forEach((object) => {
             this.setSearchableCols(object);
             this.setSearchableCase(object);
@@ -109,11 +110,11 @@ class Reactables extends Main {
         columnOpts.forEach((object) => {
             this.setCustomColumns(object)
         });
-        
+
         let colsLen = columns.length;
-        const { ajax, data } = this.settings;
+        const {ajax, data} = this.settings;
         this.resolveData(ajax, data, colsLen);
-        
+
         let autoloadPeriod = parseInt(this.settings.ajaxAutoloadPeriod);
         if (this.settings.ajaxAutoloadData === true
             && autoloadPeriod >= CommonConstants.MIN_AUTOLOAD_PERIOD
@@ -123,8 +124,8 @@ class Reactables extends Main {
             }, autoloadPeriod * 1000)
         }
     }
-    
-    resolveData (destination, data, colsLen) {
+
+    resolveData(destination, data, colsLen) {
         if (data === null) {  // ajax url data processing
             if (typeof destination.then === CommonConstants.FUNCTION) {
                 destination.then((url) => {
@@ -135,15 +136,15 @@ class Reactables extends Main {
             }
         }
     }
-    
-    setAjaxData (url, colsLen) {
-        const { headers } = this.settings;
+
+    setAjaxData(url, colsLen) {
+        const {headers} = this.settings;
         let hrs = new Headers();
 
         hrs.append(CommonConstants.HEADER_CONTENT_TYPE, CommonConstants.CONTENT_APP_JSON);
         for (let k in headers) {
             if (headers.hasOwnProperty(k)) {
-                hrs.append(k, headers[ k ]);
+                hrs.append(k, headers[k]);
             }
         }
 
@@ -153,7 +154,7 @@ class Reactables extends Main {
             this.setLoader(colsLen);
             return response.json();
         }).then((data) => {
-            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ]; // one row or several
+            let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
             if (typeof jsonData === CommonConstants.UNDEFINED) {
                 throw new DataException('JSON must contain "rows" field.')
             }
@@ -162,8 +163,8 @@ class Reactables extends Main {
             this.setTableSort();
         })
     }
-    
-    componentDidMount () {
+
+    componentDidMount() {
         let that = this;
         // turn on infinite scroll
         if (this.settings.struct.infiniteScroll === true) {
@@ -251,9 +252,10 @@ class Reactables extends Main {
                 that.setPagination();
             }
         });
-        
+
         // disabling keys
         document.addEventListener('keyup', (e) => {
+
             switch (e.which) {
                 case CommonConstants.CTRL_KEY:
                     that.setState({
@@ -274,6 +276,7 @@ class Reactables extends Main {
                     that.hidePopup();
                     break;
             }
+
             if (this.state.active === false) {// turn off events with active pop-up
                 switch (e.which) {
                     case CommonConstants.CTRL_KEY:
@@ -324,11 +327,11 @@ class Reactables extends Main {
                 }
             }
         });
-        
+
         // local data is in priority load it if it's properly filled
-        const { data } = this.settings;
+        const {data} = this.settings;
         if (data !== null && typeof data === CommonConstants.OBJECT) {
-            let jsonData = data[ 'rows' ] ? data[ 'rows' ] : data[ 'row' ]; // one row or several
+            let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
 
             this.setLoader(this.settings.columns.length);
             if (typeof jsonData === CommonConstants.UNDEFINED) {
@@ -340,8 +343,8 @@ class Reactables extends Main {
             this.setTableSort();
         }
     }
-    
-    getTools (display) {
+
+    getTools(display) {
         const {
             tableOpts,
             perPageRows,
@@ -356,7 +359,7 @@ class Reactables extends Main {
             search,
             perPage
         } = this.state;
-        
+
         let dataToPass = [];
         // prevent big data flow if it needless to pass to Tools for exports
         if (struct.download.csv === true) {
@@ -379,9 +382,9 @@ class Reactables extends Main {
             isData={data !== null}
         />)
     }
-    
-    getEditor (display) {
-        const { editor } = this.props;
+
+    getEditor(display) {
+        const {editor} = this.props;
         if (typeof editor !== CommonConstants.UNDEFINED) {
             const {
                 active,
@@ -398,7 +401,7 @@ class Reactables extends Main {
                 lang,
                 struct
             } = this.settings;
-            
+
             return (
                 <Editor
                     active={active}
@@ -420,24 +423,24 @@ class Reactables extends Main {
             )
         }
     }
-    
-    getPagination (display) {
+
+    getPagination(display) {
         const {
             lang,
             struct
         } = this.settings;
-        
+
         if (struct.pagination.indexOf(display) === -1 || struct.infiniteScroll === true) {
             return ''
         }
-        
+
         const {
             countRows,
             page,
             perPage,
             fromRow
         } = this.state;
-        
+
         return (<Pagination
             updatePagination={this.handlePagination.bind(this)}
             countRows={countRows}
@@ -446,28 +449,28 @@ class Reactables extends Main {
             fromRow={fromRow}
             lang={lang}/>)
     }
-    
-    fixHeaders () {
-        let h = document.getElementsByTagName('thead')[ 0 ], readout = document.getElementsByTagName('tbody')[ 0 ];
+
+    fixHeaders() {
+        let h = document.getElementsByTagName('thead')[0], readout = document.getElementsByTagName('tbody')[0];
         let stuck = false, stickPoint = h.offsetTop, tHeadWidth = h.offsetWidth;
 
         window.onscroll = function (e) {
-            let ths = document.getElementsByTagName('tbody')[ 0 ].children[ 0 ].children;
+            let ths = document.getElementsByTagName('tbody')[0].children[0].children;
             let offset = window.pageYOffset;
             let distance = h.offsetTop - offset;
-            
+
             if ((distance <= 0) && stuck === false) {
                 h.style.position = 'fixed';
                 h.style.top = '0px';
                 h.style.backgroundColor = '#f9f9f9';
                 stuck = true;
 
-                let fixedThs = document.getElementsByTagName('thead')[ 0 ].childNodes[ 0 ].childNodes;
-                
+                let fixedThs = document.getElementsByTagName('thead')[0].childNodes[0].childNodes;
+
                 for (let k in ths) {
-                    if (typeof fixedThs[ k ] !== CommonConstants.UNDEFINED
-                        && typeof fixedThs[ k ].style !== CommonConstants.UNDEFINED) {
-                        fixedThs[ k ].style.width = ths[ k ].offsetWidth
+                    if (typeof fixedThs[k] !== CommonConstants.UNDEFINED
+                        && typeof fixedThs[k].style !== CommonConstants.UNDEFINED) {
+                        fixedThs[k].style.width = ths[k].offsetWidth
                     }
                 }
             } else if (stuck === true && (offset <= stickPoint)) {
@@ -477,16 +480,16 @@ class Reactables extends Main {
             }
         }
     }
-    
-    rerenderTable () {
+
+    rerenderTable() {
         this.setState({
             editedCell: ''
         }, () => {
             this.createTable(this.jsonData, this.state.sortButtons, this.state.selectedRows)
         })
     }
-    
-    render () {
+
+    render() {
         let sortedCols = this.setHeads();
         const {
             dataRows
@@ -498,7 +501,7 @@ class Reactables extends Main {
         } = this.settings;
 
         return (
-            <div ref="tableLoaded" className={styles.gt_container} style={{ width: struct.width }}>
+            <div ref="tableLoaded" className={styles.gt_container} style={{width: struct.width}}>
                 <div className={styles.gt_head_tools}>
                     {this.getTools(CommonConstants.DISPLAY_TOP)}
                 </div>

@@ -565,8 +565,11 @@ class Editor extends Component {
     }
 
     resetFields() {
-        this.setState({dataIndices: {}});
-        this.setDataIndices(this.props);
+        // set timeout as in fade_out css
+        setTimeout(() => {
+            this.setState({dataIndices: {}});
+            this.setDataIndices(this.props);
+        }, 300);
     }
 
     render() {
@@ -578,7 +581,12 @@ class Editor extends Component {
             active
         } = this.props;
 
-        this.setFields(this.props);
+        if (active === false) { // clear fields from user-input data
+            this.resetFields();
+        } else {
+            this.setFields(this.props);
+        }
+
         let editorClasses = classNames({
                 gte_editor_popup: true,
                 fade_in: active,
@@ -605,7 +613,7 @@ class Editor extends Component {
                                 className="gte_form_border_box">
                                 <div
                                     className="close_btn"
-                                    onClick={() => {hidePopup();this.resetFields();}}></div>
+                                    onClick={() => {hidePopup();}}></div>
                                 <div className={formFieldsClasses}>
                                     <div className="gte_header">
                                         <div className="gte_editor_title">{popupTitle}</div>
@@ -639,7 +647,7 @@ class Editor extends Component {
                         </div>
                     </div>
                 </div>
-                <div onClick={hidePopup} className={backgroundClasses}></div>
+                <div onClick={() => {hidePopup();}} className={backgroundClasses}></div>
             </div>
         )
     }

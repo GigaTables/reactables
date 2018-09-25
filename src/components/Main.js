@@ -548,18 +548,15 @@ class Main extends Component {
 
             for (let dataKey in dataIndices) {
                 for (let key in this.jsonData) {
-                    if (typeof this.jsonData[key][CommonConstants.GT_ROW_ID] !== CommonConstants.UNDEFINED) {
-                        rowId = this.jsonData[key][CommonConstants.GT_ROW_ID];
-                    } else if (typeof this.jsonData[key]['id'] !== CommonConstants.UNDEFINED) {
-                        rowId = this.jsonData[key]['id'];
-                    }
+                    rowId = this.getRowId(this.jsonData);
 
                     if (dataIndices[dataKey] === rowId) {
                         selectedRows.splice(selectedRows.indexOf(key), 1);
                         delete this.jsonData[key];
+
                         if (dataSearch !== null) { // if searched previously - delete from dataSearch rows either
                             dataSearch.forEach((object, k) => {
-                                if (parseInt(object[CommonConstants.GT_ROW_ID]) === parseInt(dataIndices[dataKey])) {
+                                if (parseInt(this.getRowId(object)) === parseInt(dataIndices[dataKey])) {
                                     delete dataSearch[k];
                                 }
                             });
@@ -579,7 +576,7 @@ class Main extends Component {
                 for (let jKey in this.jsonData) {
 
                     // find a row and update it with fields merged from server/client
-                    if (this.jsonData[jKey][CommonConstants.GT_ROW_ID] === dataIndices[CommonConstants.GT_ROWS][dKey][CommonConstants.GT_ROW_ID]) {
+                    if (this.getRowId(this.jsonData[jKey]) === this.getRowId(dataIndices[CommonConstants.GT_ROWS][dKey])) {
 
                         for (let field in dataIndices[CommonConstants.GT_ROWS][dKey]) {
                             this.jsonData[jKey][field] = dataIndices[CommonConstants.GT_ROWS][dKey][field];
@@ -686,7 +683,7 @@ class Main extends Component {
             if (selectedIds.hasOwnProperty(sKey)) {
                 for (let jsonKey in data) {
                     if (data.hasOwnProperty(jsonKey)
-                        && data[jsonKey][CommonConstants.GT_ROW_ID] === selectedIds[sKey]) {
+                        && this.getRowId(data[jsonKey]) === selectedIds[sKey]) {
                         fields[sKey] = data[jsonKey];
                     }
                 }

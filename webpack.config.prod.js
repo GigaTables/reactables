@@ -59,7 +59,7 @@ const config = {
         'superagent': 'umd superagent',
         'react-minimal-pie-chart': 'umd react-minimal-pie-chart',
         'react-trend': 'umd react-trend',
-        'react-select': 'react-select'
+        'react-select': 'umd react-select'
     }
 };
 module.exports = config;

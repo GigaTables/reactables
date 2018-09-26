@@ -14,6 +14,7 @@ import Select from './fields/Select';
 import CheckRadio from './fields/CheckRadio';
 import TextEditor from './fields/TextEditor';
 import FormField from './FormField';
+import ReactSelect from './fields/ReactSelect';
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -353,17 +354,33 @@ class Editor extends Component {
                 }
                 break;
             case EditorConstants.TYPE_SELECT:
-                htmlFields = <Select
-                    key={i}
-                    onChange={this.onChange.bind(this)}
-                    id={fieldName}
-                    type={fieldType}
-                    name={fieldName}
-                    label={fieldLabel}
-                    value={fieldValue}
-                    attributes={attributes}
-                    objectValues={object.values}
-                />;
+                console.log(object.plugins);
+                if (typeof object.plugins !== CommonConstants.UNDEFINED
+                    && object.plugins.indexOf(EditorConstants.PLUGINS_REACT_SELECT) !== -1) {
+                    htmlFields = <ReactSelect
+                        key={i}
+                        onChange={this.onChange.bind(this)}
+                        id={fieldName}
+                        type={fieldType}
+                        name={fieldName}
+                        label={fieldLabel}
+                        value={fieldValue}
+                        attributes={attributes}
+                        pluginProps={object.pluginProps}
+                    />;
+                } else {
+                    htmlFields = <Select
+                        key={i}
+                        onChange={this.onChange.bind(this)}
+                        id={fieldName}
+                        type={fieldType}
+                        name={fieldName}
+                        label={fieldLabel}
+                        value={fieldValue}
+                        attributes={attributes}
+                        objectValues={object.values}
+                    />;
+                }
                 break;
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:

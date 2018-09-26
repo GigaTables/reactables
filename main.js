@@ -4,7 +4,7 @@ import Reactables from './src/Reactables.jsx'
 import Header from './src/components/table/Header.js'
 import './main.css'
 
-let localData = require('./local_data');
+// let localData = require('./local_data');
 
 let editor = {
     ajax: 'http://gigatables.loc/editor.php',
@@ -101,6 +101,19 @@ let editor = {
             type: 'select', // select,checkbox,radio
             attrs: {required: true},
             defaultValue: 'key2'
+        },
+        {
+            label: 'Cities:',
+            name: 'cities',
+            type: 'select',
+            plugins: 'react-select',
+            pluginProps: {
+                options: [
+                    {value: 'msc', label: 'Moscow'},
+                    {value: 'nyc', label: 'New York'},
+                    {value: 'london', label: 'London'}
+                ],
+            }
         }
     ]
 };

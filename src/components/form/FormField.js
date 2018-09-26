@@ -10,7 +10,7 @@ class FormField extends Component {
             label,
             children,
             type
-        } = this.props
+        } = this.props;
         
         return (
             <div key={id} className="gte_editor_fields">
@@ -28,6 +28,6 @@ FormField.propTypes = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string,
     type: PropTypes.string
-}
+};
 
 export default FormField

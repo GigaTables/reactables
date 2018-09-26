@@ -41,7 +41,6 @@ module.exports = {
 
     EDITABLE_CELLS_INDEX: 'editable-cells',
     PLUGINS_RTE: 'rte',
-    PLUGINS_RC_SLIDER: 'rc-slider',
-    PLUGINS_RC_RANGE: 'rc-slider',
+    PLUGINS_REACT_SELECT: 'react-select',
     ATTRIBUTES: 'attrs'
 };

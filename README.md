@@ -566,6 +566,28 @@ thus the only thing you need is to pass them through json:
 }
 ```
 
+React select plug-in (editor):
+
+![React select plugin](https://github.com/GigaTables/reactables/blob/develop/screens/GT_react_select_plugin.png)
+
+Pretty popular plug-in for ReactJS with simple settings
+
+```js
+{
+    label: 'Cities:',
+    name: 'cities',
+    type: 'select',
+    plugins: 'react-select',
+    pluginProps: {
+        options: [
+            {value: 'msc', label: 'Moscow'},
+            {value: 'nyc', label: 'New York'},
+            {value: 'london', label: 'London'}
+        ],
+    }
+}
+```
+
 Plugins integration in GT is flexible in terms of versatility with which providers/vendors may supply props, e.g. 
 some plugin have prop structure like:
 ```js

@@ -354,7 +354,6 @@ class Editor extends Component {
                 }
                 break;
             case EditorConstants.TYPE_SELECT:
-                console.log(object.plugins);
                 if (typeof object.plugins !== CommonConstants.UNDEFINED
                     && object.plugins.indexOf(EditorConstants.PLUGINS_REACT_SELECT) !== -1) {
                     htmlFields = <ReactSelect

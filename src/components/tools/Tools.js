@@ -5,7 +5,7 @@ import PagesSelector from './PagesSelector';
 import Search from './Search';
 import CSVLink from "../form/CSVLink";
 import styles from '../../css/styles.css';
-import MButton from '../theme/material-ui/MButton'
+import HOCButton from '../form/HOCButton'
 
 let CommonConstants = require('../CommonConstants');
 let EditorConstants = require('../EditorConstants');
@@ -94,64 +94,37 @@ class Tools extends Component {
                         >{language.editor_reload}</Button>;
                         break;
                     case EditorConstants.EDITOR_CREATE:
-                        if (tableOpts.theme === 'material-ui') {
-                            buttons[i] = <MButton
+                            buttons[i] = <HOCButton
                                 active={false}
                                 action={EditorConstants.ACTION_CREATE}
                                 showPopup={showPopup}
                                 key={i}
+                                incr={i}
                                 theme={tableOpts.theme}
-                            >{language.editor_create}</MButton>;
-                        } else {
-                            buttons[i] = <Button
-                                active={false}
-                                action={EditorConstants.ACTION_CREATE}
-                                showPopup={showPopup}
-                                key={i}
-                                theme={tableOpts.theme}
-                            >{language.editor_create}</Button>;
-                        }
+                                selectedRows={selectedRows}
+                            >{language.editor_create}</HOCButton>;
                         break;
                     case EditorConstants.EDITOR_EDIT:
-                        if (tableOpts.theme === 'material-ui') {
-                            buttons[i] = <MButton
-                                active={!(selectedRows.length >= 1)}
-                                action={EditorConstants.ACTION_EDIT}
-                                showPopup={showPopup}
-                                key={i}
-                                theme={tableOpts.theme}
-                            >{language.editor_edit}</MButton>;
-                        } else {
-                            buttons[i] = <Button
-                                active={!(selectedRows.length >= 1)}
-                                selectedRows={selectedRows}
-                                action={EditorConstants.ACTION_EDIT}
-                                showPopup={showPopup}
-                                key={i}
-                                theme={tableOpts.theme}
-                            >{language.editor_edit}</Button>;
-                        }
+                        buttons[i] = <HOCButton
+                            active={!(selectedRows.length >= 1)}
+                            action={EditorConstants.ACTION_EDIT}
+                            showPopup={showPopup}
+                            key={i}
+                            theme={tableOpts.theme}
+                            incr={i}
+                            selectedRows={selectedRows}
+                        >{language.editor_edit}</HOCButton>;
                         break;
                     case EditorConstants.EDITOR_REMOVE:
-                        if (tableOpts.theme === 'material-ui') {
-                            buttons[i] = <MButton
-                                active={(selectedRows.length === 0)}
-                                selectedRows={selectedRows}
-                                action={EditorConstants.ACTION_DELETE}
-                                showPopup={showPopup}
-                                key={i}
-                                theme={tableOpts.theme}
-                            >{language.editor_remove}</MButton>;
-                        } else {
-                            buttons[i] = <Button
-                                active={(selectedRows.length === 0)}
-                                selectedRows={selectedRows}
-                                action={EditorConstants.ACTION_DELETE}
-                                showPopup={showPopup}
-                                key={i}
-                                theme={tableOpts.theme}
-                            >{language.editor_remove}</Button>;
-                        }
+                        buttons[i] = <HOCButton
+                            active={(selectedRows.length === 0)}
+                            selectedRows={selectedRows}
+                            action={EditorConstants.ACTION_DELETE}
+                            showPopup={showPopup}
+                            key={i}
+                            incr={i}
+                            theme={tableOpts.theme}
+                        >{language.editor_remove}</HOCButton>;
                         break;
                 }
             });

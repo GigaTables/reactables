@@ -5,6 +5,7 @@ import PagesSelector from './PagesSelector';
 import Search from './Search';
 import CSVLink from "../form/CSVLink";
 import styles from '../../css/styles.css';
+import MButton from '../theme/material-ui/MButton'
 
 let CommonConstants = require('../CommonConstants');
 let EditorConstants = require('../EditorConstants');
@@ -20,16 +21,19 @@ class Tools extends Component {
             updatePerPage,
             perPageRows,
             lang,
+            tableOpts
         } = this.props;
 
         if (struct.rowsSelector.indexOf(display) === -1) {
             return '';
         }
+        
         return (<PagesSelector
             perPage={perPage}
             updatePerPage={updatePerPage}
             defaultPerPage={defaultPerPage}
             perPageRows={perPageRows}
+            theme={tableOpts.theme}
             lang={lang}/>)
     }
 
@@ -67,6 +71,7 @@ class Tools extends Component {
         if (typeof tableOpts.buttons !== CommonConstants.UNDEFINED
             && tableOpts.buttons.length > 0
             && tableOpts.buttonsPosition.indexOf(display) !== -1) {
+            
             tableOpts.buttons.map((btn, i) => {
                 switch (btn[EditorConstants.EXTENDED]) {
                     case EditorConstants.EDITOR_CSV:
@@ -84,30 +89,69 @@ class Tools extends Component {
                             action={EditorConstants.ACTION_RELOAD}
                             showPopup={showPopup}
                             isReload={true}
-                            key={i}>{language.editor_reload}</Button>;
+                            key={i}
+                            theme={tableOpts.theme}
+                        >{language.editor_reload}</Button>;
                         break;
                     case EditorConstants.EDITOR_CREATE:
-                        buttons[i] = <Button
-                            active={false}
-                            action={EditorConstants.ACTION_CREATE}
-                            showPopup={showPopup}
-                            key={i}>{language.editor_create}</Button>;
+                        if (tableOpts.theme === 'material-ui') {
+                            buttons[i] = <MButton
+                                active={false}
+                                action={EditorConstants.ACTION_CREATE}
+                                showPopup={showPopup}
+                                key={i}
+                                theme={tableOpts.theme}
+                            >{language.editor_create}</MButton>;
+                        } else {
+                            buttons[i] = <Button
+                                active={false}
+                                action={EditorConstants.ACTION_CREATE}
+                                showPopup={showPopup}
+                                key={i}
+                                theme={tableOpts.theme}
+                            >{language.editor_create}</Button>;
+                        }
                         break;
                     case EditorConstants.EDITOR_EDIT:
-                        buttons[i] = <Button
-                            active={!(selectedRows.length >= 1)}
-                            selectedRows={selectedRows}
-                            action={EditorConstants.ACTION_EDIT}
-                            showPopup={showPopup}
-                            key={i}>{language.editor_edit}</Button>;
+                        if (tableOpts.theme === 'material-ui') {
+                            buttons[i] = <MButton
+                                active={!(selectedRows.length >= 1)}
+                                action={EditorConstants.ACTION_EDIT}
+                                showPopup={showPopup}
+                                key={i}
+                                theme={tableOpts.theme}
+                            >{language.editor_edit}</MButton>;
+                        } else {
+                            buttons[i] = <Button
+                                active={!(selectedRows.length >= 1)}
+                                selectedRows={selectedRows}
+                                action={EditorConstants.ACTION_EDIT}
+                                showPopup={showPopup}
+                                key={i}
+                                theme={tableOpts.theme}
+                            >{language.editor_edit}</Button>;
+                        }
                         break;
                     case EditorConstants.EDITOR_REMOVE:
-                        buttons[i] = <Button
-                            active={(selectedRows.length === 0)}
-                            selectedRows={selectedRows}
-                            action={EditorConstants.ACTION_DELETE}
-                            showPopup={showPopup}
-                            key={i}>{language.editor_remove}</Button>;
+                        if (tableOpts.theme === 'material-ui') {
+                            buttons[i] = <MButton
+                                active={(selectedRows.length === 0)}
+                                selectedRows={selectedRows}
+                                action={EditorConstants.ACTION_DELETE}
+                                showPopup={showPopup}
+                                key={i}
+                                theme={tableOpts.theme}
+                            >{language.editor_remove}</MButton>;
+                        } else {
+                            buttons[i] = <Button
+                                active={(selectedRows.length === 0)}
+                                selectedRows={selectedRows}
+                                action={EditorConstants.ACTION_DELETE}
+                                showPopup={showPopup}
+                                key={i}
+                                theme={tableOpts.theme}
+                            >{language.editor_remove}</Button>;
+                        }
                         break;
                 }
             });

@@ -266,7 +266,7 @@ let settings = {
             }
         ],
         buttonsPosition: ['top', 'bottom'],
-        theme: 'std'
+        theme: 'std' // default std
     }
 };
 

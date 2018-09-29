@@ -4,6 +4,7 @@
   "description": "GigaTables is a ReactJS plug-in to help web-developers process table-data in applications and CMS, CRM, ERP or similar systems. It supports ajax data processing/editing (CRUD), pagination, cross-sorting, global search, shft/ctrl rows selection, 7 popular languages and more.",
   "main": "./build/index.js",
   "dependencies": {
+    "@material-ui/core": "^3.1.1",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
     "expect": "^1.20.2",
@@ -11,7 +12,7 @@
     "hoek": "^5.0.3",
     "lodash": "4.17.4",
     "prop-types": "^15.6.0",
-    "react": "^16.1.1",
+    "react": "^16.5.2",
     "react-dom": "^16.1.1",
     "react-minimal-pie-chart": "^3.0.2",
     "react-onclickoutside": "^6.6.2",

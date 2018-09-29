@@ -4,14 +4,10 @@ import styles from '../../css/styles.css';
 import classNames from 'classnames/bind';
 
 class Button extends Component {
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
 
-  onClick (event) {
+  onClick (action, event) {
     const { showPopup } = this.props;
-    return showPopup(event);
+    return showPopup(event, action);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -26,11 +22,12 @@ class Button extends Component {
       gte_button: true,
       gte_btn_disabled: active
     });
+    
     return (
       <div
         className="gte_buttons_container"
         data-action={action}
-        onClick={(active === false) ? this.onClick : undefined}>
+        onClick={(active === false) ? this.onClick.bind(this, action) : undefined}>
         <div data-action={action} className={buttonClasses}>
           <span data-action={action} >{children}</span>
         </div>

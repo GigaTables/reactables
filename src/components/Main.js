@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Row from './table/Row.js';
 import Column from './table/Column.js';
 import Footer from './table/Footer';
+import {DataException} from './Exceptions';
 
 const CommonConstants = require('./CommonConstants');
 const EditorConstants = require('./EditorConstants');
@@ -436,6 +437,7 @@ class Main extends Component {
         } else {
             throw new DataException('You have neither "GT_RowId" nor "id" in json structure.');
         }
+        
         return rowId;
     }
 
@@ -447,6 +449,7 @@ class Main extends Component {
             ctrlDown,
             shiftDown,
         } = this.state;
+        
         const {
             rowid,
             realid,
@@ -548,7 +551,7 @@ class Main extends Component {
 
             for (let dataKey in dataIndices) {
                 for (let key in this.jsonData) {
-                    rowId = this.getRowId(this.jsonData);
+                    rowId = this.getRowId(this.jsonData[key]);
 
                     if (dataIndices[dataKey] === rowId) {
                         selectedRows.splice(selectedRows.indexOf(key), 1);
@@ -617,14 +620,14 @@ class Main extends Component {
         });
     }
 
-    showPopup(e) {
-        const {selectedRows, dataSearch, selectedIds} = this.state;
+    showPopup(e, action) {
+        const {dataSearch} = this.state;
         this.lang = Lang[this.settings.lang];
-        let action = e.target.dataset.action,
-            popup_title = this.lang.gte_editor_popupheader_create,
+        
+        let popup_title = this.lang.gte_editor_popupheader_create,
             popup_button = this.lang.gte_editor_sendbtn_create;
         let fieldsEdit = {};
-
+        
         switch (action) {
             case EditorConstants.ACTION_RELOAD:
                 const {ajax, columns, tableOpts} = this.settings;

@@ -15,21 +15,21 @@ class HOCButton extends React.Component {
             showPopup,
             theme,
             incr
-        } = this.props
+        } = this.props;
         
-        return (theme === CommonConstants.THEME_MATERIAL_UI) ? <Button
+        return (theme === CommonConstants.THEME_MATERIAL_UI) ? <MButton
             active={active}
             selectedRows={selectedRows}
             action={action}
             showPopup={showPopup}
             key={incr}
-        >{children}</Button> : <MButton
+        >{children}</MButton> : <Button
             active={active}
             selectedRows={selectedRows}
             action={action}
             showPopup={showPopup}
             key={incr}
-        >{children}</MButton>
+        >{children}</Button>
     }
 }
 

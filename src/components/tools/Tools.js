@@ -6,6 +6,7 @@ import Search from './Search';
 import CSVLink from "../form/CSVLink";
 import styles from '../../css/styles.css';
 import HOCButton from '../form/HOCButton'
+import HOCPagesSelector from "./HOCPagesSelector";
 
 let CommonConstants = require('../CommonConstants');
 let EditorConstants = require('../EditorConstants');
@@ -28,7 +29,7 @@ class Tools extends Component {
             return '';
         }
         
-        return (<PagesSelector
+        return (<HOCPagesSelector
             perPage={perPage}
             updatePerPage={updatePerPage}
             defaultPerPage={defaultPerPage}

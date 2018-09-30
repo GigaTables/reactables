@@ -266,7 +266,7 @@ let settings = {
             }
         ],
         buttonsPosition: ['top', 'bottom'],
-        theme: 'std' // default std
+        theme: 'material-ui' // default std
     }
 };
 

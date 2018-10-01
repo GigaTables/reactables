@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from '../form/Button';
-import PagesSelector from './PagesSelector';
-import Search from './Search';
 import CSVLink from "../form/CSVLink";
 import styles from '../../css/styles.css';
 import HOCButton from '../form/HOCButton'
 import HOCPagesSelector from "./HOCPagesSelector";
+import HOCSearch from "./HOCSearch";
 
 let CommonConstants = require('../CommonConstants');
 let EditorConstants = require('../EditorConstants');
@@ -45,14 +44,16 @@ class Tools extends Component {
             search,
             doSearch,
             lang,
+            tableOpts
         } = this.props;
 
         if (struct.search.indexOf(display) === -1) {
             return '';
         }
-        return (<Search
+        return (<HOCSearch
             search={search}
             doSearch={doSearch}
+            theme={tableOpts.theme}
             lang={lang}/>)
     }
 

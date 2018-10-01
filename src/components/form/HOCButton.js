@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Button from './Button'
 import MButton from '../theme/material-ui/MButton'
 
-const CommonConstants = require('../CommonConstants')
+const CommonConstants = require('../CommonConstants');
 
-class HOCButton extends React.Component {
+class HOCButton extends Component {
     render() {
         const {
             action,

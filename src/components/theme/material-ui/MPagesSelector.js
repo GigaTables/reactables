@@ -2,22 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
+import styles from '../../../css/styles.css';
 
 const Lang = require('../../Lang');
-
-const styles = theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    formControl: {
-        margin: theme.spacing.unit,
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing.unit * 2,
-    },
-});
 
 class MPagesSelector extends Component {
     shouldComponentUpdate(nextProps) {

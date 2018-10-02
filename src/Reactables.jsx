@@ -80,8 +80,11 @@ class Reactables extends Main {
             footerAvg: 0,
             footerMinLength: 0,
             footerMaxLength: 0,
-            footerFrequency: ''
+            footerFrequency: '',
+            popup_button: '',
+            popup_title: '',
         };
+
         // cols opts
         this.searchableCols = [];
         this.searchableCase = [];

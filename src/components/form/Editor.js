@@ -15,6 +15,7 @@ import CheckRadio from './fields/CheckRadio';
 import TextEditor from './fields/TextEditor';
 import FormField from './FormField';
 import ReactSelect from './fields/ReactSelect';
+import HOCEditorButton from "./HOCEditorButton";
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -594,7 +595,8 @@ class Editor extends Component {
             popupTitle,
             action,
             popupButton,
-            active
+            active,
+            tableOpts,
         } = this.props;
 
         if (active === false) { // clear fields from user-input data
@@ -651,11 +653,14 @@ class Editor extends Component {
                                     <div className="gte_footer">
                                         <div className="gte_form_err"></div>
                                         <div className="gte_form_buttons">
-                                            <button
-                                                id="gte_sent_btn"
-                                                className="btn"
+                                            <HOCEditorButton
                                                 data-action={action}
-                                                onClick={this.btnClicked.bind(this)}>{popupButton}</button>
+                                                action={action}
+                                                btnClicked={this.btnClicked.bind(this)}
+                                                theme={tableOpts.theme}
+                                            >
+                                                {popupButton}
+                                            </HOCEditorButton>
                                         </div>
                                     </div>
                                 </div>

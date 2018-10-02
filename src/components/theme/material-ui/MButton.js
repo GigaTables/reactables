@@ -5,17 +5,19 @@ import Button from '@material-ui/core/es/Button/Button'
 class MButton extends Component {
     
     onClick(action, event) {
-        const {showPopup} = this.props
+        const {showPopup} = this.props;
         return showPopup(event, action)
     }
     
     shouldComponentUpdate(nextProps) {
-        return this.props.active !== nextProps.active
-            || this.props.action !== nextProps.action
+        const {active, action} = this.props;
+
+        return active !== nextProps.active
+            || action !== nextProps.action;
     }
     
     render() {
-        const {action, children, active} = this.props
+        const {action, children, active} = this.props;
         
         return (
             <div className="gte_buttons_container" data-action={action}
@@ -32,6 +34,6 @@ MButton.propTypes = {
     action: PropTypes.string,
     active: PropTypes.bool,
     showPopup: PropTypes.func
-}
+};
 
 export default MButton

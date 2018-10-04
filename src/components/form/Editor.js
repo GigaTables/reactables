@@ -7,7 +7,6 @@ import {t} from '../Helpers';
 import '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
-import Input from './fields/Input';
 import HTML5Input from './fields/HTML5Input';
 import TextArea from './fields/TextArea';
 import Select from './fields/Select';
@@ -16,6 +15,7 @@ import TextEditor from './fields/TextEditor';
 import FormField from './FormField';
 import ReactSelect from './fields/ReactSelect';
 import HOCEditorButton from "./HOCEditorButton";
+import HOCInput from './fields/HOCInput'
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -227,7 +227,12 @@ class Editor extends Component {
             setMultipleText
         } = this.state;
 
-        const {action, fieldsEdit} = this.props;
+        const {
+            action,
+            fieldsEdit,
+            tableOpts
+        } = this.props;
+        
         const isMultiple = (Object.keys(fieldsEdit).length > 1);
 
         let fieldType = object.type,
@@ -277,7 +282,7 @@ class Editor extends Component {
             case EditorConstants.TYPE_HIDDEN:
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
-                htmlFields = <Input key={i}
+                htmlFields = <HOCInput key={i}
                                     onFocus={this.onFocus.bind(this)}
                                     onChange={this.onChange.bind(this)}
                                     attributes={attributes}
@@ -285,7 +290,8 @@ class Editor extends Component {
                                     type={fieldType}
                                     name={fieldName}
                                     value={fieldValue}
-                                    isMultiple={isMultiple}/>;
+                                    isMultiple={isMultiple}
+                                    theme={tableOpts.theme}/>;
                 break;
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:

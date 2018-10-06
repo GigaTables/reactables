@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CommonConstants from '../../CommonConstants'
 import MInput from '../../theme/material-ui/MInput'
+
+import CommonConstants from '../../CommonConstants'
+import EditorConstants from '../../EditorConstants'
 
 class HOCInput extends Component {
     render() {
@@ -17,7 +19,7 @@ class HOCInput extends Component {
             theme
         } = this.props
         
-        return (theme === CommonConstants.THEME_MATERIAL_UI)
+        return (theme === CommonConstants.THEME_MATERIAL_UI && type !== EditorConstants.TYPE_HIDDEN)
             ? <MInput
                 onFocus={onFocus}
                 onChange={onChange}

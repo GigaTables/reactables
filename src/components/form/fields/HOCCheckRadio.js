@@ -59,7 +59,7 @@ HOCCheckRadio.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     attributes: PropTypes.object,
-    value: PropTypes.string
-}
+    // value: PropTypes.string | PropTypes.string
+};
 
 export default HOCCheckRadio

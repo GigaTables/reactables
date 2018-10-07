@@ -104,7 +104,7 @@ let editor = {
         },
         {// an example of using select - automatically selected if matches with data in table column
             label: 'Gender:',
-            name: 'gender',
+            name: 'gender[]',
             values: [// if select,checkbox,radio etc types - need this pre-set structure of values
                 {'male': 'male'},
                 {'female': 'female'}

@@ -27,7 +27,7 @@ class MInput extends Component {
             isMultiple,
             onFocus,
             onChange
-        } = this.props
+        } = this.props;
         
         return (
             <TextField
@@ -56,6 +56,6 @@ MInput.propTypes = {
     isMultiple: PropTypes.bool,
     onFocus: PropTypes.func,
     attributes: PropTypes.object
-}
+};
 
 export default MInput

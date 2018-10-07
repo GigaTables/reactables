@@ -232,7 +232,7 @@ class Editor extends Component {
             fieldsEdit,
             tableOpts
         } = this.props;
-        
+
         const isMultiple = (Object.keys(fieldsEdit).length > 1);
 
         let fieldType = object.type,
@@ -639,7 +639,9 @@ class Editor extends Component {
                                 className="gte_form_border_box">
                                 <div
                                     className="close_btn"
-                                    onClick={() => {hidePopup();}}></div>
+                                    onClick={() => {
+                                        hidePopup();
+                                    }}></div>
                                 <div className={formFieldsClasses}>
                                     <div className="gte_header">
                                         <div className="gte_editor_title">{popupTitle}</div>
@@ -676,7 +678,9 @@ class Editor extends Component {
                         </div>
                     </div>
                 </div>
-                <div onClick={() => {hidePopup();}} className={backgroundClasses}></div>
+                <div onClick={() => {
+                    hidePopup();
+                }} className={backgroundClasses}></div>
             </div>
         )
     }

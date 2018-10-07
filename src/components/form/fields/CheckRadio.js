@@ -14,7 +14,7 @@ class CheckRadio extends Component {
         
         let values = objectValues;
         let options = [], val = '',
-            //@fixme regexp to remove ex: [3] etc
+            // fixme: regexp to remove ex: [3] etc
             id = name.replace('[]', '');
         for (let k in values) {
             if (values.hasOwnProperty(k)) {

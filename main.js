@@ -102,6 +102,16 @@ let editor = {
             attrs: {required: true},
             defaultValue: 'key2'
         },
+        {// an example of using select - automatically selected if matches with data in table column
+            label: 'Gender:',
+            name: 'gender',
+            values: [// if select,checkbox,radio etc types - need this pre-set structure of values
+                {'male': 'male'},
+                {'female': 'female'}
+            ],
+            type: 'checkbox', // select,checkbox,radio
+            defaultValue: 'male'
+        },
         {
             label: 'Cities:',
             name: 'cities',

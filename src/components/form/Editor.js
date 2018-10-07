@@ -9,13 +9,13 @@ import classNames from 'classnames/bind';
 import superagent from 'superagent';
 import HTML5Input from './fields/HTML5Input';
 import TextArea from './fields/TextArea';
-import CheckRadio from './fields/CheckRadio';
 import TextEditor from './fields/TextEditor';
 import FormField from './FormField';
 import ReactSelect from './fields/ReactSelect';
 import HOCEditorButton from "./HOCEditorButton";
 import HOCInput from './fields/HOCInput'
 import HOCSelect from './fields/HOCSelect'
+import HOCCheckRadio from './fields/HOCCheckRadio'
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -391,7 +391,7 @@ class Editor extends Component {
                 break;
             case EditorConstants.TYPE_CHECKBOX:
             case EditorConstants.TYPE_RADIO:
-                htmlFields = <CheckRadio
+                htmlFields = <HOCCheckRadio
                     key={i}
                     onChange={this.onChange.bind(this)}
                     id={fieldName}
@@ -401,6 +401,7 @@ class Editor extends Component {
                     value={fieldValue}
                     attributes={attributes}
                     objectValues={object.values}
+                    theme={tableOpts.theme}
                 />;
                 break;
         }

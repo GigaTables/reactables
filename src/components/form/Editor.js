@@ -8,7 +8,6 @@ import '../../css/editor.css';
 import classNames from 'classnames/bind';
 import superagent from 'superagent';
 import HTML5Input from './fields/HTML5Input';
-import TextArea from './fields/TextArea';
 import TextEditor from './fields/TextEditor';
 import FormField from './FormField';
 import ReactSelect from './fields/ReactSelect';
@@ -16,6 +15,7 @@ import HOCEditorButton from "./HOCEditorButton";
 import HOCInput from './fields/HOCInput'
 import HOCSelect from './fields/HOCSelect'
 import HOCCheckRadio from './fields/HOCCheckRadio'
+import HOCTextArea from './fields/HOCTextArea'
 
 const CommonConstants = require('../CommonConstants');
 const EditorConstants = require('../EditorConstants');
@@ -151,6 +151,8 @@ class Editor extends Component {
 
     onFocus(e) {
         const {setMultipleText} = this.state;
+        const {tableOpts} = this.props;
+        
         let isTextArea = false;
 
         if (typeof e.target.dataset.multiple !== CommonConstants.UNDEFINED
@@ -164,6 +166,11 @@ class Editor extends Component {
             || (typeof e.target.children[0] !== CommonConstants.UNDEFINED
                 && typeof e.target.children[0].getAttribute('data-contents') !== CommonConstants.UNDEFINED
                 && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
+            isTextArea = true;
+        }
+        
+        // check for material-ui TextField multiple aka textarea
+        if (tableOpts.theme === CommonConstants.THEME_MATERIAL_UI && e.target.nodeName === 'TEXTAREA') {
             isTextArea = true;
         }
 
@@ -345,7 +352,7 @@ class Editor extends Component {
                             data-textarea={true}
                         />;
                 } else {
-                    htmlFields = <TextArea
+                    htmlFields = <HOCTextArea
                         key={i}
                         onFocus={this.onFocus.bind(this)}
                         onChange={this.onChange.bind(this)}
@@ -357,6 +364,7 @@ class Editor extends Component {
                         attributes={attributes}
                         isMultiple={isMultiple}
                         data-textarea={true}
+                        theme={tableOpts.theme}
                     />;
                 }
                 break;

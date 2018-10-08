@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Button from './Button'
 import MButton from '../theme/material-ui/MButton'
 
-const CommonConstants = require('../CommonConstants');
+import CommonConstants from '../CommonConstants'
 
 class HOCButton extends Component {
     render() {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import MSelect from '../../theme/material-ui/MSelect'
 import Select from './Select'
 
-const CommonConstants = require('../../CommonConstants');
+import CommonConstants from '../../CommonConstants'
 
 class HOCSelect extends Component {
     render() {

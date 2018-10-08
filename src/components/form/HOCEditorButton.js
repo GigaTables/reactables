@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import EditorButton from "./EditorButton";
 import MEditorButton from "../theme/material-ui/MEditorButton";
 
-const CommonConstants = require('../CommonConstants');
+import CommonConstants from '../CommonConstants'
 
 class HOCEditorButton extends Component {
     render() {

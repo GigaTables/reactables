@@ -75,6 +75,7 @@ class MCheckBox extends Component {
                                               name={name}
                                               value={key}
                                               type={type}
+                                              color="primary"
                                     />
                                 }
                                 label={val}

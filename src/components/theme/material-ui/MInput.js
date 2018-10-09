@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames/bind'
-import TextField from '@material-ui/core/es/TextField/TextField'
+import TextField from '@material-ui/core/TextField'
 
 const classes = theme => ({
     textField: {

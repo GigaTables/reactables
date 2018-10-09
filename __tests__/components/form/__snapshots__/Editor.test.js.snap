@@ -13,7 +13,7 @@ exports[`Editor renders Editor correctly 1`] = `
           onKeyUp={[Function]}>
           <div
             className="close_btn"
-            onClick={undefined} />
+            onClick={[Function]} />
           <div
             className="gte_form_fields">
             <div
@@ -165,7 +165,7 @@ exports[`Editor renders Editor correctly 1`] = `
                             <div
                               className={undefined}>
                               <textarea
-                                data-multiple={false}
+                                data-multiple={undefined}
                                 data-textarea={true}
                                 id="desc"
                                 name="desc"
@@ -475,13 +475,13 @@ exports[`Editor renders Editor correctly 1`] = `
                                           <div
                                             className="RichTextEditor__block___2Vs_D RichTextEditor__paragraph___3NTf9"
                                             data-block={true}
-                                            data-editor="a4ru2"
-                                            data-offset-key="1d49j-0-0">
+                                            data-editor="4ulug"
+                                            data-offset-key="fauvt-0-0">
                                             <div
                                               className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
-                                              data-offset-key="1d49j-0-0">
+                                              data-offset-key="fauvt-0-0">
                                               <span
-                                                data-offset-key="1d49j-0-0"
+                                                data-offset-key="fauvt-0-0"
                                                 style={Object {}}>
                                                 <br
                                                   data-text="true" />
@@ -513,7 +513,8 @@ exports[`Editor renders Editor correctly 1`] = `
                             id="date"
                             name="date"
                             onChange={[Function]}
-                            type="date" />
+                            type="date"
+                            value="" />
                         </div>
                         <div
                           className="clear" />
@@ -530,7 +531,8 @@ exports[`Editor renders Editor correctly 1`] = `
                           <input
                             id="image"
                             name="image"
-                            type="file" />
+                            type="file"
+                            value={undefined} />
                         </div>
                         <div
                           className="clear" />
@@ -560,6 +562,6 @@ exports[`Editor renders Editor correctly 1`] = `
   </div>
   <div
     className="gte_popup_background fade_in"
-    onClick={undefined} />
+    onClick={[Function]} />
 </div>
 `;

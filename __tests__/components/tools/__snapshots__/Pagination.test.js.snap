@@ -141,7 +141,7 @@ exports[`test renders Pagination correctly 3`] = `
   className={undefined}>
   <div
     className={undefined}>
-    Showing 201 to 250 of 249 entries.
+    Showing 201 to 249 of 249 entries.
   </div>
   <div
     className={undefined}>

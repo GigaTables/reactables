@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/es/Button/Button'
+import Button from '@material-ui/core/Button'
 
 class MButton extends Component {
     

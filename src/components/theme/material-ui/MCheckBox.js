@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Checkbox from '@material-ui/core/es/Checkbox/Checkbox'
-import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 class MCheckBox extends Component {
 

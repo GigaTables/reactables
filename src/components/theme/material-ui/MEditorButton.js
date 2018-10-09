@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Button from '@material-ui/core/es/Button/Button'
+import Button from '@material-ui/core/Button'
 
 const styles = {
     container: {

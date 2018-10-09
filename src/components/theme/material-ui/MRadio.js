@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import RadioGroup from '@material-ui/core/es/RadioGroup/RadioGroup'
-import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlLabel'
-import Radio from '@material-ui/core/es/Radio/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Radio from '@material-ui/core/Radio'
 
 const classes = theme => ({
     root: {

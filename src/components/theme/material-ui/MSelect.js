@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Select from '@material-ui/core/es/Select/Select'
+import Select from '@material-ui/core/Select'
 
 const CommonConstants = require('../../CommonConstants');
 const EditorConstants = require('../../EditorConstants');

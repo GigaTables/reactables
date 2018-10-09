@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TextField from '@material-ui/core/es/TextField/TextField'
+import TextField from '@material-ui/core/TextField'
 
 class MTextArea extends Component {
     

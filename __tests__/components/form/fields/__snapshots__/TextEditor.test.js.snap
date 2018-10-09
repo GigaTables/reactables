@@ -289,13 +289,13 @@ exports[`test renders TextArea correctly 1`] = `
             <div
               className="RichTextEditor__block___2Vs_D RichTextEditor__paragraph___3NTf9"
               data-block={true}
-              data-editor="29ef6"
-              data-offset-key="7a2qr-0-0">
+              data-editor="bfbp1"
+              data-offset-key="fsi0q-0-0">
               <div
                 className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
-                data-offset-key="7a2qr-0-0">
+                data-offset-key="fsi0q-0-0">
                 <span
-                  data-offset-key="7a2qr-0-0"
+                  data-offset-key="fsi0q-0-0"
                   style={Object {}}>
                   <br
                     data-text="true" />

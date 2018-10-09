@@ -32,46 +32,78 @@ exports[`test renders Tools correctly 1`] = `
     className="gte_buttons_container"
     data-action="create"
     onClick={[Function]}>
-    <div
-      className="gte_button"
-      data-action="create">
+    <button
+      className="MuiButtonBase-root-27 MuiButton-root-1 MuiButton-contained-12 MuiButton-containedPrimary-13 MuiButton-raised-15 MuiButton-raisedPrimary-16"
+      disabled={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button">
       <span
-        data-action="create">
+        className="MuiButton-label-2">
         New
       </span>
-    </div>
-    <div
-      className={undefined} />
+      <span
+        className="MuiTouchRipple-root-30" />
+    </button>
   </div>
   <div
     className="gte_buttons_container"
     data-action="edit"
     onClick={undefined}>
-    <div
-      className="gte_button gte_btn_disabled"
-      data-action="edit">
+    <button
+      className="MuiButtonBase-root-27 MuiButtonBase-disabled-28 MuiButton-root-1 MuiButton-contained-12 MuiButton-containedPrimary-13 MuiButton-raised-15 MuiButton-raisedPrimary-16 MuiButton-disabled-21"
+      disabled={true}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="-1"
+      type="button">
       <span
-        data-action="edit">
+        className="MuiButton-label-2">
         Edit
       </span>
-    </div>
-    <div
-      className={undefined} />
+    </button>
   </div>
   <div
     className="gte_buttons_container"
     data-action="delete"
     onClick={undefined}>
-    <div
-      className="gte_button gte_btn_disabled"
-      data-action="delete">
+    <button
+      className="MuiButtonBase-root-27 MuiButtonBase-disabled-28 MuiButton-root-1 MuiButton-contained-12 MuiButton-containedPrimary-13 MuiButton-raised-15 MuiButton-raisedPrimary-16 MuiButton-disabled-21"
+      disabled={true}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="-1"
+      type="button">
       <span
-        data-action="delete">
+        className="MuiButton-label-2">
         Delete
       </span>
-    </div>
-    <div
-      className={undefined} />
+    </button>
   </div>
   <div
     className={undefined}>
@@ -80,23 +112,60 @@ exports[`test renders Tools correctly 1`] = `
        
     </span>
     <span>
-      <select
-        className={undefined}
-        onChange={[Function]}
-        value={50}>
-        <option>
-          25
-        </option>
-        <option>
-          50
-        </option>
-        <option>
-          100
-        </option>
-        <option>
-          200
-        </option>
-      </select>
+      <div
+        className="MuiInputBase-root-57 MuiInput-root-44 MuiInput-underline-48"
+        onClick={[Function]}>
+        <div
+          className="MuiSelect-root-37">
+          <select
+            aria-invalid={undefined}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiSelect-select-38 MuiInputBase-input-67 MuiInput-input-52"
+            defaultValue={undefined}
+            disabled={undefined}
+            id="pages-selector"
+            name="pages-selector"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type={undefined}
+            value={50}>
+            <option
+              value={25}>
+              25
+            </option>
+            <option
+              value={50}>
+              50
+            </option>
+            <option
+              value={100}>
+              100
+            </option>
+            <option
+              value={200}>
+              200
+            </option>
+          </select>
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-74 MuiSelect-icon-43"
+            color={undefined}
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24">
+            <path
+              d="M7 10l5 5 5-5z" />
+          </svg>
+        </div>
+      </div>
     </span>
     <span>
        
@@ -104,18 +173,45 @@ exports[`test renders Tools correctly 1`] = `
     </span>
   </div>
   <div
-    className={undefined}>
-    <input
-      className={undefined}
-      name="search"
-      onChange={[Function]}
-      onKeyUp={[Function]}
-      placeholder="Search"
-      tabIndex="1"
-      type="text"
-      value="" />
+    className="">
     <div
-      className={undefined} />
+      aria-describedby={undefined}
+      className="MuiFormControl-root-83 MuiFormControl-marginDense-85">
+      <label
+        className="MuiFormLabel-root-94 MuiInputLabel-root-87 MuiInputLabel-formControl-88 MuiInputLabel-animated-91 MuiInputLabel-marginDense-89"
+        data-shrink={false}
+        htmlFor="standard-search">
+        Search
+      </label>
+      <div
+        className="MuiInputBase-root-57 MuiInput-root-44 MuiInput-underline-48 MuiInputBase-formControl-58 MuiInput-formControl-45 MuiInputBase-marginDense-64"
+        onClick={[Function]}>
+        <input
+          aria-invalid={false}
+          autoComplete={undefined}
+          autoFocus={undefined}
+          className="MuiInputBase-input-67 MuiInput-input-52 MuiInputBase-inputMarginDense-68 MuiInput-inputMarginDense-53"
+          defaultValue={undefined}
+          disabled={false}
+          id="standard-search"
+          name="search"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={undefined}
+          onKeyUp={undefined}
+          placeholder={undefined}
+          readOnly={undefined}
+          required={false}
+          rows={undefined}
+          type="text"
+          value="" />
+      </div>
+    </div>
+    <div
+      className={undefined}>
+       
+    </div>
   </div>
   <div
     className={undefined} />

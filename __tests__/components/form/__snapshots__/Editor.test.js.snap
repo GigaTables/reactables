@@ -73,29 +73,235 @@ exports[`Editor renders Editor correctly 1`] = `
                             <div
                               className={undefined}>
                               <label
-                                className="gte_label_text">
-                                <input
-                                  data-value="val1"
-                                  defaultChecked={0}
-                                  id="types"
-                                  name="types[]"
-                                  onClick={[Function]}
-                                  type="checkbox"
-                                  value="key1" />
-                                val1
+                                className="MuiFormControlLabel-root-1"
+                                id="types">
+                                <span
+                                  className="MuiButtonBase-root-21 MuiIconButton-root-15 MuiSwitchBase-root-11 MuiCheckbox-root-5 MuiCheckbox-colorPrimary-9"
+                                  onBlur={[Function]}
+                                  onFocus={[Function]}
+                                  onKeyDown={[Function]}
+                                  onKeyUp={[Function]}
+                                  onMouseDown={[Function]}
+                                  onMouseLeave={[Function]}
+                                  onMouseUp={[Function]}
+                                  onTouchEnd={[Function]}
+                                  onTouchMove={[Function]}
+                                  onTouchStart={[Function]}
+                                  role={undefined}
+                                  tabIndex={null}>
+                                  <span
+                                    className="MuiIconButton-label-20">
+                                    <svg
+                                      aria-hidden="true"
+                                      className="MuiSvgIcon-root-24"
+                                      color={undefined}
+                                      focusable="false"
+                                      role="presentation"
+                                      viewBox="0 0 24 24">
+                                      <path
+                                        d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                                    </svg>
+                                    <input
+                                      autoFocus={undefined}
+                                      checked={false}
+                                      className="MuiSwitchBase-input-14"
+                                      data-indeterminate={false}
+                                      disabled={undefined}
+                                      id={undefined}
+                                      name="types[]"
+                                      onChange={[Function]}
+                                      readOnly={undefined}
+                                      required={undefined}
+                                      tabIndex={undefined}
+                                      type="checkbox"
+                                      value="key1" />
+                                  </span>
+                                  <span
+                                    className="MuiTouchRipple-root-33" />
+                                </span>
+                                <span
+                                  className="MuiTypography-root-40 MuiTypography-body1-49 MuiFormControlLabel-label-4">
+                                  val1
+                                </span>
                               </label>
                               <label
-                                className="gte_label_text">
-                                <input
-                                  data-value="val2"
-                                  defaultChecked={0}
-                                  id="types"
-                                  name="types[]"
-                                  onClick={[Function]}
-                                  type="checkbox"
-                                  value="key2" />
-                                val2
+                                className="MuiFormControlLabel-root-1"
+                                id="types">
+                                <span
+                                  className="MuiButtonBase-root-21 MuiIconButton-root-15 MuiSwitchBase-root-11 MuiCheckbox-root-5 MuiCheckbox-colorPrimary-9"
+                                  onBlur={[Function]}
+                                  onFocus={[Function]}
+                                  onKeyDown={[Function]}
+                                  onKeyUp={[Function]}
+                                  onMouseDown={[Function]}
+                                  onMouseLeave={[Function]}
+                                  onMouseUp={[Function]}
+                                  onTouchEnd={[Function]}
+                                  onTouchMove={[Function]}
+                                  onTouchStart={[Function]}
+                                  role={undefined}
+                                  tabIndex={null}>
+                                  <span
+                                    className="MuiIconButton-label-20">
+                                    <svg
+                                      aria-hidden="true"
+                                      className="MuiSvgIcon-root-24"
+                                      color={undefined}
+                                      focusable="false"
+                                      role="presentation"
+                                      viewBox="0 0 24 24">
+                                      <path
+                                        d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                                    </svg>
+                                    <input
+                                      autoFocus={undefined}
+                                      checked={false}
+                                      className="MuiSwitchBase-input-14"
+                                      data-indeterminate={false}
+                                      disabled={undefined}
+                                      id={undefined}
+                                      name="types[]"
+                                      onChange={[Function]}
+                                      readOnly={undefined}
+                                      required={undefined}
+                                      tabIndex={undefined}
+                                      type="checkbox"
+                                      value="key2" />
+                                  </span>
+                                  <span
+                                    className="MuiTouchRipple-root-33" />
+                                </span>
+                                <span
+                                  className="MuiTypography-root-40 MuiTypography-body1-49 MuiFormControlLabel-label-4">
+                                  val2
+                                </span>
                               </label>
+                            </div>
+                            <div
+                              className="clear" />
+                          </div>
+                          <div
+                            className="gte_editor_fields">
+                            <label
+                              className="gte_label"
+                              htmlFor="cities[]">
+                              Cities:
+                            </label>
+                            <div
+                              className={undefined}>
+                              <div
+                                aria-label="Cities:"
+                                className="MuiFormGroup-root-66"
+                                role="radiogroup">
+                                <label
+                                  className="MuiFormControlLabel-root-1"
+                                  data-value="val1"
+                                  id="cities"
+                                  onClick={[Function]}
+                                  type="radio">
+                                  <span
+                                    className="MuiButtonBase-root-21 MuiIconButton-root-15 MuiSwitchBase-root-11 MuiRadio-root-68 MuiRadio-colorPrimary-71"
+                                    onBlur={[Function]}
+                                    onFocus={[Function]}
+                                    onKeyDown={[Function]}
+                                    onKeyUp={[Function]}
+                                    onMouseDown={[Function]}
+                                    onMouseLeave={[Function]}
+                                    onMouseUp={[Function]}
+                                    onTouchEnd={[Function]}
+                                    onTouchMove={[Function]}
+                                    onTouchStart={[Function]}
+                                    role={undefined}
+                                    tabIndex={null}>
+                                    <span
+                                      className="MuiIconButton-label-20">
+                                      <svg
+                                        aria-hidden="true"
+                                        className="MuiSvgIcon-root-24"
+                                        color={undefined}
+                                        focusable="false"
+                                        role="presentation"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                                      </svg>
+                                      <input
+                                        autoFocus={undefined}
+                                        checked={false}
+                                        className="MuiSwitchBase-input-14"
+                                        disabled={undefined}
+                                        id={undefined}
+                                        name="cities[]"
+                                        onChange={[Function]}
+                                        readOnly={undefined}
+                                        required={undefined}
+                                        tabIndex={undefined}
+                                        type="radio"
+                                        value="key1" />
+                                    </span>
+                                    <span
+                                      className="MuiTouchRipple-root-33" />
+                                  </span>
+                                  <span
+                                    className="MuiTypography-root-40 MuiTypography-body1-49 MuiFormControlLabel-label-4">
+                                    val1
+                                  </span>
+                                </label>
+                                <label
+                                  className="MuiFormControlLabel-root-1"
+                                  data-value="val2"
+                                  id="cities"
+                                  onClick={[Function]}
+                                  type="radio">
+                                  <span
+                                    className="MuiButtonBase-root-21 MuiIconButton-root-15 MuiSwitchBase-root-11 MuiRadio-root-68 MuiRadio-colorPrimary-71"
+                                    onBlur={[Function]}
+                                    onFocus={[Function]}
+                                    onKeyDown={[Function]}
+                                    onKeyUp={[Function]}
+                                    onMouseDown={[Function]}
+                                    onMouseLeave={[Function]}
+                                    onMouseUp={[Function]}
+                                    onTouchEnd={[Function]}
+                                    onTouchMove={[Function]}
+                                    onTouchStart={[Function]}
+                                    role={undefined}
+                                    tabIndex={null}>
+                                    <span
+                                      className="MuiIconButton-label-20">
+                                      <svg
+                                        aria-hidden="true"
+                                        className="MuiSvgIcon-root-24"
+                                        color={undefined}
+                                        focusable="false"
+                                        role="presentation"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
+                                      </svg>
+                                      <input
+                                        autoFocus={undefined}
+                                        checked={false}
+                                        className="MuiSwitchBase-input-14"
+                                        disabled={undefined}
+                                        id={undefined}
+                                        name="cities[]"
+                                        onChange={[Function]}
+                                        readOnly={undefined}
+                                        required={undefined}
+                                        tabIndex={undefined}
+                                        type="radio"
+                                        value="key2" />
+                                    </span>
+                                    <span
+                                      className="MuiTouchRipple-root-33" />
+                                  </span>
+                                  <span
+                                    className="MuiTypography-root-40 MuiTypography-body1-49 MuiFormControlLabel-label-4">
+                                    val2
+                                  </span>
+                                </label>
+                              </div>
                             </div>
                             <div
                               className="clear" />
@@ -109,22 +315,54 @@ exports[`Editor renders Editor correctly 1`] = `
                             </label>
                             <div
                               className={undefined}>
-                              <select
-                                id="types[]"
-                                name="types[]"
-                                onChange={[Function]}
-                                value="">
-                                <option
-                                  data-value="val1"
-                                  value="key1">
-                                  val1
-                                </option>
-                                <option
-                                  data-value="val2"
-                                  value="key2">
-                                  val2
-                                </option>
-                              </select>
+                              <div
+                                className="MuiInputBase-root-93 MuiInput-root-80 MuiInput-underline-84"
+                                onClick={[Function]}>
+                                <div
+                                  className="MuiSelect-root-73">
+                                  <select
+                                    aria-invalid={undefined}
+                                    autoComplete={undefined}
+                                    autoFocus={undefined}
+                                    className="MuiSelect-select-74 MuiInputBase-input-103 MuiInput-input-88"
+                                    defaultValue={undefined}
+                                    disabled={undefined}
+                                    id="types[]"
+                                    name="types[]"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    onKeyDown={undefined}
+                                    onKeyUp={undefined}
+                                    placeholder={undefined}
+                                    readOnly={undefined}
+                                    required={undefined}
+                                    rows={undefined}
+                                    type={undefined}
+                                    value="">
+                                    <option
+                                      data-value="val1"
+                                      value="key1">
+                                      val1
+                                    </option>
+                                    <option
+                                      data-value="val2"
+                                      value="key2">
+                                      val2
+                                    </option>
+                                  </select>
+                                  <svg
+                                    aria-hidden="true"
+                                    className="MuiSvgIcon-root-24 MuiSelect-icon-79"
+                                    color={undefined}
+                                    focusable="false"
+                                    role="presentation"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                      d="M7 10l5 5 5-5z" />
+                                  </svg>
+                                </div>
+                              </div>
                             </div>
                             <div
                               className="clear" />
@@ -138,19 +376,35 @@ exports[`Editor renders Editor correctly 1`] = `
                             </label>
                             <div
                               className={undefined}>
-                              <input
-                                0={
-                                  Object {
-                                    "pattern": "^[A-Za-z0-9_]+$",
-                                  }
-                                }
-                                data-multiple={false}
-                                id="title"
-                                name="title"
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                type="text"
-                                value="" />
+                              <div
+                                aria-describedby={undefined}
+                                className="MuiFormControl-root-110 MuiFormControl-marginDense-112 MuiFormControl-fullWidth-113"
+                                data-multiple={undefined}>
+                                <div
+                                  className="MuiInputBase-root-93 MuiInput-root-80 MuiInput-underline-84 MuiInputBase-fullWidth-102 MuiInput-fullWidth-87 MuiInputBase-formControl-94 MuiInput-formControl-81 MuiInputBase-marginDense-100"
+                                  onClick={[Function]}>
+                                  <input
+                                    aria-invalid={false}
+                                    autoComplete={undefined}
+                                    autoFocus={undefined}
+                                    className="MuiInputBase-input-103 MuiInput-input-88 MuiInputBase-inputMarginDense-104 MuiInput-inputMarginDense-89"
+                                    defaultValue={undefined}
+                                    disabled={false}
+                                    id="title"
+                                    name="title"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    onKeyDown={undefined}
+                                    onKeyUp={undefined}
+                                    placeholder={undefined}
+                                    readOnly={undefined}
+                                    required={false}
+                                    rows={undefined}
+                                    type="text"
+                                    value="" />
+                                </div>
+                              </div>
                             </div>
                             <div
                               className="clear" />
@@ -164,14 +418,58 @@ exports[`Editor renders Editor correctly 1`] = `
                             </label>
                             <div
                               className={undefined}>
-                              <textarea
+                              <div
+                                aria-describedby={undefined}
+                                className="MuiFormControl-root-110 MuiFormControl-fullWidth-113"
                                 data-multiple={undefined}
-                                data-textarea={true}
-                                id="desc"
-                                name="desc"
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                value="" />
+                                data-textarea={true}>
+                                <div
+                                  className="MuiInputBase-root-93 MuiInput-root-80 MuiInput-underline-84 MuiInputBase-fullWidth-102 MuiInput-fullWidth-87 MuiInputBase-formControl-94 MuiInput-formControl-81 MuiInputBase-multiline-101 MuiInput-multiline-86"
+                                  onClick={[Function]}>
+                                  <div
+                                    className="Textarea-root-114">
+                                    <textarea
+                                      aria-hidden="true"
+                                      className="Textarea-textarea-115 Textarea-shadow-116"
+                                      readOnly={true}
+                                      rows="1"
+                                      tabIndex={-1}
+                                      value="" />
+                                    <textarea
+                                      aria-hidden="true"
+                                      className="Textarea-textarea-115 Textarea-shadow-116"
+                                      defaultValue={undefined}
+                                      readOnly={true}
+                                      rows={1}
+                                      tabIndex={-1}
+                                      value="" />
+                                    <textarea
+                                      aria-invalid={false}
+                                      autoComplete={undefined}
+                                      autoFocus={undefined}
+                                      className="Textarea-textarea-115 MuiInputBase-input-103 MuiInput-input-88 MuiInputBase-inputType-106 MuiInput-inputType-91 MuiInputBase-inputMultiline-105 MuiInput-inputMultiline-90"
+                                      defaultValue={undefined}
+                                      disabled={false}
+                                      id="desc"
+                                      name="desc"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      onKeyDown={undefined}
+                                      onKeyUp={undefined}
+                                      placeholder={undefined}
+                                      readOnly={undefined}
+                                      required={false}
+                                      rows={1}
+                                      style={
+                                        Object {
+                                          "height": 19,
+                                        }
+                                      }
+                                      value="" />
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                             <div
                               className="clear" />
@@ -475,13 +773,13 @@ exports[`Editor renders Editor correctly 1`] = `
                                           <div
                                             className="RichTextEditor__block___2Vs_D RichTextEditor__paragraph___3NTf9"
                                             data-block={true}
-                                            data-editor="4ulug"
-                                            data-offset-key="fauvt-0-0">
+                                            data-editor="88hp9"
+                                            data-offset-key="ftu1a-0-0">
                                             <div
                                               className="public-DraftStyleDefault-block public-DraftStyleDefault-ltr"
-                                              data-offset-key="fauvt-0-0">
+                                              data-offset-key="ftu1a-0-0">
                                               <span
-                                                data-offset-key="fauvt-0-0"
+                                                data-offset-key="ftu1a-0-0"
                                                 style={Object {}}>
                                                 <br
                                                   data-text="true" />
@@ -548,11 +846,44 @@ exports[`Editor renders Editor correctly 1`] = `
                 className="gte_form_err" />
               <div
                 className="gte_form_buttons">
-                <button
-                  className="btn"
-                  data-action="create"
-                  id="gte_sent_btn"
-                  onClick={[Function]} />
+                <div
+                  style={
+                    Object {
+                      "marginBottom": -5,
+                      "paddingLeft": 15,
+                      "paddingRight": 15,
+                    }
+                  }>
+                  <button
+                    className="MuiButtonBase-root-21 MuiButton-root-117 MuiButton-contained-128 MuiButton-containedPrimary-129 MuiButton-raised-131 MuiButton-raisedPrimary-132"
+                    data-action="create"
+                    disabled={false}
+                    id="gte_sent_btn"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    style={
+                      Object {
+                        "float": "right",
+                        "padding": "5px 15px",
+                      }
+                    }
+                    tabIndex="0"
+                    type="button">
+                    <span
+                      className="MuiButton-label-118" />
+                    <span
+                      className="MuiTouchRipple-root-33" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

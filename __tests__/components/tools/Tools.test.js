@@ -104,7 +104,7 @@ it('renders Tools correctly', () => {
                     }
                 ],
                 buttonsPosition: [ 'top', 'bottom' ],
-                theme: 'std'
+                theme: 'material-ui'
             }}
             updatePerPage={(e) => {}}
             doSearch={(e) => {}}

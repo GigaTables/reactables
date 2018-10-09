@@ -29,9 +29,15 @@ const editor = {
                 { 'key2': 'val2' }
             ],
             type: 'checkbox' // select,checkbox,radio
-//              attrs: [
-//                {'multiple':true}
-//              ]
+        },
+        {// an example of using select - automatically selected if matches with data in table column
+            label: 'Cities:',
+            name: 'cities[]',
+            values: [// if select,checkbox,radio etc types - need this pre-set structure of values
+                { 'key1': 'val1' },
+                { 'key2': 'val2' }
+            ],
+            type: 'radio' // select,checkbox,radio
         },
         {// an example of using select - automatically selected if matches with data in table column
             label: 'Types:',
@@ -169,7 +175,7 @@ const settings = {
             }
         ],
         buttonsPosition: [ 'top', 'bottom' ],
-        theme: 'std'
+        theme: 'material-ui'
     }
 }
 

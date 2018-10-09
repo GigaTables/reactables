@@ -36,6 +36,8 @@ GigaTables supports the following capabilities:
 
 -- plugins
 
+-- material-ui theme
+
 and more...
 
 * [Installation](#user-content-installation)
@@ -50,6 +52,7 @@ and more...
 * [Ajax autoload period](#user-content-ajax-autoload-period)
 * [Hot keys](#user-content-hot-keys)
 * [Plugins](#user-content-plugins)
+* [Themes](#user-content-themes)
 * [Headers](#user-content-headers)
 * [Aggregate Footer](#user-content-aggregate-footer)
 * [Data export](#user-content-data-export)
@@ -604,6 +607,27 @@ stroke: {
 }
 ```
 you can just place a new structure to `pluginProps`, update the plugin and proceed using new features.
+
+## Themes
+GT supports the most popular ReactJS theme - material-ui, thus you can easelly switch between standard and material-ui themes 
+by setting:     
+```js
+tableOpts: {
+    ...
+    theme: 'material-ui' // 'std' is the default theme
+    ...    
+}
+```
+there are buttons, inputs, selects, redio, checkboxes, textareas and other form/table elements for material-ui theme.
+
+
+As an option you can always set additional attributes to any component as with std form elements e.g.:
+```js
+attrs: {
+    className: 'titleField',
+    placeholder: 'Place holder'
+}
+```
 
 ## Headers
 In some work-flows u may need to send several useful headers, ex. with secret key for api, 

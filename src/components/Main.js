@@ -547,7 +547,7 @@ class Main extends Component {
             } = this.state;
 
             for (let dataKey in dataIndices) {
-                for (let key in this.jsonData[key]) {
+                for (let key in this.jsonData) {
                     rowId = this.getRowId(this.jsonData[key]);
 
                     if (dataIndices[dataKey] === rowId) {

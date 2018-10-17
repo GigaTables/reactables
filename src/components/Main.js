@@ -548,7 +548,7 @@ class Main extends Component {
 
             for (let dataKey in dataIndices) {
                 for (let key in this.jsonData[key]) {
-                    rowId = this.getRowId(this.jsonData);
+                    rowId = this.getRowId(this.jsonData[key]);
 
                     if (dataIndices[dataKey] === rowId) {
                         selectedRows.splice(selectedRows.indexOf(key), 1);

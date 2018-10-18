@@ -56,7 +56,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --hot",
-    "build": "rimraf build && webpack --config webpack.config.prod.js",
+    "build": "rimraf build && webpack --config webpack.config.prod.js --display-modules",
     "test": "jest --updateSnapshot --verbose",
     "codecov": "bash <(curl -s https://codecov.io/bash)"
   },

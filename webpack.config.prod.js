@@ -42,7 +42,7 @@ const config = {
             bundleAuthor: package.author,
             isPlatform: false,
         })),
-    externals: {
+    externals: [{
         'react': 'umd react',
         'react-dom': 'umd react-dom',
         'prop-types': 'umd prop-types',
@@ -60,7 +60,7 @@ const config = {
         'react-minimal-pie-chart': 'umd react-minimal-pie-chart',
         'react-trend': 'umd react-trend',
         'react-select': 'umd react-select',
-        '@material-ui/core': 'umd @material-ui/core'
-    }
+        '@material-ui/core/Select': 'umd @material-ui/core/Select'
+    }, /@material-ui\/core\/*./,]
 };
 module.exports = config;

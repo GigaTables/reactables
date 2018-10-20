@@ -715,6 +715,44 @@ Sometimes users need to export data in different formats, the most popular is cs
 ```
 You'll see an extra button `CSV Export` on the left, right before standard buttons for CRUD. 
 
+## Table options
+
+| Property | Available values | Default value(s) | Description |
+| :--- | :---: | :--- |
+| `struct.search` | top/bottom | ['top'] | Where to display the common search field (searches all rows) |
+| `struct.rowsSelector` | top/bottom, asc/desc | ['top', 'asc'] | Where to display rows selector field with order setting |
+| `struct.pagination` | top/bottom | bottom | Where to display pagination block |
+| `struct.fixedHeader` | true/false | false | Whether to fix table header or not |
+| `struct.editableCells` | true/false | false | Whether to edit cells by clicking on it and send changed content pressing Enter |
+| `struct.aggregateFooter` | true/false | false | Whether to count frequency/sum/avg/minLength/maxLength and put them in footer (see `column` settings bellow) |
+| `struct.download.csv` | true/false | false | Whether to display button with CSV Export |
+| `struct.width` | (string) 'Npx' | width of columns | width of a table |
+| `lang` | (string) 'en/gr/ru/fr/es/ch/hi/ar/pt/ja' | 'en' | Language that will be shown on all elements |
+| `perPageRows` | array of integers | [25, 50, 100, 200, 500] | How many rows to show per page |
+| `defaultPerPage` | integer | 50 | How many rows to show per page by default | 
+| `ajaxAutoloadData` | true/false | false | Whether to load data automatically from the server (back-end) |
+| `ajaxAutoloadPeriod` | integer | every 5 seconds (maximum 300 seconds) | Language that will be shown on all elements |
+| `headers` | (object) of key/value pairs of headers | no extra headers | Extra headers to send to the server (back-end) via ajax request |
+| `ajax` | string/Promise | none | Url to send the ajax request to |
+| `data` | object | none | Local data either as an object or loaded content from require |
+| `requestType` | (string) one of HTTP methods GET/POST etc | 'GET' | HTTP method to be used to send an ajax request for table data |
+| `columns` | (array) an array of object | none | Array of objects which describes columns behaveour |
+| `columns` object prop `data` | (string) column id | none | Unique string to set a column id e.g.: title/description |
+| `columns` object prop `sortable` | true/false | true | Whether to sort column or not |
+| `columns` object prop `visible` | true/false | true | Whether to show column or not |
+| `columns` object prop `searchable` | true/false | true | Whether to search this column (in common search) or not |
+| `columns` object prop `discreteSearch` | true/false | true | Whether to search in this particular column or not |
+| `columns` object prop `discreteCISearch` | true/false | true | Case Insensitive search in this particular column |
+| `columns` object prop `discreteSearchValue` | (function/closure) | title of column | Title that will be displayed in search field |
+| `columns` object prop `plugins` | (string) | none | A plugin to use for rendering specific data in column | 
+| `columns` object prop `pluginProps` | (object) | none | A plugin special properties to use for rendering |
+| `columns` object prop `footer` | (string) avg/sum/frequency/minLength/maxLength | none | If `aggregateFooter` is set to true, then values will be processed according to this setting |
+| `columnOpts.render` | (function/closure) | none | How to render column data |
+| `columnOpts.target` | (string) | none | To which column should render method be applied (see `columns` object prop `data` they should be the same) |
+| `tableOpts` object prop `buttons` | (array) | none | An array of object buttons |
+| `tableOpts` object prop `buttonsPosition` | (array) | ['top', 'bottom'] | An array of object buttons |
+| `tableOpts` object prop `theme` | (string) material-ui/std | 'std' | Theme that will be set on all elements |
+
 ## FAQ
 
 **Can I use file types in GT editor to upload files through AJAX on server?**

@@ -56,6 +56,7 @@ and more...
 * [Headers](#user-content-headers)
 * [Aggregate Footer](#user-content-aggregate-footer)
 * [Data export](#user-content-data-export)
+* [Table options](#user-content-table-options)
 * [FAQ](#user-content-faq)
 
 ### Installation

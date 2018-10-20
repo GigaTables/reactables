@@ -57,6 +57,7 @@ and more...
 * [Aggregate Footer](#user-content-aggregate-footer)
 * [Data export](#user-content-data-export)
 * [Table options](#user-content-table-options)
+* [Editor options](#user-content-editor-options)
 * [FAQ](#user-content-faq)
 
 ### Installation
@@ -720,22 +721,22 @@ You'll see an extra button `CSV Export` on the left, right before standard butto
 
 | Property | Available values | Default value(s) | Description |
 | :--- | :---: | :---: | :--- |
-| `struct.search` | top/bottom | ['top'] | Where to display the common search field (searches all rows) |
-| `struct.rowsSelector` | top/bottom, asc/desc | ['top', 'asc'] | Where to display rows selector field with order setting |
-| `struct.pagination` | top/bottom | bottom | Where to display pagination block |
-| `struct.fixedHeader` | true/false | false | Whether to fix table header or not |
-| `struct.editableCells` | true/false | false | Whether to edit cells by clicking on it and send changed content pressing Enter |
-| `struct.aggregateFooter` | true/false | false | Whether to count frequency/sum/avg/minLength/maxLength and put them in footer (see `column` settings bellow) |
-| `struct.download.csv` | true/false | false | Whether to display button with CSV Export |
+| `struct.search` | (array) top/bottom | ['top'] | Where to display the common search field (searches all rows) |
+| `struct.rowsSelector` | (array) top/bottom, asc/desc | ['top', 'asc'] | Where to display rows selector field with order setting |
+| `struct.pagination` | (array) top/bottom | ['bottom'] | Where to display pagination block |
+| `struct.fixedHeader` | (bool) true/false | false | Whether to fix table header or not |
+| `struct.editableCells` | (bool) true/false | false | Whether to edit cells by clicking on it and send changed content pressing Enter |
+| `struct.aggregateFooter` | (bool) true/false | false | Whether to count frequency/sum/avg/minLength/maxLength and put them in footer (see `column` settings bellow) |
+| `struct.download.csv` | (bool) true/false | false | Whether to display button with CSV Export |
 | `struct.width` | (string) 'Npx' | width of columns | width of a table |
 | `lang` | (string) 'en/gr/ru/fr/es/ch/hi/ar/pt/ja' | 'en' | Language that will be shown on all elements |
-| `perPageRows` | array of integers | [25, 50, 100, 200, 500] | How many rows to show per page |
-| `defaultPerPage` | integer | 50 | How many rows to show per page by default | 
+| `perPageRows` | (array) of integers | [25, 50, 100, 200, 500] | How many rows to show per page |
+| `defaultPerPage` | (integer) N according to `perPageRows` | 50 | How many rows to show per page by default | 
 | `ajaxAutoloadData` | true/false | false | Whether to load data automatically from the server (back-end) |
 | `ajaxAutoloadPeriod` | integer | every 5 seconds (maximum 300 seconds) | Language that will be shown on all elements |
 | `headers` | (object) of key/value pairs of headers | no extra headers | Extra headers to send to the server (back-end) via ajax request |
 | `ajax` | string/Promise | none | Url to send the ajax request to |
-| `data` | object | none | Local data either as an object or loaded content from require |
+| `data` | (object) | none | Local data either as an object or loaded content from require |
 | `requestType` | (string) one of HTTP methods GET/POST etc | 'GET' | HTTP method to be used to send an ajax request for table data |
 | `columns` | (array) an array of object | none | Array of objects which describes columns behaveour |
 | `columns` object prop `data` | (string) column id | none | Unique string to set a column id e.g.: title/description |
@@ -753,6 +754,24 @@ You'll see an extra button `CSV Export` on the left, right before standard butto
 | `tableOpts` object prop `buttons` | (array) | none | An array of object buttons |
 | `tableOpts` object prop `buttonsPosition` | (array) | ['top', 'bottom'] | An array of object buttons |
 | `tableOpts` object prop `theme` | (string) material-ui/std | 'std' | Theme that will be set on all elements |
+
+## Editor options
+
+| Property | Available values | Default value(s) | Description |
+| :--- | :---: | :---: | :--- |
+| `ajax` | (string/object) | none | Url/objects to send CRUD ops |
+| `ajax.create` | (object) | none | An object of props url/type/headers for create operation |
+| `ajax.edit` | (object) | none | An object of props url/type/headers for edit operation |
+| `ajax.delete` | (object) | none | An object of props url/type/headers for delete operation |
+| `ajaxFiles` | (string) | none | Where to send file uploads |
+| `fields` | (array) of objects | none | An array of object form fields |
+| `fields` object prop `type` | (string) | none | One of HTML5 form element e.x.: input/select/email/textarea etc |
+| `fields` object prop `name` | (string) | none | Name of field that will be sent to back-end |
+| `fields` object prop `label` | (string) | none | Form field label |
+| `fields` object prop `attrs` | (object) | none | An object of field props e.g.: size/min/max/placeholder etc |
+| `fields` object prop `defaultValue` | (any) | none | Default value for a field |
+| `fields` object prop `plugins` | (string) | none | A custom plugin to use for a field |
+| `fields` object prop `pluginProps` | (object) | none | A set of plugin props |
 
 ## FAQ
 

@@ -718,7 +718,7 @@ You'll see an extra button `CSV Export` on the left, right before standard butto
 ## Table options
 
 | Property | Available values | Default value(s) | Description |
-| :--- | :---: | :--- |
+| :--- | :---: | :---: | :--- |
 | `struct.search` | top/bottom | ['top'] | Where to display the common search field (searches all rows) |
 | `struct.rowsSelector` | top/bottom, asc/desc | ['top', 'asc'] | Where to display rows selector field with order setting |
 | `struct.pagination` | top/bottom | bottom | Where to display pagination block |

@@ -186,7 +186,8 @@ Also add `index.html` file to the root and put the following content in it:
 </html>
 ```
 
-Be sure to create a `webpack.config.js` file and copy content from the same file in this repo.
+Be sure to create a `webpack.config.js` file and copy content from the same file in this repo. 
+Get to the project directory and run `npm start`. 
 That's it, you are up and running.
 
 ### Advanced configuration with opts and editor

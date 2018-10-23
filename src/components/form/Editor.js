@@ -185,8 +185,6 @@ class Editor extends Component {
         let isMultiple = e.target.dataset.multiple;
         let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value;
 
-        console.log(e.target.name, e.target.value, e.target.checked, e.target.type);
-
         if (e.target.type === EditorConstants.TYPE_CHECKBOX) {
             let newItems = {};
             if (typeof this.state.dataIndices[e.target.name] !== CommonConstants.UNDEFINED) {

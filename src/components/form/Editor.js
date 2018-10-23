@@ -152,7 +152,7 @@ class Editor extends Component {
     onFocus(e) {
         const {setMultipleText} = this.state;
         const {tableOpts} = this.props;
-        
+
         let isTextArea = false;
 
         if (typeof e.target.dataset.multiple !== CommonConstants.UNDEFINED
@@ -168,7 +168,7 @@ class Editor extends Component {
                 && e.target.children[0].getAttribute('data-contents') === CommonConstants.STR_TRUE)) {
             isTextArea = true;
         }
-        
+
         // check for material-ui TextField multiple aka textarea
         if (tableOpts.theme === CommonConstants.THEME_MATERIAL_UI && e.target.nodeName === 'TEXTAREA') {
             isTextArea = true;
@@ -185,12 +185,30 @@ class Editor extends Component {
         let isMultiple = e.target.dataset.multiple;
         let val = (isMultiple && setMultipleText === 0) ? '' : e.target.value;
 
-        this.setState({
-            dataIndices: Object.assign({}, this.state.dataIndices, {
-                [e.target.name]: val
-            }),
-            setMultipleText: 1
-        });
+        console.log(e.target.name, e.target.value, e.target.checked, e.target.type);
+
+        if (e.target.type === EditorConstants.TYPE_CHECKBOX) {
+            let newItems = {};
+            if (typeof this.state.dataIndices[e.target.name] !== CommonConstants.UNDEFINED) {
+                newItems[e.target.name] = {...this.state.dataIndices[e.target.name]};
+            } else {
+                newItems[e.target.name] = {};
+            }
+
+            newItems[e.target.name][e.target.value] = e.target.checked;
+
+            this.setState({
+                dataIndices: newItems,
+                setMultipleText: 1
+            });
+        } else {
+            this.setState({
+                dataIndices: Object.assign({}, this.state.dataIndices, {
+                    [e.target.name]: val
+                }),
+                setMultipleText: 1
+            });
+        }
     }
 
     /**
@@ -290,15 +308,15 @@ class Editor extends Component {
             case EditorConstants.TYPE_EMAIL:
             case EditorConstants.TYPE_PASSWORD:
                 htmlFields = <HOCInput key={i}
-                                    onFocus={this.onFocus.bind(this)}
-                                    onChange={this.onChange.bind(this)}
-                                    attributes={attributes}
-                                    id={fieldName}
-                                    type={fieldType}
-                                    name={fieldName}
-                                    value={fieldValue}
-                                    isMultiple={isMultiple}
-                                    theme={tableOpts.theme}/>;
+                                       onFocus={this.onFocus.bind(this)}
+                                       onChange={this.onChange.bind(this)}
+                                       attributes={attributes}
+                                       id={fieldName}
+                                       type={fieldType}
+                                       name={fieldName}
+                                       value={fieldValue}
+                                       isMultiple={isMultiple}
+                                       theme={tableOpts.theme}/>;
                 break;
             case EditorConstants.TYPE_COLOR:
             case EditorConstants.TYPE_DATE:

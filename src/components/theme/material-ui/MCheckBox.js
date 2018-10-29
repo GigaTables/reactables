@@ -97,7 +97,6 @@ MCheckBox.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     attributes: PropTypes.object,
-    // value: PropTypes.string
 };
 
 export default MCheckBox

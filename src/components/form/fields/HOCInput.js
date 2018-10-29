@@ -48,6 +48,6 @@ HOCInput.propTypes = {
     isMultiple: PropTypes.bool,
     onFocus: PropTypes.func,
     attributes: PropTypes.object
-}
+};
 
 export default HOCInput

@@ -76,12 +76,6 @@ see how to create table with JSX bellow.
 
 [More screen-shots](https://github.com/GigaTables/reactables/wiki)
 
-Live demo:
- 
-- [Standard theme](http://159.69.81.61:9999/)
-
-- [Material UI theme](http://159.69.81.61:8888/) 
-
 ## Installation based on browser script implementation (which U can download from build/ dir)
 ```HTML
     <script src="build/index.js"></script>

@@ -12,14 +12,15 @@ class Row extends Component {
             maxRow,
             editableCells,
         } = this.props;
+        
         return editableCells === true
             || gteRowId !== nextProps.gteRowId
-            || count !== nextProps.count
             || selectedRows.length !== nextProps.selectedRows.length
             || selectedRows.indexOf(count) !== nextProps.selectedRows.indexOf(count) // on multiple merged rows selection Shift+Clk
             || selectedRows.indexOf(count) !== -1 // on multiple splitted rows selection Ctrl+Clk
             || minRow !== nextProps.minRow
-            || maxRow !== nextProps.maxRow;
+            || maxRow !== nextProps.maxRow
+            || selectedRows.length > 0;
     }
 
     render() {
@@ -39,6 +40,7 @@ class Row extends Component {
             odd: (count % 2 !== 0),
             active: (selectedRows.indexOf(count) !== -1)
         });
+        
         return (
             <tr
                 key={gteRowId}

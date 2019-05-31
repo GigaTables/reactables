@@ -83,6 +83,7 @@ class Reactables extends Main {
             footerFrequency: '',
             popup_button: '',
             popup_title: '',
+            searchFocus: false,
         };
 
         // cols opts
@@ -331,7 +332,7 @@ class Reactables extends Main {
             }
         });
 
-        // local data is in priority load it if it's properly filled
+        // local data is in priority load if it's properly filled
         const {data} = this.settings;
         if (data !== null && typeof data === CommonConstants.OBJECT) {
             let jsonData = data['rows'] ? data['rows'] : data['row']; // one row or several
@@ -368,10 +369,13 @@ class Reactables extends Main {
         if (struct.download.csv === true) {
             dataToPass = this.jsonData
         }
+        
         return (<Tools
             updatePerPage={this.updatePerPage.bind(this)}
             showPopup={this.showPopup.bind(this)}
             doSearch={this.doSearch.bind(this)}
+            searchFocus={this.searchFocus.bind(this)}
+            searchBlur={this.searchBlur.bind(this)}
             tableOpts={tableOpts}
             perPageRows={perPageRows}
             perPage={perPage}

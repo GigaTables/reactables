@@ -44,15 +44,20 @@ class Tools extends Component {
             search,
             doSearch,
             lang,
-            tableOpts
+            tableOpts,
+            searchBlur,
+            searchFocus
         } = this.props;
 
         if (struct.search.indexOf(display) === -1) {
             return '';
         }
+        
         return (<HOCSearch
             search={search}
             doSearch={doSearch}
+            searchBlur={searchBlur}
+            searchFocus={searchFocus}
             theme={tableOpts.theme}
             lang={lang}/>)
     }
@@ -138,6 +143,7 @@ class Tools extends Component {
         const {
             isData,
         } = this.props;
+        
         return (
             <div className="gt_head_tools">
                 {(isData) ? '' : this.getButtons()}

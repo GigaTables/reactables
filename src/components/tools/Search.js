@@ -15,6 +15,8 @@ class Search extends Component {
       lang,
       doSearch,
       search,
+      searchBlur,
+      searchFocus,
     } = this.props;
 
     const language = Lang[lang];
@@ -25,6 +27,8 @@ class Search extends Component {
           value={search}
           onKeyUp={doSearch}
           onChange={doSearch}
+          onBlur={searchBlur}
+          onFocus={searchFocus}
           type="text"
           name="search"
           className={styles.gt_search}

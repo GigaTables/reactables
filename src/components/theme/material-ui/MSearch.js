@@ -52,7 +52,9 @@ class MSearch extends Component {
     {
         const {
             lang,
-            search
+            search,
+            searchBlur,
+            searchFocus,
         } = this.props;
 
         const language = Lang[lang];
@@ -62,6 +64,8 @@ class MSearch extends Component {
                 variant="standard"
                 value={search}
                 onChange={(e) => {this.handleChange('search', e)}}
+                onFocus={searchFocus}
+                onBlur={searchBlur}
                 id="standard-search"
                 label={language.search}
                 className={classNames(classes.textField, classes.dense)}

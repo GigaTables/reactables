@@ -134,7 +134,19 @@ class Main extends Component {
 
         this.lastTimeKeyup = this.nowMillis;
     }
+    
+    searchBlur() {
+        this.setState({
+           searchFocus: false
+        });
+    }
 
+    searchFocus() {
+        this.setState({
+            searchFocus: true
+        });
+    }
+    
     createTable(jsonData, sortedButtons, selectedRows) {
         const {
             dataSearch,
@@ -975,6 +987,7 @@ class Main extends Component {
             arrowDown,
             perPage,
             aDown,
+            searchFocus,
         } = this.state;
 
         if (shiftDown === true && arrowUp === true && selectedRows.length > 0) {
@@ -1001,7 +1014,7 @@ class Main extends Component {
                 });
                 this.setSelectedIds();
             }
-        } else if (ctrlDown === true && aDown === true) {
+        } else if (ctrlDown === true && aDown === true && searchFocus === false) {
             let rows = [];
             for (let i = 0; i < perPage; ++i) {
                 rows[i] = i;

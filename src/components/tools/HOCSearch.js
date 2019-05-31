@@ -16,17 +16,23 @@ class HOCSearch extends Component {
             lang,
             doSearch,
             search,
-            theme
+            theme,
+            searchBlur,
+            searchFocus,
         } = this.props;
 
         return (theme === CommonConstants.THEME_MATERIAL_UI) ?
         <MSearch
             search={search}
             doSearch={doSearch}
+            searchBlur={searchBlur}
+            searchFocus={searchFocus}
             lang={lang}
         /> : <Search
                 search={search}
                 doSearch={doSearch}
+                searchBlur={searchBlur}
+                searchFocus={searchFocus}
                 lang={lang}/>
     }
 }

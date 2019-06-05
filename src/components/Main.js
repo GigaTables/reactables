@@ -119,12 +119,14 @@ class Main extends Component {
             
             this.tOut = [];
             this.c = 0;
-            this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
-            this.setState({page: 1});
+            this.setState({page: 1}, () => {
+                this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+            });
         } else {
             this.tOut[this.c] = setTimeout(function () {
-                that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
-                that.setState({page: 1});
+                that.setState({page: 1}, () => {
+                    that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
+                });
             }, CommonConstants.TIMEOUT_SEARCH);
             this.c++;
         }

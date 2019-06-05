@@ -75,8 +75,8 @@ class Main extends Component {
 
         let that = this;
         let name = e.target.name,
-            val = e.target.value,
-            len = val.length;
+            val = e.target.value;
+        
         this.nowMillis = (new Date()).getTime();
         let period = this.nowMillis - this.lastTimeKeyup;
         this.setState({
@@ -116,15 +116,19 @@ class Main extends Component {
             for (let j in this.tOut) {
                 clearTimeout(this.tOut[j]);
             }
+            
             this.tOut = [];
             this.c = 0;
             this.createTable(nJson, this.state.sortedButtons, this.state.selectedRows);
+            this.setState({page: 1});
         } else {
             this.tOut[this.c] = setTimeout(function () {
                 that.createTable(nJson, that.state.sortedButtons, that.state.selectedRows);
+                that.setState({page: 1});
             }, CommonConstants.TIMEOUT_SEARCH);
             this.c++;
         }
+        
         this.setState({
             dataSearch: nJson,
             // remove selected rows on any user action

@@ -1,3 +1,4 @@
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/brillout/awesome-react-components#table--data-grid)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GigaTables/reactables/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GigaTables/reactables/?branch=master)
 [![Build Status](https://travis-ci.org/GigaTables/reactables.svg?branch=master)](https://travis-ci.org/GigaTables/reactables)
 [![Code Coverage](https://codecov.io/gh/GigaTables/reactables/branch/master/graph/badge.svg)](https://codecov.io/gh/GigaTables/reactables)

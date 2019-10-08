@@ -65,13 +65,13 @@ and more...
 
 - npm i gigatables-react
 
-After installation will be completed add import to your `main.js` like this:
+After installation has been completed, add import to your `main.js` like this:
 
 ```JS
 import { Reactables, Header } from 'gigatables-react'
 ```
 
-see how to create table with JSX bellow.
+see how to create table with JSX below.
 ## Demo
 ![Demo](https://github.com/GigaTables/reactables/blob/develop/screens/GT.gif)
 
@@ -728,7 +728,7 @@ You'll see an extra button `CSV Export` on the left, right before standard butto
 | `struct.pagination` | (array) top/bottom | ['bottom'] | Where to display pagination block |
 | `struct.fixedHeader` | (bool) | false | Whether to fix table header or not |
 | `struct.editableCells` | (bool) | false | Whether to edit cells by clicking on it and send changed content pressing Enter |
-| `struct.aggregateFooter` | (bool) | false | Whether to count frequency/sum/avg/minLength/maxLength and put them in footer (see `column` settings bellow) |
+| `struct.aggregateFooter` | (bool) | false | Whether to count frequency/sum/avg/minLength/maxLength and put them in footer (see `column` settings below) |
 | `struct.download.csv` | (bool) | false | Whether to display button with CSV Export |
 | `struct.width` | (string) 'Npx' | width of columns | width of a table |
 | `lang` | (string) 'en/gr/ru/fr/es/ch/hi/ar/pt/ja' | 'en' | Language that will be shown on all elements |
